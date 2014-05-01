@@ -222,7 +222,7 @@ public class XFXIntegrationDialog extends javax.swing.JDialog implements TableMo
         cbEffects.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jToolBar1.add(cbEffects);
 
-        btnAddInit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/32px-Crystal_Clear_action_edit_add-yellow.png"))); // NOI18N
+        btnAddInit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/32px-Crystal_Clear_action_edit_add-yellow.png"))); // NOI18N
         btnAddInit.setToolTipText("Add in Init");
         btnAddInit.setFocusable(false);
         btnAddInit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -234,7 +234,7 @@ public class XFXIntegrationDialog extends javax.swing.JDialog implements TableMo
         });
         jToolBar1.add(btnAddInit);
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/32px-Crystal_Clear_action_edit_add-blue.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/32px-Crystal_Clear_action_edit_add-blue.png"))); // NOI18N
         btnAdd.setToolTipText("Add");
         btnAdd.setFocusable(false);
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -246,7 +246,7 @@ public class XFXIntegrationDialog extends javax.swing.JDialog implements TableMo
         });
         jToolBar1.add(btnAdd);
 
-        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/32px-Crystal_Clear_action_edit_remove.png"))); // NOI18N
+        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/32px-Crystal_Clear_action_edit_remove.png"))); // NOI18N
         btnRemove.setToolTipText("Remove");
         btnRemove.setFocusable(false);
         btnRemove.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

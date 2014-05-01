@@ -19,7 +19,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmCut">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_action_editcut.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_action_editcut.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cut"/>
           </Properties>
@@ -30,7 +30,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmCopy">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_action_editcopy.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_action_editcopy.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Copy"/>
           </Properties>
@@ -41,7 +41,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmPaste">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_action_editpaste.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_action_editpaste.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Paste"/>
           </Properties>
@@ -52,7 +52,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmDelete">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_action_button_cancel.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_action_button_cancel.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Delete"/>
           </Properties>
@@ -73,7 +73,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmClear">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_filesystem_trashcan_empty.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_filesystem_trashcan_empty.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Clear"/>
           </Properties>
@@ -86,7 +86,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmColor">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_device_blockdevice.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_device_blockdevice.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Choose a color..."/>
           </Properties>
@@ -97,7 +97,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmAlpha">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_miscellaneous.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_miscellaneous.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Choose an alpha..."/>
           </Properties>
@@ -123,7 +123,7 @@
             <Menu class="javax.swing.JMenu" name="popmKaraOK">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame5.png"/>
+                  <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame5.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="For animation..."/>
               </Properties>
@@ -131,7 +131,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_b">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame3.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cb - Bold" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -142,7 +142,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_i">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame3.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005ci - Italic" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -153,7 +153,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_u">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cu - Underline" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -164,7 +164,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_s">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cs - Strike out" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -175,7 +175,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_bord">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cbord - Thickness of border" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -186,7 +186,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_shad">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cshad - Depth of shader" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -197,7 +197,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_be">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cbe - Blur edge" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -208,7 +208,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fs">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame3.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfs - Font size" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -219,7 +219,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fscx">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfscx - Font scale of X" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -230,7 +230,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fscy">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfscy - Font scale of Y" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -241,7 +241,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fsp">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfsp - Font spacing" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -252,7 +252,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_frx">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfrx - Font rotation on X" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -263,7 +263,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fry">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfry - Font rotation on Y" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -274,7 +274,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_frz">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfrz - Font rotation on Z" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -285,7 +285,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_1c">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c1c&amp;H&lt;hexa&gt;&amp; - Color of text" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -296,7 +296,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_2c">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c2c&amp;H&lt;hexa&gt;&amp; - Color of karaoke" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -307,7 +307,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_3c">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c3c&amp;H&lt;hexa&gt;&amp; - Color of border" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -318,7 +318,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_4c">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c4c&amp;H&lt;hexa&gt;&amp; - Color of shader" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -329,7 +329,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_alpha">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005calpha&amp;H&lt;hexa&gt;&amp; - Tranparency" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -340,7 +340,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_1a">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c1a&amp;H&lt;hexa&gt;&amp; - Tranparency of text" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -351,7 +351,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_2a">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c2a&amp;H&lt;hexa&gt;&amp; - Tranparency of karaoke" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -362,7 +362,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_3a">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c3a&amp;H&lt;hexa&gt;&amp; - Tranparency of border" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -373,7 +373,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_4a">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c4a&amp;H&lt;hexa&gt;&amp; - Tranparency of shader" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -384,7 +384,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_clip">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame2.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cclip - Region of visibility" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -397,7 +397,7 @@
             <Menu class="javax.swing.JMenu" name="popmKaraOK2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                  <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="For animation..."/>
               </Properties>
@@ -405,7 +405,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_xbord">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cxbord - Thickness of border on X" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -416,7 +416,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_ybord">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cybord - Thickness of border on Y" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -427,7 +427,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_xshad">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cxshad - Depth of shader on X" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -438,7 +438,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_yshad">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cyshad - Depth of shader on Y" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -449,7 +449,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_blur">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cblur - Blur" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -460,7 +460,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fax">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfax - Text shearing on X" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -471,7 +471,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fay">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfay - Text shearing on Y" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -482,7 +482,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_iclip">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame4.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005ciclip - Region of  invisibility" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -495,7 +495,7 @@
             <Menu class="javax.swing.JMenu" name="popmKaraOK3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                  <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="For animation..."/>
               </Properties>
@@ -503,7 +503,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fsc">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfsc - Font scale" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -514,7 +514,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_fsvp">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfsvp - Leading" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -525,7 +525,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_frs">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cfrs - Baseline obliquity" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -536,7 +536,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_z">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cz - Z coordinate" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -547,7 +547,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_distort">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cdistort - Distortion" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -558,7 +558,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_md">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cmd - Boundaries deforming" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -569,7 +569,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_mdx">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cmdx - Boundaries deforming on X" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -580,7 +580,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_mdy">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cmdy - Boundaries deforming on Y" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -591,7 +591,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_mdz">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cmdz - Boundaries deforming on Z" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -602,7 +602,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_1vc">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c1vc - Gradients on text (color)" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -613,7 +613,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_2vc">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c2vc - Gradients on karaoke (color)" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -624,7 +624,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_3vc">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c3vc - Gradients on border (color)" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -635,7 +635,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_4vc">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c4vc - Gradients on shader (color)" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -646,7 +646,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_1va">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c1va - Gradients on text (transparency)" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -657,7 +657,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_2va">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c2va - Gradients on karaoke (transparency)" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -668,7 +668,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_3va">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c3va - Gradients on border (transparency)" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -679,7 +679,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_4va">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c4va - Gradients on shader (transparency)" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -690,7 +690,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_1img">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c1img - Image fill on text" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -701,7 +701,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_2img">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c2img - Image fill on karaoke" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -712,7 +712,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_3img">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c3img - Image fill on border" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -723,7 +723,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_4img">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005c4img - Image fill on shader" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -734,7 +734,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="popm_jitter">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"/>
+                      <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_ksame.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="\u005cjitter - Shaking" containsInvalidXMLChars="true"/>
                   </Properties>
@@ -1022,7 +1022,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmIntCalc">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_calc.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_calc.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Insert a calc..."/>
           </Properties>
@@ -1033,7 +1033,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmFloCalc">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_calc.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_calc.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Insert a float calc..."/>
           </Properties>
@@ -1044,7 +1044,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="popmDrawing">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/smallboxforfansub/images/20px-Crystal_Clear_app_kcoloredit.png"/>
+              <Image iconType="3" name="/feuille/images/20px-Crystal_Clear_app_kcoloredit.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Insert a drawing..."/>
           </Properties>

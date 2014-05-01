@@ -64,7 +64,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables pour la classe principale
     private JDesktopPane desk;
     private BufferedImage backgroundimage;
-    private String DOCSPATH = "E:\\Dev\\Projets\\Java\\SmallBoxForFansub\\docs\\";
+    private String DOCSPATH = "E:\\Dev\\Projets\\Java\\Feuille\\docs\\";
     private String CODEPATH = "";
     private int videoWidth = 1280;
     private int videoHeight = 720;
@@ -346,7 +346,11 @@ public class MainFrame extends javax.swing.JFrame {
         cbbr = new ComboBoxButtonRenderer();
         cbButtonScript.setModel(dcbmSplug);
         cbButtonScript.setRenderer(cbbr);
-        splug.searchForScript(DOCSPATH);
+        try{
+            splug.searchForScript(DOCSPATH);
+        }catch(Exception e){
+            
+        }        
         List<Object> sobjList = new ArrayList<>(splug.getSObjectList());        
         for(Object o : sobjList){
             if(o instanceof SButton){

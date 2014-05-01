@@ -654,7 +654,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         OK_Button = new javax.swing.JButton();
         cbSaveEffects = new javax.swing.JCheckBox();
 
-        popmCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_action_editcut.png"))); // NOI18N
+        popmCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_editcut.png"))); // NOI18N
         popmCut.setText("Cut");
         popmCut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -663,7 +663,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides.add(popmCut);
 
-        popmCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_action_editcopy.png"))); // NOI18N
+        popmCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_editcopy.png"))); // NOI18N
         popmCopy.setText("Copy");
         popmCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -672,7 +672,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides.add(popmCopy);
 
-        popmPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_action_editpaste.png"))); // NOI18N
+        popmPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_editpaste.png"))); // NOI18N
         popmPaste.setText("Paste");
         popmPaste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -681,7 +681,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides.add(popmPaste);
 
-        popmDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_action_button_cancel.png"))); // NOI18N
+        popmDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_button_cancel.png"))); // NOI18N
         popmDelete.setText("Delete");
         popmDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -699,7 +699,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides.add(popmSelAll);
 
-        popmClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_filesystem_trashcan_empty.png"))); // NOI18N
+        popmClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_filesystem_trashcan_empty.png"))); // NOI18N
         popmClear.setText("Clear");
         popmClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -709,7 +709,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popOverrides.add(popmClear);
         popOverrides.add(popmOverSep2);
 
-        popmColor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_device_blockdevice.png"))); // NOI18N
+        popmColor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_device_blockdevice.png"))); // NOI18N
         popmColor.setText("Choose a color...");
         popmColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -718,7 +718,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides.add(popmColor);
 
-        popmAlpha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_miscellaneous.png"))); // NOI18N
+        popmAlpha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_miscellaneous.png"))); // NOI18N
         popmAlpha.setText("Choose an alpha...");
         popmAlpha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -738,10 +738,10 @@ public class ParticleDialog extends javax.swing.JDialog {
 
         popmOverrides.setText("Insert overrides...");
 
-        popmKaraOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame5.png"))); // NOI18N
+        popmKaraOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame5.png"))); // NOI18N
         popmKaraOK.setText("For animation...");
 
-        popm_b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_b.setText("\\b - Bold");
         popm_b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -750,7 +750,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_b);
 
-        popm_i.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_i.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_i.setText("\\i - Italic");
         popm_i.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -759,7 +759,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_i);
 
-        popm_u.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_u.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_u.setText("\\u - Underline");
         popm_u.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -768,7 +768,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_u);
 
-        popm_s.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_s.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_s.setText("\\s - Strike out");
         popm_s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -777,7 +777,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_s);
 
-        popm_bord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_bord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_bord.setText("\\bord - Thickness of border");
         popm_bord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -786,7 +786,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_bord);
 
-        popm_shad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_shad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_shad.setText("\\shad - Depth of shader");
         popm_shad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -795,7 +795,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_shad);
 
-        popm_be.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_be.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_be.setText("\\be - Blur edge");
         popm_be.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -804,7 +804,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_be);
 
-        popm_fs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_fs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_fs.setText("\\fs - Font size");
         popm_fs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -813,7 +813,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_fs);
 
-        popm_fscx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fscx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fscx.setText("\\fscx - Font scale of X");
         popm_fscx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -822,7 +822,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_fscx);
 
-        popm_fscy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fscy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fscy.setText("\\fscy - Font scale of Y");
         popm_fscy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -831,7 +831,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_fscy);
 
-        popm_fsp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fsp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fsp.setText("\\fsp - Font spacing");
         popm_fsp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -840,7 +840,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_fsp);
 
-        popm_frx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_frx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_frx.setText("\\frx - Font rotation on X");
         popm_frx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -849,7 +849,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_frx);
 
-        popm_fry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fry.setText("\\fry - Font rotation on Y");
         popm_fry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -858,7 +858,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_fry);
 
-        popm_frz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_frz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_frz.setText("\\frz - Font rotation on Z");
         popm_frz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -867,7 +867,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_frz);
 
-        popm_1c.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_1c.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_1c.setText("\\1c&H<hexa>& - Color of text");
         popm_1c.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -876,7 +876,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_1c);
 
-        popm_2c.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_2c.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_2c.setText("\\2c&H<hexa>& - Color of karaoke");
         popm_2c.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -885,7 +885,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_2c);
 
-        popm_3c.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_3c.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_3c.setText("\\3c&H<hexa>& - Color of border");
         popm_3c.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -894,7 +894,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_3c);
 
-        popm_4c.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_4c.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_4c.setText("\\4c&H<hexa>& - Color of shader");
         popm_4c.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -903,7 +903,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_4c);
 
-        popm_alpha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_alpha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_alpha.setText("\\alpha&H<hexa>& - Tranparency");
         popm_alpha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -912,7 +912,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_alpha);
 
-        popm_1a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_1a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_1a.setText("\\1a&H<hexa>& - Tranparency of text");
         popm_1a.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -921,7 +921,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_1a);
 
-        popm_2a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_2a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_2a.setText("\\2a&H<hexa>& - Tranparency of karaoke");
         popm_2a.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -930,7 +930,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_2a);
 
-        popm_3a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_3a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_3a.setText("\\3a&H<hexa>& - Tranparency of border");
         popm_3a.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -939,7 +939,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_3a);
 
-        popm_4a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_4a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_4a.setText("\\4a&H<hexa>& - Tranparency of shader");
         popm_4a.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -948,7 +948,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK.add(popm_4a);
 
-        popm_clip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_clip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_clip.setText("\\clip - Region of visibility");
         popm_clip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -959,10 +959,10 @@ public class ParticleDialog extends javax.swing.JDialog {
 
         popmOverrides.add(popmKaraOK);
 
-        popmKaraOK2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popmKaraOK2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popmKaraOK2.setText("For animation...");
 
-        popm_xbord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_xbord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_xbord.setText("\\xbord - Thickness of border on X");
         popm_xbord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -971,7 +971,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK2.add(popm_xbord);
 
-        popm_ybord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_ybord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_ybord.setText("\\ybord - Thickness of border on Y");
         popm_ybord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -980,7 +980,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK2.add(popm_ybord);
 
-        popm_xshad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_xshad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_xshad.setText("\\xshad - Depth of shader on X");
         popm_xshad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -989,7 +989,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK2.add(popm_xshad);
 
-        popm_yshad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_yshad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_yshad.setText("\\yshad - Depth of shader on Y");
         popm_yshad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -998,7 +998,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK2.add(popm_yshad);
 
-        popm_blur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_blur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_blur.setText("\\blur - Blur");
         popm_blur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1007,7 +1007,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK2.add(popm_blur);
 
-        popm_fax.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_fax.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_fax.setText("\\fax - Text shearing on X");
         popm_fax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1016,7 +1016,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK2.add(popm_fax);
 
-        popm_fay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_fay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_fay.setText("\\fay - Text shearing on Y");
         popm_fay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1025,7 +1025,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK2.add(popm_fay);
 
-        popm_iclip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_iclip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_iclip.setText("\\iclip - Region of  invisibility");
         popm_iclip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1036,10 +1036,10 @@ public class ParticleDialog extends javax.swing.JDialog {
 
         popmOverrides.add(popmKaraOK2);
 
-        popmKaraOK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popmKaraOK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popmKaraOK3.setText("For animation...");
 
-        popm_fsc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_fsc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_fsc.setText("\\fsc - Font scale");
         popm_fsc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1048,7 +1048,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_fsc);
 
-        popm_fsvp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_fsvp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_fsvp.setText("\\fsvp - Leading");
         popm_fsvp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1057,7 +1057,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_fsvp);
 
-        popm_frs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_frs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_frs.setText("\\frs - Baseline obliquity");
         popm_frs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1066,7 +1066,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_frs);
 
-        popm_z.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_z.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_z.setText("\\z - Z coordinate");
         popm_z.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1075,7 +1075,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_z);
 
-        popm_distort.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_distort.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_distort.setText("\\distort - Distortion");
         popm_distort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1084,7 +1084,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_distort);
 
-        popm_md.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_md.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_md.setText("\\md - Boundaries deforming");
         popm_md.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1093,7 +1093,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_md);
 
-        popm_mdx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_mdx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_mdx.setText("\\mdx - Boundaries deforming on X");
         popm_mdx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1102,7 +1102,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_mdx);
 
-        popm_mdy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_mdy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_mdy.setText("\\mdy - Boundaries deforming on Y");
         popm_mdy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1111,7 +1111,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_mdy);
 
-        popm_mdz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_mdz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_mdz.setText("\\mdz - Boundaries deforming on Z");
         popm_mdz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1120,7 +1120,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_mdz);
 
-        popm_1vc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_1vc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_1vc.setText("\\1vc - Gradients on text (color)");
         popm_1vc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1129,7 +1129,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_1vc);
 
-        popm_2vc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_2vc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_2vc.setText("\\2vc - Gradients on karaoke (color)");
         popm_2vc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1138,7 +1138,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_2vc);
 
-        popm_3vc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_3vc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_3vc.setText("\\3vc - Gradients on border (color)");
         popm_3vc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1147,7 +1147,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_3vc);
 
-        popm_4vc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_4vc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_4vc.setText("\\4vc - Gradients on shader (color)");
         popm_4vc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1156,7 +1156,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_4vc);
 
-        popm_1va.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_1va.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_1va.setText("\\1va - Gradients on text (transparency)");
         popm_1va.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1165,7 +1165,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_1va);
 
-        popm_2va.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_2va.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_2va.setText("\\2va - Gradients on karaoke (transparency)");
         popm_2va.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1174,7 +1174,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_2va);
 
-        popm_3va.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_3va.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_3va.setText("\\3va - Gradients on border (transparency)");
         popm_3va.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1183,7 +1183,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_3va);
 
-        popm_4va.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_4va.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_4va.setText("\\4va - Gradients on shader (transparency)");
         popm_4va.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1192,7 +1192,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_4va);
 
-        popm_1img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_1img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_1img.setText("\\1img - Image fill on text");
         popm_1img.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1201,7 +1201,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_1img);
 
-        popm_2img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_2img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_2img.setText("\\2img - Image fill on karaoke");
         popm_2img.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1210,7 +1210,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_2img);
 
-        popm_3img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_3img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_3img.setText("\\3img - Image fill on border");
         popm_3img.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1219,7 +1219,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_3img);
 
-        popm_4img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_4img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_4img.setText("\\4img - Image fill on shader");
         popm_4img.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1228,7 +1228,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK3.add(popm_4img);
 
-        popm_jitter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_jitter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_jitter.setText("\\jitter - Shaking");
         popm_jitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1241,7 +1241,7 @@ public class ParticleDialog extends javax.swing.JDialog {
 
         popmKaraNOK.setText("For configuration...");
 
-        popm_fn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_fn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_fn.setText("\\fn - Font name");
         popm_fn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1250,7 +1250,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_fn);
 
-        popm_fe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_fe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_fe.setText("\\fe - Font encoding");
         popm_fe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1259,7 +1259,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_fe);
 
-        popm_q.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_q.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_q.setText("\\q - Wrapping style");
         popm_q.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1268,7 +1268,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_q);
 
-        popm_a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_a.setText("\\a -Alignment (old)");
         popm_a.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1277,7 +1277,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_a);
 
-        popm_an.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_an.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_an.setText("\\an - Alignment");
         popm_an.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1286,7 +1286,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_an);
 
-        popm_pos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_pos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_pos.setText("\\pos - Position");
         popm_pos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1295,7 +1295,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_pos);
 
-        popm_move.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_move.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_move.setText("\\move - Position in real time");
         popm_move.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1304,7 +1304,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_move);
 
-        popm_org.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_org.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_org.setText("\\org - Origin");
         popm_org.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1313,7 +1313,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_org);
 
-        popm_fad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fad.setText("\\fad - Fading");
         popm_fad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1322,7 +1322,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_fad);
 
-        popm_fade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fade.setText("\\fade - Fading");
         popm_fade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1331,7 +1331,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_fade);
 
-        popm_clip2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_clip2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_clip2.setText("\\clip - Region of visibility");
         popm_clip2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1340,7 +1340,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_clip2);
 
-        popm_iclip2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_iclip2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_iclip2.setText("\\iclip - Region of invisibility");
         popm_iclip2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1349,7 +1349,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_iclip2);
 
-        popm_mover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_mover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_mover.setText("\\mover - Polar move");
         popm_mover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1358,7 +1358,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_mover);
 
-        popm_moves3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_moves3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_moves3.setText("\\moves3 - Spline move");
         popm_moves3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1367,7 +1367,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_moves3);
 
-        popm_moves4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_moves4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_moves4.setText("\\moves4 - Spline move");
         popm_moves4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1376,7 +1376,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_moves4);
 
-        popm_movevc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_movevc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_movevc.setText("\\movevc - Moveable vector clip");
         popm_movevc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1385,7 +1385,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK.add(popm_movevc);
 
-        popm_movevc2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_movevc2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_movevc2.setText("\\movevc - Moveable vector clip");
         popm_movevc2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1414,7 +1414,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popmOverrides.add(popmDelSurround);
         popmOverrides.add(jSeparator9);
 
-        popm_k.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_k.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_k.setText("\\k - Simple karaoke");
         popm_k.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1423,7 +1423,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmOverrides.add(popm_k);
 
-        popm_kf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_kf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_kf.setText("\\kf - Karaoke with fill");
         popm_kf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1432,7 +1432,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmOverrides.add(popm_kf);
 
-        popm_ko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_ko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_ko.setText("\\ko - Karaoke with outline");
         popm_ko.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1441,7 +1441,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmOverrides.add(popm_ko);
 
-        popm_t.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_t.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_t.setText("\\t - Animation");
         popm_t.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1451,7 +1451,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popmOverrides.add(popm_t);
         popmOverrides.add(jSeparator10);
 
-        popm_reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_reset.setText("\\r - Reset");
         popm_reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1463,7 +1463,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popOverrides.add(popmOverrides);
         popOverrides.add(popmOverSep4);
 
-        popmIntCalc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_calc.png"))); // NOI18N
+        popmIntCalc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_calc.png"))); // NOI18N
         popmIntCalc.setText("Insert a calc...");
         popmIntCalc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1472,7 +1472,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides.add(popmIntCalc);
 
-        popmFloCalc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_calc.png"))); // NOI18N
+        popmFloCalc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_calc.png"))); // NOI18N
         popmFloCalc.setText("Insert a float calc...");
         popmFloCalc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1481,7 +1481,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides.add(popmFloCalc);
 
-        popmDrawing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_kcoloredit.png"))); // NOI18N
+        popmDrawing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_kcoloredit.png"))); // NOI18N
         popmDrawing.setText("Insert a drawing...");
         popmDrawing.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1512,7 +1512,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popOverrides1.add(popmInsScript);
         popOverrides1.add(jSeparator2);
 
-        popmCut1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_action_editcut.png"))); // NOI18N
+        popmCut1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_editcut.png"))); // NOI18N
         popmCut1.setText("Cut");
         popmCut1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1521,7 +1521,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides1.add(popmCut1);
 
-        popmCopy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_action_editcopy.png"))); // NOI18N
+        popmCopy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_editcopy.png"))); // NOI18N
         popmCopy1.setText("Copy");
         popmCopy1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1530,7 +1530,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides1.add(popmCopy1);
 
-        popmPaste1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_action_editpaste.png"))); // NOI18N
+        popmPaste1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_editpaste.png"))); // NOI18N
         popmPaste1.setText("Paste");
         popmPaste1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1539,7 +1539,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides1.add(popmPaste1);
 
-        popmDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_action_button_cancel.png"))); // NOI18N
+        popmDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_button_cancel.png"))); // NOI18N
         popmDelete1.setText("Delete");
         popmDelete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1557,7 +1557,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides1.add(popmSelAll1);
 
-        popmClear1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_filesystem_trashcan_empty.png"))); // NOI18N
+        popmClear1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_filesystem_trashcan_empty.png"))); // NOI18N
         popmClear1.setText("Clear");
         popmClear1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1567,7 +1567,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popOverrides1.add(popmClear1);
         popOverrides1.add(popmOverSep6);
 
-        popmColor1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_device_blockdevice.png"))); // NOI18N
+        popmColor1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_device_blockdevice.png"))); // NOI18N
         popmColor1.setText("Choose a color...");
         popmColor1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1576,7 +1576,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popOverrides1.add(popmColor1);
 
-        popmAlpha1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_miscellaneous.png"))); // NOI18N
+        popmAlpha1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_miscellaneous.png"))); // NOI18N
         popmAlpha1.setText("Choose an alpha...");
         popmAlpha1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1596,10 +1596,10 @@ public class ParticleDialog extends javax.swing.JDialog {
 
         popmOverrides1.setText("Insert overrides...");
 
-        popmKaraOK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame5.png"))); // NOI18N
+        popmKaraOK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame5.png"))); // NOI18N
         popmKaraOK1.setText("For animation...");
 
-        popm_b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_b1.setText("\\b - Bold");
         popm_b1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1608,7 +1608,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_b1);
 
-        popm_i1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_i1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_i1.setText("\\i - Italic");
         popm_i1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1617,7 +1617,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_i1);
 
-        popm_u1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_u1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_u1.setText("\\u - Underline");
         popm_u1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1626,7 +1626,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_u1);
 
-        popm_s1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_s1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_s1.setText("\\s - Strike out");
         popm_s1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1635,7 +1635,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_s1);
 
-        popm_bord1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_bord1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_bord1.setText("\\bord - Thickness of border");
         popm_bord1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1644,7 +1644,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_bord1);
 
-        popm_shad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_shad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_shad1.setText("\\shad - Depth of shader");
         popm_shad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1653,7 +1653,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_shad1);
 
-        popm_be1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_be1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_be1.setText("\\be - Blur edge");
         popm_be1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1662,7 +1662,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_be1);
 
-        popm_fs1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_fs1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_fs1.setText("\\fs - Font size");
         popm_fs1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1671,7 +1671,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_fs1);
 
-        popm_fscx1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fscx1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fscx1.setText("\\fscx - Font scale of X");
         popm_fscx1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1680,7 +1680,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_fscx1);
 
-        popm_fscy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fscy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fscy1.setText("\\fscy - Font scale of Y");
         popm_fscy1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1689,7 +1689,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_fscy1);
 
-        popm_fsp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fsp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fsp1.setText("\\fsp - Font spacing");
         popm_fsp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1698,7 +1698,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_fsp1);
 
-        popm_frx1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_frx1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_frx1.setText("\\frx - Font rotation on X");
         popm_frx1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1707,7 +1707,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_frx1);
 
-        popm_fry1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fry1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fry1.setText("\\fry - Font rotation on Y");
         popm_fry1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1716,7 +1716,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_fry1);
 
-        popm_frz1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_frz1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_frz1.setText("\\frz - Font rotation on Z");
         popm_frz1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1725,7 +1725,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_frz1);
 
-        popm_1c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_1c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_1c1.setText("\\1c&H<hexa>& - Color of text");
         popm_1c1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1734,7 +1734,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_1c1);
 
-        popm_2c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_2c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_2c1.setText("\\2c&H<hexa>& - Color of karaoke");
         popm_2c1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1743,7 +1743,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_2c1);
 
-        popm_3c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_3c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_3c1.setText("\\3c&H<hexa>& - Color of border");
         popm_3c1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1752,7 +1752,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_3c1);
 
-        popm_4c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_4c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_4c1.setText("\\4c&H<hexa>& - Color of shader");
         popm_4c1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1761,7 +1761,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_4c1);
 
-        popm_alpha1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_alpha1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_alpha1.setText("\\alpha&H<hexa>& - Tranparency");
         popm_alpha1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1770,7 +1770,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_alpha1);
 
-        popm_1a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_1a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_1a1.setText("\\1a&H<hexa>& - Tranparency of text");
         popm_1a1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1779,7 +1779,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_1a1);
 
-        popm_2a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_2a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_2a1.setText("\\2a&H<hexa>& - Tranparency of karaoke");
         popm_2a1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1788,7 +1788,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_2a1);
 
-        popm_3a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_3a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_3a1.setText("\\3a&H<hexa>& - Tranparency of border");
         popm_3a1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1797,7 +1797,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_3a1);
 
-        popm_4a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_4a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_4a1.setText("\\4a&H<hexa>& - Tranparency of shader");
         popm_4a1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1806,7 +1806,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK1.add(popm_4a1);
 
-        popm_clip1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_clip1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_clip1.setText("\\clip - Region of visibility");
         popm_clip1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1817,10 +1817,10 @@ public class ParticleDialog extends javax.swing.JDialog {
 
         popmOverrides1.add(popmKaraOK1);
 
-        popmKaraOK4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popmKaraOK4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popmKaraOK4.setText("For animation...");
 
-        popm_xbord1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_xbord1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_xbord1.setText("\\xbord - Thickness of border on X");
         popm_xbord1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1829,7 +1829,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK4.add(popm_xbord1);
 
-        popm_ybord1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_ybord1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_ybord1.setText("\\ybord - Thickness of border on Y");
         popm_ybord1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1838,7 +1838,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK4.add(popm_ybord1);
 
-        popm_xshad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_xshad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_xshad1.setText("\\xshad - Depth of shader on X");
         popm_xshad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1847,7 +1847,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK4.add(popm_xshad1);
 
-        popm_yshad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_yshad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_yshad1.setText("\\yshad - Depth of shader on Y");
         popm_yshad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1856,7 +1856,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK4.add(popm_yshad1);
 
-        popm_blur1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_blur1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_blur1.setText("\\blur - Blur");
         popm_blur1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1865,7 +1865,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK4.add(popm_blur1);
 
-        popm_fax1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_fax1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_fax1.setText("\\fax - Text shearing on X");
         popm_fax1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1874,7 +1874,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK4.add(popm_fax1);
 
-        popm_fay1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_fay1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_fay1.setText("\\fay - Text shearing on Y");
         popm_fay1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1883,7 +1883,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK4.add(popm_fay1);
 
-        popm_iclip1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_iclip1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_iclip1.setText("\\iclip - Region of  invisibility");
         popm_iclip1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1894,10 +1894,10 @@ public class ParticleDialog extends javax.swing.JDialog {
 
         popmOverrides1.add(popmKaraOK4);
 
-        popmKaraOK5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popmKaraOK5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popmKaraOK5.setText("For animation...");
 
-        popm_fsc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_fsc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_fsc1.setText("\\fsc - Font scale");
         popm_fsc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1906,7 +1906,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_fsc1);
 
-        popm_fsvp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_fsvp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_fsvp1.setText("\\fsvp - Leading");
         popm_fsvp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1915,7 +1915,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_fsvp1);
 
-        popm_frs1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_frs1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_frs1.setText("\\frs - Baseline obliquity");
         popm_frs1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1924,7 +1924,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_frs1);
 
-        popm_z1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_z1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_z1.setText("\\z - Z coordinate");
         popm_z1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1933,7 +1933,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_z1);
 
-        popm_distort1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_distort1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_distort1.setText("\\distort - Distortion");
         popm_distort1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1942,7 +1942,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_distort1);
 
-        popm_md1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_md1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_md1.setText("\\md - Boundaries deforming");
         popm_md1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1951,7 +1951,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_md1);
 
-        popm_mdx1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_mdx1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_mdx1.setText("\\mdx - Boundaries deforming on X");
         popm_mdx1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1960,7 +1960,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_mdx1);
 
-        popm_mdy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_mdy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_mdy1.setText("\\mdy - Boundaries deforming on Y");
         popm_mdy1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1969,7 +1969,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_mdy1);
 
-        popm_mdz1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_mdz1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_mdz1.setText("\\mdz - Boundaries deforming on Z");
         popm_mdz1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1978,7 +1978,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_mdz1);
 
-        popm_1vc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_1vc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_1vc1.setText("\\1vc - Gradients on text (color)");
         popm_1vc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1987,7 +1987,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_1vc1);
 
-        popm_2vc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_2vc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_2vc1.setText("\\2vc - Gradients on karaoke (color)");
         popm_2vc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1996,7 +1996,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_2vc1);
 
-        popm_3vc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_3vc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_3vc1.setText("\\3vc - Gradients on border (color)");
         popm_3vc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2005,7 +2005,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_3vc1);
 
-        popm_4vc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_4vc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_4vc1.setText("\\4vc - Gradients on shader (color)");
         popm_4vc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2014,7 +2014,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_4vc1);
 
-        popm_1va1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_1va1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_1va1.setText("\\1va - Gradients on text (transparency)");
         popm_1va1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2023,7 +2023,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_1va1);
 
-        popm_2va1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_2va1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_2va1.setText("\\2va - Gradients on karaoke (transparency)");
         popm_2va1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2032,7 +2032,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_2va1);
 
-        popm_3va1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_3va1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_3va1.setText("\\3va - Gradients on border (transparency)");
         popm_3va1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2041,7 +2041,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_3va1);
 
-        popm_4va1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_4va1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_4va1.setText("\\4va - Gradients on shader (transparency)");
         popm_4va1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2050,7 +2050,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_4va1);
 
-        popm_1img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_1img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_1img1.setText("\\1img - Image fill on text");
         popm_1img1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2059,7 +2059,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_1img1);
 
-        popm_2img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_2img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_2img1.setText("\\2img - Image fill on karaoke");
         popm_2img1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2068,7 +2068,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_2img1);
 
-        popm_3img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_3img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_3img1.setText("\\3img - Image fill on border");
         popm_3img1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2077,7 +2077,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_3img1);
 
-        popm_4img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_4img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_4img1.setText("\\4img - Image fill on shader");
         popm_4img1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2086,7 +2086,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraOK5.add(popm_4img1);
 
-        popm_jitter1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_jitter1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_jitter1.setText("\\jitter - Shaking");
         popm_jitter1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2099,7 +2099,7 @@ public class ParticleDialog extends javax.swing.JDialog {
 
         popmKaraNOK1.setText("For configuration...");
 
-        popm_fn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_fn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_fn1.setText("\\fn - Font name");
         popm_fn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2108,7 +2108,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_fn1);
 
-        popm_fe1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_fe1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_fe1.setText("\\fe - Font encoding");
         popm_fe1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2117,7 +2117,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_fe1);
 
-        popm_q1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_q1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_q1.setText("\\q - Wrapping style");
         popm_q1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2126,7 +2126,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_q1);
 
-        popm_a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_a1.setText("\\a -Alignment (old)");
         popm_a1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2135,7 +2135,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_a1);
 
-        popm_an1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_an1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_an1.setText("\\an - Alignment");
         popm_an1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2144,7 +2144,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_an1);
 
-        popm_pos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_pos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_pos1.setText("\\pos - Position");
         popm_pos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2153,7 +2153,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_pos1);
 
-        popm_move1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_move1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_move1.setText("\\move - Position in real time");
         popm_move1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2162,7 +2162,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_move1);
 
-        popm_org1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_org1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_org1.setText("\\org - Origin");
         popm_org1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2171,7 +2171,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_org1);
 
-        popm_fad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fad1.setText("\\fad - Fading");
         popm_fad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2180,7 +2180,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_fad1);
 
-        popm_fade1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_fade1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_fade1.setText("\\fade - Fading");
         popm_fade1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2189,7 +2189,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_fade1);
 
-        popm_clip3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_clip3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_clip3.setText("\\clip - Region of visibility");
         popm_clip3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2198,7 +2198,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_clip3);
 
-        popm_iclip3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
+        popm_iclip3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame4.png"))); // NOI18N
         popm_iclip3.setText("\\iclip - Region of invisibility");
         popm_iclip3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2207,7 +2207,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_iclip3);
 
-        popm_mover1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_mover1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_mover1.setText("\\mover - Polar move");
         popm_mover1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2216,7 +2216,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_mover1);
 
-        popm_moves5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_moves5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_moves5.setText("\\moves3 - Spline move");
         popm_moves5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2225,7 +2225,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_moves5);
 
-        popm_moves6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_moves6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_moves6.setText("\\moves4 - Spline move");
         popm_moves6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2234,7 +2234,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_moves6);
 
-        popm_movevc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_movevc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_movevc1.setText("\\movevc - Moveable vector clip");
         popm_movevc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2243,7 +2243,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmKaraNOK1.add(popm_movevc1);
 
-        popm_movevc3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
+        popm_movevc3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame.png"))); // NOI18N
         popm_movevc3.setText("\\movevc - Moveable vector clip");
         popm_movevc3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2255,7 +2255,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popmOverrides1.add(popmKaraNOK1);
         popmOverrides1.add(jSeparator1);
 
-        popm_k1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_k1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_k1.setText("\\k - Simple karaoke");
         popm_k1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2264,7 +2264,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmOverrides1.add(popm_k1);
 
-        popm_kf1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_kf1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_kf1.setText("\\kf - Karaoke with fill");
         popm_kf1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2273,7 +2273,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmOverrides1.add(popm_kf1);
 
-        popm_ko1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_ko1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_ko1.setText("\\ko - Karaoke with outline");
         popm_ko1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2282,7 +2282,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         });
         popmOverrides1.add(popm_ko1);
 
-        popm_t1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
+        popm_t1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame2.png"))); // NOI18N
         popm_t1.setText("\\t - Animation");
         popm_t1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2292,7 +2292,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popmOverrides1.add(popm_t1);
         popmOverrides1.add(jSeparator3);
 
-        popm_reset1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
+        popm_reset1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_ksame3.png"))); // NOI18N
         popm_reset1.setText("\\r - Reset");
         popm_reset1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2304,7 +2304,7 @@ public class ParticleDialog extends javax.swing.JDialog {
         popOverrides1.add(popmOverrides1);
         popOverrides1.add(popmOverSep8);
 
-        popmDrawing1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallboxforfansub/images/20px-Crystal_Clear_app_kcoloredit.png"))); // NOI18N
+        popmDrawing1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_app_kcoloredit.png"))); // NOI18N
         popmDrawing1.setText("Insert a drawing...");
         popmDrawing1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

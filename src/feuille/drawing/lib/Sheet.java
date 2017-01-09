@@ -4,16 +4,6 @@
  */
 package feuille.drawing.lib;
 
-import feuille.drawing.lib.ShapesList;
-import feuille.drawing.lib.ReStart;
-import feuille.drawing.lib.Point;
-import feuille.drawing.lib.Move;
-import feuille.drawing.lib.Line;
-import feuille.drawing.lib.Layer;
-import feuille.drawing.lib.IShape;
-import feuille.drawing.lib.ControlPoint;
-import feuille.drawing.lib.Bezier;
-import feuille.drawing.lib.BSpline;
 import java.awt.*;
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.GeneralPath;
@@ -55,20 +45,26 @@ public class Sheet extends javax.swing.JPanel {
     private java.util.List<Layer> layerList = null;
     
     private Selection selection = new Selection();
-    private java.util.List<Center> centers = new java.util.ArrayList<Center>();
-    private java.util.List<Resize> resizes = new java.util.ArrayList<Resize>();
-    private java.util.List<Shear> shears = new java.util.ArrayList<Shear>();
-    private java.util.List<Translation> translations = new java.util.ArrayList<Translation>();
-    private java.util.List<feuille.drawing.ornament.IShape> oml = new java.util.ArrayList<feuille.drawing.ornament.IShape>();
+    private final java.util.List<Center> centers = new java.util.ArrayList<>();
+    private final java.util.List<Resize> resizes = new java.util.ArrayList<>();
+    private final java.util.List<Shear> shears = new java.util.ArrayList<>();
+    private final java.util.List<Translation> translations = new java.util.ArrayList<>();
+    private java.util.List<feuille.drawing.ornament.IShape> oml = new java.util.ArrayList<>();
+    
+    private boolean hasGrid = false;
     
     public Sheet(){
+        init();
+    }
+    
+    private void init(){
         setLayout(null);
     }
     
     public enum Thickness{
         Big(10),Large(8),Medium(6),Small(4);
 
-        private int thick;
+        private final int thick;
 
         Thickness(int thick){
             this.thick = thick;
@@ -149,6 +145,11 @@ public class Sheet extends javax.swing.JPanel {
         
         //Dessine les axes correspondant au curseur de la souris.
         g2d.setColor(Color.pink);
+        if(hasGrid==true){
+            java.awt.Point p = getGridCoordinates(mouseX, mouseY);
+            mouseX = p.x;
+            mouseY = p.y;
+        }
         g2d.drawLine(mouseX, 0, mouseX, getHeight());
         g2d.drawLine(0, mouseY, getWidth(), mouseY);
 
@@ -510,7 +511,11 @@ public class Sheet extends javax.swing.JPanel {
                 }
             }
         }
-                
+        
+        //Dessine le point à ajouter s'il existe dans la sélection
+        if(selection.getPointToAdd()!=null){
+            selection.drawPointToAdd(g2d);
+        }
         
         //Dessine le rectangle de sélection de groupe
         if(selection.exists()){
@@ -819,7 +824,8 @@ public class Sheet extends javax.swing.JPanel {
         this.thickness = thickness;
     }
     
-    /** Met à jour la liste de formes et demande une mise à jour de l'affichage. */
+    /** Met à jour la liste de formes et demande une mise à jour de l'affichage.
+     * @param slist */
     public void updateShapesList(ShapesList slist){
         this.slist = slist;
         this.repaint();
@@ -830,35 +836,43 @@ public class Sheet extends javax.swing.JPanel {
         repaint();
     }
 
-    /** Met à jour les coordonnées de position de la souris. */
+    /** Met à jour les coordonnées de position de la souris.
+     * @param mouseX
+     * @param mouseY */
     public void updateMousePosition(int mouseX, int mouseY){
         this.mouseX = mouseX;
         this.mouseY = mouseY;
     }
 
     /** Met à jour les coordonnées de position de l'image
-     * en ajoutant la valeur de déplacement. */
+     * en ajoutant la valeur de déplacement.
+     * @param x
+     * @param y */
     public void updateImagePosition(int x, int y){
         imageX = imageX+x;
         imageY = imageY+y;
     }
 
-    /** Met à jour l'image. */
+    /** Met à jour l'image.
+     * @param img */
     public void updateImage(ImageIcon img){
         this.img = img;
     }
 
-    /** Met à jour la transparence de l'image. */
+    /** Met à jour la transparence de l'image.
+     * @param alpha */
     public void updateImageTransparency(Float alpha){
         this.alpha = alpha;
     }
 
-    /** Met à jour le chemin de la zone. */
+    /** Met à jour le chemin de la zone.
+     * @param gp */
     public void updateGeneralPath(GeneralPath gp){
         this.gp = gp;
     }
 
-    /** Met à jour la transparence pour la zone. */
+    /** Met à jour la transparence pour la zone.
+     * @param gpAlpha */
     public void updateGeneralPathTransparency(Float gpAlpha){
         this.gpAlpha = gpAlpha;
     }
@@ -983,4 +997,21 @@ public class Sheet extends javax.swing.JPanel {
         this.oml = oml;
         repaint();
     }
+    
+    public void updateGrid(boolean hasGrid){
+        this.hasGrid = hasGrid;
+        repaint();
+    }
+    
+    public static java.awt.Point getGridCoordinates(int x, int y){
+        //On compte combien de fois on trouve le nombre 25 dans x et y
+        float nX = x/25f;
+        float nY = y/25f;
+        //On arrondit et on multiplie ce chiffre pour se positionner sur la grille
+        int newX = Math.round(nX) * 25;
+        int newY = Math.round(nY) * 25;
+        //On retourne le nouveau point        
+        return new java.awt.Point(newX, newY);
+    }
 }
+

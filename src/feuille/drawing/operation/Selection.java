@@ -33,7 +33,7 @@ public class Selection {
     
     private int fromX, fromY, toX, toY;
     private Float gpAlpha = 0.2f;
-    private List<IShape> selectedShape = new ArrayList<IShape>();
+    private List<IShape> selectedShape = new ArrayList<>();
     
     private String localCommandCopy = "";
     
@@ -359,7 +359,7 @@ public class Selection {
     
     //Met à jour le dessin à partir des commandes ASS
     private List<IShape> shapesFromCommands(String com){
-        List<Command> commandList = new ArrayList<Command>();
+        List<Command> commandList = new ArrayList<>();
         Pattern pat = Pattern.compile("([a-z]*)\\s*(-*\\d*)\\s*(-*\\d*)\\s*");
         Matcher mat = pat.matcher(com);
         while(mat.find()){
@@ -407,7 +407,7 @@ public class Selection {
             }            
         }
         
-        List<IShape> shapes = new ArrayList<IShape>();
+        List<IShape> shapes = new ArrayList<>();
         java.awt.Point p_init = new java.awt.Point();
         Command last_command = null;
         
@@ -742,7 +742,7 @@ public class Selection {
     
     //TODO : Prise en charge des bsplines (revoir points de référence pour bspline)
     public List<IShape> shapesWithSym(Layer lay){
-        List<IShape> finalShapes = new ArrayList<IShape>();
+        List<IShape> finalShapes = new ArrayList<>();
         //Parcourt la liste une première fois afin d'avoir le premier coté
         //afin de la recopier sans aucune inversion (sans aucune symétrie)
         setOriginalShapes(lay, finalShapes);
@@ -892,7 +892,7 @@ public class Selection {
     }
     
     public List<IShape> shapesAroundASide(Layer lay, int side, double angle){
-        List<IShape> finalShapes = new ArrayList<IShape>();
+        List<IShape> finalShapes = new ArrayList<>();
         //Parcourt la liste une première fois afin d'avoir le premier coté
         //afin de la recopier sans aucune inversion (sans aucune symétrie)
         setOriginalShapes(lay, finalShapes);
@@ -1021,7 +1021,7 @@ public class Selection {
     }
     
     public List<IShape> shapesOneAfter(Layer lay, int times){
-        List<IShape> finalShapes = new ArrayList<IShape>();
+        List<IShape> finalShapes = new ArrayList<>();
         //Parcourt la liste une première fois afin d'avoir le premier coté
         //afin de la recopier sans aucune inversion (sans aucune symétrie)
         setOriginalShapes(lay, finalShapes);
@@ -1132,6 +1132,503 @@ public class Selection {
                 if(ks instanceof Point && lastPoint == null){
                     lastPoint = (Point)ks;
                 }
+            }
+        }
+        
+        return finalShapes;
+    }
+    
+    private java.awt.Point pointadded = null;
+    
+    public void setPointToAdd(java.awt.Point p){
+        pointadded = p;
+    }
+    
+    public java.awt.Point getPointToAdd(){
+        return pointadded;
+    }
+    
+    public void drawPointToAdd(Graphics2D g2d){
+        g2d.setColor(Color.cyan);
+        g2d.fillRect(pointadded.x-5, pointadded.y-5, 10, 10);
+    }
+    
+    /** Renvoie le premier élément "point" de la liste. */
+    public Point getPointBefore(Layer lay, Point p){
+        int found = 0; Point pa = null;
+        for(int i = lay.getShapesList().getShapes().size()-1; i >= 0; i--){            
+            IShape s = lay.getShapesList().getShapes().get(i);
+            if(s instanceof Point && found == 1){
+                pa = (Point)lay.getShapesList().getShapes().get(i);
+            }            
+            if(pa != null){
+                return pa;
+            }
+//            if(found != 0){
+//                found += 1;
+//            }
+            if(found == 0 && s.equals(p)){
+                found += 1;
+            }            
+        }
+        return null;
+    }
+    
+    public List<IShape> addOnePointBetweenLines(Layer lay, Point p){
+        List<IShape> finalShapes = new ArrayList<>();
+        
+        //Première boucle : repérage des éléments de début et de fin de zone
+        IShape first = null, last = null; IShape lastShape = null;
+        for(int i=0; i<lay.getShapesList().getShapes().size(); i++){
+            IShape s = lay.getShapesList().getShapes().get(i);
+            if(lastShape==null){
+                lastShape = s;
+            }            
+            if(s instanceof Line && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Bezier && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof BSpline && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Move && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof ReStart && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }
+            lastShape = s;
+        }
+        
+        //Deuxième boucle : remplissage de la liste pour extraction
+        boolean afterFirst = false, afterLast = false;
+        for(IShape s : lay.getShapesList().getShapes()){ 
+            if(afterFirst==true && s.equals(last) && first!=null && last!=null){
+                finalShapes.add(new Line(first.getLastPoint().x, first.getLastPoint().y, p.getLastPoint().x, p.getLastPoint().y));
+                finalShapes.add(p);
+                finalShapes.add(new Line(p.getLastPoint().x, p.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+            }else if(afterFirst==true && first!=null && last!=null && first.equals(last)){
+                finalShapes.add(new Line(first.getLastPoint().x, first.getLastPoint().y, p.getLastPoint().x, p.getLastPoint().y));
+                finalShapes.add(p);
+                finalShapes.add(new Line(p.getLastPoint().x, p.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+                afterFirst = false;
+            }else if(afterFirst==false | afterLast==true){
+                finalShapes.add(s);
+            }
+            
+            if(s.equals(first)){
+                afterFirst = true;
+            }
+        }
+        
+        return finalShapes;
+    }
+    
+    public List<IShape> addOnePointBetweenCurves(Layer lay, Point p){
+        List<IShape> finalShapes = new ArrayList<>();
+        
+        //Première boucle : repérage des éléments de début et de fin de zone
+        IShape first = null, last = null, sp = null, lastShape = null, firstPoint = null;
+        for(int i=0; i<lay.getShapesList().getShapes().size(); i++){
+            IShape s = lay.getShapesList().getShapes().get(i);
+            if(lastShape==null){
+                lastShape = s;
+            }            
+            if(s instanceof Line && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Bezier && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof BSpline && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Move && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof ReStart && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }
+            lastShape = s;
+        }
+        
+        //Deuxième boucle : remplissage de la liste pour extraction
+        boolean afterFirst = false, afterLast = false;
+        for(IShape s : lay.getShapesList().getShapes()){ 
+            if(afterFirst==true && s.equals(last) && first!=null && last!=null && sp!=null){
+                finalShapes.add(first);
+                finalShapes.add(new Bezier(sp.getLastPoint().x, sp.getLastPoint().y, p.getOriginPoint().x, p.getOriginPoint().y));
+                finalShapes.add(p);
+                finalShapes.add(new Bezier(p.getLastPoint().x, p.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+            }else if(afterFirst==true && first!=null && last!=null && sp!=null && first.equals(last)){
+                finalShapes.add(first);
+                finalShapes.add(new Bezier(sp.getLastPoint().x, sp.getLastPoint().y, p.getOriginPoint().x, p.getOriginPoint().y));
+                finalShapes.add(p);
+                finalShapes.add(new Bezier(p.getLastPoint().x, p.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+                afterFirst = false;
+            }else if(afterFirst==false | afterLast==true){
+                finalShapes.add(s);
+            }
+            
+            if(s.equals(first)){
+                afterFirst = true;
+            }
+        }
+        
+        return finalShapes;
+    }
+    
+    public List<IShape> addOnePointBetweenLineCurve(Layer lay, Point p){
+        List<IShape> finalShapes = new ArrayList<>();
+        
+        //Première boucle : repérage des éléments de début et de fin de zone
+        IShape first = null, last = null; IShape lastShape = null;
+        for(int i=0; i<lay.getShapesList().getShapes().size(); i++){
+            IShape s = lay.getShapesList().getShapes().get(i);
+            if(lastShape==null){
+                lastShape = s;
+            }            
+            if(s instanceof Line && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Bezier && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof BSpline && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Move && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof ReStart && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }
+            lastShape = s;
+        }
+        
+        //Deuxième boucle : remplissage de la liste pour extraction
+        boolean afterFirst = false, afterLast = false;
+        for(IShape s : lay.getShapesList().getShapes()){ 
+            if(afterFirst==true && s.equals(last) && first!=null && last!=null){
+                finalShapes.add(new Line(first.getLastPoint().x, first.getLastPoint().y, p.getLastPoint().x, p.getLastPoint().y));
+                finalShapes.add(p);
+                finalShapes.add(new Bezier(p.getLastPoint().x, p.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+            }else if(afterFirst==true && first!=null && last!=null && first.equals(last)){
+                finalShapes.add(new Line(first.getLastPoint().x, first.getLastPoint().y, p.getLastPoint().x, p.getLastPoint().y));
+                finalShapes.add(p);
+                finalShapes.add(new Bezier(p.getLastPoint().x, p.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+                afterFirst = false;
+            }else if(afterFirst==false | afterLast==true){
+                finalShapes.add(s);
+            }
+            
+            if(s.equals(first)){
+                afterFirst = true;
+            }
+        }
+        
+        return finalShapes;
+    }
+    
+    public List<IShape> addOnePointBetweenCurveLine(Layer lay, Point p){
+        List<IShape> finalShapes = new ArrayList<>();
+        
+        //Première boucle : repérage des éléments de début et de fin de zone
+        IShape first = null, last = null, sp = null, lastShape = null;
+        for(int i=0; i<lay.getShapesList().getShapes().size(); i++){
+            IShape s = lay.getShapesList().getShapes().get(i);
+            if(lastShape==null){
+                lastShape = s;
+            }            
+            if(s instanceof Line && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Bezier && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof BSpline && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Move && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof ReStart && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }
+            lastShape = s;
+        }
+        
+        //Deuxième boucle : remplissage de la liste pour extraction
+        boolean afterFirst = false, afterLast = false;
+        for(IShape s : lay.getShapesList().getShapes()){ 
+            if(afterFirst==true && s.equals(last) && first!=null && last!=null && sp!=null){
+                finalShapes.add(first);
+                finalShapes.add(new Bezier(sp.getLastPoint().x, sp.getLastPoint().y, p.getOriginPoint().x, p.getOriginPoint().y));
+                finalShapes.add(p);
+                finalShapes.add(new Line(p.getLastPoint().x, p.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+            }else if(afterFirst==true && first!=null && last!=null && sp!=null && first.equals(last)){
+                finalShapes.add(first);
+                finalShapes.add(new Bezier(sp.getLastPoint().x, sp.getLastPoint().y, p.getOriginPoint().x, p.getOriginPoint().y));
+                finalShapes.add(p);
+                finalShapes.add(new Line(p.getLastPoint().x, p.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+                afterFirst = false;
+            }else if(afterFirst==false | afterLast==true){
+                finalShapes.add(s);
+            }
+            
+            if(s.equals(first)){
+                afterFirst = true;
+            }
+        }
+        
+        return finalShapes;
+    }
+    
+    public List<IShape> removeOnePointBetweenPointsL(Layer lay){
+        List<IShape> finalShapes = new ArrayList<>();
+        
+        //Première boucle : repérage des éléments de début et de fin de zone
+        IShape first = null, last = null, lastShape = null;
+        for(int i=0; i<lay.getShapesList().getShapes().size(); i++){
+            IShape s = lay.getShapesList().getShapes().get(i);
+            if(lastShape==null){
+                lastShape = s;
+            }            
+            if(s instanceof Line && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Bezier && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof BSpline && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Move && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof ReStart && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }
+            lastShape = s;
+        }
+        
+        //Deuxième boucle : remplissage de la liste pour extraction
+        boolean afterFirst = false, afterLast = false;
+        for(IShape s : lay.getShapesList().getShapes()){ 
+            if(afterFirst==true && s.equals(last) && first!=null && last!=null){
+                finalShapes.add(new Line(first.getLastPoint().x, first.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+            }else if(afterFirst==true && first!=null && last!=null && first.equals(last)){
+                finalShapes.add(new Line(first.getLastPoint().x, first.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+                afterFirst = false;
+            }else if(afterFirst==false | afterLast==true){
+                finalShapes.add(s);
+            }
+            
+            if(s.equals(first)){
+                afterFirst = true;
+            }
+        }
+        
+        return finalShapes;
+    }
+    
+    public List<IShape> removeOnePointBetweenPointsC(Layer lay){
+        List<IShape> finalShapes = new ArrayList<>();
+        
+        //Première boucle : repérage des éléments de début et de fin de zone
+        IShape first = null, last = null, sp = null, lastShape = null;
+        for(int i=0; i<lay.getShapesList().getShapes().size(); i++){
+            IShape s = lay.getShapesList().getShapes().get(i);
+            if(lastShape==null){
+                lastShape = s;
+            }            
+            if(s instanceof Line && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Bezier && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof BSpline && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof Move && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }else if(s instanceof ReStart && s.isInSelection()){
+                if(first == null){
+                    first = lastShape;
+                    sp = getPointBefore(lay, (Point)lastShape);
+                    last = lastShape;
+                }else{
+                    last = s;
+                }
+            }
+            lastShape = s;
+        }
+        
+        //Deuxième boucle : remplissage de la liste pour extraction
+        boolean afterFirst = false, afterLast = false;
+        for(IShape s : lay.getShapesList().getShapes()){ 
+            if(afterFirst==true && s.equals(last) && first!=null && last!=null && sp!=null){
+                finalShapes.add(new Bezier(sp.getLastPoint().x, sp.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+            }else if(afterFirst==true && first!=null && last!=null && sp!=null && first.equals(last)){
+                finalShapes.add(new Bezier(sp.getLastPoint().x, sp.getLastPoint().y, last.getLastPoint().x, last.getLastPoint().y));
+                afterLast = true;
+                afterFirst = false;
+            }else if(afterFirst==false | afterLast==true){
+                finalShapes.add(s);
+            }
+            
+            if(s.equals(first)){
+                afterFirst = true;
             }
         }
         

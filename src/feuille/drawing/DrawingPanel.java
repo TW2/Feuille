@@ -2220,6 +2220,18 @@ public class DrawingPanel extends javax.swing.JPanel {
         popmSelectionGeo3A = new javax.swing.JMenuItem();
         popmSelectionGeo3B = new javax.swing.JMenuItem();
         popmSelectionGeoPlus = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        popmAddPointsBL = new javax.swing.JMenuItem();
+        popmAddPointsBC = new javax.swing.JMenuItem();
+        popmAddPointsBLC = new javax.swing.JMenuItem();
+        popmAddPointsBCL = new javax.swing.JMenuItem();
+        popmRemovePointsLine = new javax.swing.JMenuItem();
+        popmRemovePointsCurve = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        popmBoolOpUnion = new javax.swing.JMenuItem();
+        popmBoolOpSubstract = new javax.swing.JMenuItem();
+        popmBoolOpIntersect = new javax.swing.JMenuItem();
+        popmBoolOpExcluOR = new javax.swing.JMenuItem();
         popRubberSize = new javax.swing.JPopupMenu();
         popmRubberSize2 = new javax.swing.JRadioButtonMenuItem();
         popmRubberSize4 = new javax.swing.JRadioButtonMenuItem();
@@ -2246,6 +2258,7 @@ public class DrawingPanel extends javax.swing.JPanel {
         tbReStart = new javax.swing.JToggleButton();
         tbMove = new javax.swing.JToggleButton();
         btnCloseBSpline = new javax.swing.JButton();
+        tbGrid = new javax.swing.JToggleButton();
         ifrImage = new javax.swing.JInternalFrame();
         btnUnloadImage = new javax.swing.JButton();
         btnImage = new javax.swing.JButton();
@@ -2596,6 +2609,102 @@ public class DrawingPanel extends javax.swing.JPanel {
             }
         });
         popDrawing.add(popmSelectionGeoPlus);
+        popDrawing.add(jSeparator7);
+
+        popmAddPointsBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_edit_add2.png"))); // NOI18N
+        popmAddPointsBL.setText("Ajouter un point entre deux lignes");
+        popmAddPointsBL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmAddPointsBLActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmAddPointsBL);
+
+        popmAddPointsBC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_edit_add2.png"))); // NOI18N
+        popmAddPointsBC.setText("Ajouter un point entre deux courbes");
+        popmAddPointsBC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmAddPointsBCActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmAddPointsBC);
+
+        popmAddPointsBLC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_edit_add2.png"))); // NOI18N
+        popmAddPointsBLC.setText("Ajouter un point entre une ligne et une courbe");
+        popmAddPointsBLC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmAddPointsBLCActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmAddPointsBLC);
+
+        popmAddPointsBCL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_edit_add2.png"))); // NOI18N
+        popmAddPointsBCL.setText("Ajouter un point entre une courbe et une ligne");
+        popmAddPointsBCL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmAddPointsBCLActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmAddPointsBCL);
+
+        popmRemovePointsLine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_edit_remove2.png"))); // NOI18N
+        popmRemovePointsLine.setText("Enlever ou remplacer des points par une ligne");
+        popmRemovePointsLine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmRemovePointsLineActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmRemovePointsLine);
+
+        popmRemovePointsCurve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20px-Crystal_Clear_action_edit_remove2.png"))); // NOI18N
+        popmRemovePointsCurve.setText("Enlever ou remplacer des points par une courbe");
+        popmRemovePointsCurve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmRemovePointsCurveActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmRemovePointsCurve);
+        popDrawing.add(jSeparator8);
+
+        popmBoolOpUnion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20 union.png"))); // NOI18N
+        popmBoolOpUnion.setText("Make union");
+        popmBoolOpUnion.setToolTipText("Select 2 layers at least to make union.");
+        popmBoolOpUnion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmBoolOpUnionActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmBoolOpUnion);
+
+        popmBoolOpSubstract.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20 substract.png"))); // NOI18N
+        popmBoolOpSubstract.setText("Make substract");
+        popmBoolOpSubstract.setToolTipText("Select 2 layers at least to make substract.");
+        popmBoolOpSubstract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmBoolOpSubstractActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmBoolOpSubstract);
+
+        popmBoolOpIntersect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20 intersect.png"))); // NOI18N
+        popmBoolOpIntersect.setText("Make intersect");
+        popmBoolOpIntersect.setToolTipText("Select 2 layers at least to make intersect.");
+        popmBoolOpIntersect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmBoolOpIntersectActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmBoolOpIntersect);
+
+        popmBoolOpExcluOR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/20 XOR.png"))); // NOI18N
+        popmBoolOpExcluOR.setText("Make XOR");
+        popmBoolOpExcluOR.setToolTipText("Select 2 layers at least to make XOR.");
+        popmBoolOpExcluOR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmBoolOpExcluORActionPerformed(evt);
+            }
+        });
+        popDrawing.add(popmBoolOpExcluOR);
 
         bgRubberSize.add(popmRubberSize2);
         popmRubberSize2.setText("Taille de la gomme : 02 px");
@@ -2750,6 +2859,16 @@ public class DrawingPanel extends javax.swing.JPanel {
         });
         ifrMainDraw.getContentPane().add(btnCloseBSpline);
         btnCloseBSpline.setBounds(40, 40, 40, 40);
+
+        tbGrid.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/gridlocker.png"))); // NOI18N
+        tbGrid.setToolTipText("Se déplacer sur la grille");
+        tbGrid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbGridActionPerformed(evt);
+            }
+        });
+        ifrMainDraw.getContentPane().add(tbGrid);
+        tbGrid.setBounds(120, 80, 40, 40);
 
         jDesktopPane1.add(ifrMainDraw);
         ifrMainDraw.setBounds(10, 90, 180, 150);
@@ -3246,6 +3365,11 @@ public class DrawingPanel extends javax.swing.JPanel {
        // On récupère les coordonnées sur le composant sheet.
         int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
         int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
+        if(tbGrid.isSelected()){
+            java.awt.Point pa = Sheet.getGridCoordinates(xa, ya);
+            xa = pa.x;
+            ya = pa.y;
+        }
         Layer lay = getCurrentLayer();
 
         // Si on clique sur le bouton 1 de la souris (le bouton gauche).
@@ -3705,6 +3829,13 @@ public class DrawingPanel extends javax.swing.JPanel {
 
     private void spSheetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spSheetMousePressed
         // QUAND ON APPUIE SUR UN BOUTON DE LA SOURIS
+        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
+        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
+        if(tbGrid.isSelected()){
+            java.awt.Point pa = Sheet.getGridCoordinates(xa, ya);
+            xa = pa.x;
+            ya = pa.y;
+        }
     if(tbShapeBezier.isSelected() | tbShapeLine.isSelected()
             | tbMove.isSelected() | tbReStart.isSelected()){
         //Prépare la mise à jour de la position des points proches du pointeur
@@ -3712,8 +3843,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         //on marque chaque élément concerné par un déplacment
         if(evt.getButton()==2){
             Layer lay = getCurrentLayer();
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             java.awt.Point p2d = new java.awt.Point(xa/scale,ya/scale);
             lay.setChangelist(lay.getShapesList().getShapesAtPoint(p2d));
             for (IShape s : lay.getShapesList().getShapes()){
@@ -3728,8 +3857,6 @@ public class DrawingPanel extends javax.swing.JPanel {
     }else if (tbShapeBSpline1.isSelected() | tbNextPoint.isSelected()){
         if(evt.getButton()==2){
             Layer lay = getCurrentLayer();
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             java.awt.Point p2d = new java.awt.Point(xa/scale,ya/scale);
             lay.setChangelist(lay.getShapesList().getShapesAtPoint(p2d));
             for (IShape s : lay.getShapesList().getShapes()){
@@ -3751,8 +3878,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         Layer lay = getCurrentLayer();
         if(tbNormalMode.isSelected() && lay.getTranslation().isSet()){
             if(evt.getButton()==1){
-                int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                 lay.getTranslation().setDistance(xa, ya);
                 lay.getTranslation().setTranslatonPreview(getCurrentLayer().getShapesList().getShapes());
                 sh.updateTranslation(lay.getTranslation());
@@ -3761,8 +3886,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             List<Layer> layers = getLinkedLayers();
             for(Layer lay2 : layers){
                 if(evt.getButton()==1){
-                    int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                    int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                     lay2.getTranslation().setDistance(xa, ya);
                     lay2.getTranslation().setTranslatonPreview(lay2.getShapesList().getShapes());
                     sh.updateTranslation(lay2.getTranslation());
@@ -3773,8 +3896,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         
     }else if(tbSelection.isSelected() && evt.getButton()==1){
         // On récupère les coordonnées sur le composant sheet.
-        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
         selection.setStartPoint(xa, ya);
         selection.setEndPoint(xa, ya);
         sh.updateSelection(selection, false);
@@ -3783,8 +3904,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         Layer lay = getCurrentLayer();
         if(tbNormalMode.isSelected() && lay.getCenter().isSet()){
             if(evt.getButton()==1){
-                int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                 lay.getCenter().setRotation(xa, ya);
                 lay.getCenter().setRotationPreview(getCurrentLayer().getShapesList().getShapes(), 0d);
                 sh.updateCenter(lay.getCenter());
@@ -3793,8 +3912,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             List<Layer> layers = getLinkedLayers();
             for(Layer lay2 : layers){
                 if(evt.getButton()==1){
-                    int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                    int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                     lay2.getCenter().setRotation(xa, ya);
                     lay2.getCenter().setRotationPreview(lay2.getShapesList().getShapes(), 0d);
                     sh.updateCenter(lay2.getCenter());
@@ -3805,8 +3922,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         Layer lay = getCurrentLayer();
         if(tbNormalMode.isSelected() && lay.getResize().isSet()){
             if(evt.getButton()==1){
-                int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                 lay.getResize().setDistance(xa, ya);
                 lay.getResize().setResizePreview(getCurrentLayer().getShapesList().getShapes(), 0d);
                 sh.updateResize(lay.getResize());
@@ -3815,8 +3930,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             List<Layer> layers = getLinkedLayers();
             for(Layer lay2 : layers){
                 if(evt.getButton()==1){
-                    int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                    int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                     lay2.getResize().setDistance(xa, ya);
                     lay2.getResize().setResizePreview(lay2.getShapesList().getShapes(), 0d);
                     sh.updateResize(lay2.getResize());
@@ -3827,8 +3940,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         Layer lay = getCurrentLayer();
         if(tbNormalMode.isSelected() && lay.getShear().isSet()){
             if(evt.getButton()==1){
-                int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                 lay.getShear().setMovePoint(xa, ya);
                 lay.getShear().setShearPreview(getCurrentLayer().getShapesList().getShapes());
                 sh.updateShear(lay.getShear());
@@ -3837,8 +3948,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             List<Layer> layers = getLinkedLayers();
             for(Layer lay2 : layers){
                 if(evt.getButton()==1){
-                    int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                    int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                     lay2.getShear().setMovePoint(xa, ya);
                     lay2.getShear().setShearPreview(lay2.getShapesList().getShapes());
                     sh.updateShear(lay2.getShear());
@@ -3847,8 +3956,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         }        
     }else if(tbOrnMMLine.isSelected() | tbOrnMMBezier.isSelected()){
         if(evt.getButton()==2){
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             java.awt.Point p2d = new java.awt.Point(xa/scale,ya/scale);
             ornlayForMain.setChangeList(ornlayForMain.getShapesAtPoint(p2d));
             for (feuille.drawing.ornament.IShape s : ornlayForMain.getList()){
@@ -3865,14 +3972,19 @@ public class DrawingPanel extends javax.swing.JPanel {
 
     private void spSheetMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spSheetMouseReleased
         // QUAND ON RELACHE UN BOUTON DE LA SOURIS
+        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
+        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
+        if(tbGrid.isSelected()){
+            java.awt.Point pa = Sheet.getGridCoordinates(xa, ya);
+            xa = pa.x;
+            ya = pa.y;
+        }
     if(tbShapeBezier.isSelected() | tbShapeLine.isSelected()
             | tbShapeBSpline1.isSelected() | tbNextPoint.isSelected()
             | tbMove.isSelected() | tbReStart.isSelected()){
         //Met à jour la position des points et des lignes/courbes.
         Layer lay = getCurrentLayer();
         if(evt.getButton()==2 && lay.getChangelist()!=null){
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             java.awt.Point p2d = new java.awt.Point(xa/scale,ya/scale);
             for (IShape s : lay.getShapesList().getShapes()){
                 if(s.getMarked()==true){
@@ -3942,8 +4054,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         }
     }else if(tbSelection.isSelected() && evt.getButton()==1){
         // On récupère les coordonnées sur le composant sheet.
-        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
         selection.setEndPoint(xa, ya);
         Layer lay = getCurrentLayer();
         selection.searchForShapes(lay.getShapesList());
@@ -4012,8 +4122,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         }
     }else if(tbOrnMMLine.isSelected() | tbOrnMMBezier.isSelected()){
         if(evt.getButton()==2 && ornlayForMain.getChangeList()!=null){
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             java.awt.Point p2d = new java.awt.Point(xa/scale,ya/scale);
             for (feuille.drawing.ornament.IShape s : ornlayForMain.getList()) {
                 if(s.getMarked()==true){
@@ -4048,6 +4156,13 @@ public class DrawingPanel extends javax.swing.JPanel {
 
     private void spSheetMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spSheetMouseDragged
         // QUAND ON DEPLACE LA SOURIS AVEC UN BOUTON ENFONCE (LE BOUTON GAUCHE)
+        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
+        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
+        if(tbGrid.isSelected()){
+            java.awt.Point pa = Sheet.getGridCoordinates(xa, ya);
+            xa = pa.x;
+            ya = pa.y;
+        }
     if(tbShapeBezier.isSelected() | tbShapeLine.isSelected() 
             | tbMove.isSelected() | tbReStart.isSelected()
             | tbShapeBSpline1.isSelected() | tbNextPoint.isSelected()){
@@ -4055,8 +4170,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         Layer lay = getCurrentLayer();
         if(lay.getChangelist()!=null){
             // On récupère les coordonnées sur le composant sheet.
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             java.awt.Point p2d = new java.awt.Point(xa/scale,ya/scale);
 
             //cette méthode ne sert plus à rien, car on ne veut pas n'importe quelle Shape
@@ -4135,8 +4248,6 @@ public class DrawingPanel extends javax.swing.JPanel {
 //        tfAssCommands.setText(updateCommands());
         Layer lay = getCurrentLayer();
         if(tbNormalMode.isSelected() && lay.getTranslation().isSet()){
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             lay.getTranslation().setDistance(xa, ya);
             lay.getTranslation().setTranslatonPreview(lay.getShapesList().getShapes());
             sh.updateTranslation(lay.getTranslation());
@@ -4144,8 +4255,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             List<Layer> layers = getLinkedLayers();
             List<Translation> translations = new ArrayList<Translation>();
             for(Layer lay2 : layers){
-                int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                 lay2.getTranslation().setDistance(xa, ya);
                 lay2.getTranslation().setTranslatonPreview(lay2.getShapesList().getShapes());
 //                sh.updateCenter(lay2.getCenter());
@@ -4155,16 +4264,12 @@ public class DrawingPanel extends javax.swing.JPanel {
         }
     }else if(tbFreeDrawing.isSelected()){
         // On récupère les coordonnées sur le composant sheet.
-        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
         graDraft.fillOval((xa/scale)-(penSizeUnit/2), (ya/scale)-(penSizeUnit/2), penSizeUnit, penSizeUnit);
         graDraft.setColor(penColor);
         sh.updateDraft(imgDraft);
         sh.updateDrawing();
     }else if(tbFreeClear.isSelected()){
         // On récupère les coordonnées sur le composant sheet.
-        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
         Composite originalComposite = graDraft.getComposite();
         AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.CLEAR, 0.0f);
         graDraft.setComposite(composite);
@@ -4175,16 +4280,12 @@ public class DrawingPanel extends javax.swing.JPanel {
         sh.updateDrawing();
     }else if(tbSelection.isSelected()){
         // On récupère les coordonnées sur le composant sheet.
-        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
         selection.setEndPoint(xa, ya);
         sh.updateSelection(selection, false);
         sh.updateDrawing();
     }else if(tbRotation.isSelected()){
         Layer lay = getCurrentLayer();
         if(tbNormalMode.isSelected() && lay.getCenter().isSet()){
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             lay.getCenter().setRotation(xa, ya);
             lay.getCenter().setRotationPreview(lay.getShapesList().getShapes(), 0d);
             sh.updateCenter(lay.getCenter());
@@ -4192,8 +4293,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             List<Layer> layers = getLinkedLayers();
             List<Center> centers = new ArrayList<Center>();
             for(Layer lay2 : layers){
-                int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                 lay2.getCenter().setRotation(xa, ya);
                 lay2.getCenter().setRotationPreview(lay2.getShapesList().getShapes(), 0d);
 //                sh.updateCenter(lay2.getCenter());
@@ -4204,8 +4303,6 @@ public class DrawingPanel extends javax.swing.JPanel {
     }else if(tbResize.isSelected()){
         Layer lay = getCurrentLayer();
         if(tbNormalMode.isSelected() && lay.getResize().isSet()){
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             lay.getResize().setDistance(xa, ya);
             lay.getResize().setResizePreview(lay.getShapesList().getShapes(), 0d);
             sh.updateResize(lay.getResize());
@@ -4213,8 +4310,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             List<Layer> layers = getLinkedLayers();
             List<Resize> resizes = new ArrayList<Resize>();
             for(Layer lay2 : layers){
-                int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                 lay2.getResize().setDistance(xa, ya);
                 lay2.getResize().setResizePreview(lay2.getShapesList().getShapes(), 0d);
 //                sh.updateResize(lay2.getResize());
@@ -4225,8 +4320,6 @@ public class DrawingPanel extends javax.swing.JPanel {
     }else if(tbShear.isSelected()){
         Layer lay = getCurrentLayer();
         if(tbNormalMode.isSelected() && lay.getShear().isSet()){
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             lay.getShear().setShearPoint(xa, ya);
             lay.getShear().setShearPreview(lay.getShapesList().getShapes());
             sh.updateShear(lay.getShear());
@@ -4234,8 +4327,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             List<Layer> layers = getLinkedLayers();
             List<Shear> shears = new ArrayList<Shear>();
             for(Layer lay2 : layers){
-                int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-                int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
                 lay2.getShear().setShearPoint(xa, ya);
                 lay2.getShear().setShearPreview(lay2.getShapesList().getShapes());
 //                sh.updateShear(lay2.getShear());
@@ -4245,8 +4336,6 @@ public class DrawingPanel extends javax.swing.JPanel {
         }
     }else if(tbOrnMMLine.isSelected() | tbOrnMMBezier.isSelected()){
         if(ornlayForMain.getChangeList()!=null){
-            int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-            int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
             java.awt.Point p2d = new java.awt.Point(xa/scale,ya/scale);
             if(tbOrnMMLine.isSelected() | tbOrnMMBezier.isSelected()){
                 if(ornlayForMain.getLastPointOfShapes().getLastPoint()!=null){
@@ -4296,6 +4385,13 @@ public class DrawingPanel extends javax.swing.JPanel {
 
     private void spSheetMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spSheetMouseMoved
         // QUAND ON DEPLACE LA SOURIS
+        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
+        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
+        if(tbGrid.isSelected()){
+            java.awt.Point pa = Sheet.getGridCoordinates(xa, ya);
+            xa = pa.x;
+            ya = pa.y;
+        }
     if(tbShapeBezier.isSelected() | tbShapeLine.isSelected()
             | tbFreeDrawing.isSelected() | tbFreeClear.isSelected()
             | tbShapeBSpline1.isSelected() | tbNextPoint.isSelected()
@@ -4305,8 +4401,6 @@ public class DrawingPanel extends javax.swing.JPanel {
             | tbShear.isSelected() | tbOrnMMBSpline.isSelected()
             | tbOrnMMBezier.isSelected() | tbOrnMMLine.isSelected()){
         // On récupère les coordonnées sur le composant sheet.
-        int xa = evt.getXOnScreen()-(int)sh.getLocationOnScreen().getX();
-        int ya = evt.getYOnScreen()-(int)sh.getLocationOnScreen().getY();
         //on met à jour les coordonnées dans cette méthode afin de voir les traits
         //vertical et horizontal lorsqu'on bouge la souris
         sh.updateMousePosition(xa/scale, ya/scale);
@@ -5246,6 +5340,318 @@ public class DrawingPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCloseBSplineActionPerformed
 
+    private void popmAddPointsBLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmAddPointsBLActionPerformed
+        // Ajouter un point entre deux lignes
+        if(selection.getPointToAdd()!=null){
+            Layer lay = getCurrentLayer();
+            List<IShape> shapes = selection.addOnePointBetweenLines(
+                lay,
+                new Point(selection.getPointToAdd().x, selection.getPointToAdd().y));
+            sh.updateSelection(selection, true);
+            lay.getShapesList().removeAllShapes();
+            lay.clearRemembers();
+            for(IShape s : shapes){
+                lay.getShapesList().addShape(s); lay.addRemember(s);
+            }
+            updateRemember(lay);
+            sh.updateGeneralPath(lay.getGeneralPath());
+            sh.updateShapesList(lay.getShapesList());
+            lay.updateEndPoint();
+            tfAssCommands.setText(updateCommands());
+            shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+            selection.setPointToAdd(null);
+        }
+    }//GEN-LAST:event_popmAddPointsBLActionPerformed
+
+    private void popmAddPointsBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmAddPointsBCActionPerformed
+        // Ajouter un point entre deux courbes
+        if(selection.getPointToAdd()!=null){
+            Layer lay = getCurrentLayer();
+            List<IShape> shapes = selection.addOnePointBetweenCurves(
+                lay,
+                new Point(selection.getPointToAdd().x, selection.getPointToAdd().y));
+            sh.updateSelection(selection, true);
+            lay.getShapesList().removeAllShapes();
+            lay.clearRemembers();
+            for(IShape s : shapes){
+                lay.getShapesList().addShape(s); lay.addRemember(s);
+            }
+            updateRemember(lay);
+            sh.updateGeneralPath(lay.getGeneralPath());
+            sh.updateShapesList(lay.getShapesList());
+            lay.updateEndPoint();
+            tfAssCommands.setText(updateCommands());
+            shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+            selection.setPointToAdd(null);
+        }
+    }//GEN-LAST:event_popmAddPointsBCActionPerformed
+
+    private void popmAddPointsBLCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmAddPointsBLCActionPerformed
+        // Ajouter un point entre une ligne et une courbe
+        if(selection.getPointToAdd()!=null){
+            Layer lay = getCurrentLayer();
+            List<IShape> shapes = selection.addOnePointBetweenLineCurve(
+                lay,
+                new Point(selection.getPointToAdd().x, selection.getPointToAdd().y));
+            sh.updateSelection(selection, true);
+            lay.getShapesList().removeAllShapes();
+            lay.clearRemembers();
+            for(IShape s : shapes){
+                lay.getShapesList().addShape(s); lay.addRemember(s);
+            }
+            updateRemember(lay);
+            sh.updateGeneralPath(lay.getGeneralPath());
+            sh.updateShapesList(lay.getShapesList());
+            lay.updateEndPoint();
+            tfAssCommands.setText(updateCommands());
+            shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+            selection.setPointToAdd(null);
+        }
+    }//GEN-LAST:event_popmAddPointsBLCActionPerformed
+
+    private void popmAddPointsBCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmAddPointsBCLActionPerformed
+        // Ajouter un point entre une courbe et une ligne
+        if(selection.getPointToAdd()!=null){
+            Layer lay = getCurrentLayer();
+            List<IShape> shapes = selection.addOnePointBetweenCurveLine(
+                lay,
+                new Point(selection.getPointToAdd().x, selection.getPointToAdd().y));
+            sh.updateSelection(selection, true);
+            lay.getShapesList().removeAllShapes();
+            lay.clearRemembers();
+            for(IShape s : shapes){
+                lay.getShapesList().addShape(s); lay.addRemember(s);
+            }
+            updateRemember(lay);
+            sh.updateGeneralPath(lay.getGeneralPath());
+            sh.updateShapesList(lay.getShapesList());
+            lay.updateEndPoint();
+            tfAssCommands.setText(updateCommands());
+            shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+            selection.setPointToAdd(null);
+        }
+    }//GEN-LAST:event_popmAddPointsBCLActionPerformed
+
+    private void popmRemovePointsLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmRemovePointsLineActionPerformed
+        // Efface un point entre les points
+        Layer lay = getCurrentLayer();
+        List<IShape> shapes = selection.removeOnePointBetweenPointsL(lay);
+        sh.updateSelection(selection, true);
+        lay.getShapesList().removeAllShapes();
+        lay.clearRemembers();
+        for(IShape s : shapes){
+            lay.getShapesList().addShape(s); lay.addRemember(s);
+        }
+        updateRemember(lay);
+        sh.updateGeneralPath(lay.getGeneralPath());
+        sh.updateShapesList(lay.getShapesList());
+        lay.updateEndPoint();
+        tfAssCommands.setText(updateCommands());
+        shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+    }//GEN-LAST:event_popmRemovePointsLineActionPerformed
+
+    private void popmRemovePointsCurveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmRemovePointsCurveActionPerformed
+        // Efface un point entre les points
+        Layer lay = getCurrentLayer();
+        List<IShape> shapes = selection.removeOnePointBetweenPointsC(lay);
+        sh.updateSelection(selection, true);
+        lay.getShapesList().removeAllShapes();
+        lay.clearRemembers();
+        for(IShape s : shapes){
+            lay.getShapesList().addShape(s); lay.addRemember(s);
+        }
+        updateRemember(lay);
+        sh.updateGeneralPath(lay.getGeneralPath());
+        sh.updateShapesList(lay.getShapesList());
+        lay.updateEndPoint();
+        tfAssCommands.setText(updateCommands());
+        shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+    }//GEN-LAST:event_popmRemovePointsCurveActionPerformed
+
+    private void popmBoolOpUnionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmBoolOpUnionActionPerformed
+        int[] indices = lstLayer.getSelectedIndices();
+        if(indices.length >= 2){
+            //On fait autant d'opérations booléennes que demandées
+            java.awt.Shape one = ((Layer)dlm.toArray()[indices[0]]).getGeneralPath();
+            for(int i=1; i<indices.length; i++){
+                java.awt.Shape two = ((Layer)dlm.toArray()[indices[i]]).getGeneralPath();
+                one = BooleanOp.getUnion(one, two);
+            }
+            //On crée un nouveau calque contenant notre résultat booléen.
+            Layer lay = new Layer();
+            lay.fromShape(one);
+            //On efface tous les calques qui ont servi.
+            for(int i=indices[indices.length-1]; i >=0; i--){
+                dlm.remove(indices[i]);
+            }
+            //On ajoute notre calque résultant
+            dlm.addElement(lay);
+
+            //On sélectionne le calque (pour éviter que getCurrentLayer() soit null)
+            //en cas où tous les calques ont été consommés.
+            lstLayer.setSelectedIndex(0);
+
+            //On met à jour la liste des calques dans le composant de dessin
+            List<Layer> listlay = new ArrayList<>();
+            for(Object o : dlm.toArray()){
+                if(o instanceof Layer){
+                    Layer layer = (Layer)o;
+                    if(listlay.contains(layer)==false){
+                        listlay.add(layer);
+                    }
+                }
+            }
+            sh.setLayerList(listlay);
+
+            //On met à jour le contrôle de dessin et on effectue des opérations de routine
+            sh.updateGeneralPath(lay.getGeneralPath());
+            sh.updateShapesList(lay.getShapesList());
+            lay.updateEndPoint();
+            tfAssCommands.setText(updateCommands());
+            shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+        }
+    }//GEN-LAST:event_popmBoolOpUnionActionPerformed
+
+    private void popmBoolOpSubstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmBoolOpSubstractActionPerformed
+        int[] indices = lstLayer.getSelectedIndices();
+        if(indices.length >= 2){
+            //On fait autant d'opérations booléennes que demandées
+            java.awt.Shape one = ((Layer)dlm.toArray()[indices[0]]).getGeneralPath();
+            for(int i=1; i<indices.length; i++){
+                java.awt.Shape two = ((Layer)dlm.toArray()[indices[i]]).getGeneralPath();
+                one = BooleanOp.getSubstract(one, two);
+            }
+            //On crée un nouveau calque contenant notre résultat booléen.
+            Layer lay = new Layer();
+            lay.fromShape(one);
+            //On efface tous les calques qui ont servi.
+            for(int i=indices[indices.length-1]; i >=0; i--){
+                dlm.remove(indices[i]);
+            }
+            //On ajoute notre calque résultant
+            dlm.addElement(lay);
+
+            //On sélectionne le calque (pour éviter que getCurrentLayer() soit null)
+            //en cas où tous les calques ont été consommés.
+            lstLayer.setSelectedIndex(0);
+
+            //On met à jour la liste des calques dans le composant de dessin
+            List<Layer> listlay = new ArrayList<>();
+            for(Object o : dlm.toArray()){
+                if(o instanceof Layer){
+                    Layer layer = (Layer)o;
+                    if(listlay.contains(layer)==false){
+                        listlay.add(layer);
+                    }
+                }
+            }
+            sh.setLayerList(listlay);
+
+            //On met à jour le contrôle de dessin et on effectue des opérations de routine
+            sh.updateGeneralPath(lay.getGeneralPath());
+            sh.updateShapesList(lay.getShapesList());
+            lay.updateEndPoint();
+            tfAssCommands.setText(updateCommands());
+            shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+        }
+    }//GEN-LAST:event_popmBoolOpSubstractActionPerformed
+
+    private void popmBoolOpIntersectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmBoolOpIntersectActionPerformed
+        int[] indices = lstLayer.getSelectedIndices();
+        if(indices.length >= 2){
+            //On fait autant d'opérations booléennes que demandées
+            java.awt.Shape one = ((Layer)dlm.toArray()[indices[0]]).getGeneralPath();
+            for(int i=1; i<indices.length; i++){
+                java.awt.Shape two = ((Layer)dlm.toArray()[indices[i]]).getGeneralPath();
+                one = BooleanOp.getIntersect(one, two);
+            }
+            //On crée un nouveau calque contenant notre résultat booléen.
+            Layer lay = new Layer();
+            lay.fromShape(one);
+            //On efface tous les calques qui ont servi.
+            for(int i=indices[indices.length-1]; i >=0; i--){
+                dlm.remove(indices[i]);
+            }
+            //On ajoute notre calque résultant
+            dlm.addElement(lay);
+
+            //On sélectionne le calque (pour éviter que getCurrentLayer() soit null)
+            //en cas où tous les calques ont été consommés.
+            lstLayer.setSelectedIndex(0);
+
+            //On met à jour la liste des calques dans le composant de dessin
+            List<Layer> listlay = new ArrayList<>();
+            for(Object o : dlm.toArray()){
+                if(o instanceof Layer){
+                    Layer layer = (Layer)o;
+                    if(listlay.contains(layer)==false){
+                        listlay.add(layer);
+                    }
+                }
+            }
+            sh.setLayerList(listlay);
+
+            //On met à jour le contrôle de dessin et on effectue des opérations de routine
+            sh.updateGeneralPath(lay.getGeneralPath());
+            sh.updateShapesList(lay.getShapesList());
+            lay.updateEndPoint();
+            tfAssCommands.setText(updateCommands());
+            shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+        }
+    }//GEN-LAST:event_popmBoolOpIntersectActionPerformed
+
+    private void popmBoolOpExcluORActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmBoolOpExcluORActionPerformed
+        int[] indices = lstLayer.getSelectedIndices();
+        if(indices.length >= 2){
+            //On fait autant d'opérations booléennes que demandées
+            java.awt.Shape one = ((Layer)dlm.toArray()[indices[0]]).getGeneralPath();
+            for(int i=1; i<indices.length; i++){
+                java.awt.Shape two = ((Layer)dlm.toArray()[indices[i]]).getGeneralPath();
+                one = BooleanOp.getXOR(one, two);
+            }
+            //On crée un nouveau calque contenant notre résultat booléen.
+            Layer lay = new Layer();
+            lay.fromShape(one);
+            //On efface tous les calques qui ont servi.
+            for(int i=indices[indices.length-1]; i >=0; i--){
+                dlm.remove(indices[i]);
+            }
+            //On ajoute notre calque résultant
+            dlm.addElement(lay);
+
+            //On sélectionne le calque (pour éviter que getCurrentLayer() soit null)
+            //en cas où tous les calques ont été consommés.
+            lstLayer.setSelectedIndex(0);
+
+            //On met à jour la liste des calques dans le composant de dessin
+            List<Layer> listlay = new ArrayList<>();
+            for(Object o : dlm.toArray()){
+                if(o instanceof Layer){
+                    Layer layer = (Layer)o;
+                    if(listlay.contains(layer)==false){
+                        listlay.add(layer);
+                    }
+                }
+            }
+            sh.setLayerList(listlay);
+
+            //On met à jour le contrôle de dessin et on effectue des opérations de routine
+            sh.updateGeneralPath(lay.getGeneralPath());
+            sh.updateShapesList(lay.getShapesList());
+            lay.updateEndPoint();
+            tfAssCommands.setText(updateCommands());
+            shapesFromCommands(tfAssCommands.getText(), lay, 0, 0, null, 0);
+        }
+    }//GEN-LAST:event_popmBoolOpExcluORActionPerformed
+
+    private void tbGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbGridActionPerformed
+        if(tbGrid.isSelected()){
+            sh.updateGrid(true);
+        }else{
+            sh.updateGrid(false);
+        }
+    }//GEN-LAST:event_tbGridActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgDraw;
     private javax.swing.ButtonGroup bgImageMove;
@@ -5298,6 +5704,8 @@ public class DrawingPanel extends javax.swing.JPanel {
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JLabel lblAssCommands;
     private javax.swing.JLabel lblCoordinates;
     private javax.swing.JLabel lblDrawingAlpha;
@@ -5315,6 +5723,14 @@ public class DrawingPanel extends javax.swing.JPanel {
     private javax.swing.JPopupMenu popLayer;
     private javax.swing.JPopupMenu popPenSize;
     private javax.swing.JPopupMenu popRubberSize;
+    private javax.swing.JMenuItem popmAddPointsBC;
+    private javax.swing.JMenuItem popmAddPointsBCL;
+    private javax.swing.JMenuItem popmAddPointsBL;
+    private javax.swing.JMenuItem popmAddPointsBLC;
+    private javax.swing.JMenuItem popmBoolOpExcluOR;
+    private javax.swing.JMenuItem popmBoolOpIntersect;
+    private javax.swing.JMenuItem popmBoolOpSubstract;
+    private javax.swing.JMenuItem popmBoolOpUnion;
     private javax.swing.JMenuItem popmClearSketch;
     private javax.swing.JMenuItem popmColor;
     private javax.swing.JMenuItem popmCopy;
@@ -5336,6 +5752,8 @@ public class DrawingPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButtonMenuItem popmPenSize4;
     private javax.swing.JRadioButtonMenuItem popmPenSize6;
     private javax.swing.JRadioButtonMenuItem popmPenSize8;
+    private javax.swing.JMenuItem popmRemovePointsCurve;
+    private javax.swing.JMenuItem popmRemovePointsLine;
     private javax.swing.JRadioButtonMenuItem popmRubberSize10;
     private javax.swing.JRadioButtonMenuItem popmRubberSize2;
     private javax.swing.JRadioButtonMenuItem popmRubberSize4;
@@ -5360,6 +5778,7 @@ public class DrawingPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner spiOrnMMFreq;
     private javax.swing.JToggleButton tbFreeClear;
     private javax.swing.JToggleButton tbFreeDrawing;
+    private javax.swing.JToggleButton tbGrid;
     private javax.swing.JToggleButton tbMove;
     private javax.swing.JToggleButton tbNextPoint;
     private javax.swing.JToggleButton tbNormalMode;

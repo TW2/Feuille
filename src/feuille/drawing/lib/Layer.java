@@ -234,6 +234,85 @@ public class Layer {
         return gp;
     }
     
+    public void fromShape(java.awt.Shape shx){
+        float beginX = 0, beginY = 0, lastX = 0, lastY = 0;
+        
+        for (PathIterator pi = shx.getPathIterator(new AffineTransform()); !pi.isDone(); pi.next()){
+            float[] coords = new float[6];
+            int type = pi.currentSegment(coords);
+
+            switch(type) {
+                case PathIterator.SEG_MOVETO :                        
+                    ReStart m = new ReStart();
+                    m.setOriginPoint((int)coords[0], (int)coords[1]);
+                    m.setLastPoint((int)coords[0], (int)coords[1]);
+                    slist.addShape(m); addRemember(m);
+                    //Point p = new Point();
+                    //p.setOriginPoint((int)coords[0], (int)coords[1]);
+                    //p.setLastPoint((int)coords[0], (int)coords[1]);
+                    //slist.addShape(p); addRemember(p);
+                    beginX = coords[0]; beginY = coords[1];
+                    lastX = coords[0]; lastY = coords[1];
+                    break;
+                case PathIterator.SEG_LINETO :
+                    Point p2 = new Point();
+                    p2.setOriginPoint((int)lastX, (int)lastY);
+                    p2.setLastPoint((int)lastX, (int)lastY);
+                    slist.addShape(p2); addRemember(p2);
+                    Line l = new Line();
+                    l.setOriginPoint((int)lastX, (int)lastY);
+                    l.setLastPoint((int)coords[0], (int)coords[1]);
+                    slist.addShape(l); addRemember(l);                    
+                    lastX = coords[0]; lastY = coords[1];
+                    break;
+                case PathIterator.SEG_QUADTO :
+                    Point pq = new Point();
+                    pq.setOriginPoint((int)lastX, (int)lastY);
+                    pq.setLastPoint((int)lastX, (int)lastY);
+                    slist.addShape(pq); addRemember(pq);
+                    Bezier q = Bezier.createCubicFromQuad(
+                            (int)lastX, (int)lastY, 
+                            (int)coords[0], (int)coords[1], 
+                            (int)coords[2], (int)coords[3]);
+                    slist.addShape(q); addRemember(q);                    
+                    ControlPoint cp1q = q.getControl1();
+                    ControlPoint cp2q = q.getControl2();
+                    slist.addShape(cp1q); addRemember(cp1q);
+                    slist.addShape(cp2q); addRemember(cp2q);
+                    lastX = coords[2]; lastY = coords[3];
+                    break;
+                case PathIterator.SEG_CUBICTO :
+                    Point p4 = new Point();
+                    p4.setOriginPoint((int)lastX, (int)lastY);
+                    p4.setLastPoint((int)lastX, (int)lastY);
+                    slist.addShape(p4); addRemember(p4);
+                    Bezier c = new Bezier();
+                    c.setOriginPoint((int)lastX, (int)lastY);
+                    c.setLastPoint((int)coords[4], (int)coords[5]);
+                    c.setControl1Point((int)coords[0], (int)coords[1]);
+                    c.setControl2Point((int)coords[2], (int)coords[3]);
+                    slist.addShape(c); addRemember(c);                    
+                    ControlPoint cp1 = c.getControl1();
+                    ControlPoint cp2 = c.getControl2();
+                    slist.addShape(cp1); addRemember(cp1);
+                    slist.addShape(cp2); addRemember(cp2);
+                    lastX = coords[4]; lastY = coords[5];
+                    break;
+                case PathIterator.SEG_CLOSE :
+                    Point p5 = new Point();
+                    p5.setOriginPoint((int)lastX, (int)lastY);
+                    p5.setLastPoint((int)lastX, (int)lastY);
+                    slist.addShape(p5); addRemember(p5);
+                    Line l2 = new Line();
+                    l2.setOriginPoint((int)lastX, (int)lastY);
+                    l2.setLastPoint((int)beginX, (int)beginY);
+                    slist.addShape(l2); addRemember(l2);                    
+            }
+            
+        }
+        
+    }
+    
     /** Obtient si oui ou non la couche doit être dessinée. */
     public boolean isSelected(){
         return isSelected;

@@ -16,17 +16,70 @@
  */
 package feuille;
 
+import feuille.panel.*;
+import feuille.util.ISO_3166;
+import feuille.util.Language;
+import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+
 /**
  *
  * @author util2
  */
 public class MainFrame extends javax.swing.JFrame {
+    
+    List<PanelGroup> groups = new ArrayList<>();
+    Language lang = new Language();
+    ISO_3166 wantedIso = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        init();
+    }
+    
+    private void init(){        
+        // Look and Feel
+        try {
+            UIManager.setLookAndFeel(new NimbusLookAndFeel());
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (UnsupportedLookAndFeelException exc) {
+            System.out.println("Nimbus LookAndFeel not loaded : "+exc);
+        }
+        
+        // Dimension
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension dim = toolkit.getScreenSize();
+        GraphicsConfiguration gconf = GraphicsEnvironment
+                .getLocalGraphicsEnvironment().getDefaultScreenDevice()
+                .getDefaultConfiguration();
+        Insets insets = toolkit.getScreenInsets(gconf);
+        setSize(dim.width - insets.left - insets.right - 300,
+                dim.height - insets.top - insets.bottom - 300);
+        
+        // Center the position
+        setLocationRelativeTo(null);
+        
+        // Populate ISO_3166 map (Language class) and choose (IO, XML)
+        // TODO
+        
+        // Creating a group
+        PanelGroup defaultGroup = PanelGroup.create(lang, wantedIso);        
+        
+        // Adding a table to SOUTH
+        tabbedSOUTH.add(defaultGroup.getTable());
     }
 
     /**
@@ -38,13 +91,13 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jTabbedPane6 = new javax.swing.JTabbedPane();
-        jTabbedPane7 = new javax.swing.JTabbedPane();
+        tabbedNORTH = new javax.swing.JTabbedPane();
+        tabbedSOUTH = new javax.swing.JTabbedPane();
+        tabbedWEST = new javax.swing.JTabbedPane();
+        tabbedEAST = new javax.swing.JTabbedPane();
         jSplitPane1 = new javax.swing.JSplitPane();
-        jTabbedPane8 = new javax.swing.JTabbedPane();
-        jTabbedPane9 = new javax.swing.JTabbedPane();
+        tabbedCTOP = new javax.swing.JTabbedPane();
+        tabbedCBOTTOM = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -55,8 +108,8 @@ public class MainFrame extends javax.swing.JFrame {
         jSplitPane1.setDividerSize(10);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setOneTouchExpandable(true);
-        jSplitPane1.setLeftComponent(jTabbedPane8);
-        jSplitPane1.setRightComponent(jTabbedPane9);
+        jSplitPane1.setLeftComponent(tabbedCTOP);
+        jSplitPane1.setRightComponent(tabbedCBOTTOM);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -70,26 +123,26 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
-            .addComponent(jTabbedPane2)
+            .addComponent(tabbedNORTH)
+            .addComponent(tabbedSOUTH)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabbedWEST, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tabbedEAST, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabbedNORTH, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane6)
-                    .addComponent(jTabbedPane7)
-                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE))
+                    .addComponent(tabbedWEST)
+                    .addComponent(tabbedEAST)
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tabbedSOUTH, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -135,11 +188,127 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTabbedPane jTabbedPane7;
-    private javax.swing.JTabbedPane jTabbedPane8;
-    private javax.swing.JTabbedPane jTabbedPane9;
+    private javax.swing.JTabbedPane tabbedCBOTTOM;
+    private javax.swing.JTabbedPane tabbedCTOP;
+    private javax.swing.JTabbedPane tabbedEAST;
+    private javax.swing.JTabbedPane tabbedNORTH;
+    private javax.swing.JTabbedPane tabbedSOUTH;
+    private javax.swing.JTabbedPane tabbedWEST;
     // End of variables declaration//GEN-END:variables
+
+    public static class PanelGroup {
+        
+        ASSEditor assEditor;
+        Chat chat;
+        Draw draw;
+        DrawEditor drawEditor;
+        FXEditor fxEditor;
+        MacroEditor macroEditor;
+        Table table;
+        Video video;
+        Wave wave;
+
+        public PanelGroup() {
+        }
+
+        public PanelGroup(ASSEditor assEditor, Chat chat, Draw draw, DrawEditor drawEditor, FXEditor fxEditor, MacroEditor macroEditor, Table table, Video video, Wave wave) {
+            this.assEditor = assEditor;
+            this.chat = chat;
+            this.draw = draw;
+            this.drawEditor = drawEditor;
+            this.fxEditor = fxEditor;
+            this.macroEditor = macroEditor;
+            this.table = table;
+            this.video = video;
+            this.wave = wave;
+        }
+
+        public void setAssEditor(ASSEditor assEditor) {
+            this.assEditor = assEditor;
+        }
+
+        public ASSEditor getAssEditor() {
+            return assEditor;
+        }
+
+        public void setChat(Chat chat) {
+            this.chat = chat;
+        }
+
+        public Chat getChat() {
+            return chat;
+        }
+
+        public void setDraw(Draw draw) {
+            this.draw = draw;
+        }
+
+        public Draw getDraw() {
+            return draw;
+        }
+
+        public void setDrawEditor(DrawEditor drawEditor) {
+            this.drawEditor = drawEditor;
+        }
+
+        public DrawEditor getDrawEditor() {
+            return drawEditor;
+        }
+
+        public void setFxEditor(FXEditor fxEditor) {
+            this.fxEditor = fxEditor;
+        }
+
+        public FXEditor getFxEditor() {
+            return fxEditor;
+        }
+
+        public void setMacroEditor(MacroEditor macroEditor) {
+            this.macroEditor = macroEditor;
+        }
+
+        public MacroEditor getMacroEditor() {
+            return macroEditor;
+        }
+
+        public void setTable(Table table) {
+            this.table = table;
+        }
+
+        public Table getTable() {
+            return table;
+        }
+
+        public void setVideo(Video video) {
+            this.video = video;
+        }
+
+        public Video getVideo() {
+            return video;
+        }
+
+        public void setWave(Wave wave) {
+            this.wave = wave;
+        }
+
+        public Wave getWave() {
+            return wave;
+        }
+        
+        public static PanelGroup create(Language in, ISO_3166 get) {
+            PanelGroup pg = new PanelGroup();
+            pg.assEditor = new ASSEditor();
+            pg.chat = new Chat();
+            pg.draw = new Draw();
+            pg.drawEditor = new DrawEditor();
+            pg.fxEditor = new FXEditor();
+            pg.macroEditor = new MacroEditor();
+            pg.table = new Table();
+            pg.table.initializeTable(in, get);
+            pg.video = new Video();
+            pg.wave = new Wave();
+            return pg;            
+        }
+        
+    }
 }

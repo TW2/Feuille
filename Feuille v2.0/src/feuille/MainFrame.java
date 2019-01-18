@@ -16,6 +16,8 @@
  */
 package feuille;
 
+import feuille.io.ASS;
+import feuille.io.Event;
 import feuille.panel.*;
 import feuille.util.ISO_3166;
 import feuille.util.Language;
@@ -24,12 +26,15 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 /**
@@ -38,10 +43,13 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
  */
 public class MainFrame extends javax.swing.JFrame {
     
-    List<PanelGroup> groups = new ArrayList<>();
-    Language lang = new Language();
+    // Language (loading from properties of each component)
     ISO_3166 wantedIso = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
-
+    Language chosen = new Language();
+    
+    List<PanelGroup> groups = new ArrayList<>();
+    PanelGroup defaultGroup = null;
+    
     /**
      * Creates new form MainFrame
      */
@@ -50,7 +58,10 @@ public class MainFrame extends javax.swing.JFrame {
         init();
     }
     
-    private void init(){        
+    private void init(){
+        // Language
+        ISO_3166 get = chosen.isForced() ? chosen.getIso() : wantedIso;
+        
         // Look and Feel
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
@@ -72,14 +83,19 @@ public class MainFrame extends javax.swing.JFrame {
         // Center the position
         setLocationRelativeTo(null);
         
-        // Populate ISO_3166 map (Language class) and choose (IO, XML)
-        // TODO
-        
         // Creating a group
-        PanelGroup defaultGroup = PanelGroup.create(lang, wantedIso);        
+        defaultGroup = PanelGroup.create(chosen, wantedIso);        
         
         // Adding a table to SOUTH
         tabbedSOUTH.add(defaultGroup.getTable());
+        tabbedSOUTH.setTitleAt(0, chosen.getTranslated("TableTab", get, "Subtitles table"));
+        
+        // Language for elements of MainFrame        
+        mnuFile.setText(chosen.getTranslated("MnuFile", get, "File"));
+        mnuEdit.setText(chosen.getTranslated("MnuEdit", get, "Edit"));
+        miOpenProject.setText(chosen.getTranslated("MnuFileOpenProj", get, "Open project..."));
+        miSaveProject.setText(chosen.getTranslated("MnuFileSaveProj", get, "Save project..."));
+        miOpenSubtitleTable.setText(chosen.getTranslated("MnuFileViewSubt", get, "View subtitles..."));
     }
 
     /**
@@ -99,8 +115,12 @@ public class MainFrame extends javax.swing.JFrame {
         tabbedCTOP = new javax.swing.JTabbedPane();
         tabbedCBOTTOM = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        mnuFile = new javax.swing.JMenu();
+        miOpenProject = new javax.swing.JMenuItem();
+        miSaveProject = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        miOpenSubtitleTable = new javax.swing.JMenuItem();
+        mnuEdit = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,11 +131,37 @@ public class MainFrame extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(tabbedCTOP);
         jSplitPane1.setRightComponent(tabbedCBOTTOM);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        mnuFile.setText("File");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        miOpenProject.setText("Open project...");
+        miOpenProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miOpenProjectActionPerformed(evt);
+            }
+        });
+        mnuFile.add(miOpenProject);
+
+        miSaveProject.setText("Save project...");
+        miSaveProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSaveProjectActionPerformed(evt);
+            }
+        });
+        mnuFile.add(miSaveProject);
+        mnuFile.add(jSeparator1);
+
+        miOpenSubtitleTable.setText("View subtitle");
+        miOpenSubtitleTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miOpenSubtitleTableActionPerformed(evt);
+            }
+        });
+        mnuFile.add(miOpenSubtitleTable);
+
+        jMenuBar1.add(mnuFile);
+
+        mnuEdit.setText("Edit");
+        jMenuBar1.add(mnuEdit);
 
         setJMenuBar(jMenuBar1);
 
@@ -147,6 +193,43 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miOpenProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOpenProjectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miOpenProjectActionPerformed
+
+    private void miSaveProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaveProjectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miSaveProjectActionPerformed
+
+    private void miOpenSubtitleTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOpenSubtitleTableActionPerformed
+        JFileChooser fc = new JFileChooser();
+        for(javax.swing.filechooser.FileFilter ff : fc.getChoosableFileFilters()){
+            fc.removeChoosableFileFilter(ff);
+        }
+        fc.addChoosableFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                if(file.isDirectory()) { return true; }
+                return file.getName().toLowerCase().endsWith(".ass");
+            }
+
+            @Override
+            public String getDescription() {
+                // Language
+                ISO_3166 get = chosen.isForced() ? chosen.getIso() : wantedIso;
+                return chosen.getTranslated("ASSDescription", get, "Advanced Sub Station Files (*.ass)");
+            }
+        });
+        int z = fc.showOpenDialog(this);
+        if(z == JFileChooser.APPROVE_OPTION){
+            String path = fc.getSelectedFile().getPath();
+            ASS ass = ASS.Read(path);
+            for(Event ev : ass.getEvents()){
+                defaultGroup.getTable().addLine(ev);
+            }
+        }
+    }//GEN-LAST:event_miOpenSubtitleTableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,10 +267,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JMenuItem miOpenProject;
+    private javax.swing.JMenuItem miOpenSubtitleTable;
+    private javax.swing.JMenuItem miSaveProject;
+    private javax.swing.JMenu mnuEdit;
+    private javax.swing.JMenu mnuFile;
     private javax.swing.JTabbedPane tabbedCBOTTOM;
     private javax.swing.JTabbedPane tabbedCTOP;
     private javax.swing.JTabbedPane tabbedEAST;
@@ -195,120 +282,5 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbedSOUTH;
     private javax.swing.JTabbedPane tabbedWEST;
     // End of variables declaration//GEN-END:variables
-
-    public static class PanelGroup {
-        
-        ASSEditor assEditor;
-        Chat chat;
-        Draw draw;
-        DrawEditor drawEditor;
-        FXEditor fxEditor;
-        MacroEditor macroEditor;
-        Table table;
-        Video video;
-        Wave wave;
-
-        public PanelGroup() {
-        }
-
-        public PanelGroup(ASSEditor assEditor, Chat chat, Draw draw, DrawEditor drawEditor, FXEditor fxEditor, MacroEditor macroEditor, Table table, Video video, Wave wave) {
-            this.assEditor = assEditor;
-            this.chat = chat;
-            this.draw = draw;
-            this.drawEditor = drawEditor;
-            this.fxEditor = fxEditor;
-            this.macroEditor = macroEditor;
-            this.table = table;
-            this.video = video;
-            this.wave = wave;
-        }
-
-        public void setAssEditor(ASSEditor assEditor) {
-            this.assEditor = assEditor;
-        }
-
-        public ASSEditor getAssEditor() {
-            return assEditor;
-        }
-
-        public void setChat(Chat chat) {
-            this.chat = chat;
-        }
-
-        public Chat getChat() {
-            return chat;
-        }
-
-        public void setDraw(Draw draw) {
-            this.draw = draw;
-        }
-
-        public Draw getDraw() {
-            return draw;
-        }
-
-        public void setDrawEditor(DrawEditor drawEditor) {
-            this.drawEditor = drawEditor;
-        }
-
-        public DrawEditor getDrawEditor() {
-            return drawEditor;
-        }
-
-        public void setFxEditor(FXEditor fxEditor) {
-            this.fxEditor = fxEditor;
-        }
-
-        public FXEditor getFxEditor() {
-            return fxEditor;
-        }
-
-        public void setMacroEditor(MacroEditor macroEditor) {
-            this.macroEditor = macroEditor;
-        }
-
-        public MacroEditor getMacroEditor() {
-            return macroEditor;
-        }
-
-        public void setTable(Table table) {
-            this.table = table;
-        }
-
-        public Table getTable() {
-            return table;
-        }
-
-        public void setVideo(Video video) {
-            this.video = video;
-        }
-
-        public Video getVideo() {
-            return video;
-        }
-
-        public void setWave(Wave wave) {
-            this.wave = wave;
-        }
-
-        public Wave getWave() {
-            return wave;
-        }
-        
-        public static PanelGroup create(Language in, ISO_3166 get) {
-            PanelGroup pg = new PanelGroup();
-            pg.assEditor = new ASSEditor();
-            pg.chat = new Chat();
-            pg.draw = new Draw();
-            pg.drawEditor = new DrawEditor();
-            pg.fxEditor = new FXEditor();
-            pg.macroEditor = new MacroEditor();
-            pg.table = new Table();
-            pg.table.initializeTable(in, get);
-            pg.video = new Video();
-            pg.wave = new Wave();
-            return pg;            
-        }
-        
-    }
+    
 }

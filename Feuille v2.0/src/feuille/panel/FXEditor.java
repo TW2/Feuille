@@ -16,17 +16,46 @@
  */
 package feuille.panel;
 
+import feuille.util.ISO_3166;
+import feuille.util.Language;
+import feuille.util.effect.AFx;
+import feuille.util.effect.EffectsList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author util2
  */
 public class FXEditor extends javax.swing.JPanel {
+    
+    EffectsList sfx = new EffectsList();
+    DefaultListModel dlmSFX = new DefaultListModel();
 
     /**
      * Creates new form FXEditor
      */
     public FXEditor() {
         initComponents();
+        init();
+    }
+    
+    private void init(){
+        lstSFX.setModel(dlmSFX);
+        for(AFx afx : sfx.getEffects()){
+            dlmSFX.addElement(afx);
+        }
+    }
+    
+    public void initializeFxEditor(Language in, ISO_3166 get){        
+        // Check if there is a requested language (forced)
+        // and choose between posibilities
+        if(in.isForced() == true){
+            get = in.getIso();
+        }
+        
+        btnSaveInEditor.setToolTipText(in.getTranslated("FxEditorSaveEditor", get, "Rename in editor"));
+        btnExportToList.setToolTipText(in.getTranslated("FxEditorExportToList", get, "Put in list"));
+        lblName.setText(in.getTranslated("FxEditorFxName", get, "Effect name :"));
     }
 
     /**
@@ -38,19 +67,132 @@ public class FXEditor extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnRemove = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        lblName = new javax.swing.JLabel();
+        tfName = new javax.swing.JTextField();
+        btnSaveInEditor = new javax.swing.JButton();
+        btnExportToList = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstSFX = new javax.swing.JList<>();
+        paneViewFX = new javax.swing.JPanel();
+
+        jPanel1.setLayout(null);
+
+        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/32_minus.png"))); // NOI18N
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRemove);
+        btnRemove.setBounds(0, 0, 40, 40);
+
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/32_plus.png"))); // NOI18N
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAdd);
+        btnAdd.setBounds(40, 0, 40, 40);
+
+        lblName.setText("FX Name :");
+        jPanel1.add(lblName);
+        lblName.setBounds(90, 0, 130, 40);
+        jPanel1.add(tfName);
+        tfName.setBounds(220, 0, 340, 40);
+
+        btnSaveInEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/32_bottom arrow.png"))); // NOI18N
+        btnSaveInEditor.setToolTipText("Put to the editor");
+        btnSaveInEditor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveInEditorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSaveInEditor);
+        btnSaveInEditor.setBounds(560, 0, 40, 40);
+
+        btnExportToList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/32_top arrow.png"))); // NOI18N
+        btnExportToList.setToolTipText("Save in list");
+        btnExportToList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportToListActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnExportToList);
+        btnExportToList.setBounds(600, 0, 40, 40);
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        lstSFX.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(lstSFX);
+
+        paneViewFX.setBackground(new java.awt.Color(51, 153, 255));
+
+        javax.swing.GroupLayout paneViewFXLayout = new javax.swing.GroupLayout(paneViewFX);
+        paneViewFX.setLayout(paneViewFXLayout);
+        paneViewFXLayout.setHorizontalGroup(
+            paneViewFXLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        paneViewFXLayout.setVerticalGroup(
+            paneViewFXLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 712, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1290, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(paneViewFX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(paneViewFX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSaveInEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveInEditorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveInEditorActionPerformed
+
+    private void btnExportToListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportToListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExportToListActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnExportToList;
+    private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnSaveInEditor;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JList<String> lstSFX;
+    private javax.swing.JPanel paneViewFX;
+    private javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
 }

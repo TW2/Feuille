@@ -34,20 +34,10 @@ public class PanelGroup {
     Table table;
     Video video;
     Wave wave;
+    Wave spectrogram;
 
     public PanelGroup() {
-    }
-
-    public PanelGroup(ASSEditor assEditor, Chat chat, Draw draw, DrawEditor drawEditor, FXEditor fxEditor, MacroEditor macroEditor, Table table, Video video, Wave wave) {
-        this.assEditor = assEditor;
-        this.chat = chat;
-        this.draw = draw;
-        this.drawEditor = drawEditor;
-        this.fxEditor = fxEditor;
-        this.macroEditor = macroEditor;
-        this.table = table;
-        this.video = video;
-        this.wave = wave;
+        
     }
 
     public void setAssEditor(ASSEditor assEditor) {
@@ -122,18 +112,30 @@ public class PanelGroup {
         return wave;
     }
 
+    public void setSpectrogram(Wave spectrogram) {
+        this.spectrogram = spectrogram;
+    }
+
+    public Wave getSpectrogram() {
+        return spectrogram;
+    }
+
     public static PanelGroup create(Language chosen, ISO_3166 get) {
         PanelGroup pg = new PanelGroup();
         pg.assEditor = new ASSEditor();
+        pg.assEditor.initializeASSEditor(chosen, get);
         pg.chat = new Chat();
+        pg.chat.initializeChat(chosen, get);
         pg.draw = new Draw();
         pg.drawEditor = new DrawEditor();
         pg.fxEditor = new FXEditor();
+        pg.fxEditor.initializeFxEditor(chosen, get);
         pg.macroEditor = new MacroEditor();
         pg.table = new Table();
         pg.table.initializeTable(chosen, get);
         pg.video = new Video();
         pg.wave = new Wave();
+        pg.spectrogram = new Wave();
         return pg;            
     }
     

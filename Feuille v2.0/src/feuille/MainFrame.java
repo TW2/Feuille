@@ -44,8 +44,8 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 public class MainFrame extends javax.swing.JFrame {
     
     // Language (loading from properties of each component)
-    ISO_3166 wantedIso = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
-    Language chosen = new Language();
+    static ISO_3166 wantedIso = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
+    static Language chosen = new Language();
     
     List<PanelGroup> groups = new ArrayList<>();
     PanelGroup defaultGroup = null;
@@ -83,6 +83,9 @@ public class MainFrame extends javax.swing.JFrame {
         // Center the position
         setLocationRelativeTo(null);
         
+        // Set divider location based on a 16/9 video size
+        jSplitPane1.setDividerLocation(jSplitPane1.getHeight() * 16 / 9);
+        
         // Creating a group
         defaultGroup = PanelGroup.create(chosen, wantedIso);        
         
@@ -90,12 +93,40 @@ public class MainFrame extends javax.swing.JFrame {
         tabbedSOUTH.add(defaultGroup.getTable());
         tabbedSOUTH.setTitleAt(0, chosen.getTranslated("TableTab", get, "Subtitles table"));
         
+        // Adding a chat to WEST
+        tabbedWEST.add(defaultGroup.getChat());
+        tabbedWEST.setTitleAt(0, chosen.getTranslated("ChatTab", get, "Chat"));
+        
+        // Adding a video to MIDDLE TOP/LEFT
+        tabbedCTOP.add(defaultGroup.getVideo());
+        tabbedCTOP.setTitleAt(0, chosen.getTranslated("VideoTab", get, "Viewer"));
+        
+        // Adding an ASSEditor to MIDDLE BOTTOM/RIGHT
+        tabbedCBOTTOM.add(defaultGroup.getAssEditor());
+        tabbedCBOTTOM.setTitleAt(0, chosen.getTranslated("AssEditorTab", get, "Advanced Sub Station Editor"));
+        tabbedCBOTTOM.add(defaultGroup.getFxEditor());
+        tabbedCBOTTOM.setTitleAt(1, chosen.getTranslated("FxEditorTab", get, "Effects editor"));
+        
+        // Adding a wave to NORTH
+        tabbedNORTH.add(defaultGroup.getWave());
+        tabbedNORTH.setTitleAt(0, chosen.getTranslated("WaveTab", get, "Waveform"));
+        tabbedNORTH.add(defaultGroup.getSpectrogram());
+        tabbedNORTH.setTitleAt(1, chosen.getTranslated("SpecTab", get, "Spectrogram"));
+        
         // Language for elements of MainFrame        
         mnuFile.setText(chosen.getTranslated("MnuFile", get, "File"));
         mnuEdit.setText(chosen.getTranslated("MnuEdit", get, "Edit"));
         miOpenProject.setText(chosen.getTranslated("MnuFileOpenProj", get, "Open project..."));
         miSaveProject.setText(chosen.getTranslated("MnuFileSaveProj", get, "Save project..."));
         miOpenSubtitleTable.setText(chosen.getTranslated("MnuFileViewSubt", get, "View subtitles..."));
+    }
+    
+    public static Language getLanguage(){
+        return chosen;
+    }
+    
+    public static ISO_3166 getISOCountry(){
+        return chosen.isForced() ? chosen.getIso() : wantedIso;
     }
 
     /**
@@ -110,7 +141,6 @@ public class MainFrame extends javax.swing.JFrame {
         tabbedNORTH = new javax.swing.JTabbedPane();
         tabbedSOUTH = new javax.swing.JTabbedPane();
         tabbedWEST = new javax.swing.JTabbedPane();
-        tabbedEAST = new javax.swing.JTabbedPane();
         jSplitPane1 = new javax.swing.JSplitPane();
         tabbedCTOP = new javax.swing.JTabbedPane();
         tabbedCBOTTOM = new javax.swing.JTabbedPane();
@@ -123,10 +153,10 @@ public class MainFrame extends javax.swing.JFrame {
         mnuEdit = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Feuille v2.0 - 2019.1 (GraalVM Experimental) :: 'Oh my god!'");
 
-        jSplitPane1.setDividerLocation(200);
+        jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(10);
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setOneTouchExpandable(true);
         jSplitPane1.setLeftComponent(tabbedCTOP);
         jSplitPane1.setRightComponent(tabbedCBOTTOM);
@@ -174,9 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tabbedWEST, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabbedEAST, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +213,6 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tabbedWEST)
-                    .addComponent(tabbedEAST)
                     .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabbedSOUTH, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -277,7 +304,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu mnuFile;
     private javax.swing.JTabbedPane tabbedCBOTTOM;
     private javax.swing.JTabbedPane tabbedCTOP;
-    private javax.swing.JTabbedPane tabbedEAST;
     private javax.swing.JTabbedPane tabbedNORTH;
     private javax.swing.JTabbedPane tabbedSOUTH;
     private javax.swing.JTabbedPane tabbedWEST;

@@ -51,6 +51,10 @@ public class Event {
             }
             return lineType;
         }
+
+        public void setType(String type) {
+            this.type = type;
+        }
     }
     
     private LineType lineType = LineType.Comment;

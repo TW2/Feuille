@@ -18,6 +18,7 @@ package feuille.util.effect.VsFilterMod;
 
 import feuille.util.ColorBox;
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 import java.awt.Color;
 
 /**
@@ -26,54 +27,63 @@ import java.awt.Color;
  */
 public class ShadowColorGradient extends AFx {
     
-    Color topLeftColor = Color.black;
-    Color topRightColor = Color.black;
-    Color bottomLeftColor = Color.black;
-    Color bottomRightColor = Color.black;
+    Parameter p_topLeftColor = new Parameter(Color.black, in.getTranslated("FxListTopLeft", iso, "Top left value"));
+    Parameter p_topRightColor = new Parameter(Color.black, in.getTranslated("FxListTopRight", iso, "Top right value"));
+    Parameter p_bottomLeftColor = new Parameter(Color.black, in.getTranslated("FxListBottomLeft", iso, "Bottom left value"));    
+    Parameter p_bottomRightColor = new Parameter(Color.black, in.getTranslated("FxListBottomRight", iso, "Bottom right value"));
 
     public ShadowColorGradient() {
-        
+        name = in.getTranslated("FxListShadowColorGradient", iso, "Shadow color with gradient");
+        uniqueID = -1;
+        params.add(p_topLeftColor);
+        params.add(p_topRightColor);
+        params.add(p_bottomLeftColor);
+        params.add(p_bottomRightColor);
     }
 
     @Override
     public String getTag() {
         return "\\4vc(" 
-                + "&H" + ColorBox.colorToBgr(topLeftColor) + "&,"
-                + "&H" + ColorBox.colorToBgr(topRightColor) + "&,"
-                + "&H" + ColorBox.colorToBgr(bottomLeftColor) + "&,"
-                + "&H" + ColorBox.colorToBgr(bottomRightColor) + "&)";
+                + "&H" + ColorBox.colorToBgr(getTopLeftColor()) + "&,"
+                + "&H" + ColorBox.colorToBgr(getTopRightColor()) + "&,"
+                + "&H" + ColorBox.colorToBgr(getBottomLeftColor()) + "&,"
+                + "&H" + ColorBox.colorToBgr(getBottomRightColor()) + "&)";
     }
 
     public void setTopLeftColor(Color topLeftColor) {
-        this.topLeftColor = topLeftColor;
+        p_topLeftColor.setParam(topLeftColor);
+        params.set(0, p_topLeftColor);
     }
 
     public Color getTopLeftColor() {
-        return topLeftColor;
+        return (Color)params.get(0).getParam();
     }
 
     public void setTopRightColor(Color topRightColor) {
-        this.topRightColor = topRightColor;
+        p_topRightColor.setParam(topRightColor);
+        params.set(1, p_topRightColor);
     }
 
     public Color getTopRightColor() {
-        return topRightColor;
+        return (Color)params.get(1).getParam();
     }
 
     public void setBottomLeftColor(Color bottomLeftColor) {
-        this.bottomLeftColor = bottomLeftColor;
+        p_bottomLeftColor.setParam(bottomLeftColor);
+        params.set(2, p_bottomLeftColor);
     }
 
     public Color getBottomLeftColor() {
-        return bottomLeftColor;
+        return (Color)params.get(2).getParam();
     }
 
     public void setBottomRightColor(Color bottomRightColor) {
-        this.bottomRightColor = bottomRightColor;
+        p_bottomRightColor.setParam(bottomRightColor);
+        params.set(3, p_bottomRightColor);
     }
 
     public Color getBottomRightColor() {
-        return bottomRightColor;
+        return (Color)params.get(3).getParam();
     }
     
 }

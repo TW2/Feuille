@@ -148,43 +148,43 @@ public class ASSEditor extends javax.swing.JPanel {
         jPanel1.add(lblMarginVertical);
         lblMarginVertical.setBounds(10, 210, 170, 30);
 
-        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/play-32.png"))); // NOI18N
+        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/play-32.png"))); // NOI18N
         jPanel1.add(btnPlay);
         btnPlay.setBounds(80, 0, 40, 40);
 
-        btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/pause-32.png"))); // NOI18N
+        btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/pause-32.png"))); // NOI18N
         jPanel1.add(btnPause);
         btnPause.setBounds(120, 0, 40, 40);
 
-        btnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/stop-32.png"))); // NOI18N
+        btnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/stop-32.png"))); // NOI18N
         jPanel1.add(btnStop);
         btnStop.setBounds(160, 0, 40, 40);
 
-        btnPlayBeforeStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playbeforebegin-32.png"))); // NOI18N
+        btnPlayBeforeStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playbeforebegin-32.png"))); // NOI18N
         jPanel1.add(btnPlayBeforeStart);
         btnPlayBeforeStart.setBounds(0, 0, 40, 40);
 
-        btnPlayAfterStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playafterbegin-32.png"))); // NOI18N
+        btnPlayAfterStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playafterbegin-32.png"))); // NOI18N
         jPanel1.add(btnPlayAfterStart);
         btnPlayAfterStart.setBounds(0, 40, 40, 40);
 
-        btnPlayBeforeEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playbeforeend-32.png"))); // NOI18N
+        btnPlayBeforeEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playbeforeend-32.png"))); // NOI18N
         jPanel1.add(btnPlayBeforeEnd);
         btnPlayBeforeEnd.setBounds(40, 40, 40, 40);
 
-        btnPlayAfterEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playafterend-32.png"))); // NOI18N
+        btnPlayAfterEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playafterend-32.png"))); // NOI18N
         jPanel1.add(btnPlayAfterEnd);
         btnPlayAfterEnd.setBounds(40, 0, 40, 40);
 
-        btnPlayArea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playarea-32.png"))); // NOI18N
+        btnPlayArea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playarea-32.png"))); // NOI18N
         jPanel1.add(btnPlayArea);
         btnPlayArea.setBounds(200, 0, 40, 40);
 
-        btnKaraoke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/setkara-32.png"))); // NOI18N
+        btnKaraoke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/setkara-32.png"))); // NOI18N
         jPanel1.add(btnKaraoke);
         btnKaraoke.setBounds(200, 40, 40, 40);
 
-        btnSetTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/newtime-32.png"))); // NOI18N
+        btnSetTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/newtime-32.png"))); // NOI18N
         jPanel1.add(btnSetTime);
         btnSetTime.setBounds(240, 20, 40, 40);
 

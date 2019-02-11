@@ -16,6 +16,7 @@
  */
 package feuille.panel;
 
+import feuille.MainFrame;
 import feuille.io.ASS;
 import feuille.io.Event;
 import feuille.io.Event.LineType;
@@ -182,7 +183,7 @@ public class Table extends javax.swing.JPanel {
             case 5: ev.setMarginL(Integer.parseInt(value)); break;
             case 6: ev.setMarginR(Integer.parseInt(value)); break;
             case 7: ev.setMarginV(Integer.parseInt(value)); break;
-            case 8: ev.setStyle(value); break;
+            case 8: ev.getStyle().setName(value); break;
             case 9: ev.setName(value); break;
             case 10: ev.setEffect(value); break;
             case 11: ev.setText(value); break;
@@ -205,7 +206,7 @@ public class Table extends javax.swing.JPanel {
             Integer.toString(ev.getMarginL()), // Margin L
             Integer.toString(ev.getMarginR()), // Margin R
             Integer.toString(ev.getMarginV()), // Margin V
-            ev.getStyle(), // Style
+            ev.getStyle().getName(), // Style
             ev.getName(), // Name
             ev.getEffect(), // Effects
             ev.getText() // Text
@@ -220,7 +221,7 @@ public class Table extends javax.swing.JPanel {
      * @param line An ASS event line 
      */
     public void addLine(String line){
-        Event ev = Event.createFromASS(line);
+        Event ev = Event.createFromASS(line, MainFrame.getScriptStyles());
         Object[] row = new Object[]{
             "", // #
             ev.getLineType().toString(), // Type
@@ -230,7 +231,7 @@ public class Table extends javax.swing.JPanel {
             Integer.toString(ev.getMarginL()), // Margin L
             Integer.toString(ev.getMarginR()), // Margin R
             Integer.toString(ev.getMarginV()), // Margin V
-            ev.getStyle(), // Style
+            ev.getStyle().getName(), // Style
             ev.getName(), // Name
             ev.getEffect(), // Effects
             ev.getText() // Text
@@ -279,7 +280,7 @@ public class Table extends javax.swing.JPanel {
         ev.setMarginL(ml);
         ev.setMarginR(mr);
         ev.setMarginV(mv);
-        ev.setStyle(style.getName());
+        ev.setStyle(style);
         ev.setName(name);
         ev.setEffect(effects);
         ev.setText(text);

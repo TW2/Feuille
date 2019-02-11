@@ -18,6 +18,7 @@ package feuille.util.effect.VsFilterMod;
 
 import feuille.util.AlphaBox;
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -25,53 +26,62 @@ import feuille.util.effect.AFx;
  */
 public class KaraokeAlphaGradient extends AFx {
 
-    int topLeftAlpha = 0;
-    int topRightAlpha = 0;
-    int bottomLeftAlpha = 0;
-    int bottomRightAlpha = 0;
+    Parameter p_topLeftAlpha = new Parameter(0, in.getTranslated("FxListTopLeft", iso, "Top left value"));
+    Parameter p_topRightAlpha = new Parameter(0, in.getTranslated("FxListTopRight", iso, "Top right value"));
+    Parameter p_bottomLeftAlpha = new Parameter(0, in.getTranslated("FxListBottomLeft", iso, "Bottom left value"));    
+    Parameter p_bottomRightAlpha = new Parameter(0, in.getTranslated("FxListBottomRight", iso, "Bottom right value"));
 
     public KaraokeAlphaGradient() {
-        
+        name = in.getTranslated("FxListKaraokeAlphaGradient", iso, "Karaoke transparency with gradient");
+        uniqueID = -1;
+        params.add(p_topLeftAlpha);
+        params.add(p_topRightAlpha);
+        params.add(p_bottomLeftAlpha);
+        params.add(p_bottomRightAlpha);
     }
     
     @Override
     public String getTag() {
         return "\\2va(" 
-                + "&H" + AlphaBox.integerToHexa(topLeftAlpha) + "&,"
-                + "&H" + AlphaBox.integerToHexa(topRightAlpha) + "&,"
-                + "&H" + AlphaBox.integerToHexa(bottomLeftAlpha) + "&,"
-                + "&H" + AlphaBox.integerToHexa(bottomRightAlpha) +"&)";
+                + "&H" + AlphaBox.integerToHexa(getTopLeftAlpha()) + "&,"
+                + "&H" + AlphaBox.integerToHexa(getTopRightAlpha()) + "&,"
+                + "&H" + AlphaBox.integerToHexa(getBottomLeftAlpha()) + "&,"
+                + "&H" + AlphaBox.integerToHexa(getBottomRightAlpha()) +"&)";
     }
 
     public void setTopLeftAlpha(int topLeftAlpha) {
-        this.topLeftAlpha = topLeftAlpha;
+        p_topLeftAlpha.setParam(topLeftAlpha);
+        params.set(0, p_topLeftAlpha);
     }
 
     public int getTopLeftAlpha() {
-        return topLeftAlpha;
+        return (int)params.get(0).getParam();
     }
 
     public void setTopRightAlpha(int topRightAlpha) {
-        this.topRightAlpha = topRightAlpha;
+        p_topRightAlpha.setParam(topRightAlpha);
+        params.set(1, p_topRightAlpha);
     }
 
     public int getTopRightAlpha() {
-        return topRightAlpha;
+        return (int)params.get(1).getParam();
     }
 
     public void setBottomLeftAlpha(int bottomLeftAlpha) {
-        this.bottomLeftAlpha = bottomLeftAlpha;
+        p_bottomLeftAlpha.setParam(bottomLeftAlpha);
+        params.set(2, p_bottomLeftAlpha);
     }
 
     public int getBottomLeftAlpha() {
-        return bottomLeftAlpha;
+        return (int)params.get(2).getParam();
     }
 
     public void setBottomRightAlpha(int bottomRightAlpha) {
-        this.bottomRightAlpha = bottomRightAlpha;
+        p_bottomRightAlpha.setParam(bottomRightAlpha);
+        params.set(3, p_bottomRightAlpha);
     }
 
     public int getBottomRightAlpha() {
-        return bottomRightAlpha;
+        return (int)params.get(3).getParam();
     }
 }

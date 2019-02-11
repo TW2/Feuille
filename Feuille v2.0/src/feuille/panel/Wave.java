@@ -63,7 +63,7 @@ public class Wave extends javax.swing.JPanel {
 
         jPanel2.setLayout(null);
 
-        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/play-32.png"))); // NOI18N
+        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/play-32.png"))); // NOI18N
         btnPlay.setToolTipText("");
         btnPlay.setFocusable(false);
         btnPlay.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -71,42 +71,42 @@ public class Wave extends javax.swing.JPanel {
         jPanel2.add(btnPlay);
         btnPlay.setBounds(0, 0, 40, 40);
 
-        btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/pause-32.png"))); // NOI18N
+        btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/pause-32.png"))); // NOI18N
         btnPause.setFocusable(false);
         btnPause.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPause.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(btnPause);
         btnPause.setBounds(40, 0, 40, 40);
 
-        btnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/stop-32.png"))); // NOI18N
+        btnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/stop-32.png"))); // NOI18N
         btnStop.setFocusable(false);
         btnStop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnStop.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(btnStop);
         btnStop.setBounds(80, 0, 40, 40);
 
-        btnPlayBeforeStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playbeforebegin-32.png"))); // NOI18N
+        btnPlayBeforeStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playbeforebegin-32.png"))); // NOI18N
         btnPlayBeforeStart.setFocusable(false);
         btnPlayBeforeStart.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPlayBeforeStart.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(btnPlayBeforeStart);
         btnPlayBeforeStart.setBounds(0, 40, 40, 40);
 
-        btnPlayAfterEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playafterend-32.png"))); // NOI18N
+        btnPlayAfterEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playafterend-32.png"))); // NOI18N
         btnPlayAfterEnd.setFocusable(false);
         btnPlayAfterEnd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPlayAfterEnd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(btnPlayAfterEnd);
         btnPlayAfterEnd.setBounds(40, 40, 40, 40);
 
-        btnPlayAfterStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playafterbegin-32.png"))); // NOI18N
+        btnPlayAfterStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playafterbegin-32.png"))); // NOI18N
         btnPlayAfterStart.setFocusable(false);
         btnPlayAfterStart.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPlayAfterStart.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(btnPlayAfterStart);
         btnPlayAfterStart.setBounds(0, 80, 40, 40);
 
-        btnPlayBeforeEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/playbeforeend-32.png"))); // NOI18N
+        btnPlayBeforeEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/playbeforeend-32.png"))); // NOI18N
         btnPlayBeforeEnd.setFocusable(false);
         btnPlayBeforeEnd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPlayBeforeEnd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

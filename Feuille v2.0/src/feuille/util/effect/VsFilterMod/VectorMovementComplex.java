@@ -18,6 +18,7 @@ package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
+import feuille.util.effect.Parameter;
 
 /**
  * \\movevc(x1,y1,x2,y2[,t1,t2])
@@ -25,66 +26,89 @@ import feuille.util.effect.FxType;
  */
 public class VectorMovementComplex extends AFx {
     
-    int msStart = 0;
-    int msStop = 0;
+    Parameter p_msStart = new Parameter(0, in.getTranslated("FxListMsStart", iso, "Start time"));
+    Parameter p_msStop = new Parameter(0, in.getTranslated("FxListMsStop", iso, "End time"));
     
-    int x1 = 0, y1 = 0;
-    int x2 = 0, y2 = 0;
+    //int x1 = 0, y1 = 0;
+    Parameter p_x1 = new Parameter(0, in.getTranslated("FxListX1", iso, "X1"));
+    Parameter p_y1 = new Parameter(0, in.getTranslated("FxListY1", iso, "Y1"));
+    
+    //int x2 = 0, y2 = 0;
+    Parameter p_x2 = new Parameter(0, in.getTranslated("FxListX2", iso, "X2"));
+    Parameter p_y2 = new Parameter(0, in.getTranslated("FxListY2", iso, "Y2"));
 
     public VectorMovementComplex() {
         fxType = FxType.Override;
+        name = in.getTranslated("FxListVectorMovementComplex", iso, "Vectorial movement (complex)");
+        uniqueID = -1;
+        params.add(p_msStart);
+        params.add(p_msStop);
+        params.add(p_x1);
+        params.add(p_y1);
+        params.add(p_x2);
+        params.add(p_y2);
     }
 
     public void setMsStart(int msStart) {
-        this.msStart = msStart;
+        p_msStart.setParam(msStart);
+        params.set(0, p_msStart);
     }
 
     public int getMsStart() {
-        return msStart;
+        return (int)params.get(0).getParam();
     }
 
     public void setMsStop(int msStop) {
-        this.msStop = msStop;
+        p_msStop.setParam(msStop);
+        params.set(1, p_msStop);
     }
 
     public int getMsStop() {
-        return msStop;
+        return (int)params.get(1).getParam();
     }
 
     public void setX1(int x1) {
-        this.x1 = x1;
+        p_x1.setParam(x1);
+        params.set(2, p_x1);
     }
 
     public int getX1() {
-        return x1;
+        return (int)params.get(2).getParam();
     }
 
     public void setY1(int y1) {
-        this.y1 = y1;
+        p_y1.setParam(y1);
+        params.set(3, p_y1);
     }
 
     public int getY1() {
-        return y1;
+        return (int)params.get(3).getParam();
     }
 
     public void setX2(int x2) {
-        this.x2 = x2;
+        p_x2.setParam(x2);
+        params.set(4, p_x2);
     }
 
     public int getX2() {
-        return x2;
+        return (int)params.get(4).getParam();
     }
 
     public void setY2(int y2) {
-        this.y2 = y2;
+        p_y2.setParam(y2);
+        params.set(5, p_y2);
     }
 
     public int getY2() {
-        return y2;
+        return (int)params.get(5).getParam();
     }
 
     @Override
     public String getTag() {
+        int msStart = (int)params.get(0).getParam();
+        int msStop = (int)params.get(1).getParam();
+        int x1 = (int)params.get(2).getParam(), y1 = (int)params.get(3).getParam();
+        int x2 = (int)params.get(4).getParam(), y2 = (int)params.get(5).getParam();
         return "\\movevc("
                 + x1 + "," + y1 + ","
                 + x2 + "," + y2

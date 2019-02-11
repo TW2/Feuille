@@ -17,6 +17,7 @@
 package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,22 +25,25 @@ import feuille.util.effect.AFx;
  */
 public class FontScale extends AFx {
      
-    int value = 100;
+    Parameter param = new Parameter(0, in.getTranslated("FxListValue", iso, "Value"));
 
     public FontScale() {
-        
+        name = in.getTranslated("FxListFontScale", iso, "Scale");
+        uniqueID = -1;
+        params.add(param);
     }
 
     public void setValue(int value) {
-        this.value = value;
+        param.setParam(value);
+        params.set(0, param);
     }
 
     public int getValue() {
-        return value;
+        return (int)params.get(0).getParam();
     }
 
     @Override
     public String getTag() {
-        return "\\fsc" + value;
+        return "\\fsc" + getValue();
     }
 }

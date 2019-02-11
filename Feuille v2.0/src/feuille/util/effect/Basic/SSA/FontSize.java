@@ -17,6 +17,7 @@
 package feuille.util.effect.Basic.SSA;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,22 +25,26 @@ import feuille.util.effect.AFx;
  */
 public class FontSize extends AFx {
     
-    float value = 0f;
+    Parameter param = new Parameter(0f, in.getTranslated("FxListValue", iso, "Value"));
 
     public FontSize() {
+        name = in.getTranslated("FxListFontSize", iso, "Font size");
+        uniqueID = -1;
+        params.add(param);
     }
 
     @Override
     public String getTag() {
-        return "\\fs" + value;
+        return "\\fs" + getValue();
     }
 
     public void setValue(float value) {
-        this.value = value;
+        param.setParam(value);
+        params.set(0, param);
     }
 
     public float getValue() {
-        return value;
+        return (float)params.get(0).getParam();
     }
     
     

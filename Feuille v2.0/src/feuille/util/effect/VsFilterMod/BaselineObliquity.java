@@ -17,6 +17,7 @@
 package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,22 +25,26 @@ import feuille.util.effect.AFx;
  */
 public class BaselineObliquity extends AFx {
     
-    int value = 0;
+    Parameter param = new Parameter(0, in.getTranslated("FxListValue", iso, "Value"));
 
     public BaselineObliquity() {
+        name = in.getTranslated("FxListBaselineObliquity", iso, "Baseline obliquity");
+        uniqueID = -1;
+        params.add(param);
     }
 
     public void setValue(int value) {
-        this.value = value;
+        param.setParam(value);
+        params.set(0, param);
     }
 
     public int getValue() {
-        return value;
+        return (int)params.get(0).getParam();
     }
 
     @Override
     public String getTag() {
-        return "\\frs" + value;
+        return "\\frs" + getValue();
     }
     
     

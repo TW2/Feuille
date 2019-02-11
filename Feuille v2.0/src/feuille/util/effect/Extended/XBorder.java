@@ -17,6 +17,7 @@
 package feuille.util.effect.Extended;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,21 +25,25 @@ import feuille.util.effect.AFx;
  */
 public class XBorder extends AFx {
 
-    float value = 0f;
+    Parameter param = new Parameter(0f, in.getTranslated("FxListValue", iso, "Value"));
 
     public XBorder() {
+        name = in.getTranslated("FxListXBorder", iso, "Border on X");
+        uniqueID = -1;
+        params.add(param);
     }
 
     public void setValue(float value) {
-        this.value = value;
+        param.setParam(value);
+        params.set(0, param);
     }
 
     public float getValue() {
-        return value;
+        return (float)params.get(0).getParam();
     }
     
     @Override
     public String getTag() {
-        return "\\xbord" + value;
+        return "\\xbord" + getValue();
     }
 }

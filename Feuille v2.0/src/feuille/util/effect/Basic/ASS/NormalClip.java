@@ -31,7 +31,7 @@ public class NormalClip extends AFx {
     
     //int x2 = 0, y2 = 0;
     Parameter p_x2 = new Parameter(10, in.getTranslated("FxListX2", iso, "X2"));
-    Parameter p_y2 = new Parameter(10, in.getTranslated("FxListY2", iso, "Y1"));
+    Parameter p_y2 = new Parameter(10, in.getTranslated("FxListY2", iso, "Y2"));
 
     public NormalClip() {
         name = in.getTranslated("FxListNormalClip", iso, "Clip (rectangle)");

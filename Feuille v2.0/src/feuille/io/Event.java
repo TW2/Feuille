@@ -17,6 +17,7 @@
 package feuille.io;
 
 import feuille.util.Time;
+import java.util.Map;
 
 /**
  *
@@ -64,7 +65,7 @@ public class Event {
     private int marginV = 0; 
     private Time startTime = Time.create(0L);
     private Time endTime = Time.create(1000L);
-    private String style = "Default";
+    private Style style = Style.getDefault();
     private String name = "";
     private String effect = "";
     private String text = "";
@@ -77,9 +78,10 @@ public class Event {
      * Get an Event object from an ASS event line
      * Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
      * @param ASS an ASS line
+     * @param styles
      * @return An Event object
      */
-    public static Event createFromASS(String ASS){
+    public static Event createFromASS(String ASS, Map<String, Style> styles){
         Event ev = new Event();
         String[] array = ASS.split(",", 10);
         if(array.length == 10){
@@ -97,7 +99,7 @@ public class Event {
             ev.setStartTime(Time.create(array[1]));
             ev.setEndTime(Time.create(array[2]));
             // Style
-            ev.setStyle(array[3]);
+            ev.setStyle(styles.get(array[3]));
             // Name
             ev.setName(array[4]);
             // Margins LRV
@@ -124,7 +126,7 @@ public class Event {
         line += Integer.toString(ev.getLayer()).concat(",");
         line += ev.getStartTime().toASSTime().concat(",");
         line += ev.getEndTime().toASSTime().concat(",");
-        line += ev.getStyle().concat(",");
+        line += ev.getStyle().getName().concat(",");
         line += ev.getName().concat(",");
         line += Integer.toString(ev.getMarginL()).concat(",");
         line += Integer.toString(ev.getMarginR()).concat(",");
@@ -190,11 +192,11 @@ public class Event {
         return endTime;
     }
 
-    public void setStyle(String style) {
+    public void setStyle(Style style) {
         this.style = style;
     }
 
-    public String getStyle() {
+    public Style getStyle() {
         return style;
     }
 

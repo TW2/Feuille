@@ -16,17 +16,57 @@
  */
 package feuille.panel;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 /**
  *
  * @author util2
  */
 public class Video extends javax.swing.JPanel {
+    
+    private final VideoPane videoPane = new VideoPane();
 
     /**
      * Creates new form Video
      */
     public Video() {
         initComponents();
+        init();
+    }
+    
+    private void init(){
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                videoPane.defineSize(getWidth(), getHeight());
+            }
+        });
+        jPanel1.add(videoPane);
+    }
+    
+    public void setPath(String path){
+        videoPane.setPath(path);
+    }
+    
+    public void play(){
+        videoPane.play();
+    }
+    
+    public void pause(){
+        videoPane.pause();
+    }
+    
+    public void stop(){
+        videoPane.stop();
+    }
+    
+    public void callRepaint(){
+        videoPane.repaint();
+    }
+    
+    public void callFreeReader(){
+        videoPane.freeReader();
     }
 
     /**
@@ -59,24 +99,39 @@ public class Video extends javax.swing.JPanel {
 
         jPanel2.setLayout(null);
 
-        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/play-32.png"))); // NOI18N
+        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/play-32.png"))); // NOI18N
         btnPlay.setFocusable(false);
         btnPlay.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPlay.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnPlay);
         btnPlay.setBounds(0, 0, 40, 40);
 
-        btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/pause-32.png"))); // NOI18N
+        btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/pause-32.png"))); // NOI18N
         btnPause.setFocusable(false);
         btnPause.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPause.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPauseActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnPause);
         btnPause.setBounds(0, 40, 40, 40);
 
-        btnInitStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/stop-32.png"))); // NOI18N
+        btnInitStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/stop-32.png"))); // NOI18N
         btnInitStop.setFocusable(false);
         btnInitStop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnInitStop.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInitStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInitStopActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnInitStop);
         btnInitStop.setBounds(0, 80, 40, 40);
 
@@ -95,6 +150,18 @@ public class Video extends javax.swing.JPanel {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        play();
+    }//GEN-LAST:event_btnPlayActionPerformed
+
+    private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
+        pause();
+    }//GEN-LAST:event_btnPauseActionPerformed
+
+    private void btnInitStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInitStopActionPerformed
+        stop();
+    }//GEN-LAST:event_btnInitStopActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

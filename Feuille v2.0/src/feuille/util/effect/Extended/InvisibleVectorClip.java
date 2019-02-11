@@ -18,6 +18,7 @@ package feuille.util.effect.Extended;
 
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
+import feuille.util.effect.Parameter;
 
 /**
  * \\iclip(scale,drawing commands)
@@ -25,33 +26,39 @@ import feuille.util.effect.FxType;
  */
 public class InvisibleVectorClip extends AFx {
     
-    String drawing = "";
-    int scale = 0;
+    Parameter p_drawing = new Parameter("", in.getTranslated("FxListDrawing", iso, "Drawing path"));
+    Parameter p_scale = new Parameter(0, in.getTranslated("FxListDrawingScale", iso, "Scale"));
 
     public InvisibleVectorClip() {
         fxType = FxType.Override;
+        name = in.getTranslated("FxListInvisibleVectorClip", iso, "Invisible Clip (vector)");
+        uniqueID = -1;
+        params.add(p_drawing);
+        params.add(p_scale);
     }
 
     public void setDrawing(String drawing) {
-        this.drawing = drawing;
+        p_drawing.setParam(drawing);
+        params.set(0, p_drawing);
     }
 
     public String getDrawing() {
-        return drawing;
+        return (String)params.get(0).getParam();
     }
 
     public void setScale(int scale) {
-        this.scale = scale;
+        p_scale.setParam(scale);
+        params.set(1, p_scale);
     }
 
     public int getScale() {
-        return scale;
+        return (int)params.get(1).getParam();
     }
 
     @Override
     public String getTag() {
-        if(drawing.isEmpty() == false){
-            return "\\iclip(" + (scale != 0 ? Integer.toString(scale) + "," : "") + drawing + ")";
+        if(getDrawing().isEmpty() == false){
+            return "\\iclip(" + (getScale() != 0 ? Integer.toString(getScale()) + "," : "") + getDrawing() + ")";
         }
         return "";
     }

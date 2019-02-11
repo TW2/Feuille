@@ -17,6 +17,7 @@
 package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,68 +25,86 @@ import feuille.util.effect.AFx;
  */
 public class Distortion extends AFx {
     
-    int u1 = 0, v1 = 0;
-    int u2 = 0, v2 = 0;
-    int u3 = 0, v3 = 0;
+    Parameter p_u1 = new Parameter(0, in.getTranslated("FxListDistortionU1", iso, "U1"));
+    Parameter p_v1 = new Parameter(0, in.getTranslated("FxListDistortionV1", iso, "V1"));
+    
+    Parameter p_u2 = new Parameter(0, in.getTranslated("FxListDistortionU2", iso, "U2"));
+    Parameter p_v2 = new Parameter(0, in.getTranslated("FxListDistortionV2", iso, "V2"));
+    
+    Parameter p_u3 = new Parameter(0, in.getTranslated("FxListDistortionU3", iso, "U3"));
+    Parameter p_v3 = new Parameter(0, in.getTranslated("FxListDistortionV3", iso, "V3"));
 
     public Distortion() {
-        
+        name = in.getTranslated("FxListDistortion", iso, "Distortion");
+        uniqueID = -1;
+        params.add(p_u1);
+        params.add(p_v1);
+        params.add(p_u2);
+        params.add(p_v2);
+        params.add(p_u3);
+        params.add(p_v3);
     }
     
     @Override
     public String getTag() {
         return "\\distort("
-                + u1 + "," + v1 + ","
-                + u2 + "," + v2 + ","
-                + u3 + "," + v3 + ")";
+                + getU1() + "," + getV1() + ","
+                + getU2() + "," + getV2() + ","
+                + getU3() + "," + getV3() + ")";
     }
 
     public void setU1(int u1) {
-        this.u1 = u1;
+        p_u1.setParam(u1);
+        params.set(0, p_u1);
     }
 
     public int getU1() {
-        return u1;
+        return (int)params.get(0).getParam();
     }
 
     public void setV1(int v1) {
-        this.v1 = v1;
+        p_v1.setParam(v1);
+        params.set(1, p_v1);
     }
 
     public int getV1() {
-        return v1;
+        return (int)params.get(1).getParam();
     }
 
     public void setU2(int u2) {
-        this.u2 = u2;
+        p_u2.setParam(u2);
+        params.set(2, p_u2);
     }
 
     public int getU2() {
-        return u2;
+        return (int)params.get(2).getParam();
     }
 
     public void setV2(int v2) {
-        this.v2 = v2;
+        p_v2.setParam(v2);
+        params.set(3, p_v2);
     }
 
     public int getV2() {
-        return v2;
+        return (int)params.get(3).getParam();
     }
 
     public void setU3(int u3) {
-        this.u3 = u3;
+        p_u3.setParam(u3);
+        params.set(4, p_u3);
     }
 
     public int getU3() {
-        return u3;
+        return (int)params.get(4).getParam();
     }
 
     public void setV3(int v3) {
-        this.v3 = v3;
+        p_v3.setParam(v3);
+        params.set(5, p_v3);
     }
 
     public int getV3() {
-        return v3;
+        return (int)params.get(5).getParam();
     }
     
 }

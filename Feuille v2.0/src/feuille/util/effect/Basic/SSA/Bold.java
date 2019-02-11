@@ -17,6 +17,7 @@
 package feuille.util.effect.Basic.SSA;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,23 +25,26 @@ import feuille.util.effect.AFx;
  */
 public class Bold extends AFx {
     
-    boolean active = false;
+    Parameter param = new Parameter(false, in.getTranslated("FxListValue", iso, "Value"));
     
     public Bold() {
-        
+        name = in.getTranslated("FxListBold", iso, "Bold");
+        uniqueID = -1;
+        params.add(param);
     }
 
     @Override
     public String getTag() {
-        return "\\b" + (active == true ? "1" : "0");
+        return "\\b" + (isActive() == true ? "1" : "0");
     }
 
     public void setActive(boolean active) {
-        this.active = active;
+        param.setParam(active);
+        params.set(0, param);
     }
 
     public boolean isActive() {
-        return active;
+        return (boolean)params.get(0).getParam();
     }
     
 }

@@ -80,7 +80,7 @@ public class FXEditor extends javax.swing.JPanel {
 
         jPanel1.setLayout(null);
 
-        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/32_minus.png"))); // NOI18N
+        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/32_minus.png"))); // NOI18N
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveActionPerformed(evt);
@@ -89,7 +89,7 @@ public class FXEditor extends javax.swing.JPanel {
         jPanel1.add(btnRemove);
         btnRemove.setBounds(0, 0, 40, 40);
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/32_plus.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/32_plus.png"))); // NOI18N
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -104,7 +104,7 @@ public class FXEditor extends javax.swing.JPanel {
         jPanel1.add(tfName);
         tfName.setBounds(220, 0, 340, 40);
 
-        btnSaveInEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/32_bottom arrow.png"))); // NOI18N
+        btnSaveInEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/32_bottom arrow.png"))); // NOI18N
         btnSaveInEditor.setToolTipText("Put to the editor");
         btnSaveInEditor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class FXEditor extends javax.swing.JPanel {
         jPanel1.add(btnSaveInEditor);
         btnSaveInEditor.setBounds(560, 0, 40, 40);
 
-        btnExportToList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configuration/images/32_top arrow.png"))); // NOI18N
+        btnExportToList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feuille/images/32_top arrow.png"))); // NOI18N
         btnExportToList.setToolTipText("Save in list");
         btnExportToList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

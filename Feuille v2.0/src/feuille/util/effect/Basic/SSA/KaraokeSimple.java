@@ -18,6 +18,7 @@ package feuille.util.effect.Basic.SSA;
 
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -25,26 +26,30 @@ import feuille.util.effect.FxType;
  */
 public class KaraokeSimple extends AFx {
     
-    int milliseconds = 0;
+    Parameter param = new Parameter(0, in.getTranslated("FxListMS", iso, "Milliseconds"));
 
     public KaraokeSimple() {
         fxType = FxType.Common;
+        name = in.getTranslated("FxListKaraokeSimple", iso, "Karaoke (default)");
+        uniqueID = -1;
+        params.add(param);
     }
 
     public void setMilliseconds(int milliseconds) {
-        this.milliseconds = milliseconds;
+        param.setParam(milliseconds);
+        params.set(0, param);
     }
 
     public int getMilliseconds() {
-        return milliseconds;
+        return (int)params.get(0).getParam();
     }
     
     public void setHundredthOfSeconds(int h) {
-        this.milliseconds = h * 10;
+        setMilliseconds(h * 10);
     }
 
     public int getHundredthOfSeconds() {
-        return milliseconds / 10;
+        return getMilliseconds() / 10;
     }
 
     @Override

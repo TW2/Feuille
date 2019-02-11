@@ -19,6 +19,7 @@ package feuille.util.effect.Basic.SSA;
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
 import feuille.util.effect.OldAlignment;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -26,23 +27,27 @@ import feuille.util.effect.OldAlignment;
  */
 public class AlignmentInSSA extends AFx {
     
-    OldAlignment alignment = OldAlignment.BottomCenter;
+    Parameter param = new Parameter(OldAlignment.BottomCenter, in.getTranslated("FxListAlignment", iso, "Alignment"));
 
     public AlignmentInSSA() {
         fxType = FxType.Override;
+        name = in.getTranslated("FxListAlignment", iso, "Alignment");
+        uniqueID = -1;
+        params.add(param);
     }
 
     public void setAlignment(OldAlignment alignment) {
-        this.alignment = alignment;
+        param.setParam(alignment);
+        params.set(0, param);
     }
 
     public OldAlignment getAlignment() {
-        return alignment;
+        return (OldAlignment)params.get(0).getParam();
     }
 
     @Override
     public String getTag() {
-        return "\\a" + alignment.getValue();
+        return "\\a" + getAlignment().getValue();
     }
     
     

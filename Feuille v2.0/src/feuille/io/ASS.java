@@ -26,7 +26,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,7 +39,7 @@ import java.util.logging.Logger;
 public class ASS {
     
     private static List<Event> events = new ArrayList<>();
-    private static List<Style> styles = new ArrayList<>();
+    private static Map<String, Style> styles = new HashMap<>();
     private static List<String> names = new ArrayList<>();
     
     //[Script Info]
@@ -94,11 +96,14 @@ public class ASS {
                 if(line.startsWith("Video Zoom Percent")){ aegisVideoZoomPercent = line.substring("Video Zoom Percent: ".length()); }
                 if(line.startsWith("Active Line")){ aegisActiveLine = line.substring("Active Line: ".length()); }
                 if(line.startsWith("Video Position")){ aegisVideoPosition = line.substring("Video Position: ".length()); }
-                //[V4+ Styles]
-                if(line.startsWith("Style")){ styles.add(Style.create(line)); }
+                //[V4+ Styles]                
+                if(line.startsWith("Style")){
+                    Style style = Style.create(line);
+                    styles.put(style.getName(), style); 
+                }
                 //[Events]
                 if(line.startsWith("Comment") | line.startsWith("Dialogue") | line.startsWith("#Proposal") | line.startsWith("#Request")){
-                    events.add(Event.createFromASS(line));
+                    events.add(Event.createFromASS(line, styles));
                     String[] array = line.split(",", 9);
                     if(array[4].isEmpty() == false){ names.add(array[4]); }
                 }
@@ -146,8 +151,8 @@ public class ASS {
                     + "ScaleX, ScaleY, Spacing, Angle, "
                     + "BorderStyle, Outline, Shadow, "
                     + "Alignment, MarginL, MarginR, MarginV, Encoding");
-            for(Style style : styles){
-                pw.println(style.getStyle());
+            for(Map.Entry<String, Style> entry : styles.entrySet()){
+                pw.println(entry.getValue().getStyle());
             }
             pw.println("");
             //[Events]
@@ -294,11 +299,11 @@ public class ASS {
         return events;
     }
 
-    public void setStyles(List<Style> styles) {
+    public void setStyles(Map<String, Style> styles) {
         ASS.styles = styles;
     }
 
-    public List<Style> getStyles() {
+    public Map<String, Style> getStyles() {
         return styles;
     }
 

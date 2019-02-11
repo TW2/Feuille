@@ -18,6 +18,7 @@ package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
+import feuille.util.effect.Parameter;
 
 /**
  * \\moves4(x1,y1,x2,y2,x3,y3,x4,y4[,t1,t2])
@@ -25,106 +26,135 @@ import feuille.util.effect.FxType;
  */
 public class CubicMovement extends AFx {
     
-    int msStart = 0;
-    int msStop = 0;
+    Parameter p_msStart = new Parameter(0, in.getTranslated("FxListMsStart", iso, "Start time"));
+    Parameter p_msStop = new Parameter(0, in.getTranslated("FxListMsStop", iso, "End time"));
     
-    int startPointX = 0, startPointY = 0;
-    int controlPointX1 = 0, controlPointY1 = 0;
-    int controlPointX2 = 0, controlPointY2 = 0;
-    int endPointX = 0, endPointY = 0;
+    Parameter p_startPointX = new Parameter(0, in.getTranslated("FxListStartPointX", iso, "X at start"));
+    Parameter p_startPointY = new Parameter(0, in.getTranslated("FxListStartPointY", iso, "Y at start"));
+    
+    Parameter p_controlPointX1 = new Parameter(0, in.getTranslated("FxListControlPointX1", iso, "X for first control point"));
+    Parameter p_controlPointY1 = new Parameter(0, in.getTranslated("FxListControlPointY1", iso, "Y for first control point"));
+    
+    Parameter p_controlPointX2 = new Parameter(0, in.getTranslated("FxListControlPointX2", iso, "X for second control point"));
+    Parameter p_controlPointY2 = new Parameter(0, in.getTranslated("FxListControlPointY2", iso, "Y for second control point"));
+    
+    Parameter p_endPointX = new Parameter(0, in.getTranslated("FxListEndPointX", iso, "X at stop"));
+    Parameter p_endPointY = new Parameter(0, in.getTranslated("FxListEndPointY", iso, "Y at stop"));
 
     public CubicMovement() {
         fxType = FxType.Override;
+        name = in.getTranslated("FxListCubicMovement", iso, "Cubic movement");
+        uniqueID = -1;
+        params.add(p_msStart);
+        params.add(p_msStop);
+        params.add(p_startPointX);
+        params.add(p_startPointY);
+        params.add(p_controlPointX1);
+        params.add(p_controlPointY1);
+        params.add(p_controlPointX2);
+        params.add(p_controlPointY2);
+        params.add(p_endPointX);
+        params.add(p_endPointY);
     }
 
     public void setMsStart(int msStart) {
-        this.msStart = msStart;
+        p_msStart.setParam(msStart);
+        params.set(0, p_msStart);
     }
 
     public int getMsStart() {
-        return msStart;
+        return (int)params.get(0).getParam();
     }
 
     public void setMsStop(int msStop) {
-        this.msStop = msStop;
+        p_msStop.setParam(msStop);
+        params.set(1, p_msStop);
     }
 
     public int getMsStop() {
-        return msStop;
+        return (int)params.get(1).getParam();
     }
     
     public void setStartPointX(int startPointX) {
-        this.startPointX = startPointX;
+        p_startPointX.setParam(startPointX);
+        params.set(2, p_startPointX);
     }
 
     public int getStartPointX() {
-        return startPointX;
+        return (int)params.get(2).getParam();
     }
 
     public void setStartPointY(int startPointY) {
-        this.startPointY = startPointY;
+        p_startPointY.setParam(startPointY);
+        params.set(3, p_startPointY);
     }
 
     public int getStartPointY() {
-        return startPointY;
+        return (int)params.get(3).getParam();
     }
 
     public void setControlPointX1(int controlPointX1) {
-        this.controlPointX1 = controlPointX1;
+        p_controlPointX1.setParam(controlPointX1);
+        params.set(4, p_controlPointX1);
     }
 
     public int getControlPointX1() {
-        return controlPointX1;
+        return (int)params.get(4).getParam();
     }
 
     public void setControlPointY1(int controlPointY1) {
-        this.controlPointY1 = controlPointY1;
+        p_controlPointY1.setParam(controlPointY1);
+        params.set(5, p_controlPointY1);
     }
 
     public int getControlPointY1() {
-        return controlPointY1;
+        return (int)params.get(5).getParam();
     }
 
     public void setControlPointX2(int controlPointX2) {
-        this.controlPointX2 = controlPointX2;
+        p_controlPointX2.setParam(controlPointX2);
+        params.set(6, p_controlPointX2);
     }
 
     public int getControlPointX2() {
-        return controlPointX2;
+        return (int)params.get(6).getParam();
     }
 
     public void setControlPointY2(int controlPointY2) {
-        this.controlPointY2 = controlPointY2;
+        p_controlPointY2.setParam(controlPointY2);
+        params.set(7, p_controlPointY2);
     }
 
     public int getControlPointY2() {
-        return controlPointY2;
+        return (int)params.get(7).getParam();
     }
 
     public void setEndPointX(int endPointX) {
-        this.endPointX = endPointX;
+        p_endPointX.setParam(endPointX);
+        params.set(8, p_endPointX);
     }
 
     public int getEndPointX() {
-        return endPointX;
+        return (int)params.get(8).getParam();
     }
 
     public void setEndPointY(int endPointY) {
-        this.endPointY = endPointY;
+        p_endPointY.setParam(endPointY);
+        params.set(9, p_endPointY);
     }
 
     public int getEndPointY() {
-        return endPointY;
+        return (int)params.get(9).getParam();
     }
 
     @Override
     public String getTag() {
         return "\\moves4("
-                + startPointX + "," + startPointY + ","
-                + controlPointX1 + "," + controlPointY1 + ","
-                + controlPointX2 + "," + controlPointY2 + ","
-                + endPointX + "," + endPointY
-                + (msStart != msStop ? "," + msStart + "," + msStop : "") + ")";
+                + getStartPointX() + "," + getStartPointY() + ","
+                + getControlPointX1() + "," + getControlPointY1() + ","
+                + getControlPointX2() + "," + getControlPointY2() + ","
+                + getEndPointX() + "," + getEndPointY()
+                + ((getMsStart() != getMsStop()) ? "," + getMsStart() + "," + getMsStop() : "") + ")";
     }
     
     

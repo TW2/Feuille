@@ -17,6 +17,7 @@
 package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,24 +25,26 @@ import feuille.util.effect.AFx;
  */
 public class ZCoordinate extends AFx {
      
-    int value = 0;
+    Parameter param = new Parameter(0, in.getTranslated("FxListValue", iso, "Value"));
 
     public ZCoordinate() {
-        
+        name = in.getTranslated("FxListZCoordinate", iso, "Z coordinate");
+        uniqueID = -1;
+        params.add(param);
     }
 
     public void setValue(int value) {
-        this.value = value;
+        param.setParam(value);
+        params.set(0, param);
     }
 
     public int getValue() {
-        return value;
+        return (int)params.get(0).getParam();
     }
 
     @Override
     public String getTag() {
-        return "\\z" + value;
+        return "\\z" + getValue();
     }
-    
     
 }

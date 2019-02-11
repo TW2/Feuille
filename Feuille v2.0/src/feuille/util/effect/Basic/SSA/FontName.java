@@ -18,6 +18,7 @@ package feuille.util.effect.Basic.SSA;
 
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -25,23 +26,27 @@ import feuille.util.effect.FxType;
  */
 public class FontName extends AFx {
     
-    String fontName = "Serif";
+    Parameter p_fontName = new Parameter("Serif", in.getTranslated("FxListFontName", iso, "Font name"));
 
     public FontName() {
         fxType = FxType.Override;
+        name = in.getTranslated("FxListFontName", iso, "Font name");
+        uniqueID = -1;
+        params.add(p_fontName);
     }
 
-    public void setFontName(String fontName) {
-        this.fontName = fontName;
+    public void setValue(String value) {
+        p_fontName.setParam(value);
+        params.set(0, p_fontName);
     }
 
-    public String getFontName() {
-        return fontName;
+    public String getValue() {
+        return (String)params.get(0).getParam();
     }
 
     @Override
     public String getTag() {
-        return "\\fn" + fontName;
+        return "\\fn" + getValue();
     }
     
     

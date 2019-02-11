@@ -17,6 +17,7 @@
 package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,49 +25,58 @@ import feuille.util.effect.AFx;
  */
 public class TextImagePaint extends AFx {
     
-    String pngPath = "";
-    int xOffset = 0;
-    int yOffset = 0;
-    boolean offsetEnabled = false;
+    Parameter p_pngPath = new Parameter("", in.getTranslated("FxListPNGPath", iso, "PNG path"));
+    Parameter p_xOffset = new Parameter(0, in.getTranslated("FxListXOffset", iso, "Offset on X"));
+    Parameter p_yOffset = new Parameter(0, in.getTranslated("FxListYOffset", iso, "Offset on Y"));
+    Parameter p_offsetEnabled = new Parameter(false, in.getTranslated("FxListOffsetEnabled", iso, "Offset enabled"));
 
     public TextImagePaint() {
-        
+        name = in.getTranslated("FxListTextImagePaint", iso, "Fill text with image");
+        uniqueID = -1;
+        params.add(p_pngPath);
+        params.add(p_xOffset);
+        params.add(p_yOffset);
+        params.add(p_offsetEnabled);
     }
     
     @Override
     public String getTag() {
-        return "\\1img(" + pngPath + (offsetEnabled == true ? "," + xOffset + "," + yOffset : "") + ")";
+        return "\\1img(" + getPngPath() + (isOffsetEnabled() == true ? "," + getXOffset() + "," + getYOffset() : "") + ")";
     }
 
     public void setPngPath(String pngPath) {
-        this.pngPath = pngPath;
+        p_pngPath.setParam(pngPath);
+        params.set(0, p_pngPath);
     }
 
     public String getPngPath() {
-        return pngPath;
+        return (String)params.get(0).getParam();
     }
 
     public void setXOffset(int xOffset) {
-        this.xOffset = xOffset;
+        p_xOffset.setParam(xOffset);
+        params.set(1, p_xOffset);
     }
 
     public int getXOffset() {
-        return xOffset;
+        return (int)params.get(1).getParam();
     }
 
     public void setYOffset(int yOffset) {
-        this.yOffset = yOffset;
+        p_yOffset.setParam(yOffset);
+        params.set(2, p_yOffset);
     }
 
     public int getYOffset() {
-        return yOffset;
+        return (int)params.get(2).getParam();
     }
 
     public void setOffsetEnabled(boolean offsetEnabled) {
-        this.offsetEnabled = offsetEnabled;
+        p_offsetEnabled.setParam(offsetEnabled);
+        params.set(3, p_offsetEnabled);
     }
 
     public boolean isOffsetEnabled() {
-        return offsetEnabled;
+        return (boolean)params.get(3).getParam();
     }
 }

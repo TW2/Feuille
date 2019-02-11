@@ -18,6 +18,7 @@ package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -25,30 +26,38 @@ import feuille.util.effect.FxType;
  */
 public class VectorMovementSimple extends AFx {
     
-    int x1 = 0, y1 = 0;
+    //int x1 = 0, y1 = 0;
+    Parameter p_x = new Parameter(0, in.getTranslated("FxListX0", iso, "X"));
+    Parameter p_y = new Parameter(0, in.getTranslated("FxListY0", iso, "Y"));
 
     public VectorMovementSimple() {
         fxType = FxType.Override;
+        name = in.getTranslated("FxListVectorMovementSimple", iso, "Vectorial movement (simple)");
+        uniqueID = -1;
+        params.add(p_x);
+        params.add(p_y);
     }
 
-    public void setX1(int x1) {
-        this.x1 = x1;
+    public void setX(int x) {
+        p_x.setParam(x);
+        params.set(0, p_x);
     }
 
-    public int getX1() {
-        return x1;
+    public int getX() {
+        return (int)params.get(0).getParam();
     }
 
-    public void setY1(int y1) {
-        this.y1 = y1;
+    public void setY(int y) {
+        p_y.setParam(y);
+        params.set(1, p_y);
     }
 
-    public int getY1() {
-        return y1;
+    public int getY() {
+        return (int)params.get(1).getParam();
     }
 
     @Override
     public String getTag() {
-        return "\\movevc(" + x1 + "," + y1 + ")";
+        return "\\movevc(" + getX() + "," + getY() + ")";
     }
 }

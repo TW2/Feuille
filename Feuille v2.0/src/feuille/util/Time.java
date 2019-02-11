@@ -70,7 +70,7 @@ public class Time {
      * @return A Time object
      */
     public static Time create(String strTime){
-        Pattern p = Pattern.compile("(\\d+).+(\\d+).+(\\d+).+(\\d+)");
+        Pattern p = Pattern.compile("(\\d+)[^\\d]+(\\d+)[^\\d]+(\\d+)[^\\d]+(\\d+)");
         Matcher m = p.matcher(strTime);
         if(m.matches()){            
             return Time.create(
@@ -316,4 +316,12 @@ public class Time {
         return hour + "." + Smin + "." + Ssec + "." + Smilli;
     }
     
+    public static int getFrame(Time t, double fps){
+        double timeInSeconds = Time.toMillisecondsTime(t) / 1000d;
+        return (int)(timeInSeconds * fps);
+    }
+    
+    public static int getFrame(long pts, double fps){
+        return getFrame(Time.create(pts / 1000L), fps);
+    }
 }

@@ -25,33 +25,33 @@ import java.awt.Font;
  */
 public class Style {
     
-    private String Name = "Default";
-    private String Fontname = "Arial";
-    private double Fontsize = 28;
-    private String PrimaryColour = "0000FFFF";
-    private String SecondaryColour = "0000FFFF";
-    private String OutlineColor = "00000000";
-    private String BackColour = "00000000";
-    private boolean Bold = false;
-    private boolean Italic = false;
-    private boolean Underline = false;
-    private boolean Strikeout = false;
-    private double ScaleX = 100;
-    private double ScaleY = 100;
-    private double Spacing = 0;
-    private double Angle = 0;
-    private int BorderStyle = 1;
-    private double Outline = 2;
-    private double Shadow = 0;
-    private int Alignment = 2;
-    private int MarginL = 10;
-    private int MarginR = 10;
-    private int MarginV = 10;
-    private int MarginB = 10;
-    private int MarginT = 10;
-    //private int AlphaLevel = 0;
-    private int Encoding = 0;
-    //private int RelativeTo = 0;
+    private static String Name = "Default";
+    private static String Fontname = "Arial";
+    private static double Fontsize = 28;
+    private static String PrimaryColour = "0000FFFF";
+    private static String SecondaryColour = "0000FFFF";
+    private static String OutlineColor = "00000000";
+    private static String BackColour = "00000000";
+    private static boolean Bold = false;
+    private static boolean Italic = false;
+    private static boolean Underline = false;
+    private static boolean Strikeout = false;
+    private static double ScaleX = 100;
+    private static double ScaleY = 100;
+    private static double Spacing = 0;
+    private static double Angle = 0;
+    private static int BorderStyle = 1;
+    private static double Outline = 2;
+    private static double Shadow = 0;
+    private static int Alignment = 2;
+    private static int MarginL = 10;
+    private static int MarginR = 10;
+    private static int MarginV = 10;
+    private static int MarginB = 10;
+    private static int MarginT = 10;
+    //private static int AlphaLevel = 0;
+    private static int Encoding = 0;
+    //private static int RelativeTo = 0;
 
     public Style() {
         
@@ -70,19 +70,19 @@ public class Style {
         Style style = new Style();
         String[] array = ASS.split(",");
         // 00 - Name
-        style.setName(array[0].substring(0, "Style: ".length()));
+        style.setName(array[0].substring("Style: ".length()));
         // 01 - Fontname
         style.setFontname(array[1]);
         // 02 - Fontsize
         style.setFontsize(Double.parseDouble(array[2]));
         // 03 - PrimaryColour
-        style.PrimaryColour = array[3].substring(2);
+        Style.PrimaryColour = array[3].substring(2);
         // 04 - SecondaryColour
-        style.SecondaryColour = array[4].substring(2);
+        Style.SecondaryColour = array[4].substring(2);
         // 05 - OutlineColour
-        style.OutlineColor = array[5].substring(2);
+        Style.OutlineColor = array[5].substring(2);
         // 06 - BackColour
-        style.BackColour = array[6].substring(2);
+        Style.BackColour = array[6].substring(2);
         // 07 - Bold
         style.setBold(array[7].contains("1"));
         // 08 - Italic
@@ -118,7 +118,11 @@ public class Style {
         return style;
     }
     
-    public String getStyle(){
+    public static Style getDefault(){
+        return Style.create(Style.getStyle());
+    }
+    
+    public static String getStyle(){
         return "Style: "
                 + Name + ","
                 + Fontname + "," 
@@ -127,10 +131,10 @@ public class Style {
                 + "&H" + SecondaryColour + ","
                 + "&H" + OutlineColor + ","
                 + "&H" + BackColour + ","
-                + (Bold == true ? "1" : "0")
-                + (Italic == true ? "1" : "0")
-                + (Underline == true ? "1" : "0")
-                + (Strikeout == true ? "1" : "0")
+                + (Bold == true ? "1" : "0") + ","
+                + (Italic == true ? "1" : "0") + ","
+                + (Underline == true ? "1" : "0") + ","
+                + (Strikeout == true ? "1" : "0") + ","
                 + Math.ceil(ScaleX) + ","
                 + Math.ceil(ScaleY) + ","
                 + Math.ceil(Spacing) + ","
@@ -138,7 +142,7 @@ public class Style {
                 + Integer.toString(BorderStyle) + ","
                 + Double.toString(Outline) + ","
                 + Double.toString(Shadow) + ","
-                + Integer.toString(BorderStyle) + ","
+                + Integer.toString(Alignment) + ","
                 + Integer.toString(MarginL) + ","
                 + Integer.toString(MarginR) + ","
                 + Integer.toString(MarginV) + ","

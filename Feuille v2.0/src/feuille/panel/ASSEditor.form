@@ -100,7 +100,7 @@
         <Component class="javax.swing.JButton" name="btnPlay">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/play-32.png"/>
+              <Image iconType="3" name="/feuille/images/play-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -112,7 +112,7 @@
         <Component class="javax.swing.JButton" name="btnPause">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/pause-32.png"/>
+              <Image iconType="3" name="/feuille/images/pause-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -124,7 +124,7 @@
         <Component class="javax.swing.JButton" name="btnStop">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/stop-32.png"/>
+              <Image iconType="3" name="/feuille/images/stop-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -136,7 +136,7 @@
         <Component class="javax.swing.JButton" name="btnPlayBeforeStart">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/playbeforebegin-32.png"/>
+              <Image iconType="3" name="/feuille/images/playbeforebegin-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -148,7 +148,7 @@
         <Component class="javax.swing.JButton" name="btnPlayAfterStart">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/playafterbegin-32.png"/>
+              <Image iconType="3" name="/feuille/images/playafterbegin-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -160,7 +160,7 @@
         <Component class="javax.swing.JButton" name="btnPlayBeforeEnd">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/playbeforeend-32.png"/>
+              <Image iconType="3" name="/feuille/images/playbeforeend-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -172,7 +172,7 @@
         <Component class="javax.swing.JButton" name="btnPlayAfterEnd">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/playafterend-32.png"/>
+              <Image iconType="3" name="/feuille/images/playafterend-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -184,7 +184,7 @@
         <Component class="javax.swing.JButton" name="btnPlayArea">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/playarea-32.png"/>
+              <Image iconType="3" name="/feuille/images/playarea-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -196,7 +196,7 @@
         <Component class="javax.swing.JButton" name="btnKaraoke">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/setkara-32.png"/>
+              <Image iconType="3" name="/feuille/images/setkara-32.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -208,7 +208,7 @@
         <Component class="javax.swing.JButton" name="btnSetTime">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/newtime-32.png"/>
+              <Image iconType="3" name="/feuille/images/newtime-32.png"/>
             </Property>
           </Properties>
           <Constraints>

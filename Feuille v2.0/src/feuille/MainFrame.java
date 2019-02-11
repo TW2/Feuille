@@ -18,6 +18,7 @@ package feuille;
 
 import feuille.io.ASS;
 import feuille.io.Event;
+import feuille.io.Style;
 import feuille.panel.*;
 import feuille.util.ISO_3166;
 import feuille.util.Language;
@@ -26,10 +27,14 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -49,6 +54,10 @@ public class MainFrame extends javax.swing.JFrame {
     
     List<PanelGroup> groups = new ArrayList<>();
     PanelGroup defaultGroup = null;
+    
+    static List<Event> events = new ArrayList<>();
+    static Map<String, Style> styles = new HashMap<>();
+    static List<String> names = new ArrayList<>();
     
     /**
      * Creates new form MainFrame
@@ -100,6 +109,8 @@ public class MainFrame extends javax.swing.JFrame {
         // Adding a video to MIDDLE TOP/LEFT
         tabbedCTOP.add(defaultGroup.getVideo());
         tabbedCTOP.setTitleAt(0, chosen.getTranslated("VideoTab", get, "Viewer"));
+        tabbedCTOP.add(defaultGroup.getDraw());
+        tabbedCTOP.setTitleAt(1, chosen.getTranslated("DrawingTab", get, "ASS Drawing"));
         
         // Adding an ASSEditor to MIDDLE BOTTOM/RIGHT
         tabbedCBOTTOM.add(defaultGroup.getAssEditor());
@@ -119,6 +130,31 @@ public class MainFrame extends javax.swing.JFrame {
         miOpenProject.setText(chosen.getTranslated("MnuFileOpenProj", get, "Open project..."));
         miSaveProject.setText(chosen.getTranslated("MnuFileSaveProj", get, "Save project..."));
         miOpenSubtitleTable.setText(chosen.getTranslated("MnuFileViewSubt", get, "View subtitles..."));
+        miOpenVideoFile_Only.setText(chosen.getTranslated("MnuFileVideoOnly", get, "View video..."));
+        miOpenAudioFile_Only.setText(chosen.getTranslated("MnuFileAudioOnly", get, "View audio..."));
+        miOpenVideoAndAudio.setText(chosen.getTranslated("MnuFileBothAV", get, "View video and audio..."));
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                myWindowClosing(e);
+            }
+        });
+        
+        feuille.drawing.shape.vector.FeuilleLine fl = feuille.drawing.shape.vector.FeuilleLine.create(
+                new java.awt.geom.Point2D.Float(-5, -5), 
+                new java.awt.geom.Point2D.Float(5, 5));
+        System.out.println("For line AB where A[-5;-5] and B[5;5] :");
+        System.out.println("- is C[-2.5,2.5] is on line : " + (fl.isAtPoint(new java.awt.geom.Point2D.Double(-2.5, 2.5)) == true ? "yes" : "no"));
+        System.out.println("- is D[-2.5,-2.5] is on line : " + (fl.isAtPoint(new java.awt.geom.Point2D.Double(-2.5, -2.5)) == true ? "yes" : "no"));
+        System.out.println("- is E[2.5,2.5] is on line : " + (fl.isAtPoint(new java.awt.geom.Point2D.Double(2.5, 2.5)) == true ? "yes" : "no"));
+        System.out.println("- is F[2.5,2.555] is on line : " + (fl.isAtPoint(new java.awt.geom.Point2D.Double(2.5, 2.555)) == true ? "yes" : "no"));
+        System.out.println("- is G[-1,-1.00001] is on line : " + (fl.isAtPoint(new java.awt.geom.Point2D.Double(-1, -1.00001)) == true ? "yes" : "no"));
+        System.out.println("- is H[-1,-1] is on line : " + (fl.isAtPoint(new java.awt.geom.Point2D.Double(-1, -1)) == true ? "yes" : "no"));
+    }
+    
+    public void myWindowClosing(WindowEvent e) {
+        defaultGroup.getVideo().callFreeReader();
     }
     
     public static Language getLanguage(){
@@ -127,6 +163,18 @@ public class MainFrame extends javax.swing.JFrame {
     
     public static ISO_3166 getISOCountry(){
         return chosen.isForced() ? chosen.getIso() : wantedIso;
+    }
+    
+    public static List<Event> getScriptEvents(){
+        return events;
+    }
+    
+    public static Map<String, Style> getScriptStyles(){
+        return styles;
+    }
+    
+    public static List<String> getScriptNames(){
+        return names;
     }
 
     /**
@@ -150,6 +198,9 @@ public class MainFrame extends javax.swing.JFrame {
         miSaveProject = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         miOpenSubtitleTable = new javax.swing.JMenuItem();
+        miOpenVideoFile_Only = new javax.swing.JMenuItem();
+        miOpenAudioFile_Only = new javax.swing.JMenuItem();
+        miOpenVideoAndAudio = new javax.swing.JMenuItem();
         mnuEdit = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,6 +238,30 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         mnuFile.add(miOpenSubtitleTable);
+
+        miOpenVideoFile_Only.setText("View video");
+        miOpenVideoFile_Only.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miOpenVideoFile_OnlyActionPerformed(evt);
+            }
+        });
+        mnuFile.add(miOpenVideoFile_Only);
+
+        miOpenAudioFile_Only.setText("View audio");
+        miOpenAudioFile_Only.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miOpenAudioFile_OnlyActionPerformed(evt);
+            }
+        });
+        mnuFile.add(miOpenAudioFile_Only);
+
+        miOpenVideoAndAudio.setText("View audio and video ");
+        miOpenVideoAndAudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miOpenVideoAndAudioActionPerformed(evt);
+            }
+        });
+        mnuFile.add(miOpenVideoAndAudio);
 
         jMenuBar1.add(mnuFile);
 
@@ -252,11 +327,56 @@ public class MainFrame extends javax.swing.JFrame {
         if(z == JFileChooser.APPROVE_OPTION){
             String path = fc.getSelectedFile().getPath();
             ASS ass = ASS.Read(path);
+            
+            events = ass.getEvents();
+            styles = ass.getStyles();
+            names = ass.getNames();
+            
             for(Event ev : ass.getEvents()){
                 defaultGroup.getTable().addLine(ev);
             }
         }
     }//GEN-LAST:event_miOpenSubtitleTableActionPerformed
+
+    private void miOpenVideoFile_OnlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOpenVideoFile_OnlyActionPerformed
+        JFileChooser fc = new JFileChooser();
+        for(javax.swing.filechooser.FileFilter ff : fc.getChoosableFileFilters()){
+            fc.removeChoosableFileFilter(ff);
+        }
+        fc.addChoosableFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                if(file.isDirectory()) { return true; }
+                return file.getName().toLowerCase().endsWith(".avi") | file.getName().toLowerCase().endsWith(".mov")
+                        | file.getName().toLowerCase().endsWith(".divx") | file.getName().toLowerCase().endsWith(".asf")
+                        | file.getName().toLowerCase().endsWith(".mp4") | file.getName().toLowerCase().endsWith(".m4v")
+                        | file.getName().toLowerCase().endsWith(".ogm") | file.getName().toLowerCase().endsWith(".mkv")
+                        | file.getName().toLowerCase().endsWith(".ts") | file.getName().toLowerCase().endsWith(".m2ts")
+                        | file.getName().toLowerCase().endsWith(".mpeg") | file.getName().toLowerCase().endsWith(".mpg");
+            }
+
+            @Override
+            public String getDescription() {
+                // Language
+                ISO_3166 get = chosen.isForced() ? chosen.getIso() : wantedIso;
+                return chosen.getTranslated("VideoDescription", get, "Video files");
+            }
+        });
+        int z = fc.showOpenDialog(this);
+        if(z == JFileChooser.APPROVE_OPTION){
+            String path = fc.getSelectedFile().getPath();
+            defaultGroup.getVideo().setPath(path);
+            defaultGroup.getVideo().callRepaint();
+        }
+    }//GEN-LAST:event_miOpenVideoFile_OnlyActionPerformed
+
+    private void miOpenAudioFile_OnlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOpenAudioFile_OnlyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miOpenAudioFile_OnlyActionPerformed
+
+    private void miOpenVideoAndAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOpenVideoAndAudioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miOpenVideoAndAudioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,8 +417,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JMenuItem miOpenAudioFile_Only;
     private javax.swing.JMenuItem miOpenProject;
     private javax.swing.JMenuItem miOpenSubtitleTable;
+    private javax.swing.JMenuItem miOpenVideoAndAudio;
+    private javax.swing.JMenuItem miOpenVideoFile_Only;
     private javax.swing.JMenuItem miSaveProject;
     private javax.swing.JMenu mnuEdit;
     private javax.swing.JMenu mnuFile;

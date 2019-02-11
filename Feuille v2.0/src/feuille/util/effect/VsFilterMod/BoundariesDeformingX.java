@@ -17,6 +17,7 @@
 package feuille.util.effect.VsFilterMod;
 
 import feuille.util.effect.AFx;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -24,22 +25,25 @@ import feuille.util.effect.AFx;
  */
 public class BoundariesDeformingX extends AFx {
     
-    float value = 0;
+    Parameter param = new Parameter(0f, in.getTranslated("FxListValue", iso, "Value"));
 
     public BoundariesDeformingX() {
-        
+        name = in.getTranslated("FxListBoundariesDeformingX", iso, "Boundaries deforming on X");
+        uniqueID = -1;
+        params.add(param);
     }
 
     public void setValue(float value) {
-        this.value = value;
+        param.setParam(value);
+        params.set(0, param);
     }
 
     public float getValue() {
-        return value;
+        return (float)params.get(0).getParam();
     }
 
     @Override
     public String getTag() {
-        return "\\mdx" + value;
+        return "\\mdx" + getValue();
     }
 }

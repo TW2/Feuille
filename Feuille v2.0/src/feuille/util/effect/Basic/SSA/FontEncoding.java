@@ -18,6 +18,7 @@ package feuille.util.effect.Basic.SSA;
 
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -26,23 +27,27 @@ import feuille.util.effect.FxType;
 public class FontEncoding extends AFx {
 
     // TODO retrieve list of encoding charsets
-    int value = 1;
+    Parameter param = new Parameter(1, in.getTranslated("FxListValue", iso, "Value"));
 
     public FontEncoding() {
         fxType = FxType.Override;
+        name = in.getTranslated("FxListFontEncoding", iso, "Charset");
+        uniqueID = -1;
+        params.add(param);
     }
 
     public void setValue(int value) {
-        this.value = value;
+        param.setParam(value);
+        params.set(0, param);
     }
 
     public int getValue() {
-        return value;
+        return (int)params.get(0).getParam();
     }
     
     @Override
     public String getTag() {
-        return "\\fe" + value;
+        return "\\fe" + getValue();
     }
     
 }

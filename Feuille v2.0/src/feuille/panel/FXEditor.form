@@ -43,7 +43,7 @@
         <Component class="javax.swing.JButton" name="btnRemove">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/32_minus.png"/>
+              <Image iconType="3" name="/feuille/images/32_minus.png"/>
             </Property>
           </Properties>
           <Events>
@@ -58,7 +58,7 @@
         <Component class="javax.swing.JButton" name="btnAdd">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/32_plus.png"/>
+              <Image iconType="3" name="/feuille/images/32_plus.png"/>
             </Property>
           </Properties>
           <Events>
@@ -90,7 +90,7 @@
         <Component class="javax.swing.JButton" name="btnSaveInEditor">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/32_bottom arrow.png"/>
+              <Image iconType="3" name="/feuille/images/32_bottom arrow.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Put to the editor"/>
           </Properties>
@@ -106,7 +106,7 @@
         <Component class="javax.swing.JButton" name="btnExportToList">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/configuration/images/32_top arrow.png"/>
+              <Image iconType="3" name="/feuille/images/32_top arrow.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Save in list"/>
           </Properties>

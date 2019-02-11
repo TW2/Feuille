@@ -28,7 +28,6 @@ public class PanelGroup {
     ASSEditor assEditor;
     Chat chat;
     Draw draw;
-    DrawEditor drawEditor;
     FXEditor fxEditor;
     MacroEditor macroEditor;
     Table table;
@@ -62,14 +61,6 @@ public class PanelGroup {
 
     public Draw getDraw() {
         return draw;
-    }
-
-    public void setDrawEditor(DrawEditor drawEditor) {
-        this.drawEditor = drawEditor;
-    }
-
-    public DrawEditor getDrawEditor() {
-        return drawEditor;
     }
 
     public void setFxEditor(FXEditor fxEditor) {
@@ -127,7 +118,6 @@ public class PanelGroup {
         pg.chat = new Chat();
         pg.chat.initializeChat(chosen, get);
         pg.draw = new Draw();
-        pg.drawEditor = new DrawEditor();
         pg.fxEditor = new FXEditor();
         pg.fxEditor.initializeFxEditor(chosen, get);
         pg.macroEditor = new MacroEditor();

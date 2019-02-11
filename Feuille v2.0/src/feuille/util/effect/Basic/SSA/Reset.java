@@ -18,6 +18,7 @@ package feuille.util.effect.Basic.SSA;
 
 import feuille.util.effect.AFx;
 import feuille.util.effect.FxType;
+import feuille.util.effect.Parameter;
 
 /**
  *
@@ -25,23 +26,27 @@ import feuille.util.effect.FxType;
  */
 public class Reset extends AFx {
     
-    String fontStyle = "";
+    Parameter p_fontStyle = new Parameter("", in.getTranslated("FxListFontStyle", iso, "Font style"));
 
     public Reset() {
         fxType = FxType.Common;
+        name = in.getTranslated("FxListReset", iso, "Reset");
+        uniqueID = -1;
+        params.add(p_fontStyle);
     }
 
     public void setFontStyle(String fontStyle) {
-        this.fontStyle = fontStyle;
+        p_fontStyle.setParam(fontStyle);
+        params.set(0, p_fontStyle);
     }
 
     public String getFontStyle() {
-        return fontStyle;
+        return (String)params.get(0).getParam();
     }
     
     @Override
     public String getTag() {
-        return "\\r" + fontStyle;
+        return "\\r" + getFontStyle();
     }
     
     

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<snippetcollection>
+<snippet type="Ruby">
+<name>EnableJava</name>
+<elements>
+<element author="Chien-Rouge" description="Java library importation" language="USA"># This line is very important if you want to use java code in JRuby.&#13;
+# You must write it at every time.&#13;
+require 'java'</element>
+<element author="Chien-Rouge" description="Importation de la librairie Java" language="FRA"># Cette ligne est très importante si vous voulez utiliser du code java dans JRuby.&#13;
+# Vous devez l'écrire à chaque fois.&#13;
+require 'java'</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>FirstLine</name>
+<elements>
+<element author="Chien-Rouge" description="The first line." language="USA">#!/usr/bin/env jython</element>
+<element author="Chien-Rouge" description="La première ligne." language="FRA">#!/usr/bin/env jython</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>Imports</name>
+<elements>
+<element author="Chien-Rouge" description="AssFxMaker scripting library importation." language="USA">from assfxmaker.lib.scripting import ScriptPlugin</element>
+<element author="Chien-Rouge" description="Importation de la librairie de scripting d'AssFxMaker." language="FRA">from assfxmaker.lib.scripting import ScriptPlugin</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBFunc</name>
+<elements>
+<element author="Chien-Rouge" description="Register and add a function" language="USA"># Register the script into AssFxMaker&#13;
+Java::assfxmaker.lib.scripting.ScriptPlugin.rubyRegister("My function","myfunction","1.0","Description","Your name","","")&#13;
+&#13;
+def myfunction&#13;
+  # type your code here&#13;
+end</element>
+<element author="Chien-Rouge" description="Enregistre et ajoute une fonction." language="FRA"># Enregistre le script dans AssFxMaker&#13;
+Java::assfxmaker.lib.scripting.ScriptPlugin.rubyRegister("Ma fonction","mafonction","1.0","Description","Votre nom","","")&#13;
+&#13;
+def mafonction&#13;
+  # tapez votre code ici&#13;
+end</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYFunc</name>
+<elements>
+<element author="Chien-Rouge" description="Register and add a function" language="USA"># Register the function in the main program.&#13;
+ScriptPlugin.pythonRegister("My function", "myfunction", "1.0", "no description", "author", "", "")&#13;
+&#13;
+def myfunction():&#13;
+    # type your code here</element>
+<element author="Chien-Rouge" description="Enregistre et ajoute une fonction." language="FRA"># Enregistre la fonction dans le programme.&#13;
+ScriptPlugin.pythonRegister("Ma fonction", "mafonction", "1.0", "pas de description", "auteur", "", "")&#13;
+&#13;
+def mafonction():&#13;
+    # tapez votre code ici</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>Tools</name>
+<elements>
+<element author="Chien-Rouge" description="Tools library importation." language="USA">  # Load of the 'tools.rb' library.&#13;
+  require Java::assfxmaker.lib.scripting.ScriptPlugin.getScriptsPath()+"tools.rb"</element>
+<element author="Chien-Rouge" description="Importation de la librairie Tools." language="FRA">  # Chargement de la librairie 'tools.rb'.&#13;
+  require Java::assfxmaker.lib.scripting.ScriptPlugin.getScriptsPath()+"tools.rb"</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBGetSelLine</name>
+<elements>
+<element author="Chien-Rouge" description="Get selected line" language="USA">  # Get a selected line (line = head + sentence)&#13;
+  line = Java::assfxmaker.lib.scripting.ScriptPlugin.getSelectedOrgLine()</element>
+<element author="Chien-Rouge" description="Obtenir une ligne sélectionnée." language="FRA">  # Obtenir une ligne sélectionnée (ligne = entête + phrase)&#13;
+  line = Java::assfxmaker.lib.scripting.ScriptPlugin.getSelectedOrgLine()</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYGetSelLine</name>
+<elements>
+<element author="Chien-Rouge" description="Get selected line" language="USA">    # Get selected line (line = head + sentence)&#13;
+    line = ScriptPlugin.getSelectedOrgLine()</element>
+<element author="Chien-Rouge" description="Obtenir une ligne sélectionnée." language="FRA">    # Obtenir une ligne sélectionnée (ligne = entête + phrase)&#13;
+    line = ScriptPlugin.getSelectedOrgLine()</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBGetSelLines</name>
+<elements>
+<element author="Chien-Rouge" description="Get selected lines" language="USA">  # Get all selected lines (line = head + sentence).&#13;
+  @lines = Java::assfxmaker.lib.scripting.ScriptPlugin.getSelectedOrgLines()</element>
+<element author="Chien-Rouge" description="Obtenir les lignes sélectionnées." language="FRA">  # Obtenir les lignes sélectionnées (ligne = entête + phrase).&#13;
+  @lines = Java::assfxmaker.lib.scripting.ScriptPlugin.getSelectedOrgLines()</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYGetSelLines</name>
+<elements>
+<element author="Chien-Rouge" description="Get selected lines." language="USA">    # Get selected lines (line = head + sentence)&#13;
+    lines = ScriptPlugin.getSelectedOrgLines()</element>
+<element author="Chien-Rouge" description="Obtenir les lignes sélectionnées." language="FRA">    # Obtenir les lignes sélectionnées (ligne = entête + phrase)&#13;
+    lines = ScriptPlugin.getSelectedOrgLines()</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBForEachLine</name>
+<elements>
+<element author="Chien-Rouge" description="For each line." language="USA">  # For each 'line' in @lines&#13;
+  @lines.each do |line|&#13;
+    # treatment for one line&#13;
+  end</element>
+<element author="Chien-Rouge" description="Pour chaque ligne." language="FRA">  # Pour chaque 'line' dans @lines&#13;
+  @lines.each do |line|&#13;
+    # traitement pour une ligne&#13;
+  end</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYForEachLine</name>
+<elements>
+<element author="Chien-Rouge" description="For each line." language="USA">    for line in lines:&#13;
+        # Treatment for one line</element>
+<element author="Chien-Rouge" description="Pour chaque ligne." language="FRA">    for line in lines:&#13;
+        # Treatment for one line</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBGetSentence</name>
+<elements>
+<element author="Chien-Rouge" description="Get the sentence for this line." language="USA"># Get the sentence for this line&#13;
+sentence = Java::assfxmaker.lib.scripting.ScriptPlugin.getSentence(line)</element>
+<element author="Chien-Rouge" description="Obtenir la phrase pour cette ligne." language="FRA"># Obtenir la phrase pour cette ligne&#13;
+sentence = Java::assfxmaker.lib.scripting.ScriptPlugin.getSentence(line)</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYGetSentence</name>
+<elements>
+<element author="Chien-Rouge" description="Get the sentence for this line." language="USA"># Get the sentence for this line&#13;
+sentence = ScriptPlugin.getSentence(line)</element>
+<element author="Chien-Rouge" description="Obtenir la phrase pour cette ligne." language="FRA"># Obtenir la phrase pour cette ligne&#13;
+sentence = ScriptPlugin.getSentence(line)</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBGetHead</name>
+<elements>
+<element author="Chien-Rouge" description="Get the head for this line." language="USA"># Get the head for this line&#13;
+head = Java::assfxmaker.lib.scripting.ScriptPlugin.getHead(line);</element>
+<element author="Chien-Rouge" description="Obtenir l'entête pour cette ligne." language="FRA"># Obtenir l'entête pour cette ligne&#13;
+head = Java::assfxmaker.lib.scripting.ScriptPlugin.getHead(line);</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYGetHead</name>
+<elements>
+<element author="Chien-Rouge" description="Get the head for this line." language="USA"># Get the head for this line&#13;
+head = ScriptPlugin.getHead(line)</element>
+<element author="Chien-Rouge" description="Obtenir l'entête pour cette ligne." language="FRA"># Obtenir l'entête pour cette ligne&#13;
+head = ScriptPlugin.getHead(line)</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBGetKaraoke</name>
+<elements>
+<element author="Chien-Rouge" description="Get an array of syllables and durations." language="USA">	# Get a table of syllable parameters for the basic karaoke&#13;
+	# [i][0] : syllable                   string&#13;
+	# [i][1] : hundredth                  integer&#13;
+    # [i][2] : thousandth                 integer&#13;
+    # [i][3] : thousandth (start)         integer&#13;
+    # [i][4] : thousandth (end)           integer&#13;
+    osyl = Java::assfxmaker.lib.scripting.ScriptPlugin.phKaraoke(sentence)</element>
+<element author="Chien-Rouge" description="Obtenir un tableau de syllabes et de durées." language="FRA">	# Obtenir un tableau de syllabes et de durées pour ce karaoké&#13;
+	# [i][0] : syllabe                    string&#13;
+	# [i][1] : centième                   integer&#13;
+    # [i][2] : millième                   integer&#13;
+    # [i][3] : millième (début)           integer&#13;
+    # [i][4] : millième (fin)             integer&#13;
+    osyl = Java::assfxmaker.lib.scripting.ScriptPlugin.phKaraoke(sentence)</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYGetKaraoke</name>
+<elements>
+<element author="Chien-Rouge" description="Get an array of syllables and durations." language="USA">    # Get a table of syllable parameters for the basic karaoke&#13;
+    # [i][0] : syllable                   string&#13;
+    # [i][1] : hundredth                  integer&#13;
+    # [i][2] : thousandth                 integer&#13;
+    # [i][3] : thousandth (start)         integer&#13;
+    # [i][4] : thousandth (end)           integer&#13;
+    osyl = ScriptPlugin.phKaraoke(sentence)</element>
+<element author="Chien-Rouge" description="Obtenir un tableau de syllabes et de durées." language="FRA">	# Obtenir un tableau de syllabes et de durées pour ce karaoké&#13;
+	# [i][0] : syllabe                    string&#13;
+	# [i][1] : centième                   integer&#13;
+    # [i][2] : millième                   integer&#13;
+    # [i][3] : millième (début)           integer&#13;
+    # [i][4] : millième (fin)             integer&#13;
+    osyl = ScriptPlugin.phKaraoke(sentence)</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBCreateKaraoke</name>
+<elements>
+<element author="Chien-Rouge" description="Create the karaoke with effects." language="USA">  # Create a new sentence&#13;
+  newsentence = ""&#13;
+&#13;
+  # Loop onto each syllable to create the sentence&#13;
+  for i in 0..osyl.length-1 do&#13;
+&#13;
+    syl = osyl[i][0]&#13;
+    smiddle = (osyl[i][3]+osyl[i][2]/2).to_s()    # middle become a string&#13;
+    sstart = osyl[i][3].to_s()                    # start become a string&#13;
+    send = osyl[i][4].to_s()                      # end become a string&#13;
+&#13;
+    # The first syllable may contains overrides&#13;
+    if i==0&#13;
+      newsentence = "{\\an8\\t("+sstart+","+smiddle+",\\fscx200\\fscy200)"+"\\t("+smiddle+","+send+",\\fscx100\\fscy100)}"+syl&#13;
+    # All others syllables&#13;
+    else&#13;
+      newsentence = newsentence + "{\\r\\t("+sstart+","+smiddle+",\\fscx200\\fscy200)"+"\\t("+smiddle+","+send+",\\fscx100\\fscy100)}"+syl&#13;
+    end&#13;
+  end</element>
+<element author="Chien-Rouge" description="Créer le karaoké avec effets." language="FRA">  # Créer une nouvelle phrase&#13;
+  newsentence = ""&#13;
+&#13;
+  # Boucler sur chaque syllabe afin de créer la phrase&#13;
+  for i in 0..osyl.length-1 do&#13;
+&#13;
+    syl = osyl[i][0]&#13;
+    smiddle = (osyl[i][3]+osyl[i][2]/2).to_s()    # milieu devient un string&#13;
+    sstart = osyl[i][3].to_s()                    # début devient un string&#13;
+    send = osyl[i][4].to_s()                      # fin devient un string&#13;
+&#13;
+    # La première syllabe peut contenir des surcharges&#13;
+    if i==0&#13;
+      newsentence = "{\\an8\\t("+sstart+","+smiddle+",\\fscx200\\fscy200)"+"\\t("+smiddle+","+send+",\\fscx100\\fscy100)}"+syl&#13;
+    # Toutes les autres syllabes&#13;
+    else&#13;
+      newsentence = newsentence + "{\\r\\t("+sstart+","+smiddle+",\\fscx200\\fscy200)"+"\\t("+smiddle+","+send+",\\fscx100\\fscy100)}"+syl&#13;
+    end&#13;
+  end</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYCreateKaraoke</name>
+<elements>
+<element author="Chien-Rouge" description="Create the karaoke with effects." language="USA">    # Create a new sentence&#13;
+    newsentence = ""&#13;
+&#13;
+    # Counter&#13;
+    counter = 0&#13;
+&#13;
+    # Loop onto each syllable to create the sentence&#13;
+    while counter&lt;len(osyl):&#13;
+&#13;
+        syl = osyl[counter][0]&#13;
+        smiddle = str(osyl[counter][3]+osyl[counter][2]/2)       # middle become a string&#13;
+        sstart = str(osyl[counter][3])                           # start become a string&#13;
+        send = str(osyl[counter][4])                             # end become a string&#13;
+&#13;
+        # The first syllable may contains overrides&#13;
+        if counter==0:&#13;
+            newsentence = "{\\an8\\t("+sstart+","+smiddle+",\\fscx200\\fscy200)"+"\\t("+smiddle+","+send+",\\fscx100\\fscy100)}"+syl&#13;
+        # All others syllables&#13;
+        else:&#13;
+            newsentence = newsentence + "{\\r\\t("+sstart+","+smiddle+",\\fscx200\\fscy200)"+"\\t("+smiddle+","+send+",\\fscx100\\fscy100)}"+syl&#13;
+&#13;
+        counter += 1&#13;
+</element>
+<element author="Chien-Rouge" description="Créer le karaoké avec effets." language="FRA">    # Créer une nouvelle phrase&#13;
+    newsentence = ""&#13;
+&#13;
+    # Compteur&#13;
+    counter = 0&#13;
+&#13;
+    # Boucler sur chaque syllabe afin de créer la phrase&#13;
+    while counter&lt;len(osyl):&#13;
+&#13;
+        syl = osyl[counter][0]&#13;
+        smiddle = str(osyl[counter][3]+osyl[counter][2]/2)       # milieu devient un string&#13;
+        sstart = str(osyl[counter][3])                           # début devient un string&#13;
+        send = str(osyl[counter][4])                             # fin devient un string&#13;
+&#13;
+        # La première syllabe peut contenir des surcharges&#13;
+        if counter==0:&#13;
+            newsentence = "{\\an8\\t("+sstart+","+smiddle+",\\fscx200\\fscy200)"+"\\t("+smiddle+","+send+",\\fscx100\\fscy100)}"+syl&#13;
+        # Toutes les autres syllabes&#13;
+        else:&#13;
+            newsentence = newsentence + "{\\r\\t("+sstart+","+smiddle+",\\fscx200\\fscy200)"+"\\t("+smiddle+","+send+",\\fscx100\\fscy100)}"+syl&#13;
+&#13;
+        counter += 1&#13;
+</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBReformat</name>
+<elements>
+<element author="Chien-Rouge" description="Reformat the line." language="USA">    # Reformat the line&#13;
+    line = Java::assfxmaker.lib.scripting.ScriptPlugin.getAssLineOf(head, newsentence)</element>
+<element author="Chien-Rouge" description="Reformate la ligne." language="FRA">    # Reformate la ligne&#13;
+    line = Java::assfxmaker.lib.scripting.ScriptPlugin.getAssLineOf(head, newsentence)</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYReformat</name>
+<elements>
+<element author="Chien-Rouge" description="Reformat the line." language="USA">    # Reformat the line        &#13;
+    line = ScriptPlugin.getAssLineOf(head, newsentence)&#13;
+</element>
+<element author="Chien-Rouge" description="Reformate la ligne." language="FRA">    # Reformate la ligne&#13;
+    line = ScriptPlugin.getAssLineOf(head, newsentence)&#13;
+</element>
+</elements>
+</snippet>
+<snippet type="Ruby">
+<name>RBReturnLine</name>
+<elements>
+<element author="Chien-Rouge" description="Add a new line to the table of AssFxMaker." language="USA">    # Add a new line to the table of the main program.&#13;
+    Java::assfxmaker.lib.scripting.ScriptPlugin.addResLine(line)</element>
+<element author="Chien-Rouge" description="Ajoute une nouvelle ligne à la table d'AssFxMaker." language="FRA">    # Ajoute une nouvelle ligne à la table d'AssFxMaker.&#13;
+    Java::assfxmaker.lib.scripting.ScriptPlugin.addResLine(line)</element>
+</elements>
+</snippet>
+<snippet type="Python">
+<name>PYReturnLine</name>
+<elements>
+<element author="Chien-Rouge" description="Add a new line to the table of AssFxMaker." language="USA">    # Add a new line to the table of the main program.&#13;
+    ScriptPlugin.addResLine(line)</element>
+<element author="Chien-Rouge" description="Ajoute une nouvelle ligne à la table d'AssFxMaker." language="FRA">    # Ajoute une nouvelle ligne à la table d'AssFxMaker.&#13;
+    ScriptPlugin.addResLine(line)</element>
+</elements>
+</snippet>
+</snippetcollection>

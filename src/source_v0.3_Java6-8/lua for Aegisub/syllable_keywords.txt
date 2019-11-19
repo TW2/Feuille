@@ -1,0 +1,1 @@
+0|0|0|\k|{\an7\move($x,!$y+50!,!math.random($x-150,$x+150)!,!math.random($y-150,$y+150)+50!,!math.random($start,$start+75)!,$lend)\1c&HFFFFFF&\3c&HF5AA3A&\alpha&HBB&\p3}m -75 0 b -25 0 0 -25 0 -75 b 0 -25 25 0 75 0 b 25 0 0 25 0 75 b 0 25 -25 0 -75 0 {\p0}||0||1||||0|0|0|0|0|0|0|8

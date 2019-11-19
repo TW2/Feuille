@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<pack>
+<name>Default</name>
+<styles>;Style: Default,Arial,28.0,&amp;H0000FFFF,&amp;H0000FFFF,&amp;H00000000,&amp;H00000000,0,0,0,0,100.0,100.0,0.0,0.0,1,2,0,2,10,10,10,0;Style: Default5,Cooper Std Black,40.0,&amp;H00ccffff,&amp;H0033ffff,&amp;H0000ccff,&amp;H00330033,0,0,0,0,100.0,100.0,0.0,0.0,1,2,2,2,10,10,10,1</styles>
+</pack>
+<pack>
+<name>Other</name>
+<styles>;Style: Other,Arial,28.0,&amp;H0000FFFF,&amp;H0000FFFF,&amp;H00000000,&amp;H00000000,0,0,0,0,100.0,100.0,0.0,0.0,1,2,0,2,10,10,10,0</styles>
+</pack>
+<pack>
+<name>555</name>
+<styles>;Style: 555333,Arial,28.0,&amp;H006666ff,&amp;H009999ff,&amp;H00ff3333,&amp;H00ff99ff,-1,-1,-1,0,100.0,100.0,0.0,0.0,3,2,0,5,10,10,10,1;Style: 55444435,Arial Narrow,28.0,&amp;H00cc3300,&amp;H00ffffff,&amp;H0099ff99,&amp;H00ccffcc,-1,-1,0,-1,100.0,100.0,0.0,0.0,1,2,0,2,10,10,10,128</styles>
+</pack>
+</root>

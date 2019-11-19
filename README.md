@@ -2,8 +2,10 @@ Feuille
 =
 Its name is in French and means "Leaf", it's the old leaf of AssFxMaker and the continuation of this project.
 
-| Feuille v0.x  | Feuille v2.x |
-| ---- | ---- |
-| Java 6+ | GraalVM |
+| Feuille v0.x  | Feuille v2.1 | Feuille v2.3.2 |
+| ---- | ---- | ---- |
+| using Java 6+ | trying GraalVM | trying C++ |
 
-The currently version is 2.0, still in coding, since January 2019 and with GraalVM cause JDK11 has no out-to-the-box scripting solutions. If you want to download the GraalVM, you have to register to Oracle because there is no public release for the moment. If you search for previous releases you can find source in test folder and application in releases access (there is also the source). Version 0.x works with Java 6 or higher, I suggest you to open it with command line (java -jar Feuille.jar in your chosen directory where you had download and/or move it). In Windows, the application works great in command line. Notice that there is no more JRE! To work with recent configuration, you have to download a JDK. And configure your PATH.
+With Oracle, here in the place, making its GraalVM and Java scripts removed from currents releases (Java 9+), I can not make a good Feuille, that's why I tried GraalVM but it is aligned at Java 8 (only Nashorn as Javascript now JSR223 is dropped). There is also the usage of base drawing that sucks a lot in Java 8 cause it don't uses Harfbuzz. Now current version use it.
+
+To make really something different, and to try quitting Java because Oracle is not ready to offer a real GraalVM with evolution of currents realeases although I love GraalVM for many reasons, I decide to try developing it in C++ using the latest Microsoft Visual Studio Community. But it can be not definitive.

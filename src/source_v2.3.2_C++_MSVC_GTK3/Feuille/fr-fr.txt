@@ -1,0 +1,2 @@
+﻿ChatArea Votre discussion
+ChatEntry Tapez votre texte puis pressez "Entrée" :

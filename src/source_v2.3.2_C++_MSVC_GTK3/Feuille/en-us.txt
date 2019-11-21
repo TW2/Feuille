@@ -1,0 +1,2 @@
+﻿ChatArea Chat area
+ChatEntry Type your text and press "Enter":

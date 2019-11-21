@@ -18,13 +18,33 @@
     <ClCompile Include="Feuille.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="GtkMainFrame.cpp">
+    <ClCompile Include="MainFrame.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatPanel.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Language.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GtkMainFrame.h">
+    <ClInclude Include="ChatPanel.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="MainFrame.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Language.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="en-us.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
+    <Text Include="fr-fr.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -151,11 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChatPanel.cpp" />
     <ClCompile Include="Feuille.cpp" />
-    <ClCompile Include="GtkMainFrame.cpp" />
+    <ClCompile Include="Language.cpp" />
+    <ClCompile Include="MainFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GtkMainFrame.h" />
+    <ClInclude Include="ChatPanel.h" />
+    <ClInclude Include="Language.h" />
+    <ClInclude Include="MainFrame.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="fr-fr.txt" />
+    <Text Include="en-us.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

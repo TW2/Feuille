@@ -152,14 +152,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ChatPanel.cpp" />
+    <ClCompile Include="DrawingPanel.cpp" />
     <ClCompile Include="Feuille.cpp" />
     <ClCompile Include="Language.cpp" />
+    <ClCompile Include="LanguageLinkage.cpp" />
     <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="MainPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatPanel.h" />
+    <ClInclude Include="DrawingPanel.h" />
     <ClInclude Include="Language.h" />
+    <ClInclude Include="LanguageLinkage.h" />
     <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="MainPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fr-fr.txt" />

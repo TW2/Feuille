@@ -1,2 +1,3 @@
-﻿ChatArea Chat area
+﻿IgnoredLineCauseUTF8BOM UTF-8
+ChatArea Chat area
 ChatEntry Type your text and press "Enter":

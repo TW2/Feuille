@@ -1,12 +1,17 @@
 #include "Language.h"
 #include <fstream>
 #include <string>
-#include <vector>
 
-std::map<const gchar*, const gchar*> Language::load_language(const gchar* iso)
+Language::Language()
 {
-	std::map<const gchar*, const gchar*> mymap;
+}
 
+Language::~Language()
+{
+}
+
+std::vector<LanguageLinkage> Language::load_language(const gchar* iso)
+{
 	if (iso != NULL)
 	{
 		if (g_ascii_strcasecmp(iso, "fr") == 0 && Language::contains_file("./", "fr-fr.txt") == TRUE)
@@ -15,7 +20,7 @@ std::map<const gchar*, const gchar*> Language::load_language(const gchar* iso)
 			strcpy_s(path, "./");
 			strcat_s(path, "fr-fr.txt");
 
-			mymap = Language::get_from_path(path);
+			return Language::get_from_path(path);
 		}
 		else if (g_ascii_strcasecmp(iso, "en") == 0 && Language::contains_file("./", "en-us.txt") == TRUE)
 		{
@@ -23,7 +28,7 @@ std::map<const gchar*, const gchar*> Language::load_language(const gchar* iso)
 			strcpy_s(path, "./");
 			strcat_s(path, "en-us.txt");
 
-			mymap = Language::get_from_path(path);
+			return Language::get_from_path(path);
 		}
 	}
 	else
@@ -42,26 +47,25 @@ std::map<const gchar*, const gchar*> Language::load_language(const gchar* iso)
 			strcpy_s(path, "./");
 			strcat_s(path, filename);
 
-			mymap = Language::get_from_path(path);
+			return Language::get_from_path(path);
 		}
 	}
-
-	return mymap;
+	return std::vector<LanguageLinkage>();
 }
 
-const gchar* Language::get_content(std::map<const gchar*, const gchar*> language, const gchar* key, const gchar* default_value)
+const gchar* Language::get_content(std::vector<LanguageLinkage> llink, const gchar* key, const gchar* default_value)
 {
-	const gchar* value = nullptr;
-	try
+	for (std::vector<LanguageLinkage>::iterator it = llink.begin(); it != llink.end(); ++it)
 	{
-		value = language.at(key);
-	}
-	catch (const std::out_of_range e)
-	{
+		LanguageLinkage mylink = *it;
 
+		if (g_ascii_strcasecmp(mylink.get_key(), key) == 0)
+		{
+			return mylink.get_value();
+		}
 	}
 	
-	return value != nullptr ? value : default_value;
+	return default_value;
 }
 
 bool Language::contains_file(const gchar* folder, const gchar* filename)
@@ -87,16 +91,19 @@ bool Language::contains_file(const gchar* folder, const gchar* filename)
 	return value;
 }
 
-std::map<const gchar*, const gchar*> Language::get_from_path(const gchar* path)
+std::vector<LanguageLinkage> Language::get_from_path(const gchar* path)
 {
-	// On crée une map
-	std::map<const gchar*, const gchar*> mymap;
+	// On crée un tableau d'objet ayant X entrées
+	std::vector<LanguageLinkage> llink;
 
 	// On ouvre un fichier texte en lecture
 	std::string line;
 	std::ifstream myfile(path);
 	if (myfile.is_open())
 	{
+		// Compteur
+		int index = 0;
+
 		// Pour chaque ligne
 		while (getline(myfile, line))
 		{
@@ -126,13 +133,20 @@ std::map<const gchar*, const gchar*> Language::get_from_path(const gchar* path)
 				strcat_s(cvalue, svalue.c_str());
 				const gchar* value = cvalue;
 
-				// On met le couple clé-valeur dans la map
-				mymap.insert(std::pair<const gchar*, const gchar*>(key, value));
+				// On met le couple clé-valeur dans l'objet
+				LanguageLinkage mylink;
+				mylink.set_key(key);
+				mylink.set_value(value);
 
+				// On place l'objet dans la table
+				llink.push_back(mylink);
+
+				// On incrémente le compteur
+				index++;
 			}
 		}
 		myfile.close();
 	}
 
-	return mymap;
+	return llink;
 }

@@ -1,14 +1,21 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include <map>
 #include "dirent.h"
+#include "LanguageLinkage.h"
+#include <vector>
 
 class Language {
 public:
-	static std::map<const gchar*, const gchar*> load_language(const gchar* iso);
-	static const gchar* get_content(std::map<const gchar*, const gchar*> language, const gchar* key, const gchar* default_value);
+	// Constructeur
+	Language();
+
+	// Destructeur
+	~Language();
+
+	static std::vector<LanguageLinkage> load_language(const gchar* iso);
+	static const gchar* get_content(std::vector<LanguageLinkage> llink, const gchar* key, const gchar* default_value);
 private:
 	static bool contains_file(const gchar* folder, const gchar* filename);
-	static std::map<const gchar*, const gchar*> get_from_path(const gchar* path);
+	static std::vector<LanguageLinkage> get_from_path(const gchar* path);
 };

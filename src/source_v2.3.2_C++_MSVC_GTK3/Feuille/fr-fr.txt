@@ -1,2 +1,3 @@
-﻿ChatArea Votre discussion
+﻿IgnoredLineCauseUTF8BOM UTF-8
+ChatArea Votre discussion
 ChatEntry Tapez votre texte puis pressez "Entrée" :

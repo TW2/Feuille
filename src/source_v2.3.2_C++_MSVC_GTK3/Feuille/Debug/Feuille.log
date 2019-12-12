@@ -1,7 +1,0 @@
-﻿  DrawingPanel.cpp
-D:\Dev\Code\CPP_VisualStudio\Feuille2.3.2\Feuille\DrawingPanel.cpp(554,46): warning C4244: 'argument' : conversion de 'gdouble' en 'gint', perte possible de données
-  MainFrame.cpp
-  MainPanel.cpp
-  Génération de code en cours...
-D:\Dev\Code\CPP_VisualStudio\Feuille2.3.2\Feuille\DrawingPanel.cpp(554,39): warning C4244: 'argument' : conversion de 'gdouble' en 'gint', perte possible de données
-  Feuille.vcxproj -> D:\Dev\Code\CPP_VisualStudio\Feuille2.3.2\Feuille\Debug\Feuille.exe

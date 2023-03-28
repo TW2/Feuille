@@ -4,3 +4,9 @@
 *.jar
 *.war
 *.ear
+
+# Built project
+/target
+
+# Desktop Windows files
+*.ini

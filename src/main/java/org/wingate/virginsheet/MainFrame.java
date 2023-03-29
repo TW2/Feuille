@@ -16,11 +16,20 @@
  */
 package org.wingate.virginsheet;
 
+import java.awt.BorderLayout;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import org.wingate.virginsheet.module.KaraokePanel;
+
 /**
  *
  * @author util2
  */
 public class MainFrame extends javax.swing.JFrame {
+    
+    private Theme chosenTheme = new Theme();
+    private final KaraokePanel karaoke = new KaraokePanel();
     
     /**
      * Creates new form MainFrame
@@ -28,6 +37,12 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         
+        getContentPane().setLayout(new BorderLayout());
+    }
+    
+    public void setTheme(Theme theme){
+        chosenTheme = theme;
+        karaoke.setTheme(theme);
     }
 
     /**
@@ -44,6 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        mnuModLoadKaraoke = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -60,6 +76,16 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu3.setText("Module");
 
         jMenu4.setText("By Feuille owner");
+
+        mnuModLoadKaraoke.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        mnuModLoadKaraoke.setText("Karaoke");
+        mnuModLoadKaraoke.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuModLoadKaraokeActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnuModLoadKaraoke);
+
         jMenu3.add(jMenu4);
 
         jMenu5.setText("By community");
@@ -78,15 +104,28 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
+            .addGap(0, 937, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 443, Short.MAX_VALUE)
+            .addGap(0, 451, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mnuModLoadKaraokeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuModLoadKaraokeActionPerformed
+        // Load karaoke module in main area (by replace any one else)
+        getContentPane().removeAll();
+        getContentPane().add(karaoke, BorderLayout.CENTER);        
+        karaoke.setVisible(true);
+        try{
+            UIManager.setLookAndFeel(chosenTheme.getTheme());
+            SwingUtilities.updateComponentTreeUI(karaoke);
+        }catch(UnsupportedLookAndFeelException exc){
+            System.err.println("Look and feel error!");
+        }
+    }//GEN-LAST:event_mnuModLoadKaraokeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,5 +172,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JMenuItem mnuModLoadKaraoke;
     // End of variables declaration//GEN-END:variables
 }

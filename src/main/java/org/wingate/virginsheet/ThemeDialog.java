@@ -49,17 +49,17 @@ public class ThemeDialog extends javax.swing.JDialog {
         cbTheme.setModel(dcbmInt);
         cbExt.setModel(dcbmExt);
         
-        dcbmInt.addElement(new Theme(new FlatLightLaf(), "Light", null));
-        dcbmInt.addElement(new Theme(new FlatDarkLaf(), "Dark", null));
-        dcbmInt.addElement(new Theme(Virginsheet.useBloodyGolden(), "Bloody Golden", null));
-        dcbmInt.addElement(new Theme(Virginsheet.useGirlPowerLight(), "Girl Power Light", null));
-        dcbmInt.addElement(new Theme(Virginsheet.useArcticLight(), "Arctic Light", null));
-        dcbmInt.addElement(new Theme(Virginsheet.useLemonLight(), "Lemon Light", null));
-        dcbmInt.addElement(new Theme(Virginsheet.usePatriotLight(), "Patriot Light", null));
-        dcbmInt.addElement(new Theme(Virginsheet.useSatanDark(), "Satan Dark", null));
-        dcbmInt.addElement(new Theme(Virginsheet.useMilitaryDark(), "Military Dark", null));
-        dcbmInt.addElement(new Theme(Virginsheet.useRanchDark(), "Ranch Dark", null));
-        dcbmInt.addElement(new Theme(Virginsheet.useNuclearDark(), "Nuclear Dark", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Light, new FlatLightLaf(), "Light", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Dark, new FlatDarkLaf(), "Dark", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Dark, Virginsheet.useBloodyGolden(), "Bloody Golden", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Light, Virginsheet.useGirlPowerLight(), "Girl Power Light", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Light, Virginsheet.useArcticLight(), "Arctic Light", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Light, Virginsheet.useLemonLight(), "Lemon Light", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Light, Virginsheet.usePatriotLight(), "Patriot Light", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Dark, Virginsheet.useSatanDark(), "Satan Dark", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Dark, Virginsheet.useMilitaryDark(), "Military Dark", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Dark, Virginsheet.useRanchDark(), "Ranch Dark", null));
+        dcbmInt.addElement(new Theme(Theme.Type.Dark, Virginsheet.useNuclearDark(), "Nuclear Dark", null));
         
         cbTheme.setSelectedIndex(0);
         
@@ -166,13 +166,12 @@ public class ThemeDialog extends javax.swing.JDialog {
         return openSoftware;
     }
     
-    public FlatLaf getSelectedTheme(){
-        FlatLaf laf = new FlatLightLaf();
+    public Theme getSelectedTheme(){
+        Theme th = new Theme();
         if(cbTheme.getSelectedIndex() != -1){
-            Theme th = (Theme)cbTheme.getSelectedItem();
-            laf = th.getTheme();
+            th = (Theme)cbTheme.getSelectedItem();
         }
-        return laf;
+        return th;
     }
 
     private void addCustomTheme(Theme th){

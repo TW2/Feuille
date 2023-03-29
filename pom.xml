@@ -29,5 +29,10 @@
             <artifactId>js-scriptengine</artifactId>
             <version>22.3.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.wingate</groupId>
+            <artifactId>assj</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
 </project>

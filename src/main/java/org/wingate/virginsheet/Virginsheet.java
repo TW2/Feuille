@@ -32,7 +32,7 @@ public class Virginsheet {
             ThemeDialog th = new ThemeDialog(new javax.swing.JFrame(), true);
             th.showDialog();
             
-            FlatLaf theme = th.getSelectedTheme();
+            Theme theme = th.getSelectedTheme();
             
             MainFrame mf = new MainFrame();
             mf.setTitle(String.format("%s v%s %s %s | %s",
@@ -42,8 +42,10 @@ public class Virginsheet {
             mf.setLocationRelativeTo(null);
             mf.setVisible(true);
             
+            mf.setTheme(theme);
+            
             try{
-                UIManager.setLookAndFeel(theme);
+                UIManager.setLookAndFeel(theme.getTheme());
                 SwingUtilities.updateComponentTreeUI(mf);
             }catch(UnsupportedLookAndFeelException exc){
                 System.err.println("Look and feel error!");

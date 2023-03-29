@@ -34,15 +34,21 @@ import java.util.logging.Logger;
  */
 public class Theme {
     
+    public enum Type {
+        Light, Dark;
+    }
+    
     private FlatLaf theme = new FlatLightLaf();
     private String name = "Light";
     private String author = "";
+    private Type type = Type.Light;
 
     public Theme() {
         
     }
     
-    public Theme(FlatLaf theme, String name, String author) {
+    public Theme(Type type, FlatLaf theme, String name, String author) {
+        this.type = type;
         this.theme = theme == null ? new FlatLightLaf() : theme;
         this.name = name == null || name.isEmpty() ? "Unknown name theme" : name;
         this.author = author == null || author.isEmpty() ? "" : author;
@@ -53,6 +59,7 @@ public class Theme {
         
         // La classe de base / Base class
         th.theme = new FlatLightLaf();
+        th.type = Type.Light;
         
         // Les modifications / Settings
         Map<String, String> settings = new HashMap<>();
@@ -62,6 +69,7 @@ public class Theme {
             while((line = br.readLine()) != null){
                 if(line.contains("# dark")){
                     th.theme = new FlatDarkLaf();
+                    th.type = Type.Dark;
                 }else if(line.contains("# name: ")){
                     th.name = line.substring("# name: ".length());
                 }else if(line.contains("# author: ")){
@@ -109,6 +117,10 @@ public class Theme {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     @Override

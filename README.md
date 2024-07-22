@@ -9,4 +9,4 @@ Functionalities by module :
 - [ ] Karaoke, make your own kara
 - [ ] OCR, with Tesseract OCR
 
-Each module can be added and deleted many times.
+Each module can be added and deleted many times and moved according to the current UI matrix.

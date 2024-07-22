@@ -25,21 +25,21 @@ import java.util.regex.Pattern;
  */
 public class AssTime {
     
-    private static long msStart;
-    private static long msStop;
+    private long msStart;
+    private long msStop;
 
     public AssTime() {
         this(0L, 0L);
     }
 
     public AssTime(long msStart, long msStop) {
-        AssTime.msStart = msStart;
-        AssTime.msStop = msStop;
+        this.msStart = msStart;
+        this.msStop = msStop;
     }
 
     public AssTime(String start, String stop) {        
-        AssTime.msStart = parseASS(start);
-        AssTime.msStop = parseASS(stop);
+        this.msStart = parseASS(start);
+        this.msStop = parseASS(stop);
     }
 
     public long getMsStart() {
@@ -47,7 +47,7 @@ public class AssTime {
     }
 
     public void setMsStart(long msStart) {
-        AssTime.msStart = msStart;
+        this.msStart = msStart;
     }
 
     public long getMsStop() {
@@ -55,7 +55,7 @@ public class AssTime {
     }
 
     public void setMsStop(long msStop) {
-        AssTime.msStop = msStop;
+        this.msStop = msStop;
     }
     
     public boolean isBetween(long msCurrent){

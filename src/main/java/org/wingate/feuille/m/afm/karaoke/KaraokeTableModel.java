@@ -27,13 +27,12 @@ import org.wingate.feuille.ass.AssEvent;
  */
 public class KaraokeTableModel extends DefaultTableModel {
     
-    private List<Boolean> actives = new ArrayList<>();
-    private List<AssEvent> events = new ArrayList<>();
-    
-    private List<Boolean> memoryActives = new ArrayList<>();
-    private List<AssEvent> memoryEvents = new ArrayList<>();
+    private final List<BiEvent> events;
+    private List<AssEvent> memoryEvents;
 
     public KaraokeTableModel() {
+        events = new ArrayList<>();
+        memoryEvents = new ArrayList<>();
     }
 
     @Override
@@ -67,8 +66,8 @@ public class KaraokeTableModel extends DefaultTableModel {
     @Override
     public Object getValueAt(int row, int column) {
         switch(column){
-            case 0 -> { return actives.get(row); }
-            case 1 -> { return events.get(row); }
+            case 0 -> { return events.get(row).isActive(); }
+            case 1 -> { return events.get(row).getEvent(); }
             default -> { return null; }
         }
     }
@@ -83,8 +82,7 @@ public class KaraokeTableModel extends DefaultTableModel {
                 }else{
                     bool = false;
                 }
-                actives.remove(row);
-                actives.add(row, bool);
+                events.get(row).setActive(bool);
             }
             case 1 -> {
                 AssEvent event;
@@ -93,8 +91,7 @@ public class KaraokeTableModel extends DefaultTableModel {
                 }else{
                     event = new AssEvent();
                 }
-                events.remove(row);
-                events.add(row, event);
+                events.get(row).setOriginalAssEvent(event);
             }
             default -> { }
         }
@@ -102,50 +99,41 @@ public class KaraokeTableModel extends DefaultTableModel {
 
     @Override
     public boolean isCellEditable(int row, int column) {
-        return true;
+        switch(column){
+            case 0 -> { return true; }
+            case 1 -> { return false; }
+            default -> { return false; }
+        }
+    }
+
+    public List<BiEvent> getEvents() {
+        return events;
     }
     
     public void addEvent(boolean b, AssEvent ev){
-        actives.add(b);
-        events.add(ev);
+        events.add(new BiEvent(b, ev));
     }
     
     public void insertEvent(int index, boolean b, AssEvent ev){
         if(index >= events.size()) return;
-        actives.remove(index);
         events.remove(index);
-        actives.add(index, b);
-        events.add(index, ev);
+        addEvent(b, ev);
     }
     
     public void removeEvent(int index){
         if(index >= events.size()) return;
-        actives.remove(index);
         events.remove(index);
     }
     
     public void clearEvents(){
-        actives.clear();
         events.clear();
     }
-    
-    public void showResult(List<AssEvent> evts){
-        if(evts.isEmpty() == true || actives.isEmpty() == true || events.isEmpty() == true) return;
-        memoryActives = actives;
-        memoryEvents = events;
-        actives.clear();
-        events.clear();
-        for(AssEvent ev : evts){
-            actives.add(true);
-            events.add(ev);
-        }
+
+    public List<AssEvent> getMemoryEvents() {
+        return memoryEvents;
     }
-    
-    public void showKaraoke(){
-        if(memoryActives.isEmpty() == true || memoryEvents.isEmpty() == true) return;
-        actives = memoryActives;
-        events = memoryEvents;
-        memoryActives.clear();
-        memoryEvents.clear();
+
+    public void setMemoryEvents(List<AssEvent> memoryEvents) {
+        this.memoryEvents = memoryEvents;
     }
 }

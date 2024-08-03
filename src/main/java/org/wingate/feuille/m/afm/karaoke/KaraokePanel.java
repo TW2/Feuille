@@ -39,8 +39,7 @@ public class KaraokePanel extends javax.swing.JPanel {
     private final Theme theme;
     
     private ASS ass = null;
-    private final List<AssEvent> originalEvents = new ArrayList<>();
-    private final List<AssEvent> generatedEvents = new ArrayList<>();
+    private List<AssEvent> evts = new ArrayList<>();
     
     private final KaraokeTableModel tableModel = new KaraokeTableModel();
     private final DefaultComboBoxModel cboxModel = new DefaultComboBoxModel();
@@ -351,8 +350,7 @@ public class KaraokePanel extends javax.swing.JPanel {
         // Clean and Open
         tableModel.clearEvents();
         jTable1.updateUI();
-        originalEvents.clear();
-        generatedEvents.clear();
+        
         int z = fcOpenScript.showOpenDialog(new javax.swing.JFrame());
         if(z == JFileChooser.APPROVE_OPTION){
             ass = ASS.Read(fcOpenScript.getSelectedFile().getPath());
@@ -370,8 +368,7 @@ public class KaraokePanel extends javax.swing.JPanel {
     private void btnFewLinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFewLinesActionPerformed
         // By few lines
         if(cboxAFMEffects.getSelectedItem() instanceof SFXAbstract sfx){
-            originalEvents.clear();
-            generatedEvents.clear();
+            List<AssEvent> originalEvents = new ArrayList<>();
             for(int i=0; i<jTable1.getRowCount(); i++){
                 if(jTable1.getValueAt(i, 0) instanceof Boolean b){
                     if(b == true && jTable1.getValueAt(i, 1) instanceof AssEvent e){
@@ -379,23 +376,19 @@ public class KaraokePanel extends javax.swing.JPanel {
                     }
                 }
             }
-            for(AssEvent event : sfx.forFewLines(originalEvents)){
-                generatedEvents.add(event);
-            }
+            
+            evts.addAll(sfx.forFewLines(originalEvents));
         }
     }//GEN-LAST:event_btnFewLinesActionPerformed
 
     private void btnOneLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOneLineActionPerformed
         // By one line
         if(cboxAFMEffects.getSelectedItem() instanceof SFXAbstract sfx){
-            originalEvents.clear();
-            generatedEvents.clear();
             for(int i=0; i<jTable1.getRowCount(); i++){
                 if(jTable1.getValueAt(i, 0) instanceof Boolean b){
                     if(b == true && jTable1.getValueAt(i, 1) instanceof AssEvent e){
-                        originalEvents.add(e);
                         for(AssEvent event : sfx.forOneLine(e)){
-                            generatedEvents.add(event);
+                            evts.add(event);
                         }                        
                     }
                 }

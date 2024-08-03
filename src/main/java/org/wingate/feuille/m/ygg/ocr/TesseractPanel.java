@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -68,9 +69,10 @@ public class TesseractPanel extends javax.swing.JPanel {
         initComponents();
         
         converter1 = new Java2DFrameConverter();
-        converter2 = new LeptonicaFrameConverter();
-        pixImage1 = null;
+        converter2 = new LeptonicaFrameConverter();        
         api = new TessBaseAPI();
+        outText = null;
+        pixImage1 = null;
         
         eVideoPanel = new EmbeddedVideoPanel();
         embedPanel.setLayout(new BorderLayout());
@@ -351,18 +353,20 @@ public class TesseractPanel extends javax.swing.JPanel {
 
     @SuppressWarnings("UseSpecificCatch")
     private void btnOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOCRActionPerformed
-        try(Frame frm = converter1.getFrame(videoImage)) {
-            pixImage1 = converter2.convert(frm);
+        try{
+            // Init
+            Frame frame = converter1.convert(videoImage);
+            pixImage1 = converter2.convert(frame);
+            
+            // Usage
             api.SetImage(pixImage1);
-            try{
-                outText = api.GetUTF8Text();
-                String s = outText.getString("UTF-8");
-                tfGetter.setText(s);
-                tfSetter.setText(s);
-                outText.deallocate();
-            }catch(Exception exc){
-                System.err.println("Error: no text found in this image");
-            }            
+            outText = api.GetUTF8Text();
+            String s = outText.getString("UTF-8");
+            tfGetter.setText(s);
+            tfSetter.setText(s);
+            
+        }catch(NullPointerException | UnsupportedEncodingException ex) {
+            Logger.getLogger(TesseractPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnOCRActionPerformed
 

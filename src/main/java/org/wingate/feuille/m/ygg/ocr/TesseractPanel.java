@@ -355,8 +355,8 @@ public class TesseractPanel extends javax.swing.JPanel {
     private void btnOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOCRActionPerformed
         try{
             // Init
-            Frame frame = converter1.convert(videoImage);
-            pixImage1 = converter2.convert(frame);
+            Frame frm = converter1.convert(videoImage);
+            pixImage1 = converter2.convert(frm);
             
             // Usage
             api.SetImage(pixImage1);
@@ -395,6 +395,7 @@ public class TesseractPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_slideOCRStateChanged
 
     private void btnSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetActionPerformed
+        if(videoPath == null) return;
         initFFmpeg();
         btnPreviousFrame.setEnabled(true);
         btnNextFrame.setEnabled(true);

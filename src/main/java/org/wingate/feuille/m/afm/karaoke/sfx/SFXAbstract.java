@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.wingate.feuille.ass.AssEvent;
+import org.wingate.feuille.m.afm.karaoke.BiEvent;
 
 /**
  *
@@ -29,7 +30,9 @@ import org.wingate.feuille.ass.AssEvent;
 public abstract class SFXAbstract implements SFXInterface {
     
     protected String name;
+    protected String humanName;
     protected List<SFXCode> codes = new ArrayList<>();
+    protected List<String> templates = new ArrayList<>();
 
     public SFXAbstract() {
         name = "Unknown template";
@@ -38,6 +41,16 @@ public abstract class SFXAbstract implements SFXInterface {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getHumanName() {
+        return humanName;
+    }
+
+    @Override
+    public void setHumanName(String humanName) {
+        this.humanName = humanName;
     }
     
     @Override
@@ -54,21 +67,31 @@ public abstract class SFXAbstract implements SFXInterface {
     public void setCodes(List<SFXCode> codes) {
         this.codes = codes;
     }
-    
+
     @Override
-    public List<AssEvent> forOneLine(AssEvent input) {
-        return doJob(input);
+    public List<String> getTemplates() {
+        return templates;
     }
 
     @Override
-    public List<AssEvent> forFewLines(List<AssEvent> input) {
-        final List<AssEvent> output = new ArrayList<>();
-        
-        for(AssEvent ev : input){
-            output.addAll(doJob(ev));
+    public void setTemplates(List<String> templates) {
+        this.templates = templates;
+    }
+    
+    @Override
+    public void forOneLine(BiEvent input) {
+        input.getTransformedAssEvents().clear();
+        List<AssEvent> evts = doJob(input.getOriginalAssEvent());
+        input.getTransformedAssEvents().addAll(evts);
+    }
+
+    @Override
+    public void forFewLines(List<BiEvent> input) {
+        for(BiEvent bev : input){
+            bev.getTransformedAssEvents().clear();
+            List<AssEvent> evts = doJob(bev.getOriginalAssEvent());
+            bev.getTransformedAssEvents().addAll(evts);
         }
-        
-        return output;
     }
     
     // Remplace phKaraoke

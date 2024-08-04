@@ -16,11 +16,8 @@
  */
 package org.wingate.feuille.m.afm.karaoke;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import org.wingate.feuille.ass.ASS;
 import org.wingate.feuille.ass.AssEvent;
@@ -39,7 +36,6 @@ public class KaraokePanel extends javax.swing.JPanel {
     private final Theme theme;
     
     private ASS ass = null;
-    private List<AssEvent> evts = new ArrayList<>();
     
     private final KaraokeTableModel tableModel = new KaraokeTableModel();
     private final DefaultComboBoxModel cboxModel = new DefaultComboBoxModel();
@@ -59,8 +55,7 @@ public class KaraokePanel extends javax.swing.JPanel {
         jTable1.getColumnModel().getColumn(0).setMinWidth(40);
         jTable1.getColumnModel().getColumn(1).setMinWidth(600);
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-        jTable1.setDefaultRenderer(AssEvent.class, new KaraokeAssEventRenderer());
-        jTable1.setDefaultEditor(AssEvent.class, new KaraokeAssEventEditor());
+        jTable1.setDefaultRenderer(AssEvent.class, new HighLightEditedRenderer());
         
         for(javax.swing.filechooser.FileFilter ff : fcOpenScript.getChoosableFileFilters()){
             fcOpenScript.removeChoosableFileFilter(ff);
@@ -110,14 +105,8 @@ public class KaraokePanel extends javax.swing.JPanel {
         fcOpenCode = new javax.swing.JFileChooser();
         fcSaveCode = new javax.swing.JFileChooser();
         jPanel2 = new javax.swing.JPanel();
-        jToolBar1 = new javax.swing.JToolBar();
-        btnNewCode = new javax.swing.JButton();
-        btnOpenCode = new javax.swing.JButton();
-        btnSaveCode = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        tabpCode = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         btnNewScript = new javax.swing.JButton();
@@ -128,52 +117,9 @@ public class KaraokePanel extends javax.swing.JPanel {
         btnConfigureSFX = new javax.swing.JButton();
         btnUndo = new javax.swing.JButton();
         btnRedo = new javax.swing.JButton();
-        tbShowResultASS = new javax.swing.JToggleButton();
         cboxAFMEffects = new javax.swing.JComboBox<>();
 
         jPanel2.setLayout(new java.awt.BorderLayout());
-
-        jToolBar1.setRollover(true);
-
-        btnNewCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/32_newdocument.png"))); // NOI18N
-        btnNewCode.setText("New code");
-        btnNewCode.setFocusable(false);
-        btnNewCode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnNewCode.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnNewCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewCodeActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnNewCode);
-
-        btnOpenCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/32_folder.png"))); // NOI18N
-        btnOpenCode.setText("Open code");
-        btnOpenCode.setFocusable(false);
-        btnOpenCode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnOpenCode.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnOpenCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOpenCodeActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnOpenCode);
-
-        btnSaveCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/32_floppydisk.png"))); // NOI18N
-        btnSaveCode.setText("Save code");
-        btnSaveCode.setFocusable(false);
-        btnSaveCode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnSaveCode.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnSaveCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveCodeActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnSaveCode);
-
-        jPanel2.add(jToolBar1, java.awt.BorderLayout.SOUTH);
-
-        jPanel1.setLayout(new java.awt.GridLayout(2, 1));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -197,10 +143,7 @@ public class KaraokePanel extends javax.swing.JPanel {
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1);
-        jPanel1.add(tabpCode);
-
-        jPanel2.add(jPanel1, java.awt.BorderLayout.CENTER);
+        jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
@@ -302,18 +245,6 @@ public class KaraokePanel extends javax.swing.JPanel {
         });
         jToolBar2.add(btnRedo);
 
-        tbShowResultASS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/32 accept.png"))); // NOI18N
-        tbShowResultASS.setText("Show result");
-        tbShowResultASS.setFocusable(false);
-        tbShowResultASS.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbShowResultASS.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbShowResultASS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbShowResultASSActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(tbShowResultASS);
-
         jPanel3.add(jToolBar2, java.awt.BorderLayout.NORTH);
 
         cboxAFMEffects.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -368,30 +299,15 @@ public class KaraokePanel extends javax.swing.JPanel {
     private void btnFewLinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFewLinesActionPerformed
         // By few lines
         if(cboxAFMEffects.getSelectedItem() instanceof SFXAbstract sfx){
-            List<AssEvent> originalEvents = new ArrayList<>();
-            for(int i=0; i<jTable1.getRowCount(); i++){
-                if(jTable1.getValueAt(i, 0) instanceof Boolean b){
-                    if(b == true && jTable1.getValueAt(i, 1) instanceof AssEvent e){
-                        originalEvents.add(e);
-                    }
-                }
-            }
-            
-            evts.addAll(sfx.forFewLines(originalEvents));
+            sfx.forFewLines(tableModel.getActiveEvents());
         }
     }//GEN-LAST:event_btnFewLinesActionPerformed
 
     private void btnOneLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOneLineActionPerformed
         // By one line
         if(cboxAFMEffects.getSelectedItem() instanceof SFXAbstract sfx){
-            for(int i=0; i<jTable1.getRowCount(); i++){
-                if(jTable1.getValueAt(i, 0) instanceof Boolean b){
-                    if(b == true && jTable1.getValueAt(i, 1) instanceof AssEvent e){
-                        for(AssEvent event : sfx.forOneLine(e)){
-                            evts.add(event);
-                        }                        
-                    }
-                }
+            for(BiEvent bev : tableModel.getActiveEvents()){
+                sfx.forOneLine(bev);
             }
         }        
     }//GEN-LAST:event_btnOneLineActionPerformed
@@ -404,51 +320,27 @@ public class KaraokePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRedoActionPerformed
 
-    private void tbShowResultASSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbShowResultASSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbShowResultASSActionPerformed
-
-    private void btnNewCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewCodeActionPerformed
-        // Charge le sélecteur de type de code
-        CodeTypeDialog ctd = new CodeTypeDialog(new javax.swing.JFrame(), true);
-        ctd.showDialog();
-        if(ctd.getDialogResult() == DialogResult.Ok){
-            CodePanel cp = new CodePanel();
-            cp.setCodeType(ctd.getCodeType());
-            tabpCode.add(cp);
-            String name = JOptionPane.showInputDialog("Type a name for the new tab.");
-            CodeTabPanel ctp = new CodeTabPanel(ctd.getCodeType(), tabpCode, tabpCode.getTabCount() - 1, name);
-            tabpCode.setTabComponentAt(tabpCode.getTabCount() - 1, ctp);
-        }
-    }//GEN-LAST:event_btnNewCodeActionPerformed
-
-    private void btnOpenCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenCodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnOpenCodeActionPerformed
-
-    private void btnSaveCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveCodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveCodeActionPerformed
-
     private void cboxAFMEffectsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxAFMEffectsItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxAFMEffectsItemStateChanged
 
     private void btnConfigureSFXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigureSFXActionPerformed
-        // TODO add your handling code here:
+        // Show settings dialog
+        SettingsDialog setd = new SettingsDialog(new javax.swing.JFrame(), true);
+        setd.showDialog();
+        if(setd.getDialogResult() == DialogResult.Ok){
+            
+        }
     }//GEN-LAST:event_btnConfigureSFXActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfigureSFX;
     private javax.swing.JButton btnFewLines;
-    private javax.swing.JButton btnNewCode;
     private javax.swing.JButton btnNewScript;
     private javax.swing.JButton btnOneLine;
-    private javax.swing.JButton btnOpenCode;
     private javax.swing.JButton btnOpenScript;
     private javax.swing.JButton btnRedo;
-    private javax.swing.JButton btnSaveCode;
     private javax.swing.JButton btnSaveScript;
     private javax.swing.JButton btnUndo;
     private javax.swing.JComboBox<String> cboxAFMEffects;
@@ -456,14 +348,10 @@ public class KaraokePanel extends javax.swing.JPanel {
     private javax.swing.JFileChooser fcOpenScript;
     private javax.swing.JFileChooser fcSaveCode;
     private javax.swing.JFileChooser fcSaveScript;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
-    private javax.swing.JTabbedPane tabpCode;
-    private javax.swing.JToggleButton tbShowResultASS;
     // End of variables declaration//GEN-END:variables
 }

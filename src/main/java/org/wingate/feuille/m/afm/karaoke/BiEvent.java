@@ -44,10 +44,6 @@ public class BiEvent {
     public List<AssEvent> getTransformedAssEvents() {
         return transformedAssEvents;
     }
-    
-    public AssEvent getEvent(){
-        return originalAssEvent;
-    }
 
     public boolean isActive() {
         return active;

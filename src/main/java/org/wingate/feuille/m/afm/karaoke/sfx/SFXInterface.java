@@ -18,6 +18,7 @@ package org.wingate.feuille.m.afm.karaoke.sfx;
 
 import java.util.List;
 import org.wingate.feuille.ass.AssEvent;
+import org.wingate.feuille.m.afm.karaoke.BiEvent;
 
 /**
  *
@@ -26,11 +27,17 @@ import org.wingate.feuille.ass.AssEvent;
 public interface SFXInterface {
     public String getName();
     
+    public String getHumanName();
+    public void setHumanName(String humanName);
+    
     public List<SFXCode> getCodes();
     public void setCodes(List<SFXCode> codes);
     
-    public List<AssEvent> forOneLine(AssEvent input);
-    public List<AssEvent> forFewLines(List<AssEvent> input);
+    public List<String> getTemplates();
+    public void setTemplates(List<String> templates);
+    
+    public void forOneLine(BiEvent input);
+    public void forFewLines(List<BiEvent> input);
     
     public List<AssEvent> doJob(AssEvent input);
 }

@@ -28,11 +28,9 @@ import org.wingate.feuille.ass.AssEvent;
 public class KaraokeTableModel extends DefaultTableModel {
     
     private final List<BiEvent> events;
-    private List<AssEvent> memoryEvents;
 
     public KaraokeTableModel() {
         events = new ArrayList<>();
-        memoryEvents = new ArrayList<>();
     }
 
     @Override
@@ -67,33 +65,23 @@ public class KaraokeTableModel extends DefaultTableModel {
     public Object getValueAt(int row, int column) {
         switch(column){
             case 0 -> { return events.get(row).isActive(); }
-            case 1 -> { return events.get(row).getEvent(); }
+            case 1 -> { return events.get(row).getOriginalAssEvent(); }
             default -> { return null; }
         }
     }
 
     @Override
-    public void setValueAt(Object aValue, int row, int column) {
+    public void setValueAt(Object aValue, int row, int column) {        
         switch(column){
+            // events.get(row) is a BiEvent
             case 0 -> {
-                boolean bool;
-                if(aValue instanceof Boolean b){
-                    bool = b;
-                }else{
-                    bool = false;
-                }
-                events.get(row).setActive(bool);
+                // Is always a boolean
+                events.get(row).setActive((boolean)aValue);
             }
             case 1 -> {
-                AssEvent event;
-                if(aValue instanceof AssEvent ev){
-                    event = ev;
-                }else{
-                    event = new AssEvent();
-                }
-                events.get(row).setOriginalAssEvent(event);
+                // Is always an AssEvent
+                events.get(row).setOriginalAssEvent((AssEvent)aValue);
             }
-            default -> { }
         }
     }
 
@@ -110,6 +98,16 @@ public class KaraokeTableModel extends DefaultTableModel {
         return events;
     }
     
+    public List<BiEvent> getActiveEvents() {
+        List<BiEvent> bEvts = new ArrayList<>();
+        
+        for(BiEvent bev : events){
+            if(bev.isActive()) bEvts.add(bev);
+        }
+        
+        return bEvts;
+    }
+    
     public void addEvent(boolean b, AssEvent ev){
         events.add(new BiEvent(b, ev));
     }
@@ -117,7 +115,7 @@ public class KaraokeTableModel extends DefaultTableModel {
     public void insertEvent(int index, boolean b, AssEvent ev){
         if(index >= events.size()) return;
         events.remove(index);
-        addEvent(b, ev);
+        events.add(index, new BiEvent(b, ev));
     }
     
     public void removeEvent(int index){
@@ -127,13 +125,5 @@ public class KaraokeTableModel extends DefaultTableModel {
     
     public void clearEvents(){
         events.clear();
-    }
-
-    public List<AssEvent> getMemoryEvents() {
-        return memoryEvents;
-    }
-
-    public void setMemoryEvents(List<AssEvent> memoryEvents) {
-        this.memoryEvents = memoryEvents;
     }
 }

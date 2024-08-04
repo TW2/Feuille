@@ -432,7 +432,7 @@ public class AssEvent {
 
     @Override
     public String toString() {
-        return type;
+        return getText();
     }
 
     public int getUID() {

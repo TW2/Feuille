@@ -16,35 +16,32 @@
  */
 package org.wingate.feuille.m.afm.karaoke;
 
+import java.awt.Component;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import org.wingate.feuille.ass.AssEvent;
+import org.wingate.feuille.util.DrawColor;
 
 /**
  *
  * @author util2
  */
-public class KaraokeAssEventRenderer extends DefaultTableCellRenderer {
+public class HighLightEditedRenderer extends DefaultTableCellRenderer {
 
-    private AssEvent event;
-
-    public KaraokeAssEventRenderer() {
-        super();
-    }
-    
     @Override
-    protected void setValue(Object value) {
-        if(event == null){
-            event = new AssEvent();
-        }
-        if(value == null){
-            setText("");
-        }else{
-            if(value instanceof AssEvent ev){
-                setText(ev.getText());
+    public Component getTableCellRendererComponent(JTable table, Object value,
+            boolean isSelected, boolean hasFocus, int row, int column) {
+        
+        if(table.getModel() instanceof KaraokeTableModel model){
+            BiEvent bev = model.getEvents().get(row);
+            setText("0");
+            if(bev.getTransformedAssEvents().isEmpty()){
+                setBackground(DrawColor.blue_violet.getColor(.3f));
             }else{
-                setText("");
+                setBackground(DrawColor.yellow.getColor(.5f));
             }
         }
+        
+        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);        
     }
     
 }

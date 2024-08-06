@@ -107,6 +107,25 @@ public class SettingsDialog extends javax.swing.JDialog {
             );
         }
     }
+    
+    private void addText(String s){
+        String text = textPanelCommands.getText();
+        if(text.isEmpty()){
+            textPanelCommands.setText(s);
+        }else{
+            int insertIndex = textPanelCommands.getCaretPosition();
+            if(insertIndex == -1) insertIndex = text.length() - 1;
+            if(insertIndex + 1 < text.length() - 1){
+                textPanelCommands.setText(
+                        text.substring(0, insertIndex) + s + text.substring(insertIndex)
+                );
+            }else{
+                textPanelCommands.setText(
+                        text.substring(0, insertIndex) + s
+                );
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,6 +140,98 @@ public class SettingsDialog extends javax.swing.JDialog {
         popmRemove = new javax.swing.JMenuItem();
         popCommands = new javax.swing.JPopupMenu();
         popmSave = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        popmenuTriggers = new javax.swing.JMenu();
+        popmenuTriggersMs = new javax.swing.JMenu();
+        popmMsStart = new javax.swing.JMenuItem();
+        popmMsEnd = new javax.swing.JMenuItem();
+        popmMsMiddle = new javax.swing.JMenuItem();
+        popmMsDuration = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        popmMsSentenceStart = new javax.swing.JMenuItem();
+        popmMsSentenceEnd = new javax.swing.JMenuItem();
+        popmMsSentenceMiddle = new javax.swing.JMenuItem();
+        popmMsSentenceDuration = new javax.swing.JMenuItem();
+        popmenuTriggersCs = new javax.swing.JMenu();
+        popmCsStart = new javax.swing.JMenuItem();
+        popmCsEnd = new javax.swing.JMenuItem();
+        popmCsMiddle = new javax.swing.JMenuItem();
+        popmCsDuration = new javax.swing.JMenuItem();
+        popmTriggerSentence = new javax.swing.JMenuItem();
+        popmTriggerSyllable = new javax.swing.JMenuItem();
+        popmenuList = new javax.swing.JMenu();
+        popmFontReset = new javax.swing.JMenuItem();
+        popmWrapLine = new javax.swing.JMenuItem();
+        popmFontEncoding = new javax.swing.JMenuItem();
+        popmenuKaraoke = new javax.swing.JMenu();
+        popmKaraokeMinusK = new javax.swing.JMenuItem();
+        popmKaraokeBigK = new javax.swing.JMenuItem();
+        popmKaraokeFill = new javax.swing.JMenuItem();
+        popmKaraokeOutline = new javax.swing.JMenuItem();
+        popmenuAnimation = new javax.swing.JMenu();
+        popmAnimateSentence = new javax.swing.JMenuItem();
+        popmAnimateSentenceWithAcc = new javax.swing.JMenuItem();
+        popmAnimateTime = new javax.swing.JMenuItem();
+        popmAnimateWithAcc = new javax.swing.JMenuItem();
+        popmenuFont = new javax.swing.JMenu();
+        popmFontName = new javax.swing.JMenuItem();
+        popmFontSize = new javax.swing.JMenuItem();
+        popmFontScale = new javax.swing.JMenuItem();
+        popmFontScaleX = new javax.swing.JMenuItem();
+        popmFontScaleY = new javax.swing.JMenuItem();
+        popmFontRX = new javax.swing.JMenuItem();
+        popmFontRY = new javax.swing.JMenuItem();
+        popmFontRZ = new javax.swing.JMenuItem();
+        popmFontRZSimplified = new javax.swing.JMenuItem();
+        popmFontSpacing = new javax.swing.JMenuItem();
+        popmFontShearX = new javax.swing.JMenuItem();
+        popmFontShearY = new javax.swing.JMenuItem();
+        popmenuFontAttribute = new javax.swing.JMenu();
+        popmFontAttrBold = new javax.swing.JMenuItem();
+        popmFontAttrItalic = new javax.swing.JMenuItem();
+        popmFontAttrUnderline = new javax.swing.JMenuItem();
+        popmFontAttrStrikeOut = new javax.swing.JMenuItem();
+        popmFontAttrBord = new javax.swing.JMenuItem();
+        popmFontAttrXBord = new javax.swing.JMenuItem();
+        popmFontAttrYBord = new javax.swing.JMenuItem();
+        popmFontAttrShad = new javax.swing.JMenuItem();
+        popmFontAttrXShad = new javax.swing.JMenuItem();
+        popmFontAttrYShad = new javax.swing.JMenuItem();
+        popmenuPosition = new javax.swing.JMenu();
+        popmPosA = new javax.swing.JMenuItem();
+        popmPosAn = new javax.swing.JMenuItem();
+        popmPosPos = new javax.swing.JMenuItem();
+        popmPosMove = new javax.swing.JMenuItem();
+        popmPosOrg = new javax.swing.JMenuItem();
+        popmenuDisplay = new javax.swing.JMenu();
+        popmDisplayBlurEdge = new javax.swing.JMenuItem();
+        popmDisplayBlur = new javax.swing.JMenuItem();
+        popmDisplayPrimaryColor = new javax.swing.JMenuItem();
+        popmDisplayTextColor = new javax.swing.JMenuItem();
+        popmDisplayKaraokeColor = new javax.swing.JMenuItem();
+        popmDisplayOutlineColor = new javax.swing.JMenuItem();
+        popmDisplayShadowColor = new javax.swing.JMenuItem();
+        popmDisplayAlpha = new javax.swing.JMenuItem();
+        popmDisplayTextAlpha = new javax.swing.JMenuItem();
+        popmDisplayKaraokeAlpha = new javax.swing.JMenuItem();
+        popmDisplayOutlineAlpha = new javax.swing.JMenuItem();
+        popmDisplayShadowAlpha = new javax.swing.JMenuItem();
+        popmDisplayFad = new javax.swing.JMenuItem();
+        popmDisplayFade = new javax.swing.JMenuItem();
+        popmenuVisibility = new javax.swing.JMenu();
+        popmVisibilityClip = new javax.swing.JMenuItem();
+        popmVisibilityIClip = new javax.swing.JMenuItem();
+        popmenuDrawing = new javax.swing.JMenu();
+        popmDrawP = new javax.swing.JMenuItem();
+        popmDrawBaselineOffset = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        popmDrawMove = new javax.swing.JMenuItem();
+        popmDrawGoto = new javax.swing.JMenuItem();
+        popmDrawLine = new javax.swing.JMenuItem();
+        popmDrawCubic = new javax.swing.JMenuItem();
+        popmDrawSpline = new javax.swing.JMenuItem();
+        popmDrawCloseSpline = new javax.swing.JMenuItem();
+        popmDrawExtendSpline = new javax.swing.JMenuItem();
         btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         cboxAFMEffects = new javax.swing.JComboBox<>();
@@ -151,6 +262,646 @@ public class SettingsDialog extends javax.swing.JDialog {
             }
         });
         popCommands.add(popmSave);
+        popCommands.add(jSeparator1);
+
+        popmenuTriggers.setText("Variable");
+
+        popmenuTriggersMs.setText("In milliseconds");
+
+        popmMsStart.setText("Syllable start (ms) - %sK");
+        popmMsStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsStartActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsStart);
+
+        popmMsEnd.setText("Syllable end (ms) - %eK");
+        popmMsEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsEndActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsEnd);
+
+        popmMsMiddle.setText("Syllable middle (ms) - %mK");
+        popmMsMiddle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsMiddleActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsMiddle);
+
+        popmMsDuration.setText("Syllable duration (ms) - %dK");
+        popmMsDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsDurationActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsDuration);
+        popmenuTriggersMs.add(jSeparator3);
+
+        popmMsSentenceStart.setText("Sentence start (ms) - %ssK");
+        popmMsSentenceStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsSentenceStartActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsSentenceStart);
+
+        popmMsSentenceEnd.setText("Sentence end (ms) - %seK");
+        popmMsSentenceEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsSentenceEndActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsSentenceEnd);
+
+        popmMsSentenceMiddle.setText("Sentence middle (ms) - %smK");
+        popmMsSentenceMiddle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsSentenceMiddleActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsSentenceMiddle);
+
+        popmMsSentenceDuration.setText("Sentence duration (ms) - %sdK");
+        popmMsSentenceDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsSentenceDurationActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsSentenceDuration);
+
+        popmenuTriggers.add(popmenuTriggersMs);
+
+        popmenuTriggersCs.setText("In centiseconds");
+
+        popmCsStart.setText("Syllable start (cs) - %csK");
+        popmCsStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCsStartActionPerformed(evt);
+            }
+        });
+        popmenuTriggersCs.add(popmCsStart);
+
+        popmCsEnd.setText("Syllable end (cs) - %ceK");
+        popmCsEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCsEndActionPerformed(evt);
+            }
+        });
+        popmenuTriggersCs.add(popmCsEnd);
+
+        popmCsMiddle.setText("Syllable middle (cs) - %cmK");
+        popmCsMiddle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCsMiddleActionPerformed(evt);
+            }
+        });
+        popmenuTriggersCs.add(popmCsMiddle);
+
+        popmCsDuration.setText("Syllable duration (cs) - %cdK");
+        popmCsDuration.setToolTipText("");
+        popmCsDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCsDurationActionPerformed(evt);
+            }
+        });
+        popmenuTriggersCs.add(popmCsDuration);
+
+        popmenuTriggers.add(popmenuTriggersCs);
+
+        popmTriggerSentence.setText("Sentence - %sentence");
+        popmTriggerSentence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmTriggerSentenceActionPerformed(evt);
+            }
+        });
+        popmenuTriggers.add(popmTriggerSentence);
+
+        popmTriggerSyllable.setText("Syllable - %syllable");
+        popmTriggerSyllable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmTriggerSyllableActionPerformed(evt);
+            }
+        });
+        popmenuTriggers.add(popmTriggerSyllable);
+
+        popCommands.add(popmenuTriggers);
+
+        popmenuList.setText("Insert tag");
+
+        popmFontReset.setText("Reset - \\r");
+        popmFontReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontResetActionPerformed(evt);
+            }
+        });
+        popmenuList.add(popmFontReset);
+
+        popmWrapLine.setText("Wrap method - \\q");
+        popmWrapLine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmWrapLineActionPerformed(evt);
+            }
+        });
+        popmenuList.add(popmWrapLine);
+
+        popmFontEncoding.setText("Encoding - \\fe");
+        popmFontEncoding.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontEncodingActionPerformed(evt);
+            }
+        });
+        popmenuList.add(popmFontEncoding);
+
+        popmenuKaraoke.setText("Karaoke");
+
+        popmKaraokeMinusK.setText("\\k");
+        popmKaraokeMinusK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmKaraokeMinusKActionPerformed(evt);
+            }
+        });
+        popmenuKaraoke.add(popmKaraokeMinusK);
+
+        popmKaraokeBigK.setText("\\K");
+        popmKaraokeBigK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmKaraokeBigKActionPerformed(evt);
+            }
+        });
+        popmenuKaraoke.add(popmKaraokeBigK);
+
+        popmKaraokeFill.setText("\\kf");
+        popmKaraokeFill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmKaraokeFillActionPerformed(evt);
+            }
+        });
+        popmenuKaraoke.add(popmKaraokeFill);
+
+        popmKaraokeOutline.setText("\\ko");
+        popmKaraokeOutline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmKaraokeOutlineActionPerformed(evt);
+            }
+        });
+        popmenuKaraoke.add(popmKaraokeOutline);
+
+        popmenuList.add(popmenuKaraoke);
+
+        popmenuAnimation.setText("Animation");
+
+        popmAnimateSentence.setText("On sentence - \\t()");
+        popmAnimateSentence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmAnimateSentenceActionPerformed(evt);
+            }
+        });
+        popmenuAnimation.add(popmAnimateSentence);
+
+        popmAnimateSentenceWithAcc.setText("On sentence + acc - \\t($a,)");
+        popmAnimateSentenceWithAcc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmAnimateSentenceWithAccActionPerformed(evt);
+            }
+        });
+        popmenuAnimation.add(popmAnimateSentenceWithAcc);
+
+        popmAnimateTime.setText("On time - \\t(%sK,%eK,)");
+        popmAnimateTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmAnimateTimeActionPerformed(evt);
+            }
+        });
+        popmenuAnimation.add(popmAnimateTime);
+
+        popmAnimateWithAcc.setText("On time + acc - \\t(%sK,%eK,$a,)");
+        popmAnimateWithAcc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmAnimateWithAccActionPerformed(evt);
+            }
+        });
+        popmenuAnimation.add(popmAnimateWithAcc);
+
+        popmenuList.add(popmenuAnimation);
+
+        popmenuFont.setText("Font");
+
+        popmFontName.setText("Name - \\fn");
+        popmFontName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontNameActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontName);
+
+        popmFontSize.setText("Size - \\fs");
+        popmFontSize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontSizeActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontSize);
+
+        popmFontScale.setText("Scale X and Y - \\fsc");
+        popmFontScale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontScaleActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontScale);
+
+        popmFontScaleX.setText("Scale X - \\fscx");
+        popmFontScaleX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontScaleXActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontScaleX);
+
+        popmFontScaleY.setText("Scale Y - \\fscy");
+        popmFontScaleY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontScaleYActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontScaleY);
+
+        popmFontRX.setText("Rotation on X - \\frx");
+        popmFontRX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontRXActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontRX);
+
+        popmFontRY.setText("Rotation on Y - \\fry");
+        popmFontRY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontRYActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontRY);
+
+        popmFontRZ.setText("Rotation on Z - \\frz");
+        popmFontRZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontRZActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontRZ);
+
+        popmFontRZSimplified.setText("Rotation on Z - \\fr");
+        popmFontRZSimplified.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontRZSimplifiedActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontRZSimplified);
+
+        popmFontSpacing.setText("Spacing - \\fsp");
+        popmFontSpacing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontSpacingActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontSpacing);
+
+        popmFontShearX.setText("Shear on X - \\fax");
+        popmFontShearX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontShearXActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontShearX);
+
+        popmFontShearY.setText("Shear on Y - \\fay");
+        popmFontShearY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontShearYActionPerformed(evt);
+            }
+        });
+        popmenuFont.add(popmFontShearY);
+
+        popmenuList.add(popmenuFont);
+
+        popmenuFontAttribute.setText("Font attribute");
+
+        popmFontAttrBold.setText("Bold - \\b");
+        popmFontAttrBold.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontAttrBoldActionPerformed(evt);
+            }
+        });
+        popmenuFontAttribute.add(popmFontAttrBold);
+
+        popmFontAttrItalic.setText("Italic - \\i");
+        popmFontAttrItalic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontAttrItalicActionPerformed(evt);
+            }
+        });
+        popmenuFontAttribute.add(popmFontAttrItalic);
+
+        popmFontAttrUnderline.setText("Underline - \\u");
+        popmFontAttrUnderline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontAttrUnderlineActionPerformed(evt);
+            }
+        });
+        popmenuFontAttribute.add(popmFontAttrUnderline);
+
+        popmFontAttrStrikeOut.setText("StrikeOut - \\s");
+        popmFontAttrStrikeOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmFontAttrStrikeOutActionPerformed(evt);
+            }
+        });
+        popmenuFontAttribute.add(popmFontAttrStrikeOut);
+
+        popmFontAttrBord.setText("Border on X and Y - \\bord");
+        popmenuFontAttribute.add(popmFontAttrBord);
+
+        popmFontAttrXBord.setText("Border on X - \\xbord");
+        popmenuFontAttribute.add(popmFontAttrXBord);
+
+        popmFontAttrYBord.setText("Border on Y - \\ybord");
+        popmenuFontAttribute.add(popmFontAttrYBord);
+
+        popmFontAttrShad.setText("Shadow on X and Y - \\shad");
+        popmenuFontAttribute.add(popmFontAttrShad);
+
+        popmFontAttrXShad.setText("Shadow on X - \\xshad");
+        popmenuFontAttribute.add(popmFontAttrXShad);
+
+        popmFontAttrYShad.setText("Shadow on Y - \\yshad");
+        popmenuFontAttribute.add(popmFontAttrYShad);
+
+        popmenuList.add(popmenuFontAttribute);
+
+        popmenuPosition.setText("Position");
+
+        popmPosA.setText("Alignment (Formerly) - \\a");
+        popmPosA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmPosAActionPerformed(evt);
+            }
+        });
+        popmenuPosition.add(popmPosA);
+
+        popmPosAn.setText("Alignment (NimPad) - \\an");
+        popmPosAn.setToolTipText("");
+        popmPosAn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmPosAnActionPerformed(evt);
+            }
+        });
+        popmenuPosition.add(popmPosAn);
+
+        popmPosPos.setText("Position - \\pos");
+        popmPosPos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmPosPosActionPerformed(evt);
+            }
+        });
+        popmenuPosition.add(popmPosPos);
+
+        popmPosMove.setText("Movement - \\move");
+        popmPosMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmPosMoveActionPerformed(evt);
+            }
+        });
+        popmenuPosition.add(popmPosMove);
+
+        popmPosOrg.setText("Origin - \\org");
+        popmPosOrg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmPosOrgActionPerformed(evt);
+            }
+        });
+        popmenuPosition.add(popmPosOrg);
+
+        popmenuList.add(popmenuPosition);
+
+        popmenuDisplay.setText("Display");
+
+        popmDisplayBlurEdge.setText("Blur edge - \\be");
+        popmDisplayBlurEdge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayBlurEdgeActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayBlurEdge);
+
+        popmDisplayBlur.setText("Blur - \\blur");
+        popmDisplayBlur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayBlurActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayBlur);
+
+        popmDisplayPrimaryColor.setText("Text color (Formerly) - \\c");
+        popmDisplayPrimaryColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayPrimaryColorActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayPrimaryColor);
+
+        popmDisplayTextColor.setText("Text color - \\1c");
+        popmDisplayTextColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayTextColorActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayTextColor);
+
+        popmDisplayKaraokeColor.setText("Karaoke color - \\2c");
+        popmDisplayKaraokeColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayKaraokeColorActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayKaraokeColor);
+
+        popmDisplayOutlineColor.setText("Outline/Border color - \\3c");
+        popmDisplayOutlineColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayOutlineColorActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayOutlineColor);
+
+        popmDisplayShadowColor.setText("Shadow color - \\4c");
+        popmDisplayShadowColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayShadowColorActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayShadowColor);
+
+        popmDisplayAlpha.setText("Alpha - \\alpha");
+        popmDisplayAlpha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayAlphaActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayAlpha);
+
+        popmDisplayTextAlpha.setText("Text alpha - \\1a");
+        popmDisplayTextAlpha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayTextAlphaActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayTextAlpha);
+
+        popmDisplayKaraokeAlpha.setText("Karaoke alpha -\\2a");
+        popmDisplayKaraokeAlpha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayKaraokeAlphaActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayKaraokeAlpha);
+
+        popmDisplayOutlineAlpha.setText("Outline/Border alpha - \\3a");
+        popmDisplayOutlineAlpha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayOutlineAlphaActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayOutlineAlpha);
+
+        popmDisplayShadowAlpha.setText("Shadow alpha - \\4a");
+        popmDisplayShadowAlpha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayShadowAlphaActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayShadowAlpha);
+
+        popmDisplayFad.setText("Fade simple - \\fad");
+        popmDisplayFad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayFadActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayFad);
+
+        popmDisplayFade.setText("Fade complex - \\fade");
+        popmDisplayFade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDisplayFadeActionPerformed(evt);
+            }
+        });
+        popmenuDisplay.add(popmDisplayFade);
+
+        popmenuList.add(popmenuDisplay);
+
+        popmenuVisibility.setText("Visibility");
+
+        popmVisibilityClip.setText("Visible clip - \\clip");
+        popmVisibilityClip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmVisibilityClipActionPerformed(evt);
+            }
+        });
+        popmenuVisibility.add(popmVisibilityClip);
+
+        popmVisibilityIClip.setText("Invisible clip - \\iclip");
+        popmVisibilityIClip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmVisibilityIClipActionPerformed(evt);
+            }
+        });
+        popmenuVisibility.add(popmVisibilityIClip);
+
+        popmenuList.add(popmenuVisibility);
+
+        popmenuDrawing.setText("Drawing");
+
+        popmDrawP.setText("Draw with scale - \\p");
+        popmDrawP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawPActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawP);
+
+        popmDrawBaselineOffset.setText("Baseline offset - \\pbo");
+        popmDrawBaselineOffset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawBaselineOffsetActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawBaselineOffset);
+        popmenuDrawing.add(jSeparator2);
+
+        popmDrawMove.setText("Move command - m");
+        popmDrawMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawMoveActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawMove);
+
+        popmDrawGoto.setText("Goto command - n");
+        popmDrawGoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawGotoActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawGoto);
+
+        popmDrawLine.setText("Line command - l");
+        popmDrawLine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawLineActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawLine);
+
+        popmDrawCubic.setText("Cubic command - b");
+        popmDrawCubic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawCubicActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawCubic);
+
+        popmDrawSpline.setText("Spline command - s");
+        popmDrawSpline.setToolTipText("List of cubic splines");
+        popmDrawSpline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawSplineActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawSpline);
+
+        popmDrawCloseSpline.setText("Close spline command - c");
+        popmDrawCloseSpline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawCloseSplineActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawCloseSpline);
+
+        popmDrawExtendSpline.setText("Expand command - p");
+        popmDrawExtendSpline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmDrawExtendSplineActionPerformed(evt);
+            }
+        });
+        popmenuDrawing.add(popmDrawExtendSpline);
+
+        popmenuList.add(popmenuDrawing);
+
+        popCommands.add(popmenuList);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -438,6 +1189,290 @@ public class SettingsDialog extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void popmMsStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsStartActionPerformed
+        addText("%sK");
+    }//GEN-LAST:event_popmMsStartActionPerformed
+
+    private void popmMsEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsEndActionPerformed
+        addText("%eK");
+    }//GEN-LAST:event_popmMsEndActionPerformed
+
+    private void popmKaraokeMinusKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmKaraokeMinusKActionPerformed
+        addText("\\k%cdK");
+    }//GEN-LAST:event_popmKaraokeMinusKActionPerformed
+
+    private void popmKaraokeBigKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmKaraokeBigKActionPerformed
+        addText("\\K%cdK");
+    }//GEN-LAST:event_popmKaraokeBigKActionPerformed
+
+    private void popmKaraokeFillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmKaraokeFillActionPerformed
+        addText("\\kf%cdK");
+    }//GEN-LAST:event_popmKaraokeFillActionPerformed
+
+    private void popmKaraokeOutlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmKaraokeOutlineActionPerformed
+        addText("\\ko%cdK");
+    }//GEN-LAST:event_popmKaraokeOutlineActionPerformed
+
+    private void popmAnimateSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmAnimateSentenceActionPerformed
+        addText("\\t()");
+    }//GEN-LAST:event_popmAnimateSentenceActionPerformed
+
+    private void popmAnimateTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmAnimateTimeActionPerformed
+        addText("\\t(%sK,%eK,)");
+    }//GEN-LAST:event_popmAnimateTimeActionPerformed
+
+    private void popmAnimateWithAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmAnimateWithAccActionPerformed
+        addText("\\t(%sK,%eK,$a,)");
+    }//GEN-LAST:event_popmAnimateWithAccActionPerformed
+
+    private void popmAnimateSentenceWithAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmAnimateSentenceWithAccActionPerformed
+        addText("\\t($a,)");
+    }//GEN-LAST:event_popmAnimateSentenceWithAccActionPerformed
+
+    private void popmFontNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontNameActionPerformed
+        addText("\\fn");
+    }//GEN-LAST:event_popmFontNameActionPerformed
+
+    private void popmFontSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontSizeActionPerformed
+        addText("\\fs");
+    }//GEN-LAST:event_popmFontSizeActionPerformed
+
+    private void popmFontScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontScaleActionPerformed
+        addText("\\fsc");
+    }//GEN-LAST:event_popmFontScaleActionPerformed
+
+    private void popmFontScaleXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontScaleXActionPerformed
+        addText("\\fscx");
+    }//GEN-LAST:event_popmFontScaleXActionPerformed
+
+    private void popmFontScaleYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontScaleYActionPerformed
+        addText("\\fscy");
+    }//GEN-LAST:event_popmFontScaleYActionPerformed
+
+    private void popmFontRXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontRXActionPerformed
+        addText("\\frx");
+    }//GEN-LAST:event_popmFontRXActionPerformed
+
+    private void popmFontRYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontRYActionPerformed
+        addText("\\fry");
+    }//GEN-LAST:event_popmFontRYActionPerformed
+
+    private void popmFontRZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontRZActionPerformed
+        addText("\\frz");
+    }//GEN-LAST:event_popmFontRZActionPerformed
+
+    private void popmFontRZSimplifiedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontRZSimplifiedActionPerformed
+        addText("\\fr");
+    }//GEN-LAST:event_popmFontRZSimplifiedActionPerformed
+
+    private void popmFontSpacingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontSpacingActionPerformed
+        addText("\\fsp");
+    }//GEN-LAST:event_popmFontSpacingActionPerformed
+
+    private void popmFontShearXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontShearXActionPerformed
+        addText("\\fax");
+    }//GEN-LAST:event_popmFontShearXActionPerformed
+
+    private void popmFontShearYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontShearYActionPerformed
+        addText("\\fay");
+    }//GEN-LAST:event_popmFontShearYActionPerformed
+
+    private void popmFontAttrBoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontAttrBoldActionPerformed
+        addText("\\b");
+    }//GEN-LAST:event_popmFontAttrBoldActionPerformed
+
+    private void popmFontAttrItalicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontAttrItalicActionPerformed
+        addText("\\i");
+    }//GEN-LAST:event_popmFontAttrItalicActionPerformed
+
+    private void popmFontAttrUnderlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontAttrUnderlineActionPerformed
+        addText("\\u");
+    }//GEN-LAST:event_popmFontAttrUnderlineActionPerformed
+
+    private void popmFontAttrStrikeOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontAttrStrikeOutActionPerformed
+        addText("\\s");
+    }//GEN-LAST:event_popmFontAttrStrikeOutActionPerformed
+
+    private void popmFontResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontResetActionPerformed
+        addText("\\r");
+    }//GEN-LAST:event_popmFontResetActionPerformed
+
+    private void popmWrapLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmWrapLineActionPerformed
+        addText("\\q");
+    }//GEN-LAST:event_popmWrapLineActionPerformed
+
+    private void popmPosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmPosAActionPerformed
+        addText("\\a");
+    }//GEN-LAST:event_popmPosAActionPerformed
+
+    private void popmPosAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmPosAnActionPerformed
+        addText("\\an");
+    }//GEN-LAST:event_popmPosAnActionPerformed
+
+    private void popmPosPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmPosPosActionPerformed
+        addText("\\pos");
+    }//GEN-LAST:event_popmPosPosActionPerformed
+
+    private void popmPosMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmPosMoveActionPerformed
+        addText("\\move");
+    }//GEN-LAST:event_popmPosMoveActionPerformed
+
+    private void popmPosOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmPosOrgActionPerformed
+        addText("\\org");
+    }//GEN-LAST:event_popmPosOrgActionPerformed
+
+    private void popmDisplayBlurEdgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayBlurEdgeActionPerformed
+        addText("\\be");
+    }//GEN-LAST:event_popmDisplayBlurEdgeActionPerformed
+
+    private void popmDisplayBlurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayBlurActionPerformed
+        addText("\\blur");
+    }//GEN-LAST:event_popmDisplayBlurActionPerformed
+
+    private void popmDisplayPrimaryColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayPrimaryColorActionPerformed
+        addText("\\c");
+    }//GEN-LAST:event_popmDisplayPrimaryColorActionPerformed
+
+    private void popmDisplayTextColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayTextColorActionPerformed
+        addText("\\1c");
+    }//GEN-LAST:event_popmDisplayTextColorActionPerformed
+
+    private void popmDisplayKaraokeColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayKaraokeColorActionPerformed
+        addText("\\2c");
+    }//GEN-LAST:event_popmDisplayKaraokeColorActionPerformed
+
+    private void popmDisplayOutlineColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayOutlineColorActionPerformed
+        addText("\\3c");
+    }//GEN-LAST:event_popmDisplayOutlineColorActionPerformed
+
+    private void popmDisplayShadowColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayShadowColorActionPerformed
+        addText("\\4c");
+    }//GEN-LAST:event_popmDisplayShadowColorActionPerformed
+
+    private void popmDisplayAlphaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayAlphaActionPerformed
+        addText("\\alpha");
+    }//GEN-LAST:event_popmDisplayAlphaActionPerformed
+
+    private void popmDisplayTextAlphaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayTextAlphaActionPerformed
+        addText("\\1a");
+    }//GEN-LAST:event_popmDisplayTextAlphaActionPerformed
+
+    private void popmDisplayKaraokeAlphaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayKaraokeAlphaActionPerformed
+        addText("\\2a");
+    }//GEN-LAST:event_popmDisplayKaraokeAlphaActionPerformed
+
+    private void popmDisplayOutlineAlphaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayOutlineAlphaActionPerformed
+        addText("\\3a");
+    }//GEN-LAST:event_popmDisplayOutlineAlphaActionPerformed
+
+    private void popmDisplayShadowAlphaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayShadowAlphaActionPerformed
+        addText("\\4a");
+    }//GEN-LAST:event_popmDisplayShadowAlphaActionPerformed
+
+    private void popmDisplayFadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayFadActionPerformed
+        addText("\\fad");
+    }//GEN-LAST:event_popmDisplayFadActionPerformed
+
+    private void popmDisplayFadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDisplayFadeActionPerformed
+        addText("\\fade");
+    }//GEN-LAST:event_popmDisplayFadeActionPerformed
+
+    private void popmVisibilityClipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmVisibilityClipActionPerformed
+        addText("\\clip");
+    }//GEN-LAST:event_popmVisibilityClipActionPerformed
+
+    private void popmVisibilityIClipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmVisibilityIClipActionPerformed
+        addText("\\iclip");
+    }//GEN-LAST:event_popmVisibilityIClipActionPerformed
+
+    private void popmFontEncodingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmFontEncodingActionPerformed
+        addText("\\fe");
+    }//GEN-LAST:event_popmFontEncodingActionPerformed
+
+    private void popmDrawPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawPActionPerformed
+        addText("{\\p1}{\\p0}");
+    }//GEN-LAST:event_popmDrawPActionPerformed
+
+    private void popmDrawBaselineOffsetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawBaselineOffsetActionPerformed
+        addText("\\pbo");
+    }//GEN-LAST:event_popmDrawBaselineOffsetActionPerformed
+
+    private void popmDrawMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawMoveActionPerformed
+        addText("m");
+    }//GEN-LAST:event_popmDrawMoveActionPerformed
+
+    private void popmDrawGotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawGotoActionPerformed
+        addText("n");
+    }//GEN-LAST:event_popmDrawGotoActionPerformed
+
+    private void popmDrawLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawLineActionPerformed
+        addText("l");
+    }//GEN-LAST:event_popmDrawLineActionPerformed
+
+    private void popmDrawCubicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawCubicActionPerformed
+        addText("b");
+    }//GEN-LAST:event_popmDrawCubicActionPerformed
+
+    private void popmDrawSplineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawSplineActionPerformed
+        addText("s");
+    }//GEN-LAST:event_popmDrawSplineActionPerformed
+
+    private void popmDrawCloseSplineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawCloseSplineActionPerformed
+        addText("c");
+    }//GEN-LAST:event_popmDrawCloseSplineActionPerformed
+
+    private void popmDrawExtendSplineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmDrawExtendSplineActionPerformed
+        addText("p");
+    }//GEN-LAST:event_popmDrawExtendSplineActionPerformed
+
+    private void popmMsMiddleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsMiddleActionPerformed
+        addText("%mK");
+    }//GEN-LAST:event_popmMsMiddleActionPerformed
+
+    private void popmMsDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsDurationActionPerformed
+        addText("%dK");
+    }//GEN-LAST:event_popmMsDurationActionPerformed
+
+    private void popmCsStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCsStartActionPerformed
+        addText("%csK");
+    }//GEN-LAST:event_popmCsStartActionPerformed
+
+    private void popmCsEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCsEndActionPerformed
+        addText("%ceK");
+    }//GEN-LAST:event_popmCsEndActionPerformed
+
+    private void popmCsMiddleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCsMiddleActionPerformed
+        addText("%cmK");
+    }//GEN-LAST:event_popmCsMiddleActionPerformed
+
+    private void popmCsDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCsDurationActionPerformed
+        addText("%cdK");
+    }//GEN-LAST:event_popmCsDurationActionPerformed
+
+    private void popmMsSentenceStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsSentenceStartActionPerformed
+        addText("%ssK");
+    }//GEN-LAST:event_popmMsSentenceStartActionPerformed
+
+    private void popmMsSentenceEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsSentenceEndActionPerformed
+        addText("%seK");
+    }//GEN-LAST:event_popmMsSentenceEndActionPerformed
+
+    private void popmMsSentenceMiddleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsSentenceMiddleActionPerformed
+        addText("%smK");
+    }//GEN-LAST:event_popmMsSentenceMiddleActionPerformed
+
+    private void popmMsSentenceDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsSentenceDurationActionPerformed
+        addText("%sdK");
+    }//GEN-LAST:event_popmMsSentenceDurationActionPerformed
+
+    private void popmTriggerSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmTriggerSentenceActionPerformed
+        addText("%sentence");
+    }//GEN-LAST:event_popmTriggerSentenceActionPerformed
+
+    private void popmTriggerSyllableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmTriggerSyllableActionPerformed
+        addText("%syllable");
+    }//GEN-LAST:event_popmTriggerSyllableActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -491,12 +1526,104 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JList<String> listTemplates;
     private javax.swing.JPopupMenu popCommands;
     private javax.swing.JPopupMenu popTemplates;
+    private javax.swing.JMenuItem popmAnimateSentence;
+    private javax.swing.JMenuItem popmAnimateSentenceWithAcc;
+    private javax.swing.JMenuItem popmAnimateTime;
+    private javax.swing.JMenuItem popmAnimateWithAcc;
+    private javax.swing.JMenuItem popmCsDuration;
+    private javax.swing.JMenuItem popmCsEnd;
+    private javax.swing.JMenuItem popmCsMiddle;
+    private javax.swing.JMenuItem popmCsStart;
+    private javax.swing.JMenuItem popmDisplayAlpha;
+    private javax.swing.JMenuItem popmDisplayBlur;
+    private javax.swing.JMenuItem popmDisplayBlurEdge;
+    private javax.swing.JMenuItem popmDisplayFad;
+    private javax.swing.JMenuItem popmDisplayFade;
+    private javax.swing.JMenuItem popmDisplayKaraokeAlpha;
+    private javax.swing.JMenuItem popmDisplayKaraokeColor;
+    private javax.swing.JMenuItem popmDisplayOutlineAlpha;
+    private javax.swing.JMenuItem popmDisplayOutlineColor;
+    private javax.swing.JMenuItem popmDisplayPrimaryColor;
+    private javax.swing.JMenuItem popmDisplayShadowAlpha;
+    private javax.swing.JMenuItem popmDisplayShadowColor;
+    private javax.swing.JMenuItem popmDisplayTextAlpha;
+    private javax.swing.JMenuItem popmDisplayTextColor;
+    private javax.swing.JMenuItem popmDrawBaselineOffset;
+    private javax.swing.JMenuItem popmDrawCloseSpline;
+    private javax.swing.JMenuItem popmDrawCubic;
+    private javax.swing.JMenuItem popmDrawExtendSpline;
+    private javax.swing.JMenuItem popmDrawGoto;
+    private javax.swing.JMenuItem popmDrawLine;
+    private javax.swing.JMenuItem popmDrawMove;
+    private javax.swing.JMenuItem popmDrawP;
+    private javax.swing.JMenuItem popmDrawSpline;
+    private javax.swing.JMenuItem popmFontAttrBold;
+    private javax.swing.JMenuItem popmFontAttrBord;
+    private javax.swing.JMenuItem popmFontAttrItalic;
+    private javax.swing.JMenuItem popmFontAttrShad;
+    private javax.swing.JMenuItem popmFontAttrStrikeOut;
+    private javax.swing.JMenuItem popmFontAttrUnderline;
+    private javax.swing.JMenuItem popmFontAttrXBord;
+    private javax.swing.JMenuItem popmFontAttrXShad;
+    private javax.swing.JMenuItem popmFontAttrYBord;
+    private javax.swing.JMenuItem popmFontAttrYShad;
+    private javax.swing.JMenuItem popmFontEncoding;
+    private javax.swing.JMenuItem popmFontName;
+    private javax.swing.JMenuItem popmFontRX;
+    private javax.swing.JMenuItem popmFontRY;
+    private javax.swing.JMenuItem popmFontRZ;
+    private javax.swing.JMenuItem popmFontRZSimplified;
+    private javax.swing.JMenuItem popmFontReset;
+    private javax.swing.JMenuItem popmFontScale;
+    private javax.swing.JMenuItem popmFontScaleX;
+    private javax.swing.JMenuItem popmFontScaleY;
+    private javax.swing.JMenuItem popmFontShearX;
+    private javax.swing.JMenuItem popmFontShearY;
+    private javax.swing.JMenuItem popmFontSize;
+    private javax.swing.JMenuItem popmFontSpacing;
+    private javax.swing.JMenuItem popmKaraokeBigK;
+    private javax.swing.JMenuItem popmKaraokeFill;
+    private javax.swing.JMenuItem popmKaraokeMinusK;
+    private javax.swing.JMenuItem popmKaraokeOutline;
+    private javax.swing.JMenuItem popmMsDuration;
+    private javax.swing.JMenuItem popmMsEnd;
+    private javax.swing.JMenuItem popmMsMiddle;
+    private javax.swing.JMenuItem popmMsSentenceDuration;
+    private javax.swing.JMenuItem popmMsSentenceEnd;
+    private javax.swing.JMenuItem popmMsSentenceMiddle;
+    private javax.swing.JMenuItem popmMsSentenceStart;
+    private javax.swing.JMenuItem popmMsStart;
+    private javax.swing.JMenuItem popmPosA;
+    private javax.swing.JMenuItem popmPosAn;
+    private javax.swing.JMenuItem popmPosMove;
+    private javax.swing.JMenuItem popmPosOrg;
+    private javax.swing.JMenuItem popmPosPos;
     private javax.swing.JMenuItem popmRemove;
     private javax.swing.JMenuItem popmSave;
+    private javax.swing.JMenuItem popmTriggerSentence;
+    private javax.swing.JMenuItem popmTriggerSyllable;
+    private javax.swing.JMenuItem popmVisibilityClip;
+    private javax.swing.JMenuItem popmVisibilityIClip;
+    private javax.swing.JMenuItem popmWrapLine;
+    private javax.swing.JMenu popmenuAnimation;
+    private javax.swing.JMenu popmenuDisplay;
+    private javax.swing.JMenu popmenuDrawing;
+    private javax.swing.JMenu popmenuFont;
+    private javax.swing.JMenu popmenuFontAttribute;
+    private javax.swing.JMenu popmenuKaraoke;
+    private javax.swing.JMenu popmenuList;
+    private javax.swing.JMenu popmenuPosition;
+    private javax.swing.JMenu popmenuTriggers;
+    private javax.swing.JMenu popmenuTriggersCs;
+    private javax.swing.JMenu popmenuTriggersMs;
+    private javax.swing.JMenu popmenuVisibility;
     private javax.swing.JTabbedPane tabpCode;
     private javax.swing.JTextPane textPanelCommands;
     // End of variables declaration//GEN-END:variables

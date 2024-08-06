@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JPopupMenu" name="popTemplates">
 
@@ -32,6 +32,697 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmSaveActionPerformed"/>
           </Events>
         </MenuItem>
+        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+        </Component>
+        <Menu class="javax.swing.JMenu" name="popmenuTriggers">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Variable"/>
+          </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="popmenuTriggersMs">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="In milliseconds"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsStart">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syllable start (ms) - %sK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsStartActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsEnd">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syllable end (ms) - %eK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsEndActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsMiddle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syllable middle (ms) - %mK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsMiddleActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsDuration">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syllable duration (ms) - %dK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsDurationActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsSentenceStart">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Sentence start (ms) - %ssK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsSentenceStartActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsSentenceEnd">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Sentence end (ms) - %seK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsSentenceEndActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsSentenceMiddle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Sentence middle (ms) - %smK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsSentenceMiddleActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsSentenceDuration">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Sentence duration (ms) - %sdK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsSentenceDurationActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="popmenuTriggersCs">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="In centiseconds"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmCsStart">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syllable start (cs) - %csK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmCsStartActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmCsEnd">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syllable end (cs) - %ceK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmCsEndActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmCsMiddle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syllable middle (cs) - %cmK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmCsMiddleActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmCsDuration">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Syllable duration (cs) - %cdK"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmCsDurationActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="popmTriggerSentence">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sentence - %sentence"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmTriggerSentenceActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="popmTriggerSyllable">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Syllable - %syllable"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmTriggerSyllableActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="popmenuList">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Insert tag"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="popmFontReset">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reset - \u005cr" containsInvalidXMLChars="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontResetActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="popmWrapLine">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Wrap method - \u005cq" containsInvalidXMLChars="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmWrapLineActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="popmFontEncoding">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Encoding - \u005cfe" containsInvalidXMLChars="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontEncodingActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="popmenuKaraoke">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Karaoke"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmKaraokeMinusK">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="\u005ck" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmKaraokeMinusKActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmKaraokeBigK">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="\u005cK" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmKaraokeBigKActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmKaraokeFill">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="\u005ckf" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmKaraokeFillActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmKaraokeOutline">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="\u005cko" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmKaraokeOutlineActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="popmenuAnimation">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Animation"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmAnimateSentence">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="On sentence - \u005ct()" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmAnimateSentenceActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmAnimateSentenceWithAcc">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="On sentence + acc - \u005ct($a,)" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmAnimateSentenceWithAccActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmAnimateTime">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="On time - \u005ct(%sK,%eK,)" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmAnimateTimeActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmAnimateWithAcc">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="On time + acc - \u005ct(%sK,%eK,$a,)" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmAnimateWithAccActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="popmenuFont">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Font"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontName">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Name - \u005cfn" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontNameActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontSize">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Size - \u005cfs" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontSizeActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontScale">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Scale X and Y - \u005cfsc" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontScaleActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontScaleX">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Scale X - \u005cfscx" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontScaleXActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontScaleY">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Scale Y - \u005cfscy" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontScaleYActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontRX">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Rotation on X - \u005cfrx" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontRXActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontRY">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Rotation on Y - \u005cfry" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontRYActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontRZ">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Rotation on Z - \u005cfrz" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontRZActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontRZSimplified">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Rotation on Z - \u005cfr" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontRZSimplifiedActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontSpacing">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Spacing - \u005cfsp" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontSpacingActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontShearX">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Shear on X - \u005cfax" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontShearXActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontShearY">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Shear on Y - \u005cfay" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontShearYActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="popmenuFontAttribute">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Font attribute"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrBold">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Bold - \u005cb" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontAttrBoldActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrItalic">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Italic - \u005ci" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontAttrItalicActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrUnderline">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Underline - \u005cu" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontAttrUnderlineActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrStrikeOut">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="StrikeOut - \u005cs" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmFontAttrStrikeOutActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrBord">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Border on X and Y - \u005cbord" containsInvalidXMLChars="true"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrXBord">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Border on X - \u005cxbord" containsInvalidXMLChars="true"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrYBord">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Border on Y - \u005cybord" containsInvalidXMLChars="true"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrShad">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Shadow on X and Y - \u005cshad" containsInvalidXMLChars="true"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrXShad">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Shadow on X - \u005cxshad" containsInvalidXMLChars="true"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmFontAttrYShad">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Shadow on Y - \u005cyshad" containsInvalidXMLChars="true"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="popmenuPosition">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Position"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmPosA">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Alignment (Formerly) - \u005ca" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmPosAActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmPosAn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Alignment (NimPad) - \u005can" containsInvalidXMLChars="true"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmPosAnActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmPosPos">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Position - \u005cpos" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmPosPosActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmPosMove">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Movement - \u005cmove" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmPosMoveActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmPosOrg">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Origin - \u005corg" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmPosOrgActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="popmenuDisplay">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Display"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayBlurEdge">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Blur edge - \u005cbe" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayBlurEdgeActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayBlur">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Blur - \u005cblur" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayBlurActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayPrimaryColor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Text color (Formerly) - \u005cc" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayPrimaryColorActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayTextColor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Text color - \u005c1c" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayTextColorActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayKaraokeColor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Karaoke color - \u005c2c" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayKaraokeColorActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayOutlineColor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Outline/Border color - \u005c3c" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayOutlineColorActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayShadowColor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Shadow color - \u005c4c" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayShadowColorActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayAlpha">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Alpha - \u005calpha" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayAlphaActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayTextAlpha">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Text alpha - \u005c1a" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayTextAlphaActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayKaraokeAlpha">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Karaoke alpha -\u005c2a" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayKaraokeAlphaActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayOutlineAlpha">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Outline/Border alpha - \u005c3a" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayOutlineAlphaActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayShadowAlpha">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Shadow alpha - \u005c4a" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayShadowAlphaActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayFad">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Fade simple - \u005cfad" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayFadActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDisplayFade">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Fade complex - \u005cfade" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDisplayFadeActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="popmenuVisibility">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Visibility"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmVisibilityClip">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Visible clip - \u005cclip" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmVisibilityClipActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmVisibilityIClip">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Invisible clip - \u005ciclip" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmVisibilityIClipActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="popmenuDrawing">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Drawing"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawP">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Draw with scale - \u005cp" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawPActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawBaselineOffset">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Baseline offset - \u005cpbo" containsInvalidXMLChars="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawBaselineOffsetActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawMove">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Move command - m"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawMoveActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawGoto">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Goto command - n"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawGotoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawLine">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Line command - l"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawLineActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawCubic">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cubic command - b"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawCubicActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawSpline">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Spline command - s"/>
+                    <Property name="toolTipText" type="java.lang.String" value="List of cubic splines"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawSplineActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawCloseSpline">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Close spline command - c"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawCloseSplineActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmDrawExtendSpline">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Expand command - p"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmDrawExtendSplineActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Container>
   </NonVisualComponents>

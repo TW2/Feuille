@@ -15,7 +15,7 @@ import org.wingate.feuille.util.DialogResult;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private Theme chosenTheme = new Theme();
+    private final Theme chosenTheme = new Theme();
     private final ContainersDesktopPane desktopPane;
     
     /**
@@ -48,10 +48,6 @@ public class MainFrame extends javax.swing.JFrame {
             bgMatrixY.add(m);
             m.setSelected(i == 0);
         }
-    }
-    
-    public void setTheme(Theme theme){
-        chosenTheme = theme;
     }
     
     public Theme getTheme() {

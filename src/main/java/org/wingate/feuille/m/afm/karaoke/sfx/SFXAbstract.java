@@ -136,6 +136,11 @@ public abstract class SFXAbstract implements SFXInterface {
     public String replaceParams(String template, List<SFXSyllable> syls){
         String t, output = "";
         
+        StringBuilder sentence = new StringBuilder();
+        for(SFXSyllable syl : syls){
+            sentence.append(syl.getSyllable());
+        }
+        
         for(SFXSyllable syl : syls){
             t = template;
             
@@ -158,8 +163,10 @@ public abstract class SFXAbstract implements SFXInterface {
             
             t = t.replace("%ssK", Long.toString(syl.getMsEventStart())); // Phrase
             t = t.replace("%seK", Long.toString(syl.getMsEventEnd())); // Phrase
-            t = t.replace("%smK", Long.toString(syl.getMsEventDuration())); // Phrase
+            t = t.replace("%smK", Long.toString(syl.getMsEventDuration() / 2)); // Phrase
+            t = t.replace("%sdK", Long.toString(syl.getMsEventDuration())); // Phrase
             
+            t = t.replace("%sentence", sentence.toString());
             t = t.replace("%syllable", syl.getSyllable());
             // TODO LOOP t = t.replace("%letter", syl.getLetter());
             

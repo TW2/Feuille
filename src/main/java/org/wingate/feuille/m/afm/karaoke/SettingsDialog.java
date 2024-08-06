@@ -652,7 +652,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         });
         popmenuPosition.add(popmPosA);
 
-        popmPosAn.setText("Alignment (NimPad) - \\an");
+        popmPosAn.setText("Alignment (NumPad) - \\an");
         popmPosAn.setToolTipText("");
         popmPosAn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

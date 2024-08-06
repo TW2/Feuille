@@ -464,7 +464,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="popmPosAn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Alignment (NimPad) - \u005can" containsInvalidXMLChars="true"/>
+                    <Property name="text" type="java.lang.String" value="Alignment (NumPad) - \u005can" containsInvalidXMLChars="true"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>

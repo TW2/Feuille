@@ -27,6 +27,7 @@ import javax.swing.JDesktopPane;
 import org.wingate.feuille.m.ygg.audio.AudioPanel;
 import org.wingate.feuille.m.ygg.table.AssTablePanel;
 import org.wingate.feuille.m.ygg.video.VideoPanel;
+import org.wingate.feuille.theme.Theme;
 
 /**
  *
@@ -42,8 +43,10 @@ public class ContainersDesktopPane extends JDesktopPane {
     
     private final Matrix matrix;
     private final List<ContainerInternalFrame> containers = new ArrayList<>();
+    private final Theme theme;
 
-    public ContainersDesktopPane() {
+    public ContainersDesktopPane(Theme theme) {
+        this.theme = theme;
         matrix = new Matrix();
     }
 
@@ -61,7 +64,7 @@ public class ContainersDesktopPane extends JDesktopPane {
     }
     
     public void addElementAbstract(ElementAbstract ea, String friendlyName){
-        ContainerInternalFrame cp = new ContainerInternalFrame(this, ea);
+        ContainerInternalFrame cp = new ContainerInternalFrame(this, ea, theme);
         ea.setupMenu(friendlyName, cp);
         ea.setFriendlyName(friendlyName);// Set friendlyName
         add(cp); // Add to desktop

@@ -1,6 +1,7 @@
 package org.wingate.feuille;
 
 import java.awt.BorderLayout;
+import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import org.wingate.feuille.m.ContainerInternalFrame;
@@ -15,16 +16,22 @@ import org.wingate.feuille.util.DialogResult;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private final Theme chosenTheme = new Theme();
+    private final Theme theme;
     private final ContainersDesktopPane desktopPane;
     
     /**
      * Creates new form MainFrame
+     * @param theme
      */
-    public MainFrame() {
+    public MainFrame(Theme theme) {
         initComponents();
         
-        desktopPane = new ContainersDesktopPane();
+        File currentFolder = new File(".");
+        File file = new File(currentFolder.getAbsolutePath() + File.separator + "user");
+        if(file.exists() == false) file.mkdir();
+        
+        this.theme = theme;
+        desktopPane = new ContainersDesktopPane(theme);
         
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(desktopPane, BorderLayout.CENTER);
@@ -51,7 +58,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     public Theme getTheme() {
-        return chosenTheme;
+        return theme;
     }
     
     public enum MatrixOrientation { X, Y; }

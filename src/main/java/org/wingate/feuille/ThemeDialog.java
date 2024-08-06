@@ -17,6 +17,7 @@
 package org.wingate.feuille;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.io.File;
 import javax.swing.DefaultComboBoxModel;
@@ -25,6 +26,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileFilter;
+import org.wingate.feuille.theme.*;
 
 /**
  *
@@ -39,6 +41,8 @@ public class ThemeDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form ThemeDialog
+     * @param parent
+     * @param modal
      */
     public ThemeDialog(java.awt.Frame parent, boolean modal) {        
         super(parent, modal);        
@@ -48,17 +52,17 @@ public class ThemeDialog extends javax.swing.JDialog {
         cbTheme.setModel(dcbmInt);
         cbExt.setModel(dcbmExt);
         
-        dcbmInt.addElement(new Theme(Theme.Type.Light, new FlatLightLaf(), "Light", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Dark, new FlatDarkLaf(), "Dark", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Dark, Feuille.useBloodyGolden(), "Bloody Golden", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Light, Feuille.useGirlPowerLight(), "Girl Power Light", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Light, Feuille.useArcticLight(), "Arctic Light", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Light, Feuille.useLemonLight(), "Lemon Light", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Light, Feuille.usePatriotLight(), "Patriot Light", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Dark, Feuille.useSatanDark(), "Satan Dark", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Dark, Feuille.useMilitaryDark(), "Military Dark", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Dark, Feuille.useRanchDark(), "Ranch Dark", null));
-        dcbmInt.addElement(new Theme(Theme.Type.Dark, Feuille.useNuclearDark(), "Nuclear Dark", null));
+        dcbmInt.addElement(new Light());
+        dcbmInt.addElement(new Dark());
+        dcbmInt.addElement(new BloodyGoldenDark());
+        dcbmInt.addElement(new GirlPowerLight());
+        dcbmInt.addElement(new ArcticLight());
+        dcbmInt.addElement(new LemonLight());
+        dcbmInt.addElement(new PatriotLight());
+        dcbmInt.addElement(new SatanDark());
+        dcbmInt.addElement(new MilitaryDark());
+        dcbmInt.addElement(new RanchDark());
+        dcbmInt.addElement(new NuclearDark());
         
         cbTheme.setSelectedIndex(0);
         
@@ -79,35 +83,35 @@ public class ThemeDialog extends javax.swing.JDialog {
         });
         
         try{
-            UIManager.setLookAndFeel(Feuille.useBloodyGolden());
+            UIManager.setLookAndFeel(new BloodyGoldenDark().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel1);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");
         }
         
         try{
-            UIManager.setLookAndFeel(Feuille.usePatriotLight());
+            UIManager.setLookAndFeel(new PatriotLight().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel2);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");
         }
         
         try{
-            UIManager.setLookAndFeel(Feuille.useGirlPowerLight());
+            UIManager.setLookAndFeel(new GirlPowerLight().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel3);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");
         }
         
         try{
-            UIManager.setLookAndFeel(Feuille.useArcticLight());
+            UIManager.setLookAndFeel(new ArcticLight().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel4);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");
         }
         
         try{
-            UIManager.setLookAndFeel(Feuille.useLemonLight());
+            UIManager.setLookAndFeel(new LemonLight().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel5);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");
@@ -128,28 +132,28 @@ public class ThemeDialog extends javax.swing.JDialog {
         }
         
         try{
-            UIManager.setLookAndFeel(Feuille.useSatanDark());
+            UIManager.setLookAndFeel(new SatanDark().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel8);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");
         }
         
         try{
-            UIManager.setLookAndFeel(Feuille.useMilitaryDark());
+            UIManager.setLookAndFeel(new MilitaryDark().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel9);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");
         }
         
         try{
-            UIManager.setLookAndFeel(Feuille.useRanchDark());
+            UIManager.setLookAndFeel(new RanchDark().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel10);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");
         }
         
         try{
-            UIManager.setLookAndFeel(Feuille.useNuclearDark());
+            UIManager.setLookAndFeel(new NuclearDark().getTheme());
             SwingUtilities.updateComponentTreeUI(jPanel11);
         }catch(UnsupportedLookAndFeelException exc){
             System.err.println("Look and feel error!");

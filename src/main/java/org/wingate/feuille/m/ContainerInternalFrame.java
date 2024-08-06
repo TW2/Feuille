@@ -17,6 +17,7 @@
 package org.wingate.feuille.m;
 
 import java.awt.BorderLayout;
+import org.wingate.feuille.theme.Theme;
 
 /**
  *
@@ -31,8 +32,9 @@ public class ContainerInternalFrame extends javax.swing.JInternalFrame {
      * Creates new form ContainerInternalFrame
      * @param containersDesktopPane
      * @param elementAbstract
+     * @param theme
      */
-    public ContainerInternalFrame(ContainersDesktopPane containersDesktopPane, ElementAbstract elementAbstract) {
+    public ContainerInternalFrame(ContainersDesktopPane containersDesktopPane, ElementAbstract elementAbstract, Theme theme) {
         initComponents();
         this.containersDesktopPane = containersDesktopPane;
         this.elementAbstract = elementAbstract;
@@ -41,6 +43,12 @@ public class ContainerInternalFrame extends javax.swing.JInternalFrame {
         if(elementAbstract.getPanel() instanceof javax.swing.JPanel content){
             embedPanel.add(content, BorderLayout.CENTER);
         }
+        
+        initTheme(theme);        
+    }
+    
+    private void initTheme(Theme theme){
+        theme.apply(this);
     }
 
     public ContainersDesktopPane getContainersDesktopPane() {

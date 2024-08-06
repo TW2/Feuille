@@ -10,3 +10,6 @@
 
 # Desktop Windows files
 *.ini
+
+# User's folder
+/user

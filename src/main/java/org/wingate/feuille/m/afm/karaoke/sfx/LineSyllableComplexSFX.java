@@ -16,31 +16,28 @@
  */
 package org.wingate.feuille.m.afm.karaoke.sfx;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.wingate.feuille.ass.AssEvent;
-import org.wingate.feuille.m.afm.karaoke.BiEvent;
 
 /**
  *
  * @author util2
  */
-public interface SFXInterface {
-    public String getName();
+public class LineSyllableComplexSFX extends SFXAbstract {
+
+    public LineSyllableComplexSFX() {
+        name = "Complex karaoke (not yet implemented)";
+        helper = "";
+    }
+
+    @Override
+    public List<AssEvent> doJob(AssEvent input) {
+        final List<AssEvent> output = new ArrayList<>();        
+        
+        // TODO
+        
+        return output;
+    }
     
-    public String getHumanName();
-    public void setHumanName(String humanName);
-    
-    public String getHelper();
-    public void setHelper(String helper);
-    
-    public List<SFXCode> getCodes();
-    public void setCodes(List<SFXCode> codes);
-    
-    public List<String> getTemplates();
-    public void setTemplates(List<String> templates);
-    
-    public void forOneLine(BiEvent input);
-    public void forFewLines(List<BiEvent> input);
-    
-    public List<AssEvent> doJob(AssEvent input);
 }

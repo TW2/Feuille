@@ -44,6 +44,40 @@
                 <Property name="text" type="java.lang.String" value="In milliseconds"/>
               </Properties>
               <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsLetterStart">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Letter start (ms) - %lsK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsLetterStartActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsLetterEnd">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Letter end (ms) - %leK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsLetterEndActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsLetterMiddle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Letter middle (ms) - %lmK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsLetterMiddleActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmMsLetterDuration">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Letter duration (ms) - %ldK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmMsLetterDurationActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator4">
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="popmMsStart">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Syllable start (ms) - %sK"/>
@@ -117,6 +151,40 @@
                 <Property name="text" type="java.lang.String" value="In centiseconds"/>
               </Properties>
               <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="popmCsLetterStart">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Letter start (cs) - %lcsK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmCsLetterStartActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmCsLetterEnd">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Letter end (cs) - %lceK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmCsLetterEndActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmCsLetterMiddle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Letter middle (cs) - %lcmK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmCsLetterMiddleActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="popmCsLetterDuration">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Letter duration (cs) - %lcdK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmCsLetterDurationActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator5">
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="popmCsStart">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Syllable start (cs) - %csK"/>
@@ -152,12 +220,12 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="popmTriggerSentence">
+            <MenuItem class="javax.swing.JMenuItem" name="popmTriggerLetter">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sentence - %sentence"/>
+                <Property name="text" type="java.lang.String" value="Letter - %letter"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmTriggerSentenceActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmTriggerLetterActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="popmTriggerSyllable">
@@ -166,6 +234,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmTriggerSyllableActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="popmTriggerSentence">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sentence - %sentence"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmTriggerSentenceActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -891,7 +967,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Commands :"/>
+        <Property name="text" type="java.lang.String" value="Templates : "/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">

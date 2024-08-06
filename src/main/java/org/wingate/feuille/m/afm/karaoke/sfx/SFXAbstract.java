@@ -31,6 +31,7 @@ public abstract class SFXAbstract implements SFXInterface {
     
     protected String name;
     protected String humanName;
+    protected String helper;
     protected List<SFXCode> codes = new ArrayList<>();
     protected List<String> templates = new ArrayList<>();
 
@@ -51,6 +52,16 @@ public abstract class SFXAbstract implements SFXInterface {
     @Override
     public void setHumanName(String humanName) {
         this.humanName = humanName;
+    }
+
+    @Override
+    public String getHelper() {
+        return helper;
+    }
+
+    @Override
+    public void setHelper(String helper) {
+        this.helper = helper;
     }
     
     @Override
@@ -156,11 +167,6 @@ public abstract class SFXAbstract implements SFXInterface {
             t = t.replace("%ceK", Long.toString(syl.getMsEnd() / 10)); // Syllabe
             t = t.replace("%cdK", Long.toString(syl.getMsDuration() / 10)); // Syllabe
             
-            // TODO t = t.replace("%lsK", Long.toString(syl.getMsStart())); // Lettre
-            // TODO t = t.replace("%lmK", Long.toString(syl.getMsMid())); // Lettre
-            // TODO t = t.replace("%leK", Long.toString(syl.getMsEnd())); // Lettre
-            // TODO t = t.replace("%ldK", Long.toString(syl.getMsDuration())); // Lettre
-            
             t = t.replace("%ssK", Long.toString(syl.getMsEventStart())); // Phrase
             t = t.replace("%seK", Long.toString(syl.getMsEventEnd())); // Phrase
             t = t.replace("%smK", Long.toString(syl.getMsEventDuration() / 2)); // Phrase
@@ -168,10 +174,98 @@ public abstract class SFXAbstract implements SFXInterface {
             
             t = t.replace("%sentence", sentence.toString());
             t = t.replace("%syllable", syl.getSyllable());
-            // TODO LOOP t = t.replace("%letter", syl.getLetter());
+            
+            
+            char[] letters = syl.getSyllable().toCharArray();
+            long pastLetterDuration = syl.getMsDuration();
+            long currentBefore = syl.getMsStart();
+            for(int i=0; i<letters.length; i++){
+                long dur = letters.length - 1 == i ?
+                        pastLetterDuration : syl.getMsDuration() / letters.length;
+                pastLetterDuration -= syl.getMsDuration() / letters.length;
+                
+                // Millisecondes
+                t = t.replace("%lsK", Long.toString(currentBefore)); // Lettre
+                t = t.replace("%lmK", Long.toString(currentBefore + dur / 2L)); // Lettre
+                t = t.replace("%leK", Long.toString(currentBefore + dur)); // Lettre
+                t = t.replace("%ldK", Long.toString(dur)); // Lettre
+                
+                // Centièmes de seconde
+                t = t.replace("%lcsK", Long.toString(currentBefore / 10)); // Lettre
+                t = t.replace("%lcmK", Long.toString((currentBefore + dur / 2L) / 10)); // Lettre
+                t = t.replace("%lceK", Long.toString((currentBefore + dur) / 10)); // Lettre
+                t = t.replace("%lcdK", Long.toString(dur / 10)); // Lettre
+
+                t = t.replace("%letter", Character.toString(letters[i]));
+                
+                currentBefore += dur;
+            }
             
             output += t;
         }
+        
+        return output;
+    }
+    
+    // Remplace phReplaceParameters
+    public String replaceParams(String template, List<SFXSyllable> syls, int index){
+        String t, output = "";
+        
+        StringBuilder sentence = new StringBuilder();
+        for(SFXSyllable syl : syls){
+            sentence.append(syl.getSyllable());
+        }
+        
+        SFXSyllable syl = syls.get(index);
+        t = template;
+
+        // Millisecondes
+        t = t.replace("%sK", Long.toString(syl.getMsStart())); // Syllabe
+        t = t.replace("%mK", Long.toString(syl.getMsMid())); // Syllabe
+        t = t.replace("%eK", Long.toString(syl.getMsEnd())); // Syllabe
+        t = t.replace("%dK", Long.toString(syl.getMsDuration())); // Syllabe
+
+        // Centièmes de seconde
+        t = t.replace("%csK", Long.toString(syl.getMsStart() / 10)); // Syllabe
+        t = t.replace("%cmK", Long.toString(syl.getMsMid() / 10)); // Syllabe
+        t = t.replace("%ceK", Long.toString(syl.getMsEnd() / 10)); // Syllabe
+        t = t.replace("%cdK", Long.toString(syl.getMsDuration() / 10)); // Syllabe
+
+        t = t.replace("%ssK", Long.toString(syl.getMsEventStart())); // Phrase
+        t = t.replace("%seK", Long.toString(syl.getMsEventEnd())); // Phrase
+        t = t.replace("%smK", Long.toString(syl.getMsEventDuration() / 2)); // Phrase
+        t = t.replace("%sdK", Long.toString(syl.getMsEventDuration())); // Phrase
+
+        t = t.replace("%sentence", sentence.toString());
+        t = t.replace("%syllable", syl.getSyllable());
+
+
+        char[] letters = syl.getSyllable().toCharArray();
+        long pastLetterDuration = syl.getMsDuration();
+        long currentBefore = syl.getMsStart();
+        for(int i=0; i<letters.length; i++){
+            long dur = letters.length - 1 == i ?
+                    pastLetterDuration : syl.getMsDuration() / letters.length;
+            pastLetterDuration -= syl.getMsDuration() / letters.length;
+
+            // Millisecondes
+            t = t.replace("%lsK", Long.toString(currentBefore)); // Lettre
+            t = t.replace("%lmK", Long.toString(currentBefore + dur / 2L)); // Lettre
+            t = t.replace("%leK", Long.toString(currentBefore + dur)); // Lettre
+            t = t.replace("%ldK", Long.toString(dur)); // Lettre
+
+            // Centièmes de seconde
+            t = t.replace("%lcsK", Long.toString(currentBefore / 10)); // Lettre
+            t = t.replace("%lcmK", Long.toString((currentBefore + dur / 2L) / 10)); // Lettre
+            t = t.replace("%lceK", Long.toString((currentBefore + dur) / 10)); // Lettre
+            t = t.replace("%lcdK", Long.toString(dur / 10)); // Lettre
+
+            t = t.replace("%letter", Character.toString(letters[i]));
+
+            currentBefore += dur;
+        }
+
+        output += t;
         
         return output;
     }

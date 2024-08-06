@@ -24,12 +24,11 @@ import org.wingate.feuille.ass.AssEvent;
  *
  * @author util2
  */
-public class LineSyllableBasicSFX extends SFXAbstract {
+public class LineSyllablePeriodSFX extends SFXAbstract {
 
-    public LineSyllableBasicSFX() {
-        name = "Basic karaoke";
-        helper = "Require only one template.";
-        templates.add("{\\kf%cdK\\t(%sK,%eK,\\c&H00FFFF&)}%syllable");
+    public LineSyllablePeriodSFX() {
+        name = "Periodic karaoke";
+        helper = "Require more than one template by using a template by line.";
     }
 
     @Override
@@ -38,8 +37,14 @@ public class LineSyllableBasicSFX extends SFXAbstract {
         
         List<SFXSyllable> syls = getSyllable(input);
         AssEvent ev = input;
-        ev.setText(replaceParams(templates.getFirst(), syls));
-        output.add(ev);
+        
+        int templatesCount = -1;
+        for(int i=0; i<syls.size(); i++){
+            templatesCount = templatesCount >= templates.size() ? 0 : (templatesCount == -1 ? 0 : templatesCount++);
+            
+            ev.setText(replaceParams(templates.get(templatesCount), syls, i));
+            output.add(ev);
+        }
         
         return output;
     }

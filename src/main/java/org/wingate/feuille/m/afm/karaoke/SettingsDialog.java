@@ -19,7 +19,9 @@ package org.wingate.feuille.m.afm.karaoke;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableBasicSFX;
+import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableComplexSFX;
+import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllablePeriodSFX;
+import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableRandomSFX;
+import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableSymSFX;
 import org.wingate.feuille.m.afm.karaoke.sfx.SFXAbstract;
 import org.wingate.feuille.util.DialogResult;
 
@@ -39,7 +45,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     private DialogResult dialogResult = DialogResult.Unknown;
 
     private final DefaultComboBoxModel cboxModel = new DefaultComboBoxModel();
-    private final DefaultListModel<String> namesModel = new DefaultListModel<>();
+    private final DefaultListModel templatesModel = new DefaultListModel();
     private final Set<SFXAbstract> templates = new HashSet<>();
     
     /**
@@ -53,8 +59,13 @@ public class SettingsDialog extends javax.swing.JDialog {
         
         cboxAFMEffects.setModel(cboxModel);
         cboxModel.addElement(new LineSyllableBasicSFX());
+        cboxModel.addElement(new LineSyllableComplexSFX());
+        cboxModel.addElement(new LineSyllablePeriodSFX());
+        cboxModel.addElement(new LineSyllableRandomSFX());
+        cboxModel.addElement(new LineSyllableSymSFX());
         
-        listTemplates.setModel(namesModel);
+        listTemplates.setModel(templatesModel);
+        listTemplates.setCellRenderer(new TemplateListCellRenderer());
     }
     
     public void showDialog(){
@@ -66,8 +77,18 @@ public class SettingsDialog extends javax.swing.JDialog {
         return dialogResult;
     }
     
-    public Set<SFXAbstract> getTemplates(){
-        return templates;
+    public List<SFXAbstract> getTemplates(){
+        final List<SFXAbstract> tps = new ArrayList<>();
+        
+        int[] indices = listTemplates.getSelectedIndices();
+        
+        for(int i=0; i<indices.length; i++){
+            if(templatesModel.get(i) instanceof SFXAbstract sfx){
+                tps.add(sfx);
+            }
+        }
+        
+        return tps;
     }
     
     private void tryAddTemplate(SFXAbstract sfx, String humanName){        
@@ -92,7 +113,31 @@ public class SettingsDialog extends javax.swing.JDialog {
                     LineSyllableBasicSFX x = new LineSyllableBasicSFX();
                     x.setHumanName(humanName);
                     templates.add(x);
-                    namesModel.addElement(humanName);
+                    templatesModel.addElement(x);
+                }
+                case LineSyllableComplexSFX a -> {
+                    LineSyllableComplexSFX x = new LineSyllableComplexSFX();
+                    x.setHumanName(humanName);
+                    templates.add(x);
+                    templatesModel.addElement(x);
+                }
+                case LineSyllablePeriodSFX a -> {
+                    LineSyllablePeriodSFX x = new LineSyllablePeriodSFX();
+                    x.setHumanName(humanName);
+                    templates.add(x);
+                    templatesModel.addElement(x);
+                }
+                case LineSyllableRandomSFX a -> {
+                    LineSyllableRandomSFX x = new LineSyllableRandomSFX();
+                    x.setHumanName(humanName);
+                    templates.add(x);
+                    templatesModel.addElement(x);
+                }
+                case LineSyllableSymSFX a -> {
+                    LineSyllableSymSFX x = new LineSyllableSymSFX();
+                    x.setHumanName(humanName);
+                    templates.add(x);
+                    templatesModel.addElement(x);
                 }
                 default -> {}
             }
@@ -143,6 +188,11 @@ public class SettingsDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         popmenuTriggers = new javax.swing.JMenu();
         popmenuTriggersMs = new javax.swing.JMenu();
+        popmMsLetterStart = new javax.swing.JMenuItem();
+        popmMsLetterEnd = new javax.swing.JMenuItem();
+        popmMsLetterMiddle = new javax.swing.JMenuItem();
+        popmMsLetterDuration = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         popmMsStart = new javax.swing.JMenuItem();
         popmMsEnd = new javax.swing.JMenuItem();
         popmMsMiddle = new javax.swing.JMenuItem();
@@ -153,12 +203,18 @@ public class SettingsDialog extends javax.swing.JDialog {
         popmMsSentenceMiddle = new javax.swing.JMenuItem();
         popmMsSentenceDuration = new javax.swing.JMenuItem();
         popmenuTriggersCs = new javax.swing.JMenu();
+        popmCsLetterStart = new javax.swing.JMenuItem();
+        popmCsLetterEnd = new javax.swing.JMenuItem();
+        popmCsLetterMiddle = new javax.swing.JMenuItem();
+        popmCsLetterDuration = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         popmCsStart = new javax.swing.JMenuItem();
         popmCsEnd = new javax.swing.JMenuItem();
         popmCsMiddle = new javax.swing.JMenuItem();
         popmCsDuration = new javax.swing.JMenuItem();
-        popmTriggerSentence = new javax.swing.JMenuItem();
+        popmTriggerLetter = new javax.swing.JMenuItem();
         popmTriggerSyllable = new javax.swing.JMenuItem();
+        popmTriggerSentence = new javax.swing.JMenuItem();
         popmenuList = new javax.swing.JMenu();
         popmFontReset = new javax.swing.JMenuItem();
         popmWrapLine = new javax.swing.JMenuItem();
@@ -268,6 +324,39 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         popmenuTriggersMs.setText("In milliseconds");
 
+        popmMsLetterStart.setText("Letter start (ms) - %lsK");
+        popmMsLetterStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsLetterStartActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsLetterStart);
+
+        popmMsLetterEnd.setText("Letter end (ms) - %leK");
+        popmMsLetterEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsLetterEndActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsLetterEnd);
+
+        popmMsLetterMiddle.setText("Letter middle (ms) - %lmK");
+        popmMsLetterMiddle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsLetterMiddleActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsLetterMiddle);
+
+        popmMsLetterDuration.setText("Letter duration (ms) - %ldK");
+        popmMsLetterDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmMsLetterDurationActionPerformed(evt);
+            }
+        });
+        popmenuTriggersMs.add(popmMsLetterDuration);
+        popmenuTriggersMs.add(jSeparator4);
+
         popmMsStart.setText("Syllable start (ms) - %sK");
         popmMsStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -337,6 +426,39 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         popmenuTriggersCs.setText("In centiseconds");
 
+        popmCsLetterStart.setText("Letter start (cs) - %lcsK");
+        popmCsLetterStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCsLetterStartActionPerformed(evt);
+            }
+        });
+        popmenuTriggersCs.add(popmCsLetterStart);
+
+        popmCsLetterEnd.setText("Letter end (cs) - %lceK");
+        popmCsLetterEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCsLetterEndActionPerformed(evt);
+            }
+        });
+        popmenuTriggersCs.add(popmCsLetterEnd);
+
+        popmCsLetterMiddle.setText("Letter middle (cs) - %lcmK");
+        popmCsLetterMiddle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCsLetterMiddleActionPerformed(evt);
+            }
+        });
+        popmenuTriggersCs.add(popmCsLetterMiddle);
+
+        popmCsLetterDuration.setText("Letter duration (cs) - %lcdK");
+        popmCsLetterDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCsLetterDurationActionPerformed(evt);
+            }
+        });
+        popmenuTriggersCs.add(popmCsLetterDuration);
+        popmenuTriggersCs.add(jSeparator5);
+
         popmCsStart.setText("Syllable start (cs) - %csK");
         popmCsStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,13 +494,13 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         popmenuTriggers.add(popmenuTriggersCs);
 
-        popmTriggerSentence.setText("Sentence - %sentence");
-        popmTriggerSentence.addActionListener(new java.awt.event.ActionListener() {
+        popmTriggerLetter.setText("Letter - %letter");
+        popmTriggerLetter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                popmTriggerSentenceActionPerformed(evt);
+                popmTriggerLetterActionPerformed(evt);
             }
         });
-        popmenuTriggers.add(popmTriggerSentence);
+        popmenuTriggers.add(popmTriggerLetter);
 
         popmTriggerSyllable.setText("Syllable - %syllable");
         popmTriggerSyllable.addActionListener(new java.awt.event.ActionListener() {
@@ -387,6 +509,14 @@ public class SettingsDialog extends javax.swing.JDialog {
             }
         });
         popmenuTriggers.add(popmTriggerSyllable);
+
+        popmTriggerSentence.setText("Sentence - %sentence");
+        popmTriggerSentence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmTriggerSentenceActionPerformed(evt);
+            }
+        });
+        popmenuTriggers.add(popmTriggerSentence);
 
         popCommands.add(popmenuTriggers);
 
@@ -949,7 +1079,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(listTemplates);
 
-        jLabel1.setText("Commands :");
+        jLabel1.setText("Templates : ");
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -1099,7 +1229,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         if(z == JOptionPane.OK_OPTION){
             int[] indices = listTemplates.getSelectedIndices();
             for(int i=indices.length-1; i >= 0; i--){
-                if(namesModel.getElementAt(i) instanceof String name){
+                if(templatesModel.getElementAt(i) instanceof String name){
                     SFXAbstract a = null;
                     for(int j=0; j<templates.size(); j++){
                         SFXAbstract o = templates.toArray(SFXAbstract[]::new)[j];
@@ -1109,7 +1239,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                     }
                     if(a != null){
                         templates.remove(a);
-                        namesModel.remove(indices[i]);
+                        templatesModel.remove(indices[i]);
                     }                    
                 }
             }
@@ -1119,11 +1249,11 @@ public class SettingsDialog extends javax.swing.JDialog {
     private void listTemplatesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listTemplatesValueChanged
         // When selection of a name
         if(listTemplates.getSelectedIndex() < 0) return; // Psychotic unused option
-        if(namesModel.getElementAt(listTemplates.getSelectedIndex()) instanceof String name){
+        if(templatesModel.getElementAt(listTemplates.getSelectedIndex()) instanceof SFXAbstract sfx){
             SFXAbstract a = null;
             for(int j=0; j<templates.size(); j++){
                 SFXAbstract o = templates.toArray(SFXAbstract[]::new)[j];
-                if(o.getHumanName().equalsIgnoreCase(name)){
+                if(o.getHumanName().equalsIgnoreCase(sfx.getHumanName())){
                     a = o;
                 }
             }
@@ -1144,12 +1274,12 @@ public class SettingsDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(new javax.swing.JFrame(), "No selection !",
                     "Warning", JOptionPane.WARNING_MESSAGE);
         }else{
-            if(namesModel.getElementAt(listTemplates.getSelectedIndex()) instanceof String name){
+            if(templatesModel.getElementAt(listTemplates.getSelectedIndex()) instanceof SFXAbstract sfx){
                 
                 SFXAbstract a = null;
                 for(int j=0; j<templates.size(); j++){
                     SFXAbstract o = templates.toArray(SFXAbstract[]::new)[j];
-                    if(o.getHumanName().equalsIgnoreCase(name)){
+                    if(o.getHumanName().equalsIgnoreCase(sfx.getHumanName())){
                         a = o;
                     }
                 }
@@ -1473,6 +1603,42 @@ public class SettingsDialog extends javax.swing.JDialog {
         addText("%syllable");
     }//GEN-LAST:event_popmTriggerSyllableActionPerformed
 
+    private void popmMsLetterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsLetterStartActionPerformed
+        addText("%lsK");
+    }//GEN-LAST:event_popmMsLetterStartActionPerformed
+
+    private void popmMsLetterEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsLetterEndActionPerformed
+        addText("%leK");
+    }//GEN-LAST:event_popmMsLetterEndActionPerformed
+
+    private void popmMsLetterMiddleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsLetterMiddleActionPerformed
+        addText("%lmK");
+    }//GEN-LAST:event_popmMsLetterMiddleActionPerformed
+
+    private void popmMsLetterDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmMsLetterDurationActionPerformed
+        addText("%ldK");
+    }//GEN-LAST:event_popmMsLetterDurationActionPerformed
+
+    private void popmCsLetterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCsLetterStartActionPerformed
+        addText("%lcsK");
+    }//GEN-LAST:event_popmCsLetterStartActionPerformed
+
+    private void popmCsLetterEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCsLetterEndActionPerformed
+        addText("%lceK");
+    }//GEN-LAST:event_popmCsLetterEndActionPerformed
+
+    private void popmCsLetterMiddleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCsLetterMiddleActionPerformed
+        addText("%lcmK");
+    }//GEN-LAST:event_popmCsLetterMiddleActionPerformed
+
+    private void popmCsLetterDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCsLetterDurationActionPerformed
+        addText("%lcdK");
+    }//GEN-LAST:event_popmCsLetterDurationActionPerformed
+
+    private void popmTriggerLetterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmTriggerLetterActionPerformed
+        addText("%letter");
+    }//GEN-LAST:event_popmTriggerLetterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1529,6 +1695,8 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JList<String> listTemplates;
     private javax.swing.JPopupMenu popCommands;
@@ -1539,6 +1707,10 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JMenuItem popmAnimateWithAcc;
     private javax.swing.JMenuItem popmCsDuration;
     private javax.swing.JMenuItem popmCsEnd;
+    private javax.swing.JMenuItem popmCsLetterDuration;
+    private javax.swing.JMenuItem popmCsLetterEnd;
+    private javax.swing.JMenuItem popmCsLetterMiddle;
+    private javax.swing.JMenuItem popmCsLetterStart;
     private javax.swing.JMenuItem popmCsMiddle;
     private javax.swing.JMenuItem popmCsStart;
     private javax.swing.JMenuItem popmDisplayAlpha;
@@ -1594,6 +1766,10 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JMenuItem popmKaraokeOutline;
     private javax.swing.JMenuItem popmMsDuration;
     private javax.swing.JMenuItem popmMsEnd;
+    private javax.swing.JMenuItem popmMsLetterDuration;
+    private javax.swing.JMenuItem popmMsLetterEnd;
+    private javax.swing.JMenuItem popmMsLetterMiddle;
+    private javax.swing.JMenuItem popmMsLetterStart;
     private javax.swing.JMenuItem popmMsMiddle;
     private javax.swing.JMenuItem popmMsSentenceDuration;
     private javax.swing.JMenuItem popmMsSentenceEnd;
@@ -1607,6 +1783,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JMenuItem popmPosPos;
     private javax.swing.JMenuItem popmRemove;
     private javax.swing.JMenuItem popmSave;
+    private javax.swing.JMenuItem popmTriggerLetter;
     private javax.swing.JMenuItem popmTriggerSentence;
     private javax.swing.JMenuItem popmTriggerSyllable;
     private javax.swing.JMenuItem popmVisibilityClip;

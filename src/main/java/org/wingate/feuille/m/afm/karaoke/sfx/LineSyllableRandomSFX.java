@@ -16,31 +16,34 @@
  */
 package org.wingate.feuille.m.afm.karaoke.sfx;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.wingate.feuille.ass.AssEvent;
-import org.wingate.feuille.m.afm.karaoke.BiEvent;
 
 /**
  *
  * @author util2
  */
-public interface SFXInterface {
-    public String getName();
+public class LineSyllableRandomSFX extends SFXAbstract {
+
+    public LineSyllableRandomSFX() {
+        name = "Random karaoke";
+        helper = "Require more than one template by using a template by line.";
+    }
+
+    @Override
+    public List<AssEvent> doJob(AssEvent input) {
+        final List<AssEvent> output = new ArrayList<>();        
+        
+        List<SFXSyllable> syls = getSyllable(input);
+        AssEvent ev = input;
+        
+        for(int i=0; i<syls.size(); i++){            
+            ev.setText(replaceParams(templates.get((int)(Math.random() * syls.size())), syls, i));
+            output.add(ev);
+        }
+        
+        return output;
+    }
     
-    public String getHumanName();
-    public void setHumanName(String humanName);
-    
-    public String getHelper();
-    public void setHelper(String helper);
-    
-    public List<SFXCode> getCodes();
-    public void setCodes(List<SFXCode> codes);
-    
-    public List<String> getTemplates();
-    public void setTemplates(List<String> templates);
-    
-    public void forOneLine(BiEvent input);
-    public void forFewLines(List<BiEvent> input);
-    
-    public List<AssEvent> doJob(AssEvent input);
 }

@@ -13,7 +13,7 @@ Audio
 
 Video
 
-- [ ] View
+- [x] View (FFmpeg)
 - [ ] Edit
 - [ ] Show subtitles
 

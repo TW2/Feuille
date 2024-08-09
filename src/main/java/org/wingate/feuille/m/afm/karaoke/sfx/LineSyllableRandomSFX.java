@@ -38,10 +38,12 @@ public class LineSyllableRandomSFX extends SFXAbstract {
         List<SFXSyllable> syls = getSyllable(input);
         AssEvent ev = input;
         
-        for(int i=0; i<syls.size(); i++){            
-            ev.setText(replaceParams(templates.get((int)(Math.random() * syls.size())), syls, i));
-            output.add(ev);
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<syls.size(); i++){
+            sb.append(replaceParams(templates.get((int)(Math.random() * templates.size())), syls, i));
         }
+        ev.setText(sb.toString());
+        output.add(ev);
         
         return output;
     }

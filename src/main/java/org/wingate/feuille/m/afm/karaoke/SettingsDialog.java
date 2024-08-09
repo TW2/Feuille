@@ -16,25 +16,34 @@
  */
 package org.wingate.feuille.m.afm.karaoke;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import org.wingate.feuille.m.afm.karaoke.io.CodeIO;
+import org.wingate.feuille.m.afm.karaoke.io.EffectsIO;
 import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableBasicSFX;
 import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableComplexSFX;
 import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllablePeriodSFX;
 import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableRandomSFX;
 import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableSymSFX;
 import org.wingate.feuille.m.afm.karaoke.sfx.SFXAbstract;
+import org.wingate.feuille.m.afm.karaoke.sfx.SFXCode;
 import org.wingate.feuille.util.DialogResult;
+import org.wingate.feuille.util.GenericFileFilter;
 
 /**
  *
@@ -46,7 +55,6 @@ public class SettingsDialog extends javax.swing.JDialog {
 
     private final DefaultComboBoxModel cboxModel = new DefaultComboBoxModel();
     private final DefaultListModel templatesModel = new DefaultListModel();
-    private final Set<SFXAbstract> templates = new HashSet<>();
     
     /**
      * Creates new form SettingsDialog
@@ -66,6 +74,22 @@ public class SettingsDialog extends javax.swing.JDialog {
         
         listTemplates.setModel(templatesModel);
         listTemplates.setCellRenderer(new TemplateListCellRenderer());
+        
+        fcSaveEffects.setAcceptAllFileFilterUsed(false);       
+        fcOpenEffects.setAcceptAllFileFilterUsed(false);
+        fcSaveEffects.addChoosableFileFilter(new GenericFileFilter("sfx", "Feuille effect templates")); 
+        fcOpenEffects.addChoosableFileFilter(new GenericFileFilter("sfx", "Feuille effect templates"));
+        
+        fcSaveCode.setAcceptAllFileFilterUsed(false);
+        fcOpenCode.setAcceptAllFileFilterUsed(false);
+        fcSaveCode.addChoosableFileFilter(new GenericFileFilter("js", "JavaScript files"));
+        fcOpenCode.addChoosableFileFilter(new GenericFileFilter("js", "JavaScript files"));
+        fcSaveCode.addChoosableFileFilter(new GenericFileFilter("lua", "LUA files"));
+        fcOpenCode.addChoosableFileFilter(new GenericFileFilter("lua", "LUA files"));
+        fcSaveCode.addChoosableFileFilter(new GenericFileFilter("py", "Python files"));
+        fcOpenCode.addChoosableFileFilter(new GenericFileFilter("py", "Python files"));
+        fcSaveCode.addChoosableFileFilter(new GenericFileFilter("rb", "Ruby files"));
+        fcOpenCode.addChoosableFileFilter(new GenericFileFilter("rb", "Ruby files"));
     }
     
     public void showDialog(){
@@ -95,13 +119,15 @@ public class SettingsDialog extends javax.swing.JDialog {
         boolean add = true;
         
         // On vérifie si on n'a aucune autre entrée identique
-        for(SFXAbstract o : templates){
-            if(o.getHumanName().equalsIgnoreCase(humanName)){
-                // On a trouvé une correspondance,
-                // on dit de ne pas copier cette entrée
-                add = false;
-                break;
-            }
+        for(Object o : templatesModel.toArray()){
+            if(o instanceof SFXAbstract a){
+                if(a.getHumanName().equalsIgnoreCase(humanName)){
+                    // On a trouvé une correspondance,
+                    // on dit de ne pas copier cette entrée
+                    add = false;
+                    break;
+                }
+            }            
         }
         
         // Si on a une entrée non identique
@@ -112,31 +138,26 @@ public class SettingsDialog extends javax.swing.JDialog {
                 case LineSyllableBasicSFX a -> {
                     LineSyllableBasicSFX x = new LineSyllableBasicSFX();
                     x.setHumanName(humanName);
-                    templates.add(x);
                     templatesModel.addElement(x);
                 }
                 case LineSyllableComplexSFX a -> {
                     LineSyllableComplexSFX x = new LineSyllableComplexSFX();
                     x.setHumanName(humanName);
-                    templates.add(x);
                     templatesModel.addElement(x);
                 }
                 case LineSyllablePeriodSFX a -> {
                     LineSyllablePeriodSFX x = new LineSyllablePeriodSFX();
                     x.setHumanName(humanName);
-                    templates.add(x);
                     templatesModel.addElement(x);
                 }
                 case LineSyllableRandomSFX a -> {
                     LineSyllableRandomSFX x = new LineSyllableRandomSFX();
                     x.setHumanName(humanName);
-                    templates.add(x);
                     templatesModel.addElement(x);
                 }
                 case LineSyllableSymSFX a -> {
                     LineSyllableSymSFX x = new LineSyllableSymSFX();
                     x.setHumanName(humanName);
-                    templates.add(x);
                     templatesModel.addElement(x);
                 }
                 default -> {}
@@ -288,6 +309,20 @@ public class SettingsDialog extends javax.swing.JDialog {
         popmDrawSpline = new javax.swing.JMenuItem();
         popmDrawCloseSpline = new javax.swing.JMenuItem();
         popmDrawExtendSpline = new javax.swing.JMenuItem();
+        fcSaveEffects = new javax.swing.JFileChooser();
+        fcOpenEffects = new javax.swing.JFileChooser();
+        fcSaveCode = new javax.swing.JFileChooser();
+        fcOpenCode = new javax.swing.JFileChooser();
+        popCode = new javax.swing.JPopupMenu();
+        popmCodeCut = new javax.swing.JMenuItem();
+        popmCodeCopy = new javax.swing.JMenuItem();
+        popmCodePaste = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        popmCodeScriptName = new javax.swing.JMenuItem();
+        popmCodeAuthor = new javax.swing.JMenuItem();
+        popmCodeVersion = new javax.swing.JMenuItem();
+        popmCodeDescription = new javax.swing.JMenuItem();
+        popmCodeUpdateDetails = new javax.swing.JMenuItem();
         btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         cboxAFMEffects = new javax.swing.JComboBox<>();
@@ -302,6 +337,8 @@ public class SettingsDialog extends javax.swing.JDialog {
         btnOpenCode = new javax.swing.JButton();
         btnSaveCode = new javax.swing.JButton();
         tabpCode = new javax.swing.JTabbedPane();
+        btnSaveEffects = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         popmRemove.setText("Remove selected elements");
         popmRemove.addActionListener(new java.awt.event.ActionListener() {
@@ -1033,6 +1070,75 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         popCommands.add(popmenuList);
 
+        fcOpenEffects.setAccessory(new org.wingate.feuille.m.afm.karaoke.io.CodeAccessory());
+
+        popmCodeCut.setText("Cut");
+        popmCodeCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCodeCutActionPerformed(evt);
+            }
+        });
+        popCode.add(popmCodeCut);
+
+        popmCodeCopy.setText("Copy");
+        popmCodeCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCodeCopyActionPerformed(evt);
+            }
+        });
+        popCode.add(popmCodeCopy);
+
+        popmCodePaste.setText("Paste");
+        popmCodePaste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCodePasteActionPerformed(evt);
+            }
+        });
+        popCode.add(popmCodePaste);
+        popCode.add(jSeparator6);
+
+        popmCodeScriptName.setText("Script name...");
+        popmCodeScriptName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCodeScriptNameActionPerformed(evt);
+            }
+        });
+        popCode.add(popmCodeScriptName);
+
+        popmCodeAuthor.setText("Author...");
+        popmCodeAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCodeAuthorActionPerformed(evt);
+            }
+        });
+        popCode.add(popmCodeAuthor);
+
+        popmCodeVersion.setText("Version...");
+        popmCodeVersion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCodeVersionActionPerformed(evt);
+            }
+        });
+        popCode.add(popmCodeVersion);
+
+        popmCodeDescription.setText("Description...");
+        popmCodeDescription.setToolTipText("");
+        popmCodeDescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCodeDescriptionActionPerformed(evt);
+            }
+        });
+        popCode.add(popmCodeDescription);
+
+        popmCodeUpdateDetails.setText("Update details...");
+        popmCodeUpdateDetails.setToolTipText("");
+        popmCodeUpdateDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmCodeUpdateDetailsActionPerformed(evt);
+            }
+        });
+        popCode.add(popmCodeUpdateDetails);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnOK.setText("OK");
@@ -1125,12 +1231,32 @@ public class SettingsDialog extends javax.swing.JDialog {
         });
         jToolBar1.add(btnSaveCode);
 
+        btnSaveEffects.setText("Save selected effect with codes if any");
+        btnSaveEffects.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveEffectsActionPerformed(evt);
+            }
+        });
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnOK))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1140,18 +1266,14 @@ public class SettingsDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2)
-                            .addComponent(tabpCode)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnOK)))
+                            .addComponent(tabpCode)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRefresh)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSaveEffects)))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1163,11 +1285,14 @@ public class SettingsDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnSaveEffects)
+                    .addComponent(btnRefresh))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabpCode, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(tabpCode, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -1188,6 +1313,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         if(ctd.getDialogResult() == DialogResult.Ok){
             CodePanel cp = new CodePanel();
             cp.setCodeType(ctd.getCodeType());
+            cp.getTextArea().setPopupMenu(popCode);
             tabpCode.add(cp);
             String name = JOptionPane.showInputDialog("Type a name for the new tab.");
             CodeTabPanel ctp = new CodeTabPanel(ctd.getCodeType(), tabpCode, tabpCode.getTabCount() - 1, name);
@@ -1196,11 +1322,43 @@ public class SettingsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNewCodeActionPerformed
 
     private void btnOpenCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenCodeActionPerformed
-        // TODO add your handling code here:
+        // Open code
+        File currentFolder = new File(".");
+        File folder = new File(currentFolder.getAbsolutePath() + File.separator + "user");
+        fcOpenCode.setCurrentDirectory(folder);
+        int z = fcOpenCode.showOpenDialog(new javax.swing.JFrame());
+        if(z == javax.swing.JFileChooser.APPROVE_OPTION){
+            String path = fcOpenCode.getSelectedFile().getAbsolutePath();
+            if(fcOpenCode.getFileFilter() instanceof GenericFileFilter filter){
+                if(!path.endsWith(filter.getExtension())) path += filter.getExtension();
+                SFXCode code = CodeIO.load(path);
+                CodePanel cp = new CodePanel();
+                cp.getTextArea().setText(code.getContent());
+                cp.setCodeType(code.getCodeType());
+                cp.getTextArea().setPopupMenu(popCode);
+                tabpCode.add(cp);
+                CodeTabPanel ctp = new CodeTabPanel(
+                        code.getCodeType(), tabpCode, tabpCode.getTabCount() - 1, code.getScriptName());
+                tabpCode.setTabComponentAt(tabpCode.getTabCount() - 1, ctp);
+            }
+        }
     }//GEN-LAST:event_btnOpenCodeActionPerformed
 
     private void btnSaveCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveCodeActionPerformed
-        // TODO add your handling code here:
+        // Save code
+        if(tabpCode.getTabCount() == 0 || tabpCode.getSelectedIndex() == -1) return;
+        File currentFolder = new File(".");
+        File folder = new File(currentFolder.getAbsolutePath() + File.separator + "user");
+        fcSaveCode.setCurrentDirectory(folder);
+        int z = fcSaveCode.showSaveDialog(new javax.swing.JFrame());
+        if(z == javax.swing.JFileChooser.APPROVE_OPTION){
+            String path = fcSaveCode.getSelectedFile().getAbsolutePath();
+            int tabIndex = tabpCode.getSelectedIndex();
+            CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabIndex);            
+            cp.getCode().setContent(cp.getTextArea().getText());
+            cp.getCode().setCodeType(cp.getCodeType());
+            CodeIO.save(path, cp.getCode());
+        }
     }//GEN-LAST:event_btnSaveCodeActionPerformed
 
     private void cboxAFMEffectsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxAFMEffectsItemStateChanged
@@ -1228,17 +1386,18 @@ public class SettingsDialog extends javax.swing.JDialog {
         );
         if(z == JOptionPane.OK_OPTION){
             int[] indices = listTemplates.getSelectedIndices();
-            for(int i=indices.length-1; i >= 0; i--){
+            for(int i=indices.length-1; i >= 0; i--){                
                 if(templatesModel.getElementAt(i) instanceof String name){
                     SFXAbstract a = null;
-                    for(int j=0; j<templates.size(); j++){
-                        SFXAbstract o = templates.toArray(SFXAbstract[]::new)[j];
-                        if(o.getHumanName().equalsIgnoreCase(name)){
-                            a = o;
+                    for(Object o : templatesModel.toArray()){
+                        if(o instanceof SFXAbstract sfx){
+                            if(sfx.getHumanName().equalsIgnoreCase(name)){
+                                a = sfx;
+                                break;
+                            }
                         }
                     }
                     if(a != null){
-                        templates.remove(a);
                         templatesModel.remove(indices[i]);
                     }                    
                 }
@@ -1251,11 +1410,13 @@ public class SettingsDialog extends javax.swing.JDialog {
         if(listTemplates.getSelectedIndex() < 0) return; // Psychotic unused option
         if(templatesModel.getElementAt(listTemplates.getSelectedIndex()) instanceof SFXAbstract sfx){
             SFXAbstract a = null;
-            for(int j=0; j<templates.size(); j++){
-                SFXAbstract o = templates.toArray(SFXAbstract[]::new)[j];
-                if(o.getHumanName().equalsIgnoreCase(sfx.getHumanName())){
-                    a = o;
-                }
+            for(int j=0; j<templatesModel.getSize(); j++){
+                if(templatesModel.getElementAt(j) instanceof SFXAbstract o){
+                    if(o.getHumanName().equalsIgnoreCase(sfx.getHumanName())){
+                        a = o;
+                        break;
+                    }
+                }                
             }
             if(a == null) return;
             StringBuilder sb = new StringBuilder();
@@ -1265,11 +1426,42 @@ public class SettingsDialog extends javax.swing.JDialog {
             }
             textPanelCommands.setText(sb.toString());
             textPanelCommands.updateUI();
+            
+            List<Integer> checked = new ArrayList<>();
+            for(SFXCode code : a.getCodes()){
+                boolean add = true;                
+                for(int i=0; i<tabpCode.getTabCount(); i++){
+                    for(int j=0; j<tabpCode.getTabCount(); j++){
+                        if(tabpCode.getComponentAt(i) instanceof CodePanel cpi
+                                && tabpCode.getComponentAt(j) instanceof CodePanel cpj){
+                            if(cpi.getCode().getScriptName().equalsIgnoreCase(cpj.getCode().getScriptName())){
+                                if(checked.contains(j) == false){
+                                    checked.add(j);
+                                    add = false;
+                                    break;
+                                }
+                                
+                            }
+                        }
+                    }
+                    if(add == false) break;
+                }
+                if(add == true){
+                    CodePanel cp = new CodePanel();
+                    cp.getTextArea().setText(code.getContent());
+                    cp.setCodeType(code.getCodeType());
+                    cp.getTextArea().setPopupMenu(popCode);
+                    tabpCode.add(cp);
+                    CodeTabPanel ctp = new CodeTabPanel(
+                            code.getCodeType(), tabpCode, tabpCode.getTabCount() - 1, code.getScriptName());
+                    tabpCode.setTabComponentAt(tabpCode.getTabCount() - 1, ctp);
+                }
+            }
         }
     }//GEN-LAST:event_listTemplatesValueChanged
 
     private void popmSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmSaveActionPerformed
-        // Save commands
+        // Save commands internally into an SFXAbstract object
         if(listTemplates.getSelectedIndex() < 0){
             JOptionPane.showMessageDialog(new javax.swing.JFrame(), "No selection !",
                     "Warning", JOptionPane.WARNING_MESSAGE);
@@ -1277,10 +1469,11 @@ public class SettingsDialog extends javax.swing.JDialog {
             if(templatesModel.getElementAt(listTemplates.getSelectedIndex()) instanceof SFXAbstract sfx){
                 
                 SFXAbstract a = null;
-                for(int j=0; j<templates.size(); j++){
-                    SFXAbstract o = templates.toArray(SFXAbstract[]::new)[j];
+                for(Object obj : templatesModel.toArray()){
+                    if(obj instanceof SFXAbstract o)
                     if(o.getHumanName().equalsIgnoreCase(sfx.getHumanName())){
                         a = o;
+                        break;
                     }
                 }
                 if(a == null) return;                
@@ -1301,6 +1494,21 @@ public class SettingsDialog extends javax.swing.JDialog {
                 } catch (IOException ex) {
                     Logger.getLogger(SettingsDialog.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                if(tabpCode.getTabCount() > 0){
+                    int z = JOptionPane.showConfirmDialog(new javax.swing.JFrame(),
+                            "Do you want to put all existing coding script to your selection ?", "Question",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if(z == JOptionPane.YES_OPTION){
+                        a.getCodes().clear();
+                        for(int i=0; i<tabpCode.getTabCount(); i++){
+                            CodePanel cp = (CodePanel)tabpCode.getComponentAt(i);            
+                            cp.getCode().setContent(cp.getTextArea().getText());
+                            cp.getCode().setCodeType(cp.getCodeType());
+                            a.getCodes().add(cp.getCode());
+                        }
+                    }
+                }                
             }
         }        
     }//GEN-LAST:event_popmSaveActionPerformed
@@ -1639,9 +1847,160 @@ public class SettingsDialog extends javax.swing.JDialog {
         addText("%letter");
     }//GEN-LAST:event_popmTriggerLetterActionPerformed
 
+    private void btnSaveEffectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveEffectsActionPerformed
+        // Save selected effect with codes if any
+        if(listTemplates.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "No selection on list!",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        
+        if(listTemplates.getSelectedIndices().length > 1){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Too many selections on list!\nSelect one and only one!",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        
+        File currentFolder = new File(".");
+        File folder = new File(currentFolder.getAbsolutePath() + File.separator + "user");
+        fcSaveEffects.setCurrentDirectory(folder);
+        int z = fcSaveEffects.showSaveDialog(new javax.swing.JFrame());
+        if(z == javax.swing.JFileChooser.APPROVE_OPTION){
+            String path = fcSaveEffects.getSelectedFile().getAbsolutePath();
+            if(!path.endsWith(".sfx")) path += ".sfx";
+            SFXAbstract sfx = (SFXAbstract)templatesModel.get(listTemplates.getSelectedIndex());
+            EffectsIO.save(path, sfx);
+        }
+    }//GEN-LAST:event_btnSaveEffectsActionPerformed
+
+    @SuppressWarnings("Convert2Lambda")
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // Update list
+        File currentFolder = new File(".");
+        File folder = new File(currentFolder.getAbsolutePath() + File.separator + "user");        
+        templatesModel.clear();
+        for(File file : folder.listFiles(new java.io.FileFilter(){
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.getName().toLowerCase().endsWith(".sfx");
+            }
+        })){
+            SFXAbstract sfx = EffectsIO.load(file.getPath());
+            templatesModel.addElement(sfx);
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void popmCodeCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCodeCutActionPerformed
+        // Cut text from a SFXCode of the selected tab
+        if(tabpCode.getTabCount() == 0) return;
+        if(tabpCode.getSelectedIndex() == -1) return;
+        CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabpCode.getSelectedIndex());
+        if(cp.getTextArea().getSelectedText().isEmpty() == false){
+            // Copy selected text
+            Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+            StringSelection sel = new StringSelection(cp.getTextArea().getSelectedText());
+            clip.setContents(sel, sel);
+            // Delete selected text
+            String start = cp.getTextArea().getText().substring(0, cp.getTextArea().getSelectionStart());
+            String end = cp.getTextArea().getText().substring(cp.getTextArea().getSelectionEnd());
+            cp.getTextArea().setText(start + end);
+        }
+    }//GEN-LAST:event_popmCodeCutActionPerformed
+
+    private void popmCodeCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCodeCopyActionPerformed
+        // Copy text from a SFXCode of the selected tab
+        if(tabpCode.getTabCount() == 0) return;
+        if(tabpCode.getSelectedIndex() == -1) return;
+        CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabpCode.getSelectedIndex());
+        if(cp.getTextArea().getSelectedText().isEmpty() == false){
+            // Copy
+            Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+            StringSelection sel = new StringSelection(cp.getTextArea().getSelectedText());
+            clip.setContents(sel, sel);
+        }
+    }//GEN-LAST:event_popmCodeCopyActionPerformed
+
+    private void popmCodePasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCodePasteActionPerformed
+        // Paste text to a SFXCode of the selected tab
+        if(tabpCode.getTabCount() == 0) return;
+        if(tabpCode.getSelectedIndex() == -1) return;
+        CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabpCode.getSelectedIndex());
+        // Paste
+        Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable contents = clip.getContents(null);
+        if(contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor)){
+            try{
+                if(contents.getTransferData(DataFlavor.stringFlavor) instanceof String s){
+                    String start = "", end = "";
+                    if(cp.getTextArea().getSelectedText() != null && cp.getTextArea().getSelectedText().isEmpty() == false){
+                        start = cp.getTextArea().getText().substring(0, cp.getTextArea().getSelectionStart());
+                        end = cp.getTextArea().getText().substring(cp.getTextArea().getSelectionEnd());
+                    }
+                    cp.getTextArea().setText(start + s + end);
+                }
+            }catch(UnsupportedFlavorException | IOException exc){
+                System.err.println("Error\n" + exc.getMessage());
+            }
+        }        
+    }//GEN-LAST:event_popmCodePasteActionPerformed
+
+    private void popmCodeScriptNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCodeScriptNameActionPerformed
+        // Script name
+        if(tabpCode.getTabCount() == 0) return;
+        if(tabpCode.getSelectedIndex() == -1) return;
+        CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabpCode.getSelectedIndex());
+        String s = JOptionPane.showInputDialog("Type a script name :");
+        cp.getCode().setScriptName(s);
+    }//GEN-LAST:event_popmCodeScriptNameActionPerformed
+
+    private void popmCodeAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCodeAuthorActionPerformed
+        // Author
+        if(tabpCode.getTabCount() == 0) return;
+        if(tabpCode.getSelectedIndex() == -1) return;
+        CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabpCode.getSelectedIndex());
+        String s = JOptionPane.showInputDialog("Type an author name :");
+        cp.getCode().setAuthor(s);
+    }//GEN-LAST:event_popmCodeAuthorActionPerformed
+
+    private void popmCodeVersionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCodeVersionActionPerformed
+        // Version
+        if(tabpCode.getTabCount() == 0) return;
+        if(tabpCode.getSelectedIndex() == -1) return;
+        CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabpCode.getSelectedIndex());
+        String s = JOptionPane.showInputDialog("Type a release version :");
+        cp.getCode().setVersion(s);
+    }//GEN-LAST:event_popmCodeVersionActionPerformed
+
+    private void popmCodeDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCodeDescriptionActionPerformed
+        // Description
+        if(tabpCode.getTabCount() == 0) return;
+        if(tabpCode.getSelectedIndex() == -1) return;
+        CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabpCode.getSelectedIndex());
+        String s = JOptionPane.showInputDialog("Type a description :");
+        cp.getCode().setDescription(s);
+    }//GEN-LAST:event_popmCodeDescriptionActionPerformed
+
+    private void popmCodeUpdateDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmCodeUpdateDetailsActionPerformed
+        // UpdateDetails
+        if(tabpCode.getTabCount() == 0) return;
+        if(tabpCode.getSelectedIndex() == -1) return;
+        CodePanel cp = (CodePanel)tabpCode.getComponentAt(tabpCode.getSelectedIndex());
+        String s = JOptionPane.showInputDialog("Type an update details :");
+        cp.getCode().setUpdateDetails(s);
+    }//GEN-LAST:event_popmCodeUpdateDetailsActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    @SuppressWarnings("Convert2Lambda")
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1668,6 +2027,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 SettingsDialog dialog = new SettingsDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1687,8 +2047,14 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnNewCode;
     private javax.swing.JButton btnOK;
     private javax.swing.JButton btnOpenCode;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSaveCode;
+    private javax.swing.JButton btnSaveEffects;
     private javax.swing.JComboBox<String> cboxAFMEffects;
+    private javax.swing.JFileChooser fcOpenCode;
+    private javax.swing.JFileChooser fcOpenEffects;
+    private javax.swing.JFileChooser fcSaveCode;
+    private javax.swing.JFileChooser fcSaveEffects;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1697,14 +2063,24 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JList<String> listTemplates;
+    private javax.swing.JPopupMenu popCode;
     private javax.swing.JPopupMenu popCommands;
     private javax.swing.JPopupMenu popTemplates;
     private javax.swing.JMenuItem popmAnimateSentence;
     private javax.swing.JMenuItem popmAnimateSentenceWithAcc;
     private javax.swing.JMenuItem popmAnimateTime;
     private javax.swing.JMenuItem popmAnimateWithAcc;
+    private javax.swing.JMenuItem popmCodeAuthor;
+    private javax.swing.JMenuItem popmCodeCopy;
+    private javax.swing.JMenuItem popmCodeCut;
+    private javax.swing.JMenuItem popmCodeDescription;
+    private javax.swing.JMenuItem popmCodePaste;
+    private javax.swing.JMenuItem popmCodeScriptName;
+    private javax.swing.JMenuItem popmCodeUpdateDetails;
+    private javax.swing.JMenuItem popmCodeVersion;
     private javax.swing.JMenuItem popmCsDuration;
     private javax.swing.JMenuItem popmCsEnd;
     private javax.swing.JMenuItem popmCsLetterDuration;

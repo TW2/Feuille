@@ -98,6 +98,7 @@
                   <Image iconType="3" name="/images/32_newdocument.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add 1 line"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
@@ -182,6 +183,7 @@
                   <Image iconType="3" name="/images/32 losange carr&#xe9;.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Undo"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
@@ -196,6 +198,7 @@
                   <Image iconType="3" name="/images/32 modify.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Redo"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>

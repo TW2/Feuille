@@ -25,10 +25,38 @@ import org.wingate.feuille.m.afm.karaoke.CodeType;
 public class SFXCode {
     private CodeType codeType;
     private String content;
+    
+    private String scriptName;
+    private String author;
+    private String version;
+    private String description;
+    private String updateDetails;
+    
+    /*
+    # Scripting
+    ScriptName: scriptName
+    Author: author
+    Version: version
+    Description: description
+    UpdateDetails: update
+    CodeType: codeType
+    {
+    one script
+    },
+    */
+    
+    public SFXCode(){
+        this(CodeType.JavaScript, "function hello(){print(\"Hello world!\");}");
+    }
 
     public SFXCode(CodeType codeType, String content) {
         this.codeType = codeType;
         this.content = content;
+        scriptName = "Unknown script name";
+        author = "Unknown author";
+        version = "0.0.1";
+        description = "None";
+        updateDetails = "None";
     }
 
     public CodeType getCodeType() {
@@ -45,5 +73,57 @@ public class SFXCode {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getScriptName() {
+        return scriptName;
+    }
+
+    public void setScriptName(String scriptName) {
+        this.scriptName = scriptName;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUpdateDetails() {
+        return updateDetails;
+    }
+
+    public void setUpdateDetails(String updateDetails) {
+        this.updateDetails = updateDetails;
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        switch(codeType){
+            case JavaScript -> { s = "JavaScript"; }
+            case Lua -> { s = "Lua"; }
+            case Python -> { s = "Python"; }
+            case Ruby -> { s = "Ruby"; }
+        }
+        return String.format("%s (%s)", scriptName, s);
     }
 }

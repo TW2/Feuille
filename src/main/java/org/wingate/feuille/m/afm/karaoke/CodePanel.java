@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.wingate.feuille.m.afm.karaoke.sfx.SFXCode;
 
 /**
  *
@@ -29,8 +30,8 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 public class CodePanel extends JPanel {
     
     private final RSyntaxTextArea textArea;
-    private final RTextScrollPane scrollPane;
-    private CodeType codeType;
+    private final RTextScrollPane scrollPane;    
+    private SFXCode code;
 
     public CodePanel() {
         setLayout(new BorderLayout());
@@ -38,16 +39,16 @@ public class CodePanel extends JPanel {
         textArea.setCodeFoldingEnabled(true);
         scrollPane = new RTextScrollPane(textArea);
         add(scrollPane, BorderLayout.CENTER);
-        codeType = null;
+        code = new SFXCode();
     }
     
     public void setCodeType(CodeType codeType){
-        this.codeType = codeType;
+        code.setCodeType(codeType);
         changeType();
     }
     
     private void changeType(){
-        switch(codeType){
+        switch(code.getCodeType()){
             case JavaScript -> {
                 textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
             }
@@ -62,4 +63,21 @@ public class CodePanel extends JPanel {
             }
         }
     }
+
+    public RSyntaxTextArea getTextArea() {
+        return textArea;
+    }
+
+    public CodeType getCodeType() {
+        return code.getCodeType();
+    }
+
+    public SFXCode getCode() {
+        return code;
+    }
+
+    public void setCode(SFXCode code) {
+        this.code = code;
+    }
+    
 }

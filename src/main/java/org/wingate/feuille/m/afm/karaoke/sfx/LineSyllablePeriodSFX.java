@@ -38,13 +38,15 @@ public class LineSyllablePeriodSFX extends SFXAbstract {
         List<SFXSyllable> syls = getSyllable(input);
         AssEvent ev = input;
         
+        StringBuilder sb = new StringBuilder();
         int templatesCount = -1;
         for(int i=0; i<syls.size(); i++){
             templatesCount = templatesCount >= templates.size() ? 0 : (templatesCount == -1 ? 0 : templatesCount++);
             
-            ev.setText(replaceParams(templates.get(templatesCount), syls, i));
-            output.add(ev);
+            sb.append(replaceParams(templates.get(templatesCount), syls, i));            
         }
+        ev.setText(sb.toString());
+        output.add(ev);
         
         return output;
     }

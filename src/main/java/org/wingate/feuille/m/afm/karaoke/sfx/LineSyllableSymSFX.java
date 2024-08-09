@@ -38,15 +38,17 @@ public class LineSyllableSymSFX extends SFXAbstract {
         List<SFXSyllable> syls = getSyllable(input);
         AssEvent ev = input;
         
+        StringBuilder sb = new StringBuilder();
         int index;
         
         for(int i=0; i<syls.size(); i++){
             index = syls.size() / 2 >= i ? i : syls.size() -1 - i;
             index = index >= templates.size() ? templates.size() - 1 : index;
             
-            ev.setText(replaceParams(templates.get(index), syls, i));
-            output.add(ev);
+            sb.append(replaceParams(templates.get(index), syls, i));            
         }
+        ev.setText(sb.toString());
+        output.add(ev);        
         
         return output;
     }

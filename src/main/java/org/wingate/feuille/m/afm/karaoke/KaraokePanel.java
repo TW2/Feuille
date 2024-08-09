@@ -21,7 +21,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import org.wingate.feuille.ass.ASS;
 import org.wingate.feuille.ass.AssEvent;
-import org.wingate.feuille.m.afm.karaoke.sfx.LineSyllableBasicSFX;
 import org.wingate.feuille.m.afm.karaoke.sfx.SFXAbstract;
 import org.wingate.feuille.theme.Theme;
 import org.wingate.feuille.util.DialogResult;
@@ -48,7 +47,7 @@ public class KaraokePanel extends javax.swing.JPanel {
         initComponents();
         
         cboxAFMEffects.setModel(cboxModel);
-        cboxModel.addElement(new LineSyllableBasicSFX());
+        cboxAFMEffects.setRenderer(new TemplateListCellRenderer());
         
         jTable1.setModel(tableModel);
         jTable1.getColumnModel().getColumn(0).setMaxWidth(40);
@@ -151,6 +150,7 @@ public class KaraokePanel extends javax.swing.JPanel {
 
         btnNewScript.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/32_newdocument.png"))); // NOI18N
         btnNewScript.setText("Add 1 line");
+        btnNewScript.setEnabled(false);
         btnNewScript.setFocusable(false);
         btnNewScript.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNewScript.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -223,6 +223,7 @@ public class KaraokePanel extends javax.swing.JPanel {
 
         btnUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/32 losange carré.png"))); // NOI18N
         btnUndo.setText("Undo");
+        btnUndo.setEnabled(false);
         btnUndo.setFocusable(false);
         btnUndo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUndo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -235,6 +236,7 @@ public class KaraokePanel extends javax.swing.JPanel {
 
         btnRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/32 modify.png"))); // NOI18N
         btnRedo.setText("Redo");
+        btnRedo.setEnabled(false);
         btnRedo.setFocusable(false);
         btnRedo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRedo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -294,6 +296,16 @@ public class KaraokePanel extends javax.swing.JPanel {
 
     private void btnSaveScriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScriptActionPerformed
         // Save as
+        int z = fcSaveScript.showSaveDialog(new javax.swing.JFrame());        
+        if(z == JFileChooser.APPROVE_OPTION){
+            ASS assa = ass;
+            for(BiEvent be : tableModel.getEvents()){
+                assa.getEvents().addAll(be.getTransformedAssEvents());
+            }
+            String path = fcSaveScript.getSelectedFile().getPath();
+            if(path.endsWith(".ass") == false) path += ".ass";
+            ASS.Save(path, assa);
+        }
     }//GEN-LAST:event_btnSaveScriptActionPerformed
 
     private void btnFewLinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFewLinesActionPerformed
@@ -329,7 +341,10 @@ public class KaraokePanel extends javax.swing.JPanel {
         SettingsDialog setd = new SettingsDialog(new javax.swing.JFrame(), true);
         setd.showDialog();
         if(setd.getDialogResult() == DialogResult.Ok){
-            
+            cboxModel.removeAllElements();
+            for(SFXAbstract sfx : setd.getTemplates()){
+                cboxModel.addElement(sfx);
+            }
         }
     }//GEN-LAST:event_btnConfigureSFXActionPerformed
 

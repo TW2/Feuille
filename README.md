@@ -24,7 +24,7 @@ Table
 - [x] Create subtitles
 - [x] Open subtitles
 - [x] Save subtitles
-- [x] Editing subtitles
+- [x] Edit subtitles
 
 Karaoke
 

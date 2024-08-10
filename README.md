@@ -1,6 +1,6 @@
 # Feuille
 
-Feuille is a software about ASS (Advanced Sub Station) subtitles files. Its name is in French and means "Leaf", it's the old leaf of AssFxMaker and the continuation of this project. To work with this project you have to use latest Java version (JDK 22 for this moment). You have to put 'bin' directory path in your PATH.
+Feuille is a software about ASS (Advanced Sub Station) subtitles files. Its name is in French and means "Leaf", it's the old leaf of AssFxMaker and the continuation of this project. To work with this project you have to use latest Java version ([JDK 22](https://jdk.java.net/22/) for this moment). You have to put 'bin' directory path in your PATH.
 
 Preview -> [here](https://drive.google.com/file/d/1edSoZBIpZilJgfqF38Vl8YRS0H7H4WXk/view?usp=sharing)
 

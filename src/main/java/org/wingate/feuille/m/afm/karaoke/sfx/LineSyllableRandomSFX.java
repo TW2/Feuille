@@ -33,18 +33,24 @@ public class LineSyllableRandomSFX extends SFXAbstract {
 
     @Override
     public List<AssEvent> doJob(AssEvent input) {
+        // A new array as result
         final List<AssEvent> output = new ArrayList<>();        
         
+        // Get syllables for this event
         List<SFXSyllable> syls = getSyllable(input);
-        AssEvent ev = input;
         
+        // Replace params from templates by syllables processing
         StringBuilder sb = new StringBuilder();
         for(int i=0; i<syls.size(); i++){
             sb.append(replaceParams(templates.get((int)(Math.random() * templates.size())), syls, i));
         }
+        
+        // Define output new event
+        AssEvent ev = input.getCopy();
         ev.setText(sb.toString());
         output.add(ev);
         
+        // Our result
         return output;
     }
     

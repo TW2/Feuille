@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.graalvm.polyglot.Context;
+import org.graalvm.polyglot.Value;
 import org.wingate.feuille.ass.AssEvent;
 import org.wingate.feuille.m.afm.karaoke.BiEvent;
 
@@ -90,19 +92,37 @@ public abstract class SFXAbstract implements SFXInterface {
     }
     
     @Override
-    public void forOneLine(BiEvent input) {
+    public List<BiEvent> forOneLine(BiEvent input) {
+        final List<BiEvent> bevts = new ArrayList<>();
+        
         input.getTransformedAssEvents().clear();
         List<AssEvent> evts = doJob(input.getOriginalAssEvent());
-        input.getTransformedAssEvents().addAll(evts);
+        input.getTransformedAssEvents().addAll(evts);        
+        
+        for(AssEvent ev : evts){
+            BiEvent b = new BiEvent(false, ev);
+            bevts.add(b);
+        }
+        
+        return bevts;
     }
 
     @Override
-    public void forFewLines(List<BiEvent> input) {
+    public List<BiEvent> forFewLines(List<BiEvent> input) {
+        final List<BiEvent> bevts = new ArrayList<>();
+        
         for(BiEvent bev : input){
             bev.getTransformedAssEvents().clear();
             List<AssEvent> evts = doJob(bev.getOriginalAssEvent());
             bev.getTransformedAssEvents().addAll(evts);
+            
+            for(AssEvent ev : evts){
+                BiEvent b = new BiEvent(false, ev);
+                bevts.add(b);
+            }
         }
+        
+        return bevts;
     }
     
     // Remplace phKaraoke
@@ -175,6 +195,7 @@ public abstract class SFXAbstract implements SFXInterface {
             t = t.replace("%sentence", sentence.toString());
             t = t.replace("%syllable", syl.getSyllable());
             
+            t = replaceFunction(t);
             
             char[] letters = syl.getSyllable().toCharArray();
             long pastLetterDuration = syl.getMsDuration();
@@ -238,6 +259,8 @@ public abstract class SFXAbstract implements SFXInterface {
 
         t = t.replace("%sentence", sentence.toString());
         t = t.replace("%syllable", syl.getSyllable());
+            
+        t = replaceFunction(t);
 
 
         char[] letters = syl.getSyllable().toCharArray();
@@ -270,4 +293,55 @@ public abstract class SFXAbstract implements SFXInterface {
         return output;
     }
     
+    private String replaceFunction(String text){
+        // %resolve(scriptName, functionName, args...)
+        final String RESOLVE = "%resolve";
+        if(text.contains(RESOLVE)){
+            int from = text.indexOf(RESOLVE + "(");
+            int to = text.indexOf(")", from) + 1;
+            
+            String tag = text.substring(from, to);
+            
+            Pattern p = Pattern.compile(RESOLVE+"\\((?<name>\\w+),(?<func>\\w+),*(?<params>[^\\)]*)");
+            Matcher m = p.matcher(tag);
+            
+            String result = "";
+            
+            if(m.find()){
+                String scriptName = m.group("name");
+                String func = m.group("func");
+                String ps = m.group("params");
+                String[] params = null;
+                
+                if(ps.isEmpty() == false){
+                    params = ps.split(",");
+                }
+                
+                
+                
+                for(SFXCode c : getCodes()){
+                    if(c.getScriptName().equalsIgnoreCase(scriptName)){
+                        try(Context ctx = Context.newBuilder("js").build();){
+                            Value script = ctx.eval("js", "(" + c.getContent() + ")");
+                            
+                            result = script.execute().asString();
+                            
+//                            Value function = script.getMember(func);
+//
+//                            if(params == null){
+//                                result = function.execute();
+//                            }else{
+//                                result = function.execute((Object) params);
+//                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            
+            text = text.replace(tag, result);
+            text = replaceFunction(text);            
+        }
+        return text;
+    } 
 }

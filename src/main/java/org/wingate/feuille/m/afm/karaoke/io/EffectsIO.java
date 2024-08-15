@@ -101,18 +101,18 @@ public class EffectsIO {
                     case Python -> { pw.println("CodeType: Python"); }
                     case Ruby -> { pw.println("CodeType: Ruby"); }
                 }                
-                pw.println("{");
+                pw.println("[[");
                 pw.println(code.getContent());
-                pw.println("}");
+                pw.println("]]");
                 pw.println();
             }
             if(sfx.getTemplates().isEmpty() == false){
                 pw.println("# Templates");
             }
             for(String template : sfx.getTemplates()){
-                pw.println("{");
+                pw.println("[[");
                 pw.println(template);
-                pw.println("},");
+                pw.println("]],");
             }
         } catch (IOException ex) {
             Logger.getLogger(EffectsIO.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,16 +171,16 @@ public class EffectsIO {
                             case "Ruby" -> { code.setCodeType(CodeType.Ruby); }
                         }
                     }
-                }else if(line.startsWith("{") && c == null && sfx != null){
+                }else if(line.startsWith("[[") && c == null && sfx != null){
                     c = "";
-                }else if(line.startsWith("}") == false && c != null && sfx != null){
+                }else if(line.startsWith("]]") == false && c != null && sfx != null){
                     c += code != null ? line + "\n" : line;
-                }else if(line.startsWith("}") && sfx != null && code != null){
+                }else if(line.startsWith("]]") && sfx != null && code != null){
                     code.setContent(c);
                     sfx.getCodes().add(code);
                     c = null;
                     code = null;
-                }else if(line.startsWith("}") && sfx != null && code == null){
+                }else if(line.startsWith("]]") && sfx != null && code == null){
                     sfx.getTemplates().add(c);
                     c = null;
                 }

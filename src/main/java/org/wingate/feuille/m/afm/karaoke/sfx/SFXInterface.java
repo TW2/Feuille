@@ -39,8 +39,8 @@ public interface SFXInterface {
     public List<String> getTemplates();
     public void setTemplates(List<String> templates);
     
-    public void forOneLine(BiEvent input);
-    public void forFewLines(List<BiEvent> input);
+    public List<BiEvent> forOneLine(BiEvent input);
+    public List<BiEvent> forFewLines(List<BiEvent> input);
     
     public List<AssEvent> doJob(AssEvent input);
 }

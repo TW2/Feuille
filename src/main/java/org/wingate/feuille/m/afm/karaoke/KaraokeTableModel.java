@@ -71,7 +71,7 @@ public class KaraokeTableModel extends DefaultTableModel {
     }
 
     @Override
-    public void setValueAt(Object aValue, int row, int column) {        
+    public void setValueAt(Object aValue, int row, int column) {
         switch(column){
             // events.get(row) is a BiEvent
             case 0 -> {

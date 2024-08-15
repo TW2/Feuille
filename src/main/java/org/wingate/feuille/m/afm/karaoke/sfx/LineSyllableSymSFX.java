@@ -33,23 +33,28 @@ public class LineSyllableSymSFX extends SFXAbstract {
 
     @Override
     public List<AssEvent> doJob(AssEvent input) {
+        // A new array as result
         final List<AssEvent> output = new ArrayList<>();        
         
+        // Get syllables for this event
         List<SFXSyllable> syls = getSyllable(input);
-        AssEvent ev = input;
         
+        // Replace params from templates by syllables processing
         StringBuilder sb = new StringBuilder();
-        int index;
-        
+        int index;        
         for(int i=0; i<syls.size(); i++){
             index = syls.size() / 2 >= i ? i : syls.size() -1 - i;
-            index = index >= templates.size() ? templates.size() - 1 : index;
+            index = index < templates.size() ? index : templates.size() - 1;
             
             sb.append(replaceParams(templates.get(index), syls, i));            
         }
+        
+        // Define output new event
+        AssEvent ev = input.getCopy();
         ev.setText(sb.toString());
         output.add(ev);        
         
+        // Our result
         return output;
     }
     

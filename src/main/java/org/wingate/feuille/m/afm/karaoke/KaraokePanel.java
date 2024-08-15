@@ -16,6 +16,7 @@
  */
 package org.wingate.feuille.m.afm.karaoke;
 
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
@@ -299,8 +300,8 @@ public class KaraokePanel extends javax.swing.JPanel {
         int z = fcSaveScript.showSaveDialog(new javax.swing.JFrame());        
         if(z == JFileChooser.APPROVE_OPTION){
             ASS assa = ass;
-            for(BiEvent be : tableModel.getEvents()){
-                assa.getEvents().addAll(be.getTransformedAssEvents());
+            for(BiEvent bev : tableModel.getEvents()){
+                assa.getEvents().addAll(bev.getTransformedAssEvents());
             }
             String path = fcSaveScript.getSelectedFile().getPath();
             if(path.endsWith(".ass") == false) path += ".ass";
@@ -311,7 +312,12 @@ public class KaraokePanel extends javax.swing.JPanel {
     private void btnFewLinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFewLinesActionPerformed
         // By few lines
         if(cboxAFMEffects.getSelectedItem() instanceof SFXAbstract sfx){
-            sfx.forFewLines(tableModel.getActiveEvents());
+            List<BiEvent> bevts = sfx.forFewLines(tableModel.getActiveEvents());
+            for(BiEvent b : bevts){
+                // Original is in fact a modified one
+                tableModel.addEvent(false, b.getOriginalAssEvent());
+            }
+            jTable1.updateUI();
         }
     }//GEN-LAST:event_btnFewLinesActionPerformed
 
@@ -319,8 +325,13 @@ public class KaraokePanel extends javax.swing.JPanel {
         // By one line
         if(cboxAFMEffects.getSelectedItem() instanceof SFXAbstract sfx){
             for(BiEvent bev : tableModel.getActiveEvents()){
-                sfx.forOneLine(bev);
+                List<BiEvent> bevts = sfx.forOneLine(bev);
+                for(BiEvent b : bevts){
+                    // Original is in fact a modified one
+                    tableModel.addEvent(false, b.getOriginalAssEvent());
+                }
             }
+            jTable1.updateUI();
         }        
     }//GEN-LAST:event_btnOneLineActionPerformed
 

@@ -104,10 +104,8 @@ public class SettingsDialog extends javax.swing.JDialog {
     public List<SFXAbstract> getTemplates(){
         final List<SFXAbstract> tps = new ArrayList<>();
         
-        int[] indices = listTemplates.getSelectedIndices();
-        
-        for(int i=0; i<indices.length; i++){
-            if(templatesModel.get(i) instanceof SFXAbstract sfx){
+        for(Object o : templatesModel.toArray()){
+            if(o instanceof SFXAbstract sfx){
                 tps.add(sfx);
             }
         }

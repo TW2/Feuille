@@ -33,21 +33,28 @@ public class LineSyllablePeriodSFX extends SFXAbstract {
 
     @Override
     public List<AssEvent> doJob(AssEvent input) {
+        // A new array as result
         final List<AssEvent> output = new ArrayList<>();        
         
+        // Get syllables for this event
         List<SFXSyllable> syls = getSyllable(input);
-        AssEvent ev = input;
         
+        // Replace params from templates by syllables processing
         StringBuilder sb = new StringBuilder();
         int templatesCount = -1;
         for(int i=0; i<syls.size(); i++){
-            templatesCount = templatesCount >= templates.size() ? 0 : (templatesCount == -1 ? 0 : templatesCount++);
+            templatesCount++;
+            if(templatesCount >= templates.size()) templatesCount = 0;
             
             sb.append(replaceParams(templates.get(templatesCount), syls, i));            
         }
+        
+        // Define output new event
+        AssEvent ev = input.getCopy();
         ev.setText(sb.toString());
         output.add(ev);
         
+        // Our result
         return output;
     }
     

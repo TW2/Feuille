@@ -40,6 +40,10 @@ Karaoke
 - [x] Scripting edit
 - [x] Open templates or scripting code
 - [x] Save templates or scripting code
+- [ ] Add line
+- [ ] Edit line
+- [ ] Undo
+- [ ] Redo
 
 OCR (Tesseract)
 

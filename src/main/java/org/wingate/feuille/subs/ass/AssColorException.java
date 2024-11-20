@@ -14,12 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.wingate.feuille.util;
+package org.wingate.feuille.subs.ass;
 
 /**
  *
  * @author util2
  */
-public enum DialogResult {
-    None, OK, Cancel, Yes, No;
+public class AssColorException extends Exception{
+
+    public AssColorException(String message) {
+        super(message);
+    }
+    
 }

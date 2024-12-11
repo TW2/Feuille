@@ -6,9 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
+import javax.swing.JMenu;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 import org.wingate.feuille.dialog.ActorsDialog;
 import org.wingate.feuille.dialog.StylesDialog;
 import org.wingate.feuille.subs.ass.ASS;
@@ -17,8 +21,9 @@ import org.wingate.feuille.subs.ass.AssComboBoxRenderer;
 import org.wingate.feuille.subs.ass.AssEffect;
 import org.wingate.feuille.subs.ass.AssEvent;
 import org.wingate.feuille.subs.ass.AssStyle;
-import org.wingate.feuille.subs.ass.AssTableModel;
+import org.wingate.feuille.subs.ass.AssTableModel2;
 import org.wingate.feuille.subs.ass.AssTime;
+import org.wingate.feuille.subs.ass.AssTimeExtra;
 import org.wingate.feuille.util.Clipboard;
 import org.wingate.feuille.util.DialogResult;
 import org.wingate.feuille.util.ISO_3166;
@@ -30,13 +35,16 @@ import org.wingate.feuille.util.LanguageAccessoryPanel;
  */
 public class MainFrame extends javax.swing.JFrame {
     
-    private final AssTableModel assSubsTableModel;
+    private final AssTableModel2 assSubsTableModel;
     private final DefaultComboBoxModel comboBoxModelStyles;
     private final DefaultComboBoxModel comboBoxModelActors;
     private final DefaultComboBoxModel comboBoxModelEffects;
     
     private final LanguageAccessoryPanel languageAccess;
     private float cplThreshold = 60f;
+    
+    private ISO_3166 origin = ISO_3166.Japan;
+    private ISO_3166 translation = ISO_3166.United_Kingdom_of_Great_Britain___N__Ireland;
 
     /**
      * Creates new form MainFrame
@@ -44,7 +52,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         
-        assSubsTableModel = new AssTableModel(tableASS);
+        assSubsTableModel = new AssTableModel2(tableASS);
         assSubsTableModel.updateColumnSize();
         
         comboBoxModelStyles = new DefaultComboBoxModel();
@@ -74,6 +82,9 @@ public class MainFrame extends javax.swing.JFrame {
         });
         languageAccess = new LanguageAccessoryPanel();
         fcLinkLanguages.setAccessory(languageAccess);
+        
+        initMenuOrigin(popmOrigin);
+        initMenuTranslation(popmTranslation);
         
         updateComboBox();
     }
@@ -134,6 +145,170 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void setOrigin(String alpha2){
+        origin = ISO_3166.getISO_3166(alpha2);
+    }
+    
+    private void setTranslation(String alpha2){
+        translation = ISO_3166.getISO_3166(alpha2);
+    }
+    
+    private void initMenuOrigin(JMenu mnu){
+        File folder = new File(getClass().getResource("/org/wingate/feuille/iso3166").getPath());
+        for(File f : folder.listFiles((File dir, String name1) -> name1.endsWith(".gif"))){
+            ISO_3166 language = ISO_3166.getISO_3166(f.getName().substring(0, f.getName().indexOf(".")));
+            if(language == ISO_3166.Unknown) continue;
+            JRadioButtonMenuItem item = new JRadioButtonMenuItem(language.getCountry());
+            bgOrigin.add(item);
+            item.addActionListener((e)->{
+                setOrigin(language.getAlpha2());
+                for(AssEvent event : assSubsTableModel.getAss().getEvents()){
+                    event.setOrigin(origin);
+                }
+            });
+            mnu.add(item);
+        }
+    }
+    
+    private void initMenuTranslation(JMenu mnu){
+        File folder = new File(getClass().getResource("/org/wingate/feuille/iso3166").getPath());
+        for(File f : folder.listFiles((File dir, String name1) -> name1.endsWith(".gif"))){
+            ISO_3166 language = ISO_3166.getISO_3166(f.getName().substring(0, f.getName().indexOf(".")));
+            if(language == ISO_3166.Unknown) continue;
+            JRadioButtonMenuItem item = new JRadioButtonMenuItem(language.getCountry());
+            bgTranslation.add(item);
+            item.addActionListener((e)->{
+                setTranslation(language.getAlpha2());
+                for(AssEvent event : assSubsTableModel.getAss().getEvents()){
+                    event.setCurrentLink(translation);
+                }
+            });
+            mnu.add(item);
+        }
+    }
+    
+    private String reformatNumber(String s){
+        if(s.matches("-?\\d*") == false){
+            Pattern p = Pattern.compile("(-?\\d*)");
+            Matcher m = p.matcher(s);
+            boolean containsMinus = s.startsWith("-");
+            boolean useMinusAllowed = true;
+            StringBuilder sb = new StringBuilder();
+            while(m.find()){
+                if(useMinusAllowed && containsMinus){
+                    sb.append("-");
+                }
+                sb.append(m.group(1).replace("-", ""));
+                useMinusAllowed = false;
+            }
+            return sb.toString();
+        }
+        return s;
+    }
+    
+    private String upDownWheelRotation(String str, int wheelRotationUnit){
+        if( str.matches("-?\\d*")){
+            if(str.equalsIgnoreCase("-")) str = "0";
+            if(str.isEmpty()) str = "0";
+            int value = Integer.parseInt(str);
+            if(wheelRotationUnit < 0){
+                value++;
+            }else if(wheelRotationUnit > 0){
+                value--;
+            }
+            return value == 0 ? "" : Integer.toString(value);
+        }
+        return str;
+    }
+    
+    private void cutTextPane(javax.swing.JTextPane p){
+        if(p.getText().isEmpty()) return;
+        if(p.getSelectedText().isEmpty()) return;
+        String str = p.getText();
+        //System.out.println(p.getSelectedText());
+        if(p.getText().equals(p.getSelectedText())){
+            Clipboard.copyString(p.getSelectedText());
+            p.setText("");
+            //System.out.println("a");
+        }else{
+            Clipboard.copyString(p.getSelectedText());
+            if(p.getSelectionStart() == 0){
+                p.setText(str.substring(p.getSelectionEnd()));
+                //System.out.println("b");
+            }else if(p.getSelectionEnd() == p.getText().length()){
+                p.setText(str.substring(0, p.getSelectionStart()));
+                //System.out.println("c");
+            }else{
+                p.setText(str.substring(0, p.getSelectionStart())
+                        + str.substring(p.getSelectionEnd()));
+                //System.out.println("d");
+            }
+        }
+    }
+    
+    private void pasteTextPane(javax.swing.JTextPane p){
+        String str = p.getText();
+        if(str.equals(p.getSelectedText())){
+            p.setText(Clipboard.pasteString());
+            //System.out.println("e");
+        }else{
+            if(p.getSelectionStart() == 0){
+                p.setText(Clipboard.pasteString() + str.substring(p.getSelectionEnd()));
+                //System.out.println("f");
+            }else if(p.getSelectionEnd() == p.getText().length()){
+                p.setText(str.substring(0, p.getSelectionStart()) + Clipboard.pasteString());
+                //System.out.println("g");
+            }else{
+                String sStart = p.getSelectionStart() == 0 ? "" : str.substring(0, p.getSelectionStart());
+                String sEnd = p.getSelectionEnd() == str.length() ? "" : str.substring(p.getSelectionEnd());
+                p.setText(sStart + Clipboard.pasteString() + sEnd);
+                //System.out.println("h");
+            }
+        }
+    }
+    
+    private void copyTextPane(javax.swing.JTextPane p){
+        Clipboard.copyString(p.getSelectedText());
+        //System.out.println("i");
+    }
+    
+    private void insertTagAround(javax.swing.JTextPane p, String tag){
+        String tStart = String.format("{\\%s1}", tag);
+        String tEnd = String.format("{\\%s0}", tag);
+        String sStart = p.getSelectionStart() == 0 ? "" : p.getText().substring(0, p.getSelectionStart());
+        String sEnd = p.getSelectionEnd() == p.getText().length() ? "" : p.getText().substring(p.getSelectionEnd());
+        String sMid = p.getSelectedText() == null || p.getSelectedText().isEmpty() ? tStart + tEnd : tStart + p.getSelectedText() + tEnd;
+        p.setText(sStart + sMid + sEnd);
+    }
+    
+    private void insertTag(javax.swing.JTextPane p, String tag){
+        String sMid = String.format("{\\%s}", tag);
+        String sStart = p.getSelectionStart() == 0 ? "" : p.getText().substring(0, p.getSelectionStart());
+        String sEnd = p.getSelectionEnd() == p.getText().length() ? "" : p.getText().substring(p.getSelectionEnd());
+        p.setText(sStart + sMid + sEnd);
+    }
+    
+    private String simplify(String text){        
+        String s = text.replace("}{", "");
+        StringBuilder sb = new StringBuilder();
+        int bracket = 0;
+        for(char c : s.toCharArray()){
+            String sc = Character.toString(c);
+            switch (sc) {
+                case "{" -> {
+                    if(bracket == 0) sb.append(sc);
+                    bracket++;
+                }
+                case "}" -> {
+                    bracket--;
+                    if(bracket == 0) sb.append(sc);
+                }
+                default -> sb.append(sc);
+            }
+        }        
+        return sb.toString();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,6 +324,28 @@ public class MainFrame extends javax.swing.JFrame {
         fcAudio = new javax.swing.JFileChooser();
         fcLinkLanguages = new javax.swing.JFileChooser();
         bgCPSCPL = new javax.swing.ButtonGroup();
+        popTable = new javax.swing.JPopupMenu();
+        popmOrigin = new javax.swing.JMenu();
+        popmTranslation = new javax.swing.JMenu();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        popmUnselectLine = new javax.swing.JMenuItem();
+        bgOrigin = new javax.swing.ButtonGroup();
+        bgTranslation = new javax.swing.ButtonGroup();
+        popEditTP = new javax.swing.JPopupMenu();
+        popmEdTpCut = new javax.swing.JMenuItem();
+        popmEdTpCopy = new javax.swing.JMenuItem();
+        popmEdTpPaste = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        popmEdTpClear = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        popmEdTpMirror = new javax.swing.JMenuItem();
+        popmEdTags = new javax.swing.JMenu();
+        popmEdTagSimplify = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        popmEdTagB = new javax.swing.JMenuItem();
+        popmEdTagI = new javax.swing.JMenuItem();
+        popmEdTagU = new javax.swing.JMenuItem();
+        popmEdTagS = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
@@ -181,9 +378,9 @@ public class MainFrame extends javax.swing.JFrame {
         cbEffects = new org.wingate.konnpetkoll.swing.PlaceholderComboBox();
         btnEditEffects = new javax.swing.JButton();
         tfLayer = new org.wingate.konnpetkoll.swing.PlaceholderTextField();
-        tfStart = new javax.swing.JTextField();
-        tfEnd = new javax.swing.JTextField();
-        tfTotal = new javax.swing.JTextField();
+        tfStart = new org.wingate.feuille.util.LockFormatTextField();
+        tfEnd = new org.wingate.feuille.util.LockFormatTextField();
+        tfDuration = new org.wingate.feuille.util.LockFormatTextField();
         tfML = new org.wingate.konnpetkoll.swing.PlaceholderTextField();
         tfMR = new org.wingate.konnpetkoll.swing.PlaceholderTextField();
         tfMV = new org.wingate.konnpetkoll.swing.PlaceholderTextField();
@@ -225,6 +422,119 @@ public class MainFrame extends javax.swing.JFrame {
         mTableLinks = new javax.swing.JMenu();
         mFileQuit = new javax.swing.JMenuItem();
         mnuEdit = new javax.swing.JMenu();
+
+        popmOrigin.setText("Original language");
+        popTable.add(popmOrigin);
+
+        popmTranslation.setText("Translation to");
+        popTable.add(popmTranslation);
+        popTable.add(jSeparator6);
+
+        popmUnselectLine.setText("Unselect line");
+        popmUnselectLine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmUnselectLineActionPerformed(evt);
+            }
+        });
+        popTable.add(popmUnselectLine);
+
+        popmEdTpCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16-Crystal_Clear_action_editcut.png"))); // NOI18N
+        popmEdTpCut.setText("Cut");
+        popmEdTpCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTpCutActionPerformed(evt);
+            }
+        });
+        popEditTP.add(popmEdTpCut);
+
+        popmEdTpCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16-Crystal_Clear_action_editcopy.png"))); // NOI18N
+        popmEdTpCopy.setText("Copy");
+        popmEdTpCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTpCopyActionPerformed(evt);
+            }
+        });
+        popEditTP.add(popmEdTpCopy);
+
+        popmEdTpPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16-Crystal_Clear_action_editpaste.png"))); // NOI18N
+        popmEdTpPaste.setText("Paste");
+        popmEdTpPaste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTpPasteActionPerformed(evt);
+            }
+        });
+        popEditTP.add(popmEdTpPaste);
+        popEditTP.add(jSeparator7);
+
+        popmEdTpClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16KO.png"))); // NOI18N
+        popmEdTpClear.setText("Clear text");
+        popmEdTpClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTpClearActionPerformed(evt);
+            }
+        });
+        popEditTP.add(popmEdTpClear);
+        popEditTP.add(jSeparator8);
+
+        popmEdTpMirror.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16OK.png"))); // NOI18N
+        popmEdTpMirror.setText("Mirror text");
+        popmEdTpMirror.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTpMirrorActionPerformed(evt);
+            }
+        });
+        popEditTP.add(popmEdTpMirror);
+
+        popmEdTags.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16 font style bold.png"))); // NOI18N
+        popmEdTags.setText("Tags");
+
+        popmEdTagSimplify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16 caution.png"))); // NOI18N
+        popmEdTagSimplify.setText("Symplify");
+        popmEdTagSimplify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTagSimplifyActionPerformed(evt);
+            }
+        });
+        popmEdTags.add(popmEdTagSimplify);
+        popmEdTags.add(jSeparator9);
+
+        popmEdTagB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16_timer_stuffs_green.png"))); // NOI18N
+        popmEdTagB.setText("Bold - b");
+        popmEdTagB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTagBActionPerformed(evt);
+            }
+        });
+        popmEdTags.add(popmEdTagB);
+
+        popmEdTagI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16_timer_stuffs_green.png"))); // NOI18N
+        popmEdTagI.setText("Italic - i");
+        popmEdTagI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTagIActionPerformed(evt);
+            }
+        });
+        popmEdTags.add(popmEdTagI);
+
+        popmEdTagU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16_timer_stuffs_green.png"))); // NOI18N
+        popmEdTagU.setText("Underline - u");
+        popmEdTagU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTagUActionPerformed(evt);
+            }
+        });
+        popmEdTags.add(popmEdTagU);
+
+        popmEdTagS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16_timer_stuffs_green.png"))); // NOI18N
+        popmEdTagS.setText("StrikeOut - s");
+        popmEdTagS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmEdTagSActionPerformed(evt);
+            }
+        });
+        popmEdTags.add(popmEdTagS);
+
+        popEditTP.add(popmEdTags);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -362,7 +672,7 @@ public class MainFrame extends javax.swing.JFrame {
         waveform1.setLayout(waveform1Layout);
         waveform1Layout.setHorizontalGroup(
             waveform1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 907, Short.MAX_VALUE)
+            .addGap(0, 998, Short.MAX_VALUE)
         );
         waveform1Layout.setVerticalGroup(
             waveform1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,12 +687,32 @@ public class MainFrame extends javax.swing.JFrame {
 
         cbComment.setText("#");
         cbComment.setToolTipText("Line type");
+        cbComment.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                cbCommentMouseWheelMoved(evt);
+            }
+        });
+        cbComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCommentActionPerformed(evt);
+            }
+        });
         jPanel11.add(cbComment);
 
         jPanel8.setLayout(new java.awt.BorderLayout());
 
         cbStyles.setToolTipText("Styles");
         cbStyles.setPlaceholder("Style");
+        cbStyles.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                cbStylesMouseWheelMoved(evt);
+            }
+        });
+        cbStyles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStylesActionPerformed(evt);
+            }
+        });
         jPanel8.add(cbStyles, java.awt.BorderLayout.CENTER);
 
         btnEditStyles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16 losange carré.png"))); // NOI18N
@@ -400,6 +730,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         cbActors.setToolTipText("Actors");
         cbActors.setPlaceholder("Actor");
+        cbActors.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                cbActorsMouseWheelMoved(evt);
+            }
+        });
+        cbActors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbActorsActionPerformed(evt);
+            }
+        });
         jPanel9.add(cbActors, java.awt.BorderLayout.CENTER);
 
         btnEditActors.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16 losange carré.png"))); // NOI18N
@@ -417,6 +757,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         cbEffects.setToolTipText("Effects");
         cbEffects.setPlaceholder("Effect");
+        cbEffects.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                cbEffectsMouseWheelMoved(evt);
+            }
+        });
+        cbEffects.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEffectsActionPerformed(evt);
+            }
+        });
         jPanel10.add(cbEffects, java.awt.BorderLayout.CENTER);
 
         btnEditEffects.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16 losange carré.png"))); // NOI18N
@@ -432,30 +782,65 @@ public class MainFrame extends javax.swing.JFrame {
 
         tfLayer.setToolTipText("Scroll your mouse to change the layer");
         tfLayer.setPlaceholder("0");
+        tfLayer.setPreferredSize(new java.awt.Dimension(40, 22));
+        tfLayer.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                tfLayerMouseWheelMoved(evt);
+            }
+        });
+        tfLayer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfLayerKeyReleased(evt);
+            }
+        });
         jPanel11.add(tfLayer);
-
-        tfStart.setText("0.00.00.00");
-        tfStart.setToolTipText("Start");
         jPanel11.add(tfStart);
-
-        tfEnd.setText("0.00.00.00");
-        tfEnd.setToolTipText("End");
         jPanel11.add(tfEnd);
-
-        tfTotal.setText("0.00.00.00");
-        tfTotal.setToolTipText("Duration");
-        jPanel11.add(tfTotal);
+        jPanel11.add(tfDuration);
 
         tfML.setToolTipText("Scroll your mouse to change the left margin value");
         tfML.setPlaceholder("0");
+        tfML.setPreferredSize(new java.awt.Dimension(50, 22));
+        tfML.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                tfMLMouseWheelMoved(evt);
+            }
+        });
+        tfML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfMLActionPerformed(evt);
+            }
+        });
         jPanel11.add(tfML);
 
         tfMR.setToolTipText("Scroll your mouse to change the right margin value");
         tfMR.setPlaceholder("0");
+        tfMR.setPreferredSize(new java.awt.Dimension(50, 22));
+        tfMR.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                tfMRMouseWheelMoved(evt);
+            }
+        });
+        tfMR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfMRActionPerformed(evt);
+            }
+        });
         jPanel11.add(tfMR);
 
         tfMV.setToolTipText("Scroll your mouse to change the vertical margin value");
         tfMV.setPlaceholder("0");
+        tfMV.setPreferredSize(new java.awt.Dimension(50, 22));
+        tfMV.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                tfMVMouseWheelMoved(evt);
+            }
+        });
+        tfMV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfMVActionPerformed(evt);
+            }
+        });
         jPanel11.add(tfMV);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16 rond.png"))); // NOI18N
@@ -474,6 +859,12 @@ public class MainFrame extends javax.swing.JFrame {
         jSplitPane3.setOneTouchExpandable(true);
 
         tpTextForTable.setToolTipText("<html>Click on the middle button of the mouse to add an event.<br>\nClick on the right button of the mouse to have more choices.<br>\nDouble left click to paste text.");
+        tpTextForTable.setComponentPopupMenu(popEditTP);
+        tpTextForTable.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tpTextForTableCaretUpdate(evt);
+            }
+        });
         tpTextForTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tpTextForTableMouseClicked(evt);
@@ -484,6 +875,12 @@ public class MainFrame extends javax.swing.JFrame {
         jSplitPane3.setBottomComponent(jScrollPane4);
 
         tpSourceFromTable.setToolTipText("<html>Click on the middle button of the mouse to add an event.<br> Click on the right button of the mouse to have more choices.<br> Double left click to paste text.");
+        tpSourceFromTable.setComponentPopupMenu(popEditTP);
+        tpSourceFromTable.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tpSourceFromTableCaretUpdate(evt);
+            }
+        });
         tpSourceFromTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tpSourceFromTableMouseClicked(evt);
@@ -586,6 +983,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         ));
         tableASS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tableASS.setComponentPopupMenu(popTable);
+        tableASS.setRowHeight(40);
         tableASS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableASSMouseClicked(evt);
@@ -605,7 +1004,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 917, Short.MAX_VALUE)
+            .addGap(0, 1008, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,7 +1017,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 917, Short.MAX_VALUE)
+            .addGap(0, 1008, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -631,7 +1030,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 917, Short.MAX_VALUE)
+            .addGap(0, 1008, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -852,8 +1251,8 @@ public class MainFrame extends javax.swing.JFrame {
             AssEvent ev = new AssEvent(
                     cbComment.isSelected() ? AssEvent.Type.Comment : AssEvent.Type.Dialogue,
                     tfLayer.getText().matches("\\d+") ? Integer.parseInt(tfLayer.getText()) : 0,
-                    AssTime.create(tfStart.getText()),
-                    AssTime.create(tfEnd.getText()),
+                    tfStart.getAssTime(),
+                    tfEnd.getAssTime(),
                     (AssStyle)comboBoxModelStyles.getSelectedItem(),
                     (AssActor)comboBoxModelActors.getSelectedItem(),
                     tfML.getText().matches("\\d+") ? Integer.parseInt(tfML.getText()) : 0,
@@ -882,8 +1281,8 @@ public class MainFrame extends javax.swing.JFrame {
             AssEvent ev = new AssEvent(
                     cbComment.isSelected() ? AssEvent.Type.Comment : AssEvent.Type.Dialogue,
                     tfLayer.getText().matches("\\d+") ? Integer.parseInt(tfLayer.getText()) : 0,
-                    AssTime.create(tfStart.getText()),
-                    AssTime.create(tfEnd.getText()),
+                    tfStart.getAssTime(),
+                    tfEnd.getAssTime(),
                     (AssStyle)comboBoxModelStyles.getSelectedItem(),
                     (AssActor)comboBoxModelActors.getSelectedItem(),
                     tfML.getText().matches("\\d+") ? Integer.parseInt(tfML.getText()) : 0,
@@ -952,22 +1351,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void toggleCPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleCPSActionPerformed
         // Stats CPS (by default)
-        if(toggleCPS.isSelected()){
-            assSubsTableModel.setToCPS();
-        }else{
-            assSubsTableModel.setToCPL();
-        }
-        tableASS.updateUI();
+//        if(toggleCPS.isSelected()){
+//            assSubsTableModel.setToCPS();
+//        }else{
+//            assSubsTableModel.setToCPL();
+//        }
+//        tableASS.updateUI();
     }//GEN-LAST:event_toggleCPSActionPerformed
 
     private void toggleCPLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleCPLActionPerformed
         // Stats CPL
-        if(toggleCPL.isSelected()){
-            assSubsTableModel.setToCPL();
-        }else{
-            assSubsTableModel.setToCPS();
-        }
-        tableASS.updateUI();
+//        if(toggleCPL.isSelected()){
+//            assSubsTableModel.setToCPL();
+//        }else{
+//            assSubsTableModel.setToCPS();
+//        }
+//        tableASS.updateUI();
     }//GEN-LAST:event_toggleCPLActionPerformed
 
     private void toggleCPLMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_toggleCPLMouseWheelMoved
@@ -989,37 +1388,404 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnStrippedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStrippedActionPerformed
         // Stripped - only text
-        assSubsTableModel.setStripped(AssTableModel.NormalRenderer.Stripped.On);
+        assSubsTableModel.setStripped(AssTableModel2.NormalRenderer.Stripped.On);
         tableASS.updateUI();
     }//GEN-LAST:event_btnStrippedActionPerformed
 
     private void btnPartiallyStrippedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartiallyStrippedActionPerformed
         // Partially stripped - text with symbol
-        assSubsTableModel.setStripped(AssTableModel.NormalRenderer.Stripped.Partially);
+        assSubsTableModel.setStripped(AssTableModel2.NormalRenderer.Stripped.Partially);
         tableASS.updateUI();
     }//GEN-LAST:event_btnPartiallyStrippedActionPerformed
 
     private void btnNotStrippedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotStrippedActionPerformed
         // Not stripped - untouched text
-        assSubsTableModel.setStripped(AssTableModel.NormalRenderer.Stripped.Off);
+        assSubsTableModel.setStripped(AssTableModel2.NormalRenderer.Stripped.Off);
         tableASS.updateUI();
     }//GEN-LAST:event_btnNotStrippedActionPerformed
 
     private void tableASSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableASSMouseClicked
         // Display line for editing
-        if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1
-                && evt.getClickCount() == 2){
-            tpSourceFromTable.setText(assSubsTableModel.getValueAt(
-                    tableASS.getSelectedRow(),
-                    12
-            ).toString());
+        if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1 && evt.getClickCount() == 1){            
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 1) instanceof AssEvent.Type x){
+                // Type
+                cbComment.setSelected(x == AssEvent.Type.Comment);
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 2) instanceof Integer x){
+                // Layer
+                tfLayer.setText(Integer.toString(x));
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 3) instanceof AssTimeExtra x){
+                // Start
+                tfStart.setAssTime(x.getTime());
+                // Sets end if duration is locked
+                if(!tfEnd.isLock() && tfDuration.isLock()){
+                    double msEnd = x.getTime().getMsTime() + tfDuration.getAssTime().getMsTime();
+                    tfEnd.setAssTime(new AssTime(msEnd));
+                }
+                // Sets duration if end is locked
+                if((tfEnd.isLock() && !tfDuration.isLock()) || (!tfEnd.isLock() && !tfDuration.isLock())){
+                    double msDuration = tfEnd.getAssTime().getMsTime() - x.getTime().getMsTime();
+                    tfDuration.setAssTime(new AssTime(msDuration));
+                }
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 4) instanceof AssTimeExtra x){
+                // End
+                tfEnd.setAssTime(x.getTime());
+                // Sets start if duration is locked
+                if(!tfStart.isLock() && tfDuration.isLock()){
+                    double msStart = x.getTime().getMsTime() - tfDuration.getAssTime().getMsTime();
+                    tfStart.setAssTime(new AssTime(msStart));
+                }
+                // Sets duration if start is locked
+                if((tfStart.isLock() && !tfDuration.isLock()) || (!tfStart.isLock() && !tfDuration.isLock())){
+                    double msDuration = x.getTime().getMsTime() - tfStart.getAssTime().getMsTime();
+                    tfDuration.setAssTime(new AssTime(msDuration));
+                }
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 5) instanceof AssStyle x){
+                // Style
+                int index = -1;
+                for(int i=0; i<comboBoxModelStyles.getSize(); i++){
+                    if(comboBoxModelStyles.getElementAt(i) instanceof AssStyle style){
+                        if(style.getName().equals(x.getName())){
+                            index = i;
+                            break;
+                        }
+                    }
+                }
+                if(index != -1){
+                    comboBoxModelStyles.setSelectedItem(comboBoxModelStyles.getElementAt(index));
+                }
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 6) instanceof AssActor x){
+                // Actor
+                int index = -1;
+                for(int i=0; i<comboBoxModelActors.getSize(); i++){
+                    if(comboBoxModelActors.getElementAt(i) instanceof AssActor actor){
+                        if(actor.getName().equals(x.getName())){
+                            index = i;
+                            break;
+                        }
+                    }
+                }
+                if(index != -1){
+                    comboBoxModelActors.setSelectedItem(comboBoxModelActors.getElementAt(index));
+                }
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 7) instanceof Integer x){
+                // ML
+                tfML.setText(Integer.toString(x));
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 8) instanceof Integer x){
+                // MR
+                tfMR.setText(Integer.toString(x));
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 9) instanceof Integer x){
+                // MV
+                tfMV.setText(Integer.toString(x));
+            }
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 10) instanceof AssEffect x){
+                // Effect
+                int index = -1;
+                for(int i=0; i<comboBoxModelEffects.getSize(); i++){
+                    if(comboBoxModelEffects.getElementAt(i) instanceof AssEffect effect){
+                        if(effect.getName().equals(x.getName())){
+                            index = i;
+                            break;
+                        }
+                    }
+                }
+                if(index != -1){
+                    comboBoxModelEffects.setSelectedItem(comboBoxModelEffects.getElementAt(index));
+                }
+            }
+            // 11 => Stats
+            if(assSubsTableModel.getValueAt(tableASS.getSelectedRow(), 12) instanceof AssEvent event){
+                tpSourceFromTable.setText(event.getText());
+                tpTextForTable.setText(event.getLinks().get(event.getCurrentLink()));                
+            }
         }
     }//GEN-LAST:event_tableASSMouseClicked
 
-    
+    private void tpSourceFromTableCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tpSourceFromTableCaretUpdate
+        // TODO add your handling code here:
+        if(tableASS.getSelectedRow() != -1){
+            // Sert de support, pas copier en entier, juste les phrases
+            AssEvent event = new AssEvent();
+            
+            event.setText(tpSourceFromTable.getText());
+            event.getLinks().put(event.getCurrentLink(), tpTextForTable.getText());
+            assSubsTableModel.setValueAt(event, tableASS.getSelectedRow(), 12);
+        }
+    }//GEN-LAST:event_tpSourceFromTableCaretUpdate
+
+    private void tpTextForTableCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tpTextForTableCaretUpdate
+        // TODO add your handling code here:
+        if(tableASS.getSelectedRow() != -1){
+            // Sert de support, pas copier en entier, juste les phrases
+            AssEvent event = new AssEvent();
+            
+            event.setText(tpSourceFromTable.getText());
+            event.getLinks().put(event.getCurrentLink(), tpTextForTable.getText());
+            assSubsTableModel.setValueAt(event, tableASS.getSelectedRow(), 12);
+        }
+    }//GEN-LAST:event_tpTextForTableCaretUpdate
+
+    private void cbCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCommentActionPerformed
+        // Sélectionne désélectionne le commentaire
+        if(tableASS.getSelectedRow() != -1){
+            AssEvent.Type x = cbComment.isSelected() ? AssEvent.Type.Comment : AssEvent.Type.Dialogue;
+            assSubsTableModel.setValueAt(x, tableASS.getSelectedRow(), 1);
+        }
+    }//GEN-LAST:event_cbCommentActionPerformed
+
+    private void cbStylesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStylesActionPerformed
+        // Change le style si connu
+        if(tableASS.getSelectedRow() != -1){
+            AssStyle style = (AssStyle)comboBoxModelStyles.getSelectedItem();
+            assSubsTableModel.setValueAt(style, tableASS.getSelectedRow(), 5);
+        }
+    }//GEN-LAST:event_cbStylesActionPerformed
+
+    private void cbCommentMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_cbCommentMouseWheelMoved
+        // Défilement - Comment ou Dialogue
+        cbComment.setSelected(!cbComment.isSelected());
+        if(tableASS.getSelectedRow() != -1){
+            AssEvent.Type x = cbComment.isSelected() ? AssEvent.Type.Comment : AssEvent.Type.Dialogue;
+            assSubsTableModel.setValueAt(x, tableASS.getSelectedRow(), 1);
+        }
+    }//GEN-LAST:event_cbCommentMouseWheelMoved
+
+    private void cbStylesMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_cbStylesMouseWheelMoved
+        // Choix du style
+        if(comboBoxModelStyles.getSize() > 1){
+            int index = comboBoxModelStyles.getIndexOf((AssStyle)comboBoxModelStyles.getSelectedItem());
+            if(evt.getWheelRotation() < 0){
+                index = index + 1 < comboBoxModelStyles.getSize() ? index + 1 : 0;
+            }else if(evt.getWheelRotation() > 0){
+                index = index - 1 >= 0 ? index - 1 : comboBoxModelStyles.getSize() - 1;
+            }
+            comboBoxModelStyles.setSelectedItem(comboBoxModelStyles.getElementAt(index));
+            if(tableASS.getSelectedRow() != -1){
+                assSubsTableModel.setValueAt(
+                        (AssStyle)comboBoxModelStyles.getElementAt(index),
+                        tableASS.getSelectedRow(),
+                        5
+                );
+            }
+        }
+    }//GEN-LAST:event_cbStylesMouseWheelMoved
+
+    private void cbActorsMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_cbActorsMouseWheelMoved
+        // Choix de l'acteur
+        if(comboBoxModelActors.getSize() > 1){
+            int index = comboBoxModelActors.getIndexOf((AssActor)comboBoxModelActors.getSelectedItem());
+            if(evt.getWheelRotation() < 0){
+                index = index + 1 < comboBoxModelActors.getSize() ? index + 1 : 0;
+            }else if(evt.getWheelRotation() > 0){
+                index = index - 1 >= 0 ? index - 1 : comboBoxModelActors.getSize() - 1;
+            }
+            comboBoxModelActors.setSelectedItem(comboBoxModelActors.getElementAt(index));
+            if(tableASS.getSelectedRow() != -1){
+                assSubsTableModel.setValueAt(
+                        (AssActor)comboBoxModelActors.getElementAt(index),
+                        tableASS.getSelectedRow(),
+                        6
+                );
+            }
+        }
+    }//GEN-LAST:event_cbActorsMouseWheelMoved
+
+    private void cbEffectsMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_cbEffectsMouseWheelMoved
+        // Choix de l'effet
+        if(comboBoxModelEffects.getSize() > 1){
+            int index = comboBoxModelEffects.getIndexOf((AssEffect)comboBoxModelEffects.getSelectedItem());
+            if(evt.getWheelRotation() < 0){
+                index = index + 1 < comboBoxModelEffects.getSize() ? index + 1 : 0;
+            }else if(evt.getWheelRotation() > 0){
+                index = index - 1 >= 0 ? index - 1 : comboBoxModelEffects.getSize() - 1;
+            }
+            comboBoxModelEffects.setSelectedItem(comboBoxModelEffects.getElementAt(index));
+            if(tableASS.getSelectedRow() != -1){
+                assSubsTableModel.setValueAt(
+                        (AssEffect)comboBoxModelEffects.getElementAt(index),
+                        tableASS.getSelectedRow(),
+                        10
+                );
+            }
+        }
+    }//GEN-LAST:event_cbEffectsMouseWheelMoved
+
+    private void tfLayerMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_tfLayerMouseWheelMoved
+        // Choix de la couche
+        tfLayer.setText(upDownWheelRotation(tfLayer.getText(), evt.getWheelRotation()));
+        // Change la couche
+        if(tableASS.getSelectedRow() != -1){            
+            assSubsTableModel.setValueAt(Integer.valueOf(tfLayer.getText()), tableASS.getSelectedRow(), 2);
+        }
+    }//GEN-LAST:event_tfLayerMouseWheelMoved
+
+    private void tfMLMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_tfMLMouseWheelMoved
+        // Choix de la valeur
+        tfML.setText(upDownWheelRotation(tfML.getText(), evt.getWheelRotation()));
+        // Change la valeur
+        if(tableASS.getSelectedRow() != -1){            
+            assSubsTableModel.setValueAt(Integer.valueOf(tfML.getText()), tableASS.getSelectedRow(), 7);
+        }
+    }//GEN-LAST:event_tfMLMouseWheelMoved
+
+    private void tfMRMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_tfMRMouseWheelMoved
+        // Choix de la valeur
+        tfMR.setText(upDownWheelRotation(tfMR.getText(), evt.getWheelRotation()));
+        // Change la valeur
+        if(tableASS.getSelectedRow() != -1){            
+            assSubsTableModel.setValueAt(Integer.valueOf(tfMR.getText()), tableASS.getSelectedRow(), 8);
+        }
+    }//GEN-LAST:event_tfMRMouseWheelMoved
+
+    private void tfMVMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_tfMVMouseWheelMoved
+        // Choix de la valeur
+        tfMV.setText(upDownWheelRotation(tfMV.getText(), evt.getWheelRotation()));
+        // Change la valeur
+        if(tableASS.getSelectedRow() != -1){            
+            assSubsTableModel.setValueAt(Integer.valueOf(tfMV.getText()), tableASS.getSelectedRow(), 9);
+        }
+    }//GEN-LAST:event_tfMVMouseWheelMoved
+
+    private void cbActorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbActorsActionPerformed
+        // Change l'acteur si connu
+        if(tableASS.getSelectedRow() != -1){
+            AssActor actor = (AssActor)comboBoxModelActors.getSelectedItem();
+            assSubsTableModel.setValueAt(actor, tableASS.getSelectedRow(), 6);
+        }
+    }//GEN-LAST:event_cbActorsActionPerformed
+
+    private void cbEffectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEffectsActionPerformed
+        // Change l'effet si connu
+        if(tableASS.getSelectedRow() != -1){
+            AssEffect sfx = (AssEffect)comboBoxModelEffects.getSelectedItem();
+            assSubsTableModel.setValueAt(sfx, tableASS.getSelectedRow(), 10);
+        }
+    }//GEN-LAST:event_cbEffectsActionPerformed
+
+    private void tfMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMLActionPerformed
+        // Change la marge
+        if(tableASS.getSelectedRow() != -1){
+            assSubsTableModel.setValueAt(Integer.valueOf(tfML.getText()), tableASS.getSelectedRow(), 7);
+        }
+    }//GEN-LAST:event_tfMLActionPerformed
+
+    private void tfMRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMRActionPerformed
+        // Change la marge
+        if(tableASS.getSelectedRow() != -1){
+            assSubsTableModel.setValueAt(Integer.valueOf(tfMR.getText()), tableASS.getSelectedRow(), 8);
+        }
+    }//GEN-LAST:event_tfMRActionPerformed
+
+    private void tfMVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMVActionPerformed
+        // Change la marge
+        if(tableASS.getSelectedRow() != -1){
+            assSubsTableModel.setValueAt(Integer.valueOf(tfMV.getText()), tableASS.getSelectedRow(), 9);
+        }
+    }//GEN-LAST:event_tfMVActionPerformed
+
+    private void popmUnselectLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmUnselectLineActionPerformed
+        // Unselectect line of table if one is selected
+        if(tableASS.getSelectedRow() != -1){
+            tableASS.clearSelection();
+        }        
+    }//GEN-LAST:event_popmUnselectLineActionPerformed
+
+    private void tfLayerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfLayerKeyReleased
+        // Change l'effet si connu
+        tfLayer.setText(reformatNumber(tfLayer.getText()));
+        if(tableASS.getSelectedRow() != -1){
+            String str = tfLayer.getText();
+            if(str.equalsIgnoreCase("-")) str = "0";
+            assSubsTableModel.setValueAt((int)Integer.parseInt(str), tableASS.getSelectedRow(), 2);
+        }        
+    }//GEN-LAST:event_tfLayerKeyReleased
+
+    private void popmEdTpCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTpCutActionPerformed
+        // Cut text
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            cutTextPane(p);
+        }
+    }//GEN-LAST:event_popmEdTpCutActionPerformed
+
+    private void popmEdTpCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTpCopyActionPerformed
+        // Cut text
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            copyTextPane(p);
+        }
+    }//GEN-LAST:event_popmEdTpCopyActionPerformed
+
+    private void popmEdTpPasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTpPasteActionPerformed
+        // Cut text
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            pasteTextPane(p);
+        }
+    }//GEN-LAST:event_popmEdTpPasteActionPerformed
+
+    private void popmEdTpClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTpClearActionPerformed
+        // Clear text
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            p.setText("");
+        }
+    }//GEN-LAST:event_popmEdTpClearActionPerformed
+
+    private void popmEdTpMirrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTpMirrorActionPerformed
+        // Mirror between tpSource and tpText
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            if(p.hashCode() == tpSourceFromTable.hashCode()){
+                tpTextForTable.setText(p.getText());
+            }
+            if(p.hashCode() == tpTextForTable.hashCode()){
+                tpSourceFromTable.setText(p.getText());
+            }
+        }
+    }//GEN-LAST:event_popmEdTpMirrorActionPerformed
+
+    private void popmEdTagBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTagBActionPerformed
+        // BOLD
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            insertTagAround(p, "b");
+        }
+    }//GEN-LAST:event_popmEdTagBActionPerformed
+
+    private void popmEdTagIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTagIActionPerformed
+        // ITALIC
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            insertTagAround(p, "i");
+        }
+    }//GEN-LAST:event_popmEdTagIActionPerformed
+
+    private void popmEdTagUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTagUActionPerformed
+        // UNDERLINE
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            insertTagAround(p, "u");
+        }
+    }//GEN-LAST:event_popmEdTagUActionPerformed
+
+    private void popmEdTagSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTagSActionPerformed
+        // STRIKEOUT
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            insertTagAround(p, "s");
+        }
+    }//GEN-LAST:event_popmEdTagSActionPerformed
+
+    private void popmEdTagSimplifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmEdTagSimplifyActionPerformed
+        // Call simplify
+        if(popEditTP.getInvoker() instanceof javax.swing.JTextPane p){
+            p.setText(simplify(p.getText()));
+        }
+    }//GEN-LAST:event_popmEdTagSimplifyActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgCPSCPL;
+    private javax.swing.ButtonGroup bgOrigin;
+    private javax.swing.ButtonGroup bgTranslation;
     private javax.swing.JButton btnEditActors;
     private javax.swing.JButton btnEditEffects;
     private javax.swing.JButton btnEditStyles;
@@ -1065,6 +1831,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;
@@ -1086,14 +1856,30 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panMessageSending;
     private javax.swing.JPanel panWave;
     private org.wingate.konnpetkoll.swing.FFPlayer player;
+    private javax.swing.JPopupMenu popEditTP;
+    private javax.swing.JPopupMenu popTable;
+    private javax.swing.JMenuItem popmEdTagB;
+    private javax.swing.JMenuItem popmEdTagI;
+    private javax.swing.JMenuItem popmEdTagS;
+    private javax.swing.JMenuItem popmEdTagSimplify;
+    private javax.swing.JMenuItem popmEdTagU;
+    private javax.swing.JMenu popmEdTags;
+    private javax.swing.JMenuItem popmEdTpClear;
+    private javax.swing.JMenuItem popmEdTpCopy;
+    private javax.swing.JMenuItem popmEdTpCut;
+    private javax.swing.JMenuItem popmEdTpMirror;
+    private javax.swing.JMenuItem popmEdTpPaste;
+    private javax.swing.JMenu popmOrigin;
+    private javax.swing.JMenu popmTranslation;
+    private javax.swing.JMenuItem popmUnselectLine;
     private javax.swing.JTable tableASS;
-    private javax.swing.JTextField tfEnd;
+    private org.wingate.feuille.util.LockFormatTextField tfDuration;
+    private org.wingate.feuille.util.LockFormatTextField tfEnd;
     private org.wingate.konnpetkoll.swing.PlaceholderTextField tfLayer;
     private org.wingate.konnpetkoll.swing.PlaceholderTextField tfML;
     private org.wingate.konnpetkoll.swing.PlaceholderTextField tfMR;
     private org.wingate.konnpetkoll.swing.PlaceholderTextField tfMV;
-    private javax.swing.JTextField tfStart;
-    private javax.swing.JTextField tfTotal;
+    private org.wingate.feuille.util.LockFormatTextField tfStart;
     private javax.swing.JToggleButton toggleCPL;
     private javax.swing.JToggleButton toggleCPS;
     private javax.swing.JTextPane tpChat;

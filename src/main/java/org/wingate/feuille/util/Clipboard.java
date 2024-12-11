@@ -16,6 +16,7 @@
  */
 package org.wingate.feuille.util;
 
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -35,22 +36,23 @@ public class Clipboard {
     }
     
     public static void copyString(String text){
-        StringSelection selection = new StringSelection(text);
-        Toolkit.getDefaultToolkit().getSystemClipboard().getContents(selection);
+        try{
+            StringSelection ss = new StringSelection(text);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+        }catch(HeadlessException exc){
+            /* Presse-papier occupé ou erreur */
+        }
     }
     
     public static String pasteString(){
         String text = "";
         Transferable tr = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
-        if(tr == null) return text;
-        if(tr.isDataFlavorSupported(DataFlavor.stringFlavor)){
-            try {
-                if(tr.getTransferData(DataFlavor.stringFlavor) instanceof String v){
-                    text = v;
-                }                    
-            } catch (UnsupportedFlavorException | IOException ex) {
-                Logger.getLogger(Clipboard.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            if(tr != null && tr.isDataFlavorSupported(DataFlavor.stringFlavor)){
+                text = (String)tr.getTransferData(DataFlavor.stringFlavor);
             }
+        }catch(UnsupportedFlavorException | IOException exc){
+            /* Presse-papier occupé ou erreur */
         }
         return text;
     }

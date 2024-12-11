@@ -12,6 +12,172 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="bgCPSCPL">
     </Component>
+    <Container class="javax.swing.JPopupMenu" name="popTable">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="popmOrigin">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Original language"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="popmTranslation">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Translation to"/>
+          </Properties>
+        </Menu>
+        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator6">
+        </Component>
+        <MenuItem class="javax.swing.JMenuItem" name="popmUnselectLine">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Unselect line"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmUnselectLineActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.ButtonGroup" name="bgOrigin">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="bgTranslation">
+    </Component>
+    <Container class="javax.swing.JPopupMenu" name="popEditTP">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="popmEdTpCut">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/org/wingate/feuille/16-Crystal_Clear_action_editcut.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cut"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTpCutActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="popmEdTpCopy">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/org/wingate/feuille/16-Crystal_Clear_action_editcopy.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Copy"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTpCopyActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="popmEdTpPaste">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/org/wingate/feuille/16-Crystal_Clear_action_editpaste.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Paste"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTpPasteActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator7">
+        </Component>
+        <MenuItem class="javax.swing.JMenuItem" name="popmEdTpClear">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/org/wingate/feuille/16KO.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Clear text"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTpClearActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator8">
+        </Component>
+        <MenuItem class="javax.swing.JMenuItem" name="popmEdTpMirror">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/org/wingate/feuille/16OK.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Mirror text"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTpMirrorActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <Menu class="javax.swing.JMenu" name="popmEdTags">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/org/wingate/feuille/16 font style bold.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Tags"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="popmEdTagSimplify">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/org/wingate/feuille/16 caution.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Symplify"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTagSimplifyActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator9">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="popmEdTagB">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/org/wingate/feuille/16_timer_stuffs_green.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Bold - b"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTagBActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="popmEdTagI">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/org/wingate/feuille/16_timer_stuffs_green.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Italic - i"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTagIActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="popmEdTagU">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/org/wingate/feuille/16_timer_stuffs_green.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Underline - u"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTagUActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="popmEdTagS">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/org/wingate/feuille/16_timer_stuffs_green.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="StrikeOut - s"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="popmEdTagSActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mnuFile">
@@ -111,7 +277,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-9,0,0,3,-107"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-9,0,0,3,-16"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -345,7 +511,7 @@
                               <Layout>
                                 <DimensionLayout dim="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <EmptySpace min="0" pref="907" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="998" max="32767" attributes="0"/>
                                   </Group>
                                 </DimensionLayout>
                                 <DimensionLayout dim="1">
@@ -375,6 +541,10 @@
                                     <Property name="text" type="java.lang.String" value="#"/>
                                     <Property name="toolTipText" type="java.lang.String" value="Line type"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="cbCommentMouseWheelMoved"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCommentActionPerformed"/>
+                                  </Events>
                                 </Component>
                                 <Container class="javax.swing.JPanel" name="jPanel8">
 
@@ -385,6 +555,10 @@
                                         <Property name="toolTipText" type="java.lang.String" value="Styles"/>
                                         <Property name="placeholder" type="java.lang.String" value="Style"/>
                                       </Properties>
+                                      <Events>
+                                        <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="cbStylesMouseWheelMoved"/>
+                                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStylesActionPerformed"/>
+                                      </Events>
                                       <Constraints>
                                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                                           <BorderConstraints direction="Center"/>
@@ -418,6 +592,10 @@
                                         <Property name="toolTipText" type="java.lang.String" value="Actors"/>
                                         <Property name="placeholder" type="java.lang.String" value="Actor"/>
                                       </Properties>
+                                      <Events>
+                                        <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="cbActorsMouseWheelMoved"/>
+                                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbActorsActionPerformed"/>
+                                      </Events>
                                       <Constraints>
                                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                                           <BorderConstraints direction="Center"/>
@@ -451,6 +629,10 @@
                                         <Property name="toolTipText" type="java.lang.String" value="Effects"/>
                                         <Property name="placeholder" type="java.lang.String" value="Effect"/>
                                       </Properties>
+                                      <Events>
+                                        <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="cbEffectsMouseWheelMoved"/>
+                                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEffectsActionPerformed"/>
+                                      </Events>
                                       <Constraints>
                                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                                           <BorderConstraints direction="Center"/>
@@ -479,43 +661,59 @@
                                   <Properties>
                                     <Property name="toolTipText" type="java.lang.String" value="Scroll your mouse to change the layer"/>
                                     <Property name="placeholder" type="java.lang.String" value="0"/>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[40, 22]"/>
+                                    </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="tfLayerMouseWheelMoved"/>
+                                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfLayerKeyReleased"/>
+                                  </Events>
                                 </Component>
-                                <Component class="javax.swing.JTextField" name="tfStart">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="0.00.00.00"/>
-                                    <Property name="toolTipText" type="java.lang.String" value="Start"/>
-                                  </Properties>
+                                <Component class="org.wingate.feuille.util.LockFormatTextField" name="tfStart">
                                 </Component>
-                                <Component class="javax.swing.JTextField" name="tfEnd">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="0.00.00.00"/>
-                                    <Property name="toolTipText" type="java.lang.String" value="End"/>
-                                  </Properties>
+                                <Component class="org.wingate.feuille.util.LockFormatTextField" name="tfEnd">
                                 </Component>
-                                <Component class="javax.swing.JTextField" name="tfTotal">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="0.00.00.00"/>
-                                    <Property name="toolTipText" type="java.lang.String" value="Duration"/>
-                                  </Properties>
+                                <Component class="org.wingate.feuille.util.LockFormatTextField" name="tfDuration">
                                 </Component>
                                 <Component class="org.wingate.konnpetkoll.swing.PlaceholderTextField" name="tfML">
                                   <Properties>
                                     <Property name="toolTipText" type="java.lang.String" value="Scroll your mouse to change the left margin value"/>
                                     <Property name="placeholder" type="java.lang.String" value="0"/>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 22]"/>
+                                    </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="tfMLMouseWheelMoved"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfMLActionPerformed"/>
+                                  </Events>
                                 </Component>
                                 <Component class="org.wingate.konnpetkoll.swing.PlaceholderTextField" name="tfMR">
                                   <Properties>
                                     <Property name="toolTipText" type="java.lang.String" value="Scroll your mouse to change the right margin value"/>
                                     <Property name="placeholder" type="java.lang.String" value="0"/>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 22]"/>
+                                    </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="tfMRMouseWheelMoved"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfMRActionPerformed"/>
+                                  </Events>
                                 </Component>
                                 <Component class="org.wingate.konnpetkoll.swing.PlaceholderTextField" name="tfMV">
                                   <Properties>
                                     <Property name="toolTipText" type="java.lang.String" value="Scroll your mouse to change the vertical margin value"/>
                                     <Property name="placeholder" type="java.lang.String" value="0"/>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 22]"/>
+                                    </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="tfMVMouseWheelMoved"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfMVActionPerformed"/>
+                                  </Events>
                                 </Component>
                                 <Component class="javax.swing.JButton" name="jButton5">
                                   <Properties>
@@ -559,8 +757,12 @@
                                     <Component class="javax.swing.JTextPane" name="tpTextForTable">
                                       <Properties>
                                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Click on the middle button of the mouse to add an event.&lt;br&gt;&#xa;Click on the right button of the mouse to have more choices.&lt;br&gt;&#xa;Double left click to paste text."/>
+                                        <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                          <ComponentRef name="popEditTP"/>
+                                        </Property>
                                       </Properties>
                                       <Events>
+                                        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="tpTextForTableCaretUpdate"/>
                                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tpTextForTableMouseClicked"/>
                                       </Events>
                                     </Component>
@@ -581,8 +783,12 @@
                                     <Component class="javax.swing.JTextPane" name="tpSourceFromTable">
                                       <Properties>
                                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Click on the middle button of the mouse to add an event.&lt;br&gt; Click on the right button of the mouse to have more choices.&lt;br&gt; Double left click to paste text."/>
+                                        <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                          <ComponentRef name="popEditTP"/>
+                                        </Property>
                                       </Properties>
                                       <Events>
+                                        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="tpSourceFromTableCaretUpdate"/>
                                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tpSourceFromTableMouseClicked"/>
                                       </Events>
                                     </Component>
@@ -716,6 +922,10 @@
                               </Table>
                             </Property>
                             <Property name="autoResizeMode" type="int" value="0"/>
+                            <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="popTable"/>
+                            </Property>
+                            <Property name="rowHeight" type="int" value="40"/>
                           </Properties>
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableASSMouseClicked"/>
@@ -741,7 +951,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="917" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1008" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -763,7 +973,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="917" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1008" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -785,7 +995,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="917" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1008" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">

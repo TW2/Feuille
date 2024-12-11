@@ -1,8 +1,7 @@
 # Feuille
 Note : Feuille use [konnpetkoll](https://github.com/TW2/konnpetkoll).
 
-### Feuille alpha release equivalent v0.6 - JDK 23 or superior :
-[Feuille 0.0.1-2024-10](https://drive.google.com/file/d/1oDt-P9QEj53F6vz0N9qkvO8ajnNcUHG9/view?usp=sharing)
+Feuille alpha release equivalent v0.6 - JDK 23 or superior : [Feuille 0.0.1-2024-10](https://drive.google.com/file/d/1oDt-P9QEj53F6vz0N9qkvO8ajnNcUHG9/view?usp=sharing)
 
 Note: English people if you are looking for some english, please join me to develop a smart documentation and maybe participate with a noob like me!
 

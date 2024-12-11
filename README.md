@@ -1,4 +1,5 @@
 # Feuille
+Note : Feuille use [konnpetkoll](https://github.com/TW2/konnpetkoll).
 
 [Feuille 0.0.1-2024-10 equivalent v0.6 - JDK 23 or superior](https://drive.google.com/file/d/1oDt-P9QEj53F6vz0N9qkvO8ajnNcUHG9/view?usp=sharing)
 

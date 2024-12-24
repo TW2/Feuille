@@ -459,7 +459,7 @@ public class AssEvent {
                 textTranslation.setBackground(bg);
                 textTranslation.setForeground(fg);
                 
-                String gifFileOrigin = getClass().getResource("/org/wingate/feuille/iso3166/"
+                String gifFileOrigin = getClass().getResource("/org/wingate/feuille/util/"
                         + event.getOrigin().getAlpha2().toLowerCase() + ".gif").getPath();
                 ImageIcon iOrigin = new ImageIcon(new File(gifFileOrigin).getAbsolutePath());
                 BufferedImage imgOrigin = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);
@@ -472,7 +472,7 @@ public class AssEvent {
                 gOrigin.dispose();
                 flagOrigin.setIcon(new ImageIcon(imgOrigin));
                 
-                String gifFileTrans = getClass().getResource("/org/wingate/feuille/iso3166/"
+                String gifFileTrans = getClass().getResource("/org/wingate/feuille/util/"
                         + event.getCurrentLink().getAlpha2().toLowerCase() + ".gif").getPath();
                 ImageIcon iTranslation = new ImageIcon(new File(gifFileTrans).getAbsolutePath());
                 BufferedImage imgTranslation = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);                

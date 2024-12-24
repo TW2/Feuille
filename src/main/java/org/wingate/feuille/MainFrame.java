@@ -155,7 +155,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void initMenuOrigin(JMenu mnu){
-        File folder = new File(getClass().getResource("/org/wingate/feuille/iso3166").getPath());
+        File folder = new File(getClass().getResource("/org/wingate/feuille/util").getPath());
         for(File f : folder.listFiles((File dir, String name1) -> name1.endsWith(".gif"))){
             ISO_3166 language = ISO_3166.getISO_3166(f.getName().substring(0, f.getName().indexOf(".")));
             if(language == ISO_3166.Unknown) continue;
@@ -172,7 +172,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void initMenuTranslation(JMenu mnu){
-        File folder = new File(getClass().getResource("/org/wingate/feuille/iso3166").getPath());
+        File folder = new File(getClass().getResource("/org/wingate/feuille/util").getPath());
         for(File f : folder.listFiles((File dir, String name1) -> name1.endsWith(".gif"))){
             ISO_3166 language = ISO_3166.getISO_3166(f.getName().substring(0, f.getName().indexOf(".")));
             if(language == ISO_3166.Unknown) continue;

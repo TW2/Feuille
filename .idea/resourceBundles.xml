@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ResourceBundleManager">
+    <file url="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_fr.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_it.properties" />
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_fr.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_it.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/org/wingate/feuille/Languages_jp.properties" />
+      <base-name>Languages</base-name>
+    </custom-resource-bundle>
+  </component>
+</project>

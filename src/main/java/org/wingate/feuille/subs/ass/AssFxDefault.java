@@ -43,21 +43,18 @@ import java.util.regex.Pattern;
 public class AssFxDefault {
     
     private final List<State> states = new ArrayList<>();
-    private final AssEvent event;
 
-    public AssFxDefault(ASS ass, AssEvent event, double ms) {
+    public AssFxDefault(String text, double ms) {
         
-        this.event = event;
-        
-        int b1 = event.getText().indexOf("{");
-        int b2 = event.getText().indexOf("}", b1);
+        int b1 = text.indexOf("{");
+        int b2 = text.indexOf("}", b1);
         int stateIndex = 0;
         
-        if(event.getText().startsWith("{") && b2 != -1){
+        if(text.startsWith("{") && b2 != -1){
             // Has overrides
-            String overrides = event.getText().substring(b1 + 1, b2);
+            String overrides = text.substring(b1 + 1, b2);
             
-            if(overrides.isEmpty() == false){
+            if(!overrides.isEmpty()){
                 State s = new State();
                 String fx = overrides;
                 State ref = s;
@@ -91,8 +88,8 @@ public class AssFxDefault {
                 s.setcShadow(cShad(ref.getcShadow(), fx));
                 s.setAlign(align(ref.getAlign(), fx));
                 s.setQ(q(ref.getQ(), fx));
-                s.setReset(reset(ref.getReset(), fx, ass, event));
-                s.setPosition(position(ref.getPosition(), fx, ass, event));
+                //s.setReset(reset(ref.getReset(), fx, ass, event));
+                //s.setPosition(position(ref.getPosition(), fx, ass, event));
                 s.setOrigin(origin(ref.getOrigin(), fx));
                 
                 states.add(s);
@@ -105,8 +102,8 @@ public class AssFxDefault {
             }
         }
         
-        if(event.getText().length() > b2 + 1){
-            String inner = event.getText().substring(b2 + 1);
+        if(text.length() > b2 + 1){
+            String inner = text.substring(b2 + 1);
             if(inner.toLowerCase().contains("\\k")){
                 // Has inner karaoke
                 Pattern p = Pattern.compile("\\{(?<tag>[\\\\k\\\\K\\\\kf\\\\ko]+)(?<cstime>\\d+)(?<fx>[^\\}]*)\\}(?<syl>[^\\{]+)");
@@ -157,8 +154,8 @@ public class AssFxDefault {
                     s.setcShadow(cShad(ref.getcShadow(), fx));
                     s.setAlign(align(ref.getAlign(), fx));
                     s.setQ(q(ref.getQ(), fx));
-                    s.setReset(reset(ref.getReset(), fx, ass, event));
-                    s.setPosition(position(ref.getPosition(), fx, ass, event));
+                    //s.setReset(reset(ref.getReset(), fx, ass, event));
+                    //s.setPosition(position(ref.getPosition(), fx, ass, event));
                     s.setOrigin(origin(ref.getOrigin(), fx));
 
                     // TODO apply effects
@@ -169,7 +166,7 @@ public class AssFxDefault {
                 }
             }else{
                 // No karaoke
-                String[] t = event.getText().split("\\{");
+                String[] t = text.split("\\{");
                 for(String str : t){
                     int index = str.lastIndexOf("}") + 1;
                     State s = new State(null, ms, ms, str.substring(index));
@@ -206,8 +203,8 @@ public class AssFxDefault {
                     s.setcShadow(cShad(ref.getcShadow(), fx));
                     s.setAlign(align(ref.getAlign(), fx));
                     s.setQ(q(ref.getQ(), fx));
-                    s.setReset(reset(ref.getReset(), fx, ass, event));
-                    s.setPosition(position(ref.getPosition(), fx, ass, event));
+                    //s.setReset(reset(ref.getReset(), fx, ass, event));
+                    //s.setPosition(position(ref.getPosition(), fx, ass, event));
                     s.setOrigin(origin(ref.getOrigin(), fx));
                     
                     states.add(s);
@@ -978,114 +975,114 @@ public class AssFxDefault {
     - couleurs + transparences, bordure, ombre, flou, transition, karaoke, clip, iclip, q
     */
 
-    public void getImage(Graphics2D g, double currentMs){        
-        AssFont font = event.getStyle().getAssFont();
-        Font f = font.getFont();
-        
-        float x = 100f; // offset
-        float y = 100f; // offset
-        
-        Point2D ref = new Point2D.Double(x, y);
-        Point2D last = ref;
-        
-        double lastSize = 0d;
-        float fsp = 0f;
-        double bord = 0d, xbord = 0d, ybord = 0d;
-        double shad = 0d, xshad = 0d, yshad = 0d;
-        
-        // Pour chaque state
-        for(int k=0; k<states.size(); k++){
-            
-            // On récupère le state en cours
-            State s = states.get(k);
-            
-            // On définit un compteur afin de savoir si on repasse à 0
-            // après que k soit différent de zéro dans la boucle d'affichage
-            int counter = 0;
-            
-            // On récupère les glyphes du texte en state
-            GlyphVector gv = f.createGlyphVector(
-                    g.getFontMetrics(f).getFontRenderContext(),
-                    s.getText()
-            );            
-            
-            // Apply fn, fs, b, i, u, s
-            g.setFont(f);
-            
-            // Pour chaque glyphe on dessine
-            for(int i=0; i<gv.getNumGlyphs(); i++){
-                
-                //System.out.println(String.format(
-                //        "Anchor: %f + %f + %f = %f",
-                //        ref.getX(), last.getX(), lastSize - fsp,
-                //        ref.getX() + last.getX() + lastSize - fsp
-                //));
-                
-                // Si on est sur un autre state, que counter == 0 
-                // et que k n'est pas égale à 0, alors on peut avancer
-                // le point d'ancrage afin d'avoir un texte fluide
-                if(counter == 0 && k != 0){
-                    // Le point d'ancrage ref se définit par :
-                    // - le dernier ancrage ref
-                    // - le dernier ancrage last
-                    // - la taille du dernier caractère lastSize si non final
-                    //System.out.println("--");
-                    ref = new Point2D.Double(
-                            ref.getX() + last.getX() + lastSize - fsp,
-                            y
-                    );
-                    
-                    // Vérification - peut être décommentée
-                    //System.out.println("ref = " + ref.getX());                    
-                }
-                
-                // On récupère les données de bord et shad
-                bord = s.getBord(); xbord = s.getBordx(); ybord = s.getBordy();
-                shad = s.getShad(); xshad = s.getShadx(); yshad = s.getShady();
-
-                // On obtient la forme au point d'ancrage ref
-                Shape sh = gv.getGlyphOutline(i, (float)ref.getX() + fsp, (float)ref.getY());
-                
-                // On dessine le texte au point d'ancrage ref
-                // Ombre (shadow)
-                g.setColor(s.getcShadow());
-                g.fill(getAssShadow(sh, shad, xshad, yshad));
-                
-                // Bordure (border)
-                g.setColor(s.getcOutline());
-                drawAssOutline(g, sh, bord, xbord, ybord);
-                
-                // Karaoké (karaoke)
-                g.setColor(s.getcKaraoke());
-                g.fill(sh);
-                
-                // Texte (text)
-                g.setColor(s.getcText());
-                g.fill(sh);
-                
-                g.setColor(Color.red);
-                g.fillOval((int)(ref.getX() + fsp), (int)ref.getY(), 8, 8);
-                g.setFont(new Font("Arial", Font.PLAIN, 18));
-                g.drawString(String.valueOf(ref.getX() + fsp), (float)ref.getX() + fsp, (float)ref.getY() + 100);
-                //System.out.println(String.format("Result: %f + %f = %f", ref.getX(), fsp, ref.getX() + fsp));
-                
-                // On applique les balises                
-                fsp += (float)s.getSpacing();
-                //System.out.println("fsp: " + fsp);
-                
-                // On définit ici le nouveau ancrage glyphe
-                last = gv.getGlyphPosition(i);
-                counter++;
-                
-                // Vérification - peut être décommentée
-                //System.out.println("point(" + i + ") = " + last.getX());
-                
-                FontMetrics fm = g.getFontMetrics(f);
-                lastSize = fm.charWidth(s.getText().charAt(i)) + fsp;
-            }
-            
-        }
-    }
+//    public void getImage(Graphics2D g, double currentMs){
+//        AssFont font = event.getStyle().getAssFont();
+//        Font f = font.getFont();
+//
+//        float x = 100f; // offset
+//        float y = 100f; // offset
+//
+//        Point2D ref = new Point2D.Double(x, y);
+//        Point2D last = ref;
+//
+//        double lastSize = 0d;
+//        float fsp = 0f;
+//        double bord = 0d, xbord = 0d, ybord = 0d;
+//        double shad = 0d, xshad = 0d, yshad = 0d;
+//
+//        // Pour chaque state
+//        for(int k=0; k<states.size(); k++){
+//
+//            // On récupère le state en cours
+//            State s = states.get(k);
+//
+//            // On définit un compteur afin de savoir si on repasse à 0
+//            // après que k soit différent de zéro dans la boucle d'affichage
+//            int counter = 0;
+//
+//            // On récupère les glyphes du texte en state
+//            GlyphVector gv = f.createGlyphVector(
+//                    g.getFontMetrics(f).getFontRenderContext(),
+//                    s.getText()
+//            );
+//
+//            // Apply fn, fs, b, i, u, s
+//            g.setFont(f);
+//
+//            // Pour chaque glyphe on dessine
+//            for(int i=0; i<gv.getNumGlyphs(); i++){
+//
+//                //System.out.println(String.format(
+//                //        "Anchor: %f + %f + %f = %f",
+//                //        ref.getX(), last.getX(), lastSize - fsp,
+//                //        ref.getX() + last.getX() + lastSize - fsp
+//                //));
+//
+//                // Si on est sur un autre state, que counter == 0
+//                // et que k n'est pas égale à 0, alors on peut avancer
+//                // le point d'ancrage afin d'avoir un texte fluide
+//                if(counter == 0 && k != 0){
+//                    // Le point d'ancrage ref se définit par :
+//                    // - le dernier ancrage ref
+//                    // - le dernier ancrage last
+//                    // - la taille du dernier caractère lastSize si non final
+//                    //System.out.println("--");
+//                    ref = new Point2D.Double(
+//                            ref.getX() + last.getX() + lastSize - fsp,
+//                            y
+//                    );
+//
+//                    // Vérification - peut être décommentée
+//                    //System.out.println("ref = " + ref.getX());
+//                }
+//
+//                // On récupère les données de bord et shad
+//                bord = s.getBord(); xbord = s.getBordx(); ybord = s.getBordy();
+//                shad = s.getShad(); xshad = s.getShadx(); yshad = s.getShady();
+//
+//                // On obtient la forme au point d'ancrage ref
+//                Shape sh = gv.getGlyphOutline(i, (float)ref.getX() + fsp, (float)ref.getY());
+//
+//                // On dessine le texte au point d'ancrage ref
+//                // Ombre (shadow)
+//                g.setColor(s.getcShadow());
+//                g.fill(getAssShadow(sh, shad, xshad, yshad));
+//
+//                // Bordure (border)
+//                g.setColor(s.getcOutline());
+//                drawAssOutline(g, sh, bord, xbord, ybord);
+//
+//                // Karaoké (karaoke)
+//                g.setColor(s.getcKaraoke());
+//                g.fill(sh);
+//
+//                // Texte (text)
+//                g.setColor(s.getcText());
+//                g.fill(sh);
+//
+//                g.setColor(Color.red);
+//                g.fillOval((int)(ref.getX() + fsp), (int)ref.getY(), 8, 8);
+//                g.setFont(new Font("Arial", Font.PLAIN, 18));
+//                g.drawString(String.valueOf(ref.getX() + fsp), (float)ref.getX() + fsp, (float)ref.getY() + 100);
+//                //System.out.println(String.format("Result: %f + %f = %f", ref.getX(), fsp, ref.getX() + fsp));
+//
+//                // On applique les balises
+//                fsp += (float)s.getSpacing();
+//                //System.out.println("fsp: " + fsp);
+//
+//                // On définit ici le nouveau ancrage glyphe
+//                last = gv.getGlyphPosition(i);
+//                counter++;
+//
+//                // Vérification - peut être décommentée
+//                //System.out.println("point(" + i + ") = " + last.getX());
+//
+//                FontMetrics fm = g.getFontMetrics(f);
+//                lastSize = fm.charWidth(s.getText().charAt(i)) + fsp;
+//            }
+//
+//        }
+//    }
     
     private void drawAssOutline(Graphics2D g, Shape sh, double v, double x, double y){
         double value = x != 0 ? x : (y != 0 ? y : v);

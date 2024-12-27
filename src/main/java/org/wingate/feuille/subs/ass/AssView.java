@@ -95,7 +95,7 @@ public class AssView extends JPanel {
         renderer.getAss().getStyles().add(style);
         AssEvent event = new AssEvent();
         event.setType(AssEvent.Type.Dialogue);
-        event.setText(sentence);
+        event.getTranslations().getVersions().getFirst().setText(sentence);
         event.setStart(new AssTime(0d));
         event.setEnd(new AssTime(500d));
         event.setStyle(style);
@@ -121,7 +121,7 @@ public class AssView extends JPanel {
             event.setEnd(new AssTime(500d));
             event.setType(AssEvent.Type.Dialogue);
             event.setStyle(style);
-            event.setText("Un p{\\fsp60}ays{\\fsp0}age VERDOYANT et brumeux !");
+            event.getTranslations().getVersions().getFirst().setText("Un p{\\fsp60}ays{\\fsp0}age VERDOYANT et brumeux !");
             ass.getEvents().add(event);
 
             AssView view = new AssView(ass, 1900, 600);

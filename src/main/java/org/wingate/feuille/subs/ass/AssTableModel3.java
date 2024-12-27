@@ -16,38 +16,34 @@
  */
 package org.wingate.feuille.subs.ass;
 
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.UIManager;
+import org.wingate.feuille.util.DrawColor;
+import org.wingate.feuille.util.ISO_3166;
+
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import org.wingate.feuille.util.DrawColor;
-import org.wingate.feuille.util.ISO_3166;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
  * @author util2
  */
-public class AssTableModel2 extends AbstractTableModel {
-    
+public class AssTableModel3 extends AbstractTableModel {
+
     private final NormalRenderer stringNormalRenderer;
     private final JTable table;
-    private ASS ass;
-    private ISO_3166 link;
-    
+    private static ASS ass;
+
     private AssStatistics stats;
 
-    public AssTableModel2(JTable table) {
+    public AssTableModel3(JTable table) {
         this.table = table;
         ass = new ASS();
         stringNormalRenderer = new NormalRenderer();
-        link = null;
-        
         stats = new AssStatistics();
-        
         init();
     }
     
@@ -64,24 +60,17 @@ public class AssTableModel2 extends AbstractTableModel {
         table.setDefaultRenderer(AssEvent.class, new AssEvent.Renderer());
         table.setDefaultRenderer(AssEvent.Type.class, new NormalRenderer());
     }
-    
+
     public void updateColumnSize(){
         final TableColumnModel cm = table.getColumnModel();
         
         for(int i=0; i<table.getColumnCount(); i++){
             switch(i){
-                case 0 -> { cm.getColumn(i).setPreferredWidth(40); }
-                case 1 -> { cm.getColumn(i).setPreferredWidth(40); }
-                case 2 -> { cm.getColumn(i).setPreferredWidth(50); }
-                case 3 -> { cm.getColumn(i).setPreferredWidth(70); }
-                case 4 -> { cm.getColumn(i).setPreferredWidth(70); }
-                case 5 -> { cm.getColumn(i).setPreferredWidth(130); }
-                case 6 -> { cm.getColumn(i).setPreferredWidth(130); }
-                case 7 -> { cm.getColumn(i).setPreferredWidth(40); }
-                case 8 -> { cm.getColumn(i).setPreferredWidth(40); }
-                case 9 -> { cm.getColumn(i).setPreferredWidth(40); }
+                case 0, 1, 7, 8, 9 -> { cm.getColumn(i).setPreferredWidth(40); }
+                case 2, 11 -> { cm.getColumn(i).setPreferredWidth(50); }
+                case 3, 4 -> { cm.getColumn(i).setPreferredWidth(70); }
+                case 5, 6 -> { cm.getColumn(i).setPreferredWidth(130); }
                 case 10 -> { cm.getColumn(i).setPreferredWidth(170); }
-                case 11 -> { cm.getColumn(i).setPreferredWidth(50); }
                 case 12 -> { cm.getColumn(i).setPreferredWidth(1000); }
             }            
         }
@@ -104,14 +93,10 @@ public class AssTableModel2 extends AbstractTableModel {
         switch(columnIndex){
             case 0 -> { return Integer.class; } // Line Number
             case 1 -> { return AssEvent.Type.class; }
-            case 2 -> { return Integer.class; }
-            case 3 -> { return AssTimeExtra.class; }
-            case 4 -> { return AssTimeExtra.class; }
+            case 2, 7, 8, 9 -> { return Integer.class; }
+            case 3, 4 -> { return AssTimeExtra.class; }
             case 5 -> { return AssStyle.class; }
             case 6 -> { return AssActor.class; }
-            case 7 -> { return Integer.class; }
-            case 8 -> { return Integer.class; }
-            case 9 -> { return Integer.class; }
             case 10 -> { return AssEffect.class; }
             case 11 -> { return AssStatistics.class; } // Statistics
             case 12 -> { return AssEvent.class; }
@@ -139,11 +124,6 @@ public class AssTableModel2 extends AbstractTableModel {
         }
         
         return super.getColumnName(column);
-    }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
     }
 
     @Override
@@ -202,12 +182,7 @@ public class AssTableModel2 extends AbstractTableModel {
             case 9 -> { if(v instanceof Integer x) event.setMarginV(x); }
             case 10 -> { if(v instanceof AssEffect x) event.setEffect(x); }
             case 11 -> { if(v instanceof AssStatistics x) stats = x; }
-            case 12 -> { 
-                if(v instanceof AssEvent x){
-                    event.setText(x.getText());
-                    event.getLinks().put(event.getCurrentLink(), x.getLinks().get(x.getCurrentLink()));
-                }
-            }
+            case 12 -> { if(v instanceof AssEvent x) event = x; }
         }
         ass.getEvents().set(rowIndex, event);
         fireTableCellUpdated(rowIndex, columnIndex);
@@ -260,16 +235,8 @@ public class AssTableModel2 extends AbstractTableModel {
     public void setPartiallyStrippedSymbol(String symbol){
         stringNormalRenderer.setPartiallyStrippedSymbol(symbol);
     }
-
-    public ISO_3166 getLink() {
-        return link;
-    }
-
-    public void setLink(ISO_3166 link) {
-        this.link = link;
-    }
     
-    public class NormalRenderer extends JLabel implements TableCellRenderer {
+    public static class NormalRenderer extends JLabel implements TableCellRenderer {
     
         public enum Stripped {
             Off, Partially, On; 
@@ -285,7 +252,7 @@ public class AssTableModel2 extends AbstractTableModel {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
-            
+
             AssEvent event = ass.getEvents().get(row);
             
             Color bg;

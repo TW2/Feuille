@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.wingate.feuille.dialog;
+package org.wingate.feuille.dialog.netbeans;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -345,7 +345,7 @@ public class StylesDialog extends javax.swing.JDialog {
             }
         });
 
-        btnEditActors.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16 losange carré.png"))); // NOI18N
+        btnEditActors.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/wingate/feuille/16 losange carre.png"))); // NOI18N
         btnEditActors.setToolTipText("Edit actors");
         btnEditActors.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

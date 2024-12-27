@@ -24,10 +24,8 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -38,17 +36,19 @@ import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 import org.wingate.feuille.util.DrawColor;
 import org.wingate.feuille.util.ISO_3166;
+import org.wingate.feuille.util.Load;
 
 /**
  *
  * @author util2
  */
 public class AssEvent {
+
     public enum Type{
         Comment("Comment"),
         Dialogue("Dialogue");
         
-        String name;
+        final String name;
         
         private Type(String name){
             this.name = name;
@@ -59,109 +59,68 @@ public class AssEvent {
         }
         
     }
-    private Type type;
-    private int layer;
-    private AssTime start;
-    private AssTime end;
-    private AssStyle style;
-    private AssActor name;
-    private int marginL;
-    private int marginR;
-    private int marginV;
-    private AssEffect effect;
-    private String text;
-    private ISO_3166 origin;
-    private ISO_3166 currentLink;
-    private Map<ISO_3166, String> links;
 
-    public AssEvent(Type type, int layer, AssTime start, AssTime end,
-            AssStyle style, AssActor name, int marginL, int marginR, int marginV,
-            AssEffect effect, String text) {
-        this.type = type;
-        this.layer = layer;
-        this.start = start;
-        this.end = end;
-        this.style = style;
-        this.name = name;
-        this.marginL = marginL;
-        this.marginR = marginR;
-        this.marginV = marginV;
-        this.effect = effect;
-        this.text = text;
-        origin = ISO_3166.Japan;
-        currentLink = ISO_3166.United_Kingdom_of_Great_Britain___N__Ireland;
-        
-        links = new HashMap<>();
+    private Type type = Type.Dialogue;
+    private int layer = 0;
+    private AssTime start = new AssTime();
+    private AssTime end = new AssTime();
+    private AssStyle style = new AssStyle();
+    private AssActor name = new AssActor();
+    private int marginL = 0;
+    private int marginR = 0;
+    private int marginV = 0;
+    private AssEffect effect = new AssEffect();
+    private AssTranslateTo translations;
+    private ISO_3166 currentLanguage;
+
+    public AssEvent(){
+        translations = AssTranslateTo.createFirst(ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()));
+        currentLanguage = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
     }
 
-    public AssEvent() {
-        this(
-                Type.Dialogue,
-                0, // layer
-                new AssTime(), // start
-                new AssTime(), // end
-                new AssStyle(), // style
-                new AssActor(), // name
-                0, // marginL
-                0, // marginR
-                0, // marginV
-                new AssEffect(), // effect
-                "" // text
-        );
+    public AssEvent(ISO_3166 original){
+        translations = AssTranslateTo.createFirst(original);
+        currentLanguage = original;
     }
-    
-    public AssEvent(String rawline,
-            List<AssStyle> ls, List<AssActor> la, List<AssEffect> lf){
+
+    public static AssEvent createFromRawLine(ISO_3166 iso, String rawline, List<AssStyle> ls, List<AssActor> la, List<AssEffect> lf) {
+        AssEvent event = new AssEvent(iso);
+
         String[] t = rawline.split(",", 10);
-        
-        type    = t[0].startsWith("Dialogue: ") ? Type.Dialogue : Type.Comment;
-        layer   = Integer.parseInt(t[0].substring(t[0].indexOf(" ") + 1)); // layer
-        start   = AssTime.create(t[1]); // start
-        end     = AssTime.create(t[2]); // end
-        style   = getStyleFromName(ls, t[3]); // style
-        name    = getActorFromName(la, t[4]); // name
-        marginL = Integer.parseInt(t[5]); // marginL
-        marginR = Integer.parseInt(t[6]); // marginR
-        marginV = Integer.parseInt(t[7]); // marginV
-        effect  = getEffectFromName(lf, t[8]); // effect
-        text    = t[9]; // text
-        origin  = ISO_3166.Japan;
-        currentLink = ISO_3166.United_Kingdom_of_Great_Britain___N__Ireland;
-        
-        links = new HashMap<>();
+
+        event.type    = t[0].startsWith("Dialogue: ") ? Type.Dialogue : Type.Comment;
+        event.layer   = Integer.parseInt(t[0].substring(t[0].indexOf(" ") + 1)); // layer
+        event.start   = AssTime.create(t[1]); // start
+        event.end     = AssTime.create(t[2]); // end
+        event.style   = getStyleFromName(ls, t[3]); // style
+        event.name    = getActorFromName(la, t[4]); // name
+        event.marginL = Integer.parseInt(t[5]); // marginL
+        event.marginR = Integer.parseInt(t[6]); // marginR
+        event.marginV = Integer.parseInt(t[7]); // marginV
+        event.effect  = getEffectFromName(lf, t[8]); // effect
+        event.translations.getVersion(iso).setText(t[9]); // text (original)
+
+        return event;
     }
     
-    public String toRawLine(){
+    public String toRawLine(ISO_3166 iso){
         StringBuilder sb = new StringBuilder(getType().getName() + ": ");
-        sb = sb.append(getLayer()).append(",");
-        sb = sb.append(getStart().toAss()).append(",");
-        sb = sb.append(getEnd().toAss()).append(",");
-        sb = sb.append(getStyle().getName()).append(",");
-        sb = sb.append(getName().getName()).append(",");
-        sb = sb.append(getMarginL()).append(",");
-        sb = sb.append(getMarginR()).append(",");
-        sb = sb.append(getMarginV()).append(",");
-        sb = sb.append(getEffect().getName()).append(",");
-        sb = sb.append(getText());
+        sb.append(getLayer()).append(",");
+        sb.append(getStart().toAss()).append(",");
+        sb.append(getEnd().toAss()).append(",");
+        sb.append(getStyle().getName()).append(",");
+        sb.append(getName().getName()).append(",");
+        sb.append(getMarginL()).append(",");
+        sb.append(getMarginR()).append(",");
+        sb.append(getMarginV()).append(",");
+        sb.append(getEffect().getName()).append(",");
+        if(iso != null){
+            sb.append(translations.getVersion(iso).getText());
+        }
         return sb.toString();
     }
     
-    public String toRawLine(ISO_3166 link){
-        StringBuilder sb = new StringBuilder(getType().getName() + ": ");
-        sb = sb.append(getLayer()).append(",");
-        sb = sb.append(getStart().toAss()).append(",");
-        sb = sb.append(getEnd().toAss()).append(",");
-        sb = sb.append(getStyle().getName()).append(",");
-        sb = sb.append(getName().getName()).append(",");
-        sb = sb.append(getMarginL()).append(",");
-        sb = sb.append(getMarginR()).append(",");
-        sb = sb.append(getMarginV()).append(",");
-        sb = sb.append(getEffect().getName()).append(",");
-        sb = sb.append(links.get(link));
-        return sb.toString();
-    }
-    
-    private AssStyle getStyleFromName(List<AssStyle> l, String name){
+    private static AssStyle getStyleFromName(List<AssStyle> l, String name){
         AssStyle v = new AssStyle();
         
         for(AssStyle s : l){
@@ -174,7 +133,7 @@ public class AssEvent {
         return v;
     }
     
-    private AssActor getActorFromName(List<AssActor> l, String name){
+    private static AssActor getActorFromName(List<AssActor> l, String name){
         AssActor v = new AssActor();
         
         for(AssActor s : l){
@@ -187,7 +146,7 @@ public class AssEvent {
         return v;
     }
     
-    private AssEffect getEffectFromName(List<AssEffect> l, String name){
+    private static AssEffect getEffectFromName(List<AssEffect> l, String name){
         AssEffect v = new AssEffect();
         
         for(AssEffect s : l){
@@ -280,49 +239,25 @@ public class AssEvent {
         this.effect = effect;
     }
 
-    public String getText() {
-        return text;
+    public AssTranslateTo getTranslations() {
+        return translations;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTranslations(AssTranslateTo translations) {
+        this.translations = translations;
     }
 
-    public String getText(ISO_3166 link) {
-        return links.get(link);
+    public ISO_3166 getCurrentLanguage() {
+        return currentLanguage;
     }
 
-    public void setText(ISO_3166 link, String text) {
-        links.put(link, text);
+    public void setCurrentLanguage(ISO_3166 currentLanguage) {
+        this.currentLanguage = currentLanguage;
     }
 
-    public Map<ISO_3166, String> getLinks() {
-        return links;
-    }
-
-    public void setLinks(Map<ISO_3166, String> links) {
-        this.links = links;
-    }
-
-    public ISO_3166 getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(ISO_3166 origin) {
-        this.origin = origin;
-    }
-
-    public ISO_3166 getCurrentLink() {
-        return currentLink;
-    }
-
-    public void setCurrentLink(ISO_3166 currentLink) {
-        this.currentLink = currentLink;
-    }
-    
     public float getCPS(){
         // Character per second
-        String s = text;
+        String s = translations.getVersion(currentLanguage).getText();
         
         Pattern p = Pattern.compile("\\{[^\\}]*(?<text>[^\\{]*)");
         Matcher m = p.matcher(s);
@@ -333,7 +268,7 @@ public class AssEvent {
             sb.append(m.group("text"));
         }
         
-        if(sb.isEmpty() == false) s = sb.toString();
+        if(!sb.isEmpty()) s = sb.toString();
         
         s = s.replace("\\N", "");
         s = s.replace(" ", "");
@@ -349,7 +284,7 @@ public class AssEvent {
     public float getCPL(){
         // Character per line minus space
         // Taking the greatest piece of line (if two lines separated by \N)
-        String s = text;
+        String s = translations.getVersion(currentLanguage).getText();
         
         Pattern p = Pattern.compile("\\{[^\\}]*(?<text>[^\\{]*)");
         Matcher m = p.matcher(s);
@@ -360,7 +295,7 @@ public class AssEvent {
             sb.append(m.group("text"));
         }
         
-        if(sb.isEmpty() == false) s = sb.toString();
+        if(!sb.isEmpty()) s = sb.toString();
         
         s = s.replace(" ", "");
         if(s.contains("\\N")){
@@ -374,7 +309,7 @@ public class AssEvent {
         
         return (float)s.length();
     }
-    
+
     public static class Renderer extends JPanel implements TableCellRenderer {
         
         public enum Stripped {
@@ -384,23 +319,21 @@ public class AssEvent {
         private Stripped strippedOrigin = Stripped.Partially;
         private Stripped strippedTranslation = Stripped.Partially;
         private String partiallyStrippedSymbol = "◆";
-        
-        private final JPanel withFlagOrigin;
+
         private final JLabel flagOrigin;
         private final JLabel textOrigin;
-        
-        private final JPanel withFlagTranslation;
+
         private final JLabel flagTranslation;
         private final JLabel textTranslation;
 
         public Renderer() {
-            withFlagOrigin = new JPanel();
+            JPanel withFlagOrigin = new JPanel();
             flagOrigin = new JLabel("");
             flagOrigin.setSize(20*4/3, 20);
             textOrigin = new JLabel("");
             textOrigin.setOpaque(true);
-            
-            withFlagTranslation = new JPanel();
+
+            JPanel withFlagTranslation = new JPanel();
             flagTranslation = new JLabel("");
             flagTranslation.setSize(20*4/3, 20);
             textTranslation = new JLabel("");
@@ -429,10 +362,10 @@ public class AssEvent {
             if(value instanceof AssEvent event){
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
                 
-                textOrigin.setText(applyStrip(event.getText(), strippedOrigin));
-                textTranslation.setText(applyStrip(event.getText(event.getCurrentLink()), strippedTranslation));
+                textOrigin.setText(applyStrip(event.translations.getVersions().getFirst().getText(), strippedOrigin));
+                textTranslation.setText(applyStrip(event.translations.getLastVersion(event.currentLanguage).getText(), strippedTranslation));
                 
-                if(event.getType() == AssEvent.Type.Comment){
+                if(event.getType() == Type.Comment){
                     bg = DrawColor.violet.getColor();
                 }else{
                     // Get table background (avoid searching from any other way)
@@ -458,10 +391,9 @@ public class AssEvent {
                 
                 textTranslation.setBackground(bg);
                 textTranslation.setForeground(fg);
-                
-                String gifFileOrigin = getClass().getResource("/org/wingate/feuille/util/"
-                        + event.getOrigin().getAlpha2().toLowerCase() + ".gif").getPath();
-                ImageIcon iOrigin = new ImageIcon(new File(gifFileOrigin).getAbsolutePath());
+
+
+                ImageIcon iOrigin = Load.fromResource("/org/wingate/feuille/util/" + event.translations.getVersions().getFirst().getIso().getAlpha2().toLowerCase() + ".gif");
                 BufferedImage imgOrigin = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);
                 Graphics2D gOrigin = imgOrigin.createGraphics();
                 gOrigin.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -472,9 +404,7 @@ public class AssEvent {
                 gOrigin.dispose();
                 flagOrigin.setIcon(new ImageIcon(imgOrigin));
                 
-                String gifFileTrans = getClass().getResource("/org/wingate/feuille/util/"
-                        + event.getCurrentLink().getAlpha2().toLowerCase() + ".gif").getPath();
-                ImageIcon iTranslation = new ImageIcon(new File(gifFileTrans).getAbsolutePath());
+                ImageIcon iTranslation = Load.fromResource("/org/wingate/feuille/util/" + event.currentLanguage.getAlpha2().toLowerCase() + ".gif");
                 BufferedImage imgTranslation = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);                
                 Graphics2D gTranslation = imgTranslation.createGraphics();
                 gTranslation.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -520,7 +450,7 @@ public class AssEvent {
                     }
                 }
                 return str;
-            }catch(Exception exc){
+            }catch(Exception _){
             }
             return s;
         }

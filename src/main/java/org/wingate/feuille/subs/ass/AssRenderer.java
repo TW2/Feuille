@@ -57,8 +57,8 @@ public class AssRenderer {
             }
             if(ev.getStart().getMsTime() <= msTime && msTime < ev.getEnd().getMsTime()){
                 // Blend
-                AssFxDefault def = new AssFxDefault(ass, ev, msTime);
-                def.getImage(g, msTime);
+//                AssFxDefault def = new AssFxDefault(ass, ev, msTime);
+//                def.getImage(g, msTime);
             }
         }
         

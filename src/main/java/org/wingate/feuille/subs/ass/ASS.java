@@ -22,10 +22,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.wingate.feuille.util.ISO_3166;
@@ -52,9 +49,12 @@ public class ASS {
     private List<AssEffect> effects = new ArrayList<>();
     
     // Feuille link languages process (language, path)
-    private Map<ISO_3166, String> availableLinkLanguages = new HashMap<>();
+    private ISO_3166 iso = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
 
     public ASS() {
+        styles.add(new AssStyle());
+        actors.add(new AssActor());
+        effects.add(new AssEffect());
     }
 
     public AssInfos getInfos() {
@@ -113,14 +113,14 @@ public class ASS {
         this.effects = effects;
     }
 
-    public Map<ISO_3166, String> getAvailableLinkLanguages() {
-        return availableLinkLanguages;
+    public ISO_3166 getIso() {
+        return iso;
     }
 
-    public void setAvailableLinkLanguages(Map<ISO_3166, String> availableLinkLanguages) {
-        this.availableLinkLanguages = availableLinkLanguages;
+    public void setIso(ISO_3166 iso) {
+        this.iso = iso;
     }
-    
+
     public static ASS read(String path){
         ASS ass = new ASS();
         
@@ -178,14 +178,14 @@ public class ASS {
                     ass.getEffects().add(AssEffect.fromLine(line));
                 }else if(line.startsWith("Dialogue: ") && sec == Section.Events){
                     try{
-                        ass.getEvents().add(new AssEvent(line,
+                        ass.getEvents().add(AssEvent.createFromRawLine(ass.iso, line,
                                 ass.getStyles(), ass.getActors(), ass.getEffects()));
                     }catch(Exception exc){
                         // Last line - End of events
                     }
                 }else if(line.startsWith("Comment: ") && sec == Section.Events){
                     try{
-                        ass.getEvents().add(new AssEvent(line,
+                        ass.getEvents().add(AssEvent.createFromRawLine(ass.iso, line,
                                 ass.getStyles(), ass.getActors(), ass.getEffects()));
                     }catch(Exception exc){
                         // Last line - End of events
@@ -306,7 +306,7 @@ public class ASS {
             sbEvent = sbEvent.append("Text");
             pw.println(sbEvent.toString());
             for(AssEvent event : ass.getEvents()){
-                pw.println(event.toRawLine());
+                pw.println(event.toRawLine(ass.iso));
             }
         } catch (IOException | AssColorException ex) {
             Logger.getLogger(ASS.class.getName()).log(Level.SEVERE, null, ex);

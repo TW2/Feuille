@@ -67,10 +67,10 @@ public class AssStyle implements Cloneable {
         this(
                 "Default", // Name
                 new AssFont("Arial"), // Font
-                new AssColor(Color.red), // Text color
+                new AssColor(Color.white), // Text color
                 new AssColor(Color.red), // Karaoke color
-                new AssColor(Color.red), // Outline color
-                new AssColor(Color.red), // Shadow color
+                new AssColor(Color.black), // Outline color
+                new AssColor(Color.black), // Shadow color
                 1f, // Scale X
                 1f, // Scale Y
                 0f, // Spacing

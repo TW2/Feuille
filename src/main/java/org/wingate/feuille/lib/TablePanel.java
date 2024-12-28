@@ -13,6 +13,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -68,6 +69,7 @@ public class TablePanel extends JPanel {
     // =================================================================================================================
     private ISO_3166 originalLanguage = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
     private ISO_3166 translationLanguage = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
+    private AssTranslateTo translations = AssTranslateTo.createFirst(originalLanguage);
     private final JTable tableTable = new JTable();
     private AssTableModel3 tableTableModel = null;
     private final JScrollPane scrollTable = new JScrollPane();
@@ -201,6 +203,9 @@ public class TablePanel extends JPanel {
         flags.setPaneDst(paneTranslation);
         flags.setSrc(originalLanguage);
         flags.setDst(translationLanguage);
+        AssTranslateTo.Version v = AssTranslateTo.Version.increment(translations.getVersions().getFirst(), translationLanguage);
+        translations.getVersions().add(v);
+        flags.setTranslations(translations);
 
         panEdit.add(panCommandsOne, BorderLayout.NORTH);
         panEdit.add(splitTextPanes, BorderLayout.CENTER);
@@ -305,18 +310,21 @@ public class TablePanel extends JPanel {
         return originalLanguage;
     }
 
-    public void setOriginalLanguage(ISO_3166 originalLanguage) {
-        this.originalLanguage = originalLanguage;
-        flags.setSrc(originalLanguage);
-    }
-
     public ISO_3166 getTranslationLanguage() {
         return translationLanguage;
     }
 
-    public void setTranslationLanguage(ISO_3166 translationLanguage) {
+    public void setLanguages(ISO_3166 originalLanguage, ISO_3166 translationLanguage) {
+        this.originalLanguage = originalLanguage;
         this.translationLanguage = translationLanguage;
+        reinitFlags();
+    }
+
+    private void reinitFlags(){
+        flags.setSrc(originalLanguage);
         flags.setDst(translationLanguage);
+        flags.setTranslations(translations);
+        flags.showLabel();
     }
 
     private AssEvent createTextPaneEvent(JTextPane src, JTextPane dst){

@@ -1,6 +1,7 @@
 package org.wingate.feuille.ctrl;
 
 import org.wingate.feuille.dialog.idea.VersionDetailsDialog;
+import org.wingate.feuille.subs.ass.AssTranslateTo;
 import org.wingate.feuille.util.DialogResult;
 import org.wingate.feuille.util.ISO_3166;
 import org.wingate.feuille.util.Load;
@@ -10,6 +11,8 @@ import java.awt.*;
 import java.util.Locale;
 
 public class FlagButtons extends JPanel {
+
+    private AssTranslateTo translations;
 
     private JTextPane paneSrc;
     private JTextPane paneDst;
@@ -75,17 +78,29 @@ public class FlagButtons extends JPanel {
 
         btnSrcVersionDetails.addActionListener(e -> {
             VersionDetailsDialog dialog = new VersionDetailsDialog(new java.awt.Frame(), true, iso);
-            dialog.showDialog();
+            dialog.lockDst();
+            dialog.showDialog(src, dst, translations);
             if(dialog.getDialogResult() == DialogResult.OK){
-
+                translations = dialog.getTranslations();
+                src = dialog.getSrc();
+                lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/util/" + src.getAlpha2() + ".gif"));
             }
         });
 
         btnDstVersionDetails.addActionListener(e -> {
             VersionDetailsDialog dialog = new VersionDetailsDialog(new java.awt.Frame(), true, iso);
-            dialog.showDialog();
+            dialog.lockSrc();
+            dialog.showDialog(src, dst, translations);
             if(dialog.getDialogResult() == DialogResult.OK){
-
+                // Do the next call before all others
+                // Because dialog.getTranslations() can crash and indicate an error
+                // If error then do not change anything
+                translations = dialog.getTranslations();
+                boolean b = dialog.noError();
+                if(b){
+                    dst = dialog.getDst();
+                    lblDst.setIcon(Load.fromResource("/org/wingate/feuille/util/" + dst.getAlpha2() + ".gif"));
+                }
             }
         });
     }
@@ -96,35 +111,32 @@ public class FlagButtons extends JPanel {
         flag.setEnabled(!b);
     }
 
-    public JTextPane getPaneSrc() {
-        return paneSrc;
-    }
-
     public void setPaneSrc(JTextPane paneSrc) {
         this.paneSrc = paneSrc;
-    }
-
-    public JTextPane getPaneDst() {
-        return paneDst;
     }
 
     public void setPaneDst(JTextPane paneDst) {
         this.paneDst = paneDst;
     }
 
-    public ISO_3166 getSrc() {
-        return src;
-    }
-
     public void setSrc(ISO_3166 src) {
         this.src = src;
     }
 
-    public ISO_3166 getDst() {
-        return dst;
-    }
-
     public void setDst(ISO_3166 dst) {
         this.dst = dst;
+    }
+
+    public AssTranslateTo getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(AssTranslateTo translations) {
+        this.translations = translations;
+    }
+
+    public void showLabel(){
+        lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/util/" + src.getAlpha2() + ".gif"));
+        lblDst.setIcon(Load.fromResource("/org/wingate/feuille/util/" + dst.getAlpha2() + ".gif"));
     }
 }

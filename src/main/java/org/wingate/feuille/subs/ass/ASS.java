@@ -133,7 +133,7 @@ public class ASS {
             Section sec = Section.ScriptInfos;
             
             while((line = br.readLine()) != null){
-                if(line == null || line.isEmpty()) continue;
+                if(line.isEmpty()) continue;
                 
                 // Define section
                 if(line.startsWith("[Script Infos]")){
@@ -211,36 +211,36 @@ public class ASS {
             // Styles
             pw.println("[V4+ Styles]");
             StringBuilder sbStyle = new StringBuilder("Format: ");
-            sbStyle = sbStyle.append("Name, ");
-            sbStyle = sbStyle.append("Fontname, ");
-            sbStyle = sbStyle.append("Fontsize, ");
-            sbStyle = sbStyle.append("PrimaryColour, ");
-            sbStyle = sbStyle.append("SecondaryColour, ");
-            sbStyle = sbStyle.append("OutlineColour, ");
-            sbStyle = sbStyle.append("BackColour, ");
-            sbStyle = sbStyle.append("Bold, ");
-            sbStyle = sbStyle.append("Italic, ");
-            sbStyle = sbStyle.append("Underline, ");
-            sbStyle = sbStyle.append("StrikeOut, ");
-            sbStyle = sbStyle.append("ScaleX, ");
-            sbStyle = sbStyle.append("ScaleY, ");
-            sbStyle = sbStyle.append("Spacing, ");
-            sbStyle = sbStyle.append("Angle, ");
-            sbStyle = sbStyle.append("BorderStyle, ");
-            sbStyle = sbStyle.append("Outline, ");
-            sbStyle = sbStyle.append("Shadow, ");
-            sbStyle = sbStyle.append("Alignment, ");
-            sbStyle = sbStyle.append("MarginL, ");
-            sbStyle = sbStyle.append("MarginR, ");
-            sbStyle = sbStyle.append("MarginV, ");
-            sbStyle = sbStyle.append("Encoding");
+            sbStyle.append("Name, ");
+            sbStyle.append("Fontname, ");
+            sbStyle.append("Fontsize, ");
+            sbStyle.append("PrimaryColour, ");
+            sbStyle.append("SecondaryColour, ");
+            sbStyle.append("OutlineColour, ");
+            sbStyle.append("BackColour, ");
+            sbStyle.append("Bold, ");
+            sbStyle.append("Italic, ");
+            sbStyle.append("Underline, ");
+            sbStyle.append("StrikeOut, ");
+            sbStyle.append("ScaleX, ");
+            sbStyle.append("ScaleY, ");
+            sbStyle.append("Spacing, ");
+            sbStyle.append("Angle, ");
+            sbStyle.append("BorderStyle, ");
+            sbStyle.append("Outline, ");
+            sbStyle.append("Shadow, ");
+            sbStyle.append("Alignment, ");
+            sbStyle.append("MarginL, ");
+            sbStyle.append("MarginR, ");
+            sbStyle.append("MarginV, ");
+            sbStyle.append("Encoding");
             pw.println(sbStyle.toString());
             for(AssStyle style : ass.getStyles()){
                 pw.println(style.toRawLine());
             }
             pw.println();
             
-            if(ass.getAttachs().isEmpty() == false){
+            if(!ass.getAttachs().isEmpty()){
                 List<AssAttachment> withFonts = new ArrayList<>();
                 List<AssAttachment> withImages = new ArrayList<>();
                 for(AssAttachment attach : ass.getAttachs()){
@@ -251,7 +251,7 @@ public class ASS {
                     }
                 }
                 // Fonts
-                if(withFonts.isEmpty() == false){
+                if(!withFonts.isEmpty()){
                     pw.println("[Fonts]");
                 }                
                 for(AssAttachment attach : withFonts){
@@ -261,7 +261,7 @@ public class ASS {
                     pw.println();
                 }
                 // Graphics
-                if(withImages.isEmpty() == false){
+                if(!withImages.isEmpty()){
                     pw.println("[Graphics]");
                 }                
                 for(AssAttachment attach : withImages){
@@ -273,7 +273,7 @@ public class ASS {
                 pw.println();
             }
             
-            if(ass.getActors().isEmpty() == false){
+            if(!ass.getActors().isEmpty()){
                 pw.println("[Actors]");
                 pw.println("Format: Name, Color, Kind, Image");
                 for(AssActor actor : ass.getActors()){
@@ -282,7 +282,7 @@ public class ASS {
                 pw.println();
             }
             
-            if(ass.getEffects().isEmpty() == false){
+            if(!ass.getEffects().isEmpty()){
                 pw.println("[FXs]");
                 pw.println("Format: Name, Effect");
                 for(AssEffect fx : ass.getEffects()){
@@ -294,16 +294,16 @@ public class ASS {
             // Events
             pw.println("[Events]");
             StringBuilder sbEvent = new StringBuilder("Format: ");
-            sbEvent = sbEvent.append("Layer, ");
-            sbEvent = sbEvent.append("Start, ");
-            sbEvent = sbEvent.append("End, ");
-            sbEvent = sbEvent.append("Style, ");
-            sbEvent = sbEvent.append("Name, ");
-            sbEvent = sbEvent.append("MarginL, ");
-            sbEvent = sbEvent.append("MarginR, ");
-            sbEvent = sbEvent.append("MarginV, ");
-            sbEvent = sbEvent.append("Effect, ");
-            sbEvent = sbEvent.append("Text");
+            sbEvent.append("Layer, ");
+            sbEvent.append("Start, ");
+            sbEvent.append("End, ");
+            sbEvent.append("Style, ");
+            sbEvent.append("Name, ");
+            sbEvent.append("MarginL, ");
+            sbEvent.append("MarginR, ");
+            sbEvent.append("MarginV, ");
+            sbEvent.append("Effect, ");
+            sbEvent.append("Text");
             pw.println(sbEvent.toString());
             for(AssEvent event : ass.getEvents()){
                 pw.println(event.toRawLine(ass.iso));
@@ -325,36 +325,36 @@ public class ASS {
             // Styles
             pw.println("[V4+ Styles]");
             StringBuilder sbStyle = new StringBuilder("Format: ");
-            sbStyle = sbStyle.append("Name, ");
-            sbStyle = sbStyle.append("Fontname, ");
-            sbStyle = sbStyle.append("Fontsize, ");
-            sbStyle = sbStyle.append("PrimaryColour, ");
-            sbStyle = sbStyle.append("SecondaryColour, ");
-            sbStyle = sbStyle.append("OutlineColour, ");
-            sbStyle = sbStyle.append("BackColour, ");
-            sbStyle = sbStyle.append("Bold, ");
-            sbStyle = sbStyle.append("Italic, ");
-            sbStyle = sbStyle.append("Underline, ");
-            sbStyle = sbStyle.append("StrikeOut, ");
-            sbStyle = sbStyle.append("ScaleX, ");
-            sbStyle = sbStyle.append("ScaleY, ");
-            sbStyle = sbStyle.append("Spacing, ");
-            sbStyle = sbStyle.append("Angle, ");
-            sbStyle = sbStyle.append("BorderStyle, ");
-            sbStyle = sbStyle.append("Outline, ");
-            sbStyle = sbStyle.append("Shadow, ");
-            sbStyle = sbStyle.append("Alignment, ");
-            sbStyle = sbStyle.append("MarginL, ");
-            sbStyle = sbStyle.append("MarginR, ");
-            sbStyle = sbStyle.append("MarginV, ");
-            sbStyle = sbStyle.append("Encoding");
+            sbStyle.append("Name, ");
+            sbStyle.append("Fontname, ");
+            sbStyle.append("Fontsize, ");
+            sbStyle.append("PrimaryColour, ");
+            sbStyle.append("SecondaryColour, ");
+            sbStyle.append("OutlineColour, ");
+            sbStyle.append("BackColour, ");
+            sbStyle.append("Bold, ");
+            sbStyle.append("Italic, ");
+            sbStyle.append("Underline, ");
+            sbStyle.append("StrikeOut, ");
+            sbStyle.append("ScaleX, ");
+            sbStyle.append("ScaleY, ");
+            sbStyle.append("Spacing, ");
+            sbStyle.append("Angle, ");
+            sbStyle.append("BorderStyle, ");
+            sbStyle.append("Outline, ");
+            sbStyle.append("Shadow, ");
+            sbStyle.append("Alignment, ");
+            sbStyle.append("MarginL, ");
+            sbStyle.append("MarginR, ");
+            sbStyle.append("MarginV, ");
+            sbStyle.append("Encoding");
             pw.println(sbStyle.toString());
             for(AssStyle style : ass.getStyles()){
                 pw.println(style.toRawLine());
             }
             pw.println();
             
-            if(ass.getAttachs().isEmpty() == false){
+            if(!ass.getAttachs().isEmpty()){
                 List<AssAttachment> withFonts = new ArrayList<>();
                 List<AssAttachment> withImages = new ArrayList<>();
                 for(AssAttachment attach : ass.getAttachs()){
@@ -365,7 +365,7 @@ public class ASS {
                     }
                 }
                 // Fonts
-                if(withFonts.isEmpty() == false){
+                if(!withFonts.isEmpty()){
                     pw.println("[Fonts]");
                 }                
                 for(AssAttachment attach : withFonts){
@@ -375,7 +375,7 @@ public class ASS {
                     pw.println();
                 }
                 // Graphics
-                if(withImages.isEmpty() == false){
+                if(!withImages.isEmpty()){
                     pw.println("[Graphics]");
                 }                
                 for(AssAttachment attach : withImages){
@@ -387,7 +387,7 @@ public class ASS {
                 pw.println();
             }
             
-            if(ass.getActors().isEmpty() == false){
+            if(!ass.getActors().isEmpty()){
                 pw.println("[Actors]");
                 pw.println("Format: Name, Color, Kind, Image");
                 for(AssActor actor : ass.getActors()){
@@ -396,7 +396,7 @@ public class ASS {
                 pw.println();
             }
             
-            if(ass.getEffects().isEmpty() == false){
+            if(!ass.getEffects().isEmpty()){
                 pw.println("[FXs]");
                 pw.println("Format: Name, Effect");
                 for(AssEffect fx : ass.getEffects()){
@@ -408,16 +408,16 @@ public class ASS {
             // Events
             pw.println("[Events]");
             StringBuilder sbEvent = new StringBuilder("Format: ");
-            sbEvent = sbEvent.append("Layer, ");
-            sbEvent = sbEvent.append("Start, ");
-            sbEvent = sbEvent.append("End, ");
-            sbEvent = sbEvent.append("Style, ");
-            sbEvent = sbEvent.append("Name, ");
-            sbEvent = sbEvent.append("MarginL, ");
-            sbEvent = sbEvent.append("MarginR, ");
-            sbEvent = sbEvent.append("MarginV, ");
-            sbEvent = sbEvent.append("Effect, ");
-            sbEvent = sbEvent.append("Text");
+            sbEvent.append("Layer, ");
+            sbEvent.append("Start, ");
+            sbEvent.append("End, ");
+            sbEvent.append("Style, ");
+            sbEvent.append("Name, ");
+            sbEvent.append("MarginL, ");
+            sbEvent.append("MarginR, ");
+            sbEvent.append("MarginV, ");
+            sbEvent.append("Effect, ");
+            sbEvent.append("Text");
             pw.println(sbEvent.toString());
             for(AssEvent event : ass.getEvents()){
                 pw.println(event.toRawLine(link));

@@ -55,6 +55,10 @@ public class AssTranslateTo {
         private final int dayInMonth;
         private final int month;
         private final int year;
+        private final int hourOfDay;
+        private final int minutes;
+        private final int seconds;
+        private final int ms;
         private final Locale loc;
 
         public Tag(int lastTagNumber, String tagText) {
@@ -69,6 +73,14 @@ public class AssTranslateTo {
             month = calendar.get(Calendar.MONTH);
             // Year
             year = calendar.get(Calendar.YEAR);
+            // Hour (24h format)
+            hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+            // Minutes
+            minutes =  calendar.get(Calendar.MINUTE);
+            // Seconds
+            seconds = calendar.get(Calendar.SECOND);
+            // Milliseconds
+            ms = calendar.get((Calendar.MILLISECOND));
             // Locale (for ISO-3166-1 search)
             loc = Locale.getDefault();
         }
@@ -93,8 +105,20 @@ public class AssTranslateTo {
             return dayOfWeek;
         }
 
-        public Locale getLoc() {
-            return loc;
+        public int getHourOfDay() {
+            return hourOfDay;
+        }
+
+        public int getMinutes() {
+            return minutes;
+        }
+
+        public int getSeconds() {
+            return seconds;
+        }
+
+        public int getMs() {
+            return ms;
         }
 
         public int getNumber() {
@@ -128,7 +152,7 @@ public class AssTranslateTo {
         }
 
         public static Version increment(Version lastVersion, ISO_3166 lng){
-            return increment(lastVersion, "Update script to version " + lastVersion.tag.number, lng);
+            return increment(lastVersion, "Update script of \"Version " + lastVersion.tag.number + "\"", lng);
         }
 
         public Tag getTag() {

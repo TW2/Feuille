@@ -1,4 +1,4 @@
-package org.wingate.feuille.dialog.idea;
+package org.wingate.feuille.dialog;
 
 import org.wingate.feuille.subs.ass.AssTranslateTo;
 import org.wingate.feuille.util.DialogResult;

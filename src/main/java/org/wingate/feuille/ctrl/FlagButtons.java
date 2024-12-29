@@ -1,6 +1,6 @@
 package org.wingate.feuille.ctrl;
 
-import org.wingate.feuille.dialog.idea.VersionDetailsDialog;
+import org.wingate.feuille.dialog.VersionDetailsDialog;
 import org.wingate.feuille.subs.ass.AssTranslateTo;
 import org.wingate.feuille.util.DialogResult;
 import org.wingate.feuille.util.ISO_3166;

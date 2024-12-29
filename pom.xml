@@ -48,11 +48,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.wingate</groupId>
-            <artifactId>konnpetkoll</artifactId>
-            <version>0.0.2_2024-10</version>
-        </dependency>
-        <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.5.1</version>

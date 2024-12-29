@@ -9,20 +9,17 @@ import java.util.Objects;
 public class Load {
 
     public static ImageIcon fromResource(String resource){
-        String s = Objects.requireNonNull(Load.class.getResource(resource)).getPath();
-        if(s.startsWith("file:")){
-            try (InputStream in = Load.class.getResourceAsStream(resource)) {
-                if (in != null) {
-                    try (ByteArrayOutputStream out = new ByteArrayOutputStream()){
-                        out.write(in.readAllBytes());
-                        return new ImageIcon(out.toByteArray());
-                    }
+        try (InputStream in = Load.class.getResourceAsStream(resource)) {
+            if (in != null) {
+                try (ByteArrayOutputStream out = new ByteArrayOutputStream()){
+                    out.write(in.readAllBytes());
+                    return new ImageIcon(out.toByteArray());
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return new ImageIcon(s.replace("%20", " "));
+        throw new NullPointerException();
     }
 
     public static String language(String key, String value, ISO_3166 iso){

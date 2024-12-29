@@ -16,6 +16,8 @@
  */
 package org.wingate.feuille.subs.ass;
 
+import org.wingate.feuille.util.ISO_3166;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +42,7 @@ public class AssInfos {
     private int playDepth;
     private float timer;
     private int wrapStyle;
+    private AssTranslateTo translations;
 
     public AssInfos(String title, String originalScript,
             String originalTranslation, String originalEditing,
@@ -62,6 +65,7 @@ public class AssInfos {
         this.playDepth = playDepth;
         this.timer = timer;
         this.wrapStyle = wrapStyle;
+        translations = null;
     }
 
     public AssInfos() {
@@ -80,6 +84,7 @@ public class AssInfos {
         playDepth = -1;
         timer = 100f;
         wrapStyle = -1;
+        translations = null;
     }
 
     public String getTitle() {
@@ -201,7 +206,15 @@ public class AssInfos {
     public void setWrapStyle(int wrapStyle) {
         this.wrapStyle = wrapStyle;
     }
-    
+
+    public AssTranslateTo getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(AssTranslateTo translations) {
+        this.translations = translations;
+    }
+
     public static void writeInfos(AssInfos inf, PrintWriter pw){
         pw.println("Title: " + inf.getTitle());
         if(inf.getOriginalScript() != null){
@@ -238,6 +251,23 @@ public class AssInfos {
             pw.println("Timer: " + inf.getTimer());
         }
         pw.println("WrapStyle: " + inf.getWrapStyle());
+        if(inf.getTranslations() != null){
+            for(AssTranslateTo.Version v : inf.getTranslations().getVersions()){
+                pw.printf("Translations: %d::%d::%d::%d::%d::%02d::%02d::%02d::%03d::%s::%s\n",
+                        v.getTag().getNumber(), // Version (number)
+                        v.getTag().getDayOfWeek(), // Day of week (number)
+                        v.getTag().getYear(), // Year (number)
+                        v.getTag().getMonth(), // Month (number)
+                        v.getTag().getDayInMonth(), // Day in month (number)
+                        v.getTag().getHourOfDay(), // Hour (number)
+                        v.getTag().getMinutes(), // Minutes (number)
+                        v.getTag().getSeconds(), // Seconds (number)
+                        v.getTag().getMs(), // Milliseconds (number)
+                        v.getTag().getTagText(), // Details (automatic text)
+                        v.getIso().getCountry()
+                );
+            }
+        }
     }
     
     public static void read(AssInfos inf, BufferedReader br) throws IOException{
@@ -259,7 +289,32 @@ public class AssInfos {
             if(line.startsWith("PlayDepth: ")) inf.setPlayDepth(Integer.parseInt(line.substring("PlayDepth: ".length())));
             if(line.startsWith("Timer: ")) inf.setTimer(Float.parseFloat(line.substring("Timer: ".length())));
             if(line.startsWith("WrapStyle: ")) inf.setWrapStyle(Integer.parseInt(line.substring("WrapStyle: ".length())));
+            if(line.startsWith("Translations: ")) inf.setTranslationsFromLine(line.substring("Translations: ".length()));
         }
         
+    }
+
+    private void setTranslationsFromLine(String line){
+        // Decode line
+        String[] t = line.split("::");
+
+        AssTranslateTo.Tag tag = new AssTranslateTo.Tag(t[9]); // t[9] tag text
+        tag.setNumber(Integer.parseInt(t[0])); // Version
+        tag.setDayOfWeek(Integer.parseInt(t[1]));
+        tag.setYear(Integer.parseInt(t[2]));
+        tag.setMonth(Integer.parseInt(t[3]));
+        tag.setDayInMonth(Integer.parseInt(t[4]));
+        tag.setHourOfDay(Integer.parseInt(t[5]));
+        tag.setMinutes(Integer.parseInt(t[6]));
+        tag.setSeconds(Integer.parseInt(t[7]));
+        tag.setMs(Integer.parseInt(t[8]));
+
+        AssTranslateTo.Version v = new AssTranslateTo.Version(tag, ISO_3166.getISO_3166(t[10])); // t[10] country
+
+        if(translations == null){
+            translations = new AssTranslateTo();
+        }
+
+        translations.getVersions().add(v);
     }
 }

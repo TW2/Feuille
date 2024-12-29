@@ -71,20 +71,17 @@ public class AssEvent {
     private int marginV = 0;
     private AssEffect effect = new AssEffect();
     private AssTranslateTo translations;
-    private ISO_3166 currentLanguage;
+    private ISO_3166 srcLanguage;
+    private ISO_3166 dstLanguage;
 
-    public AssEvent(){
-        translations = AssTranslateTo.createFirst(ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()));
-        currentLanguage = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
+    public AssEvent(AssTranslateTo translations, ISO_3166 srcLanguage, ISO_3166 dstLanguage){
+        this.translations = translations;
+        this.srcLanguage = srcLanguage;
+        this.dstLanguage = dstLanguage == null ? ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()) : dstLanguage;
     }
 
-    public AssEvent(ISO_3166 original){
-        translations = AssTranslateTo.createFirst(original);
-        currentLanguage = original;
-    }
-
-    public static AssEvent createFromRawLine(ISO_3166 iso, String rawline, List<AssStyle> ls, List<AssActor> la, List<AssEffect> lf) {
-        AssEvent event = new AssEvent(iso);
+    public static AssEvent createFromRawLine(AssTranslateTo translations, ISO_3166 srcLanguage, ISO_3166 dstLanguage, String rawline, List<AssStyle> ls, List<AssActor> la, List<AssEffect> lf) {
+        AssEvent event = new AssEvent(translations, srcLanguage, dstLanguage);
 
         String[] t = rawline.split(",", 10);
 
@@ -98,12 +95,12 @@ public class AssEvent {
         event.marginR = Integer.parseInt(t[6]); // marginR
         event.marginV = Integer.parseInt(t[7]); // marginV
         event.effect  = getEffectFromName(lf, t[8]); // effect
-        event.translations.getVersion(iso).setText(t[9]); // text (original)
+        event.translations.getVersions().getLast().getTexts().add(t[9]); // text (original)
 
         return event;
     }
     
-    public String toRawLine(ISO_3166 iso){
+    public String toRawLine(ISO_3166 src, int index){
         StringBuilder sb = new StringBuilder(getType().getName() + ": ");
         sb.append(getLayer()).append(",");
         sb.append(getStart().toAss()).append(",");
@@ -114,8 +111,8 @@ public class AssEvent {
         sb.append(getMarginR()).append(",");
         sb.append(getMarginV()).append(",");
         sb.append(getEffect().getName()).append(",");
-        if(iso != null){
-            sb.append(translations.getVersion(iso).getText());
+        if(src != null){
+            sb.append(translations.getVersion(src).getTexts().get(index));
         }
         return sb.toString();
     }
@@ -247,17 +244,9 @@ public class AssEvent {
         this.translations = translations;
     }
 
-    public ISO_3166 getCurrentLanguage() {
-        return currentLanguage;
-    }
-
-    public void setCurrentLanguage(ISO_3166 currentLanguage) {
-        this.currentLanguage = currentLanguage;
-    }
-
-    public float getCPS(){
+    public float getCPS(int index){
         // Character per second
-        String s = translations.getVersion(currentLanguage).getText();
+        String s = translations.getVersion(dstLanguage).getTexts().get(index);
         
         Pattern p = Pattern.compile("\\{[^\\}]*(?<text>[^\\{]*)");
         Matcher m = p.matcher(s);
@@ -281,10 +270,10 @@ public class AssEvent {
         return s.length() / 60f;
     }
     
-    public float getCPL(){
+    public float getCPL(int index){
         // Character per line minus space
         // Taking the greatest piece of line (if two lines separated by \N)
-        String s = translations.getVersion(currentLanguage).getText();
+        String s = translations.getVersion(dstLanguage).getTexts().get(index);
         
         Pattern p = Pattern.compile("\\{[^\\}]*(?<text>[^\\{]*)");
         Matcher m = p.matcher(s);
@@ -362,8 +351,8 @@ public class AssEvent {
             if(value instanceof AssEvent event){
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
                 
-                textOrigin.setText(applyStrip(event.translations.getVersions().getFirst().getText(), strippedOrigin));
-                textTranslation.setText(applyStrip(event.translations.getLastVersion(event.currentLanguage).getText(), strippedTranslation));
+                textOrigin.setText(applyStrip(event.translations.getVersion(event.srcLanguage).getTexts().get(row), strippedOrigin));
+                textTranslation.setText(applyStrip(event.translations.getLastVersion(event.dstLanguage).getTexts().get(row), strippedTranslation));
                 
                 if(event.getType() == Type.Comment){
                     bg = DrawColor.violet.getColor();
@@ -393,7 +382,7 @@ public class AssEvent {
                 textTranslation.setForeground(fg);
 
 
-                ImageIcon iOrigin = Load.fromResource("/org/wingate/feuille/util/" + event.translations.getVersions().getFirst().getIso().getAlpha2().toLowerCase() + ".gif");
+                ImageIcon iOrigin = Load.fromResource("/org/wingate/feuille/" + event.translations.getVersion(event.srcLanguage).getIso().getAlpha2().toLowerCase() + ".gif");
                 BufferedImage imgOrigin = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);
                 Graphics2D gOrigin = imgOrigin.createGraphics();
                 gOrigin.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -404,7 +393,7 @@ public class AssEvent {
                 gOrigin.dispose();
                 flagOrigin.setIcon(new ImageIcon(imgOrigin));
                 
-                ImageIcon iTranslation = Load.fromResource("/org/wingate/feuille/util/" + event.currentLanguage.getAlpha2().toLowerCase() + ".gif");
+                ImageIcon iTranslation = Load.fromResource("/org/wingate/feuille/" + event.dstLanguage.getAlpha2().toLowerCase() + ".gif");
                 BufferedImage imgTranslation = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);                
                 Graphics2D gTranslation = imgTranslation.createGraphics();
                 gTranslation.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

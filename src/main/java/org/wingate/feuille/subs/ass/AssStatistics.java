@@ -108,7 +108,7 @@ public class AssStatistics {
                 
                 // Set text (CPL)
                 lblCPLText.setHorizontalAlignment(SwingConstants.CENTER);
-                String cpl = Integer.toString(Math.round(x.getEvent().getCPL()));
+                String cpl = Integer.toString(Math.round(x.getEvent().getCPL(row)));
                 lblCPLText.setText(cpl);
                 lblCPLText.setBackground(bg);
                 lblCPLText.setForeground(fg);                
@@ -116,20 +116,20 @@ public class AssStatistics {
                 // Set background color to border (make fake background)
                 lblCPLColor.setBorder(new LineBorder(bg, size / 4));
                 // Set stats color to real background
-                lblCPLColor.setBackground(getCplStats(x.getEvent().getCPL()));
-                setToolTipText(String.format("%s %.2f", "CPL", x.getEvent().getCPL()));
+                lblCPLColor.setBackground(getCplStats(x.getEvent().getCPL(row)));
+                setToolTipText(String.format("%s %.2f", "CPL", x.getEvent().getCPL(row)));
                 
                 // Set text (CPS)
                 lblCPSText.setHorizontalAlignment(SwingConstants.CENTER);
-                lblCPSText.setText(String.format("%.2f", x.getEvent().getCPS()));
+                lblCPSText.setText(String.format("%.2f", x.getEvent().getCPS(row)));
                 lblCPSText.setBackground(bg);
                 lblCPSText.setForeground(fg);
                 lblCPSColor.setPreferredSize(new java.awt.Dimension(size, size));                
                 // Set background color to border (make fake background)
                 lblCPSColor.setBorder(new LineBorder(bg, size / 4));
                 // Set stats color to real background
-                lblCPSColor.setBackground(getCpsStats(x.getEvent().getCPS()));
-                setToolTipText(String.format("%s %.2f", "CPS", x.getEvent().getCPS()));
+                lblCPSColor.setBackground(getCpsStats(x.getEvent().getCPS(row)));
+                setToolTipText(String.format("%s %.2f", "CPS", x.getEvent().getCPS(row)));
             }
             
             return this;

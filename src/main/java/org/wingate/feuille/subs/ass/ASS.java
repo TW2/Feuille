@@ -49,7 +49,7 @@ public class ASS {
     private List<AssEffect> effects = new ArrayList<>();
     
     // Feuille link languages process (language, path)
-    private ISO_3166 iso = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
+    private AssTranslateTo translations = new AssTranslateTo();
 
     public ASS() {
         styles.add(new AssStyle());
@@ -113,14 +113,6 @@ public class ASS {
         this.effects = effects;
     }
 
-    public ISO_3166 getIso() {
-        return iso;
-    }
-
-    public void setIso(ISO_3166 iso) {
-        this.iso = iso;
-    }
-
     public static ASS read(String path){
         ASS ass = new ASS();
         
@@ -178,15 +170,29 @@ public class ASS {
                     ass.getEffects().add(AssEffect.fromLine(line));
                 }else if(line.startsWith("Dialogue: ") && sec == Section.Events){
                     try{
-                        ass.getEvents().add(AssEvent.createFromRawLine(ass.iso, line,
-                                ass.getStyles(), ass.getActors(), ass.getEffects()));
+                        AssTranslateTo tr = ass.getInfos().getTranslations();
+                        ISO_3166 cur;
+                        if(tr == null){
+                            cur = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
+                            tr = AssTranslateTo.createFirst(cur);
+                        }else{
+                            cur = tr.getVersions().getLast().getIso();
+                        }
+                        ass.getEvents().add(AssEvent.createFromRawLine(tr, cur, null, line, ass.getStyles(), ass.getActors(), ass.getEffects()));
                     }catch(Exception exc){
                         // Last line - End of events
                     }
                 }else if(line.startsWith("Comment: ") && sec == Section.Events){
                     try{
-                        ass.getEvents().add(AssEvent.createFromRawLine(ass.iso, line,
-                                ass.getStyles(), ass.getActors(), ass.getEffects()));
+                        AssTranslateTo tr = ass.getInfos().getTranslations();
+                        ISO_3166 cur;
+                        if(tr == null){
+                            cur = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
+                            tr = AssTranslateTo.createFirst(cur);
+                        }else{
+                            cur = tr.getVersions().getLast().getIso();
+                        }
+                        ass.getEvents().add(AssEvent.createFromRawLine(tr, cur, null, line, ass.getStyles(), ass.getActors(), ass.getEffects()));
                     }catch(Exception exc){
                         // Last line - End of events
                     }                    
@@ -199,7 +205,7 @@ public class ASS {
         return ass;
     }
     
-    public static void write(ASS ass, String path){
+    public static void write(ASS ass, ISO_3166 iso, String path){
         try(PrintWriter pw = new PrintWriter(path, StandardCharsets.UTF_8);){
             // Script Info
             pw.println("[Script Info]");
@@ -210,31 +216,9 @@ public class ASS {
             
             // Styles
             pw.println("[V4+ Styles]");
-            StringBuilder sbStyle = new StringBuilder("Format: ");
-            sbStyle.append("Name, ");
-            sbStyle.append("Fontname, ");
-            sbStyle.append("Fontsize, ");
-            sbStyle.append("PrimaryColour, ");
-            sbStyle.append("SecondaryColour, ");
-            sbStyle.append("OutlineColour, ");
-            sbStyle.append("BackColour, ");
-            sbStyle.append("Bold, ");
-            sbStyle.append("Italic, ");
-            sbStyle.append("Underline, ");
-            sbStyle.append("StrikeOut, ");
-            sbStyle.append("ScaleX, ");
-            sbStyle.append("ScaleY, ");
-            sbStyle.append("Spacing, ");
-            sbStyle.append("Angle, ");
-            sbStyle.append("BorderStyle, ");
-            sbStyle.append("Outline, ");
-            sbStyle.append("Shadow, ");
-            sbStyle.append("Alignment, ");
-            sbStyle.append("MarginL, ");
-            sbStyle.append("MarginR, ");
-            sbStyle.append("MarginV, ");
-            sbStyle.append("Encoding");
-            pw.println(sbStyle.toString());
+            pw.println("Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour," +
+                    " Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow," +
+                    " Alignment, MarginL, MarginR, MarginV, Encoding");
             for(AssStyle style : ass.getStyles()){
                 pw.println(style.toRawLine());
             }
@@ -293,134 +277,10 @@ public class ASS {
             
             // Events
             pw.println("[Events]");
-            StringBuilder sbEvent = new StringBuilder("Format: ");
-            sbEvent.append("Layer, ");
-            sbEvent.append("Start, ");
-            sbEvent.append("End, ");
-            sbEvent.append("Style, ");
-            sbEvent.append("Name, ");
-            sbEvent.append("MarginL, ");
-            sbEvent.append("MarginR, ");
-            sbEvent.append("MarginV, ");
-            sbEvent.append("Effect, ");
-            sbEvent.append("Text");
-            pw.println(sbEvent.toString());
-            for(AssEvent event : ass.getEvents()){
-                pw.println(event.toRawLine(ass.iso));
-            }
-        } catch (IOException | AssColorException ex) {
-            Logger.getLogger(ASS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public static void write(ASS ass, String path, ISO_3166 link){
-        try(PrintWriter pw = new PrintWriter(path, StandardCharsets.UTF_8);){
-            // Script Info
-            pw.println("[Script Info]");
-            pw.println("; Script generated by Feuille :: Leaf in English ::");
-            pw.println("; https://github.com/TW2/Feuille");
-            AssInfos.writeInfos(ass.getInfos(), pw);
-            pw.println();
-            
-            // Styles
-            pw.println("[V4+ Styles]");
-            StringBuilder sbStyle = new StringBuilder("Format: ");
-            sbStyle.append("Name, ");
-            sbStyle.append("Fontname, ");
-            sbStyle.append("Fontsize, ");
-            sbStyle.append("PrimaryColour, ");
-            sbStyle.append("SecondaryColour, ");
-            sbStyle.append("OutlineColour, ");
-            sbStyle.append("BackColour, ");
-            sbStyle.append("Bold, ");
-            sbStyle.append("Italic, ");
-            sbStyle.append("Underline, ");
-            sbStyle.append("StrikeOut, ");
-            sbStyle.append("ScaleX, ");
-            sbStyle.append("ScaleY, ");
-            sbStyle.append("Spacing, ");
-            sbStyle.append("Angle, ");
-            sbStyle.append("BorderStyle, ");
-            sbStyle.append("Outline, ");
-            sbStyle.append("Shadow, ");
-            sbStyle.append("Alignment, ");
-            sbStyle.append("MarginL, ");
-            sbStyle.append("MarginR, ");
-            sbStyle.append("MarginV, ");
-            sbStyle.append("Encoding");
-            pw.println(sbStyle.toString());
-            for(AssStyle style : ass.getStyles()){
-                pw.println(style.toRawLine());
-            }
-            pw.println();
-            
-            if(!ass.getAttachs().isEmpty()){
-                List<AssAttachment> withFonts = new ArrayList<>();
-                List<AssAttachment> withImages = new ArrayList<>();
-                for(AssAttachment attach : ass.getAttachs()){
-                    switch(attach.getType()){
-                        case Font -> { withFonts.add(attach); }
-                        case Image -> { withImages.add(attach); }
-                        case None -> { /* Nothing */ }
-                    }
-                }
-                // Fonts
-                if(!withFonts.isEmpty()){
-                    pw.println("[Fonts]");
-                }                
-                for(AssAttachment attach : withFonts){
-                    File file = new File(attach.getPath());
-                    pw.println("fontname: " + file.getName());
-                    AssUU.writeUU(file, pw);
-                    pw.println();
-                }
-                // Graphics
-                if(!withImages.isEmpty()){
-                    pw.println("[Graphics]");
-                }                
-                for(AssAttachment attach : withImages){
-                    File file = new File(attach.getPath());
-                    pw.println("filename: " + file.getName());
-                    AssUU.writeUU(file, pw);
-                    pw.println();
-                }
-                pw.println();
-            }
-            
-            if(!ass.getActors().isEmpty()){
-                pw.println("[Actors]");
-                pw.println("Format: Name, Color, Kind, Image");
-                for(AssActor actor : ass.getActors()){
-                    pw.println(actor.toLine());
-                }
-                pw.println();
-            }
-            
-            if(!ass.getEffects().isEmpty()){
-                pw.println("[FXs]");
-                pw.println("Format: Name, Effect");
-                for(AssEffect fx : ass.getEffects()){
-                    pw.println(fx.toLine());
-                }
-                pw.println();
-            }
-            
-            // Events
-            pw.println("[Events]");
-            StringBuilder sbEvent = new StringBuilder("Format: ");
-            sbEvent.append("Layer, ");
-            sbEvent.append("Start, ");
-            sbEvent.append("End, ");
-            sbEvent.append("Style, ");
-            sbEvent.append("Name, ");
-            sbEvent.append("MarginL, ");
-            sbEvent.append("MarginR, ");
-            sbEvent.append("MarginV, ");
-            sbEvent.append("Effect, ");
-            sbEvent.append("Text");
-            pw.println(sbEvent.toString());
-            for(AssEvent event : ass.getEvents()){
-                pw.println(event.toRawLine(link));
+            pw.println("Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text");
+            for(int i=0; i<ass.getEvents().size(); i++){
+                AssEvent event = ass.getEvents().get(i);
+                pw.println(event.toRawLine(iso, i));
             }
         } catch (IOException | AssColorException ex) {
             Logger.getLogger(ASS.class.getName()).log(Level.SEVERE, null, ex);

@@ -39,8 +39,8 @@ public class FlagButtons extends JPanel {
         src = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
         dst = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
 
-        lblSrc = new JLabel(Load.fromResource("/org/wingate/feuille/util/" + src.getAlpha2() + ".gif"));
-        lblDst = new JLabel(Load.fromResource("/org/wingate/feuille/util/" + dst.getAlpha2() + ".gif"));
+        lblSrc = new JLabel(Load.fromResource("/org/wingate/feuille/" + src.getAlpha2() + ".gif"));
+        lblDst = new JLabel(Load.fromResource("/org/wingate/feuille/" + dst.getAlpha2() + ".gif"));
 
         btnSrcVersionDetails = new JButton(Load.fromResource("/org/wingate/feuille/thin-present-red.png"));
         btnDstVersionDetails = new JButton(Load.fromResource("/org/wingate/feuille/thin-present-green.png"));
@@ -66,6 +66,10 @@ public class FlagButtons extends JPanel {
         panDst.add(lblDst, BorderLayout.CENTER);
         panDst.add(btnDstLock, BorderLayout.EAST);
 
+        translations = AssTranslateTo.createFirst(src);
+        AssTranslateTo.Version v = AssTranslateTo.Version.increment(translations.getVersions().getFirst(), dst);
+        translations.getVersions().add(v);
+
         btnSrcLock.addActionListener(e -> {
             boolean b = btnSrcLock.getIcon().hashCode() == linkOK.hashCode();
             lockUnlock(!b, paneSrc, btnSrcVersionDetails, lblSrc);
@@ -85,7 +89,7 @@ public class FlagButtons extends JPanel {
             if(dialog.getDialogResult() == DialogResult.OK){
                 translations = dialog.getTranslations();
                 src = dialog.getSrc();
-                lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/util/" + src.getAlpha2() + ".gif"));
+                lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/" + src.getAlpha2() + ".gif"));
             }
         });
 
@@ -101,7 +105,7 @@ public class FlagButtons extends JPanel {
                 boolean b = dialog.noError();
                 if(b){
                     dst = dialog.getDst();
-                    lblDst.setIcon(Load.fromResource("/org/wingate/feuille/util/" + dst.getAlpha2() + ".gif"));
+                    lblDst.setIcon(Load.fromResource("/org/wingate/feuille/" + dst.getAlpha2() + ".gif"));
                 }
             }
         });
@@ -118,7 +122,7 @@ public class FlagButtons extends JPanel {
                     if(dialog.getDialogResult() == DialogResult.OK){
                         translations = dialog.getTranslations();
                         src = dialog.getSrc();
-                        lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/util/" + src.getAlpha2() + ".gif"));
+                        lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/" + src.getAlpha2() + ".gif"));
                     }
                 }
             }
@@ -141,7 +145,7 @@ public class FlagButtons extends JPanel {
                         boolean b = dialog.noError();
                         if(b){
                             dst = dialog.getDst();
-                            lblDst.setIcon(Load.fromResource("/org/wingate/feuille/util/" + dst.getAlpha2() + ".gif"));
+                            lblDst.setIcon(Load.fromResource("/org/wingate/feuille/" + dst.getAlpha2() + ".gif"));
                         }
                     }
                 }
@@ -171,6 +175,14 @@ public class FlagButtons extends JPanel {
         this.dst = dst;
     }
 
+    public ISO_3166 getSrc() {
+        return src;
+    }
+
+    public ISO_3166 getDst() {
+        return dst;
+    }
+
     public AssTranslateTo getTranslations() {
         return translations;
     }
@@ -180,7 +192,7 @@ public class FlagButtons extends JPanel {
     }
 
     public void showLabel(){
-        lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/util/" + src.getAlpha2() + ".gif"));
-        lblDst.setIcon(Load.fromResource("/org/wingate/feuille/util/" + dst.getAlpha2() + ".gif"));
+        lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/" + src.getAlpha2() + ".gif"));
+        lblDst.setIcon(Load.fromResource("/org/wingate/feuille/" + dst.getAlpha2() + ".gif"));
     }
 }

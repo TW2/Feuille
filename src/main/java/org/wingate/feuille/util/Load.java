@@ -1,6 +1,8 @@
 package org.wingate.feuille.util;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
@@ -16,10 +18,13 @@ public class Load {
                     return new ImageIcon(out.toByteArray());
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        throw new NullPointerException();
+        } catch (IOException _) { }
+        BufferedImage img = new BufferedImage(16,16,BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = img.createGraphics();
+        g.setColor(Color.black);
+        g.fillRect(0,0, 16,16);
+        g.dispose();
+        return new ImageIcon(img);
     }
 
     public static String language(String key, String value, ISO_3166 iso){

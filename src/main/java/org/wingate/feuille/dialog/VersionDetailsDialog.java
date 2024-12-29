@@ -7,6 +7,7 @@ import org.wingate.feuille.util.Load;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +24,6 @@ public class VersionDetailsDialog extends JDialog {
     private final DefaultComboBoxModel<ISO_3166> cbModelDst;
     private final JComboBox<ISO_3166> cbSrc;
     private final JComboBox<ISO_3166> cbDst;
-    private final JTextField tfSrc;
-    private final JTextField tfDst;
     private final JButton btnDstChangeUpdate;
     private final JTextPane paneUpdates;
 
@@ -46,26 +45,20 @@ public class VersionDetailsDialog extends JDialog {
         cbDst = new JComboBox<>(cbModelDst);
         cbSrc.setRenderer(new Renderer());
         cbDst.setRenderer(new Renderer());
-        tfSrc = new JTextField("");
-        tfDst = new JTextField("");
         btnDstChangeUpdate = new JButton(Load.language("btn_dst-change-update", "Change", iso));
 
         // SRC
         lblSrc.setLocation(6, 2);
         lblSrc.setSize(130, 22);
         cbSrc.setLocation(136, 2);
-        cbSrc.setSize(200, 22);
-        tfSrc.setLocation(338, 2);
-        tfSrc.setSize(300, 22);
+        cbSrc.setSize(340, 22);
 
         // DST
         lblDst.setLocation(6, 26);
         lblDst.setSize(130, 22);
         cbDst.setLocation(136, 26);
-        cbDst.setSize(200, 22);
-        tfDst.setLocation(338, 26);
-        tfDst.setSize(300, 22);
-        btnDstChangeUpdate.setLocation(640, 26);
+        cbDst.setSize(340, 22);
+        btnDstChangeUpdate.setLocation(478, 26);
         btnDstChangeUpdate.setSize(160, 22);
 
         // Update
@@ -81,20 +74,18 @@ public class VersionDetailsDialog extends JDialog {
         scrollUpdates.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         // Cancel
-        btnCancel.setLocation(640, 144);
+        btnCancel.setLocation(316, 192);
         btnCancel.setSize(160, 22);
 
         // OK
-        btnOK.setLocation(640, 168);
+        btnOK.setLocation(478, 192);
         btnOK.setSize(160, 22);
 
         getContentPane().setLayout(null);
         getContentPane().add(lblSrc);
         getContentPane().add(cbSrc);
-        getContentPane().add(tfSrc);
         getContentPane().add(lblDst);
         getContentPane().add(cbDst);
-        getContentPane().add(tfDst);
         getContentPane().add(btnDstChangeUpdate);
         getContentPane().add(lblUpdates);
         getContentPane().add(scrollUpdates);
@@ -104,7 +95,7 @@ public class VersionDetailsDialog extends JDialog {
         for(ISO_3166 x : ISO_3166.values()){
             if(x == ISO_3166.Unknown || x == null) continue;
             try{
-                Load.fromResource("/org/wingate/feuille/util/" + x.getAlpha2() + ".gif");
+                Load.fromResource("/org/wingate/feuille/" + x.getAlpha2() + ".gif");
                 cbModelSrc.addElement(x);
             }catch(Exception _){ }
         }
@@ -112,7 +103,7 @@ public class VersionDetailsDialog extends JDialog {
         for(ISO_3166 x : ISO_3166.values()){
             if(x == ISO_3166.Unknown || x == null) continue;
             try{
-                Load.fromResource("/org/wingate/feuille/util/" + x.getAlpha2() + ".gif");
+                Load.fromResource("/org/wingate/feuille/" + x.getAlpha2() + ".gif");
                 cbModelDst.addElement(x);
             }catch(Exception _){ }
         }
@@ -146,9 +137,6 @@ public class VersionDetailsDialog extends JDialog {
                     translations = AssTranslateTo.createFirst(cbSrc.getItemAt(cbSrc.getSelectedIndex()));
                     AssTranslateTo.Version v = AssTranslateTo.Version.increment(translations.getVersions().getFirst(), cbDst.getItemAt(cbDst.getSelectedIndex()));
                     translations.getVersions().add(v);
-                    tfSrc.setText(translations.getVersion(cbSrc.getItemAt(cbSrc.getSelectedIndex())).getText());
-                }else{
-                    tfSrc.setText(translations.getVersion(cbSrc.getItemAt(cbSrc.getSelectedIndex())).getText());
                 }
                 refillPane(translations);
             }catch(Exception ex){
@@ -159,12 +147,7 @@ public class VersionDetailsDialog extends JDialog {
 
         btnDstChangeUpdate.addActionListener(e -> {
             try{
-                AssTranslateTo.Version v;
-                if(tfDst.getText().isEmpty()){
-                    v = AssTranslateTo.Version.increment(translations.getVersions().getLast(), cbDst.getItemAt(cbDst.getSelectedIndex()));
-                }else{
-                    v = AssTranslateTo.Version.increment(translations.getVersions().getLast(), tfDst.getText(), cbDst.getItemAt(cbDst.getSelectedIndex()));
-                }
+                AssTranslateTo.Version v = AssTranslateTo.Version.increment(translations.getVersions().getLast(), cbDst.getItemAt(cbDst.getSelectedIndex()));
                 translations.getVersions().add(v);
                 refillPane(translations);
             }catch(Exception ex){
@@ -185,7 +168,7 @@ public class VersionDetailsDialog extends JDialog {
         cbModelSrc.setSelectedItem(src);
         cbModelDst.setSelectedItem(dst);
         refillPane(translations);
-        setSize(820,233);
+        setSize(660,258);
         setLocationRelativeTo(parent);
         setVisible(true);
     }
@@ -204,20 +187,19 @@ public class VersionDetailsDialog extends JDialog {
 
     public void lockSrc(){
         cbSrc.setEnabled(false);
-        tfSrc.setEnabled(false);
     }
 
     public void lockDst(){
         cbDst.setEnabled(false);
-        tfDst.setEnabled(false);
         btnDstChangeUpdate.setEnabled(false);
     }
 
     public AssTranslateTo getTranslations() {
-        try{
-            translations.getVersion(cbSrc.getItemAt(cbSrc.getSelectedIndex())).setText(tfSrc.getText());
-            translations.getLastVersion(cbDst.getItemAt(cbDst.getSelectedIndex())).setText(tfDst.getText());
-        }catch(Exception _){
+        final java.util.List<ISO_3166> languages = new ArrayList<>();
+        for(AssTranslateTo.Version v : translations.getVersions()){
+            languages.add(v.getIso());
+        }
+        if(!languages.contains(cbDst.getItemAt(cbDst.getSelectedIndex()))){
             noError = false;
             JOptionPane.showMessageDialog(
                     this,
@@ -265,7 +247,7 @@ public class VersionDetailsDialog extends JDialog {
         // Let's format the date
         int year = v.getTag().getYear();
         int i_day = v.getTag().getDayInMonth();
-        int i_month = v.getTag().getMonth();
+        int i_month = v.getTag().getMonth() + 1;
         int h = v.getTag().getHourOfDay();
         int m = v.getTag().getMinutes();
         int s = v.getTag().getSeconds();
@@ -316,7 +298,7 @@ public class VersionDetailsDialog extends JDialog {
                 lblText.setForeground(UIManager.getColor("List.foreground"));
             }
 
-            lblFlag.setIcon(Load.fromResource("/org/wingate/feuille/util/" + value.getAlpha2() + ".gif"));
+            lblFlag.setIcon(Load.fromResource("/org/wingate/feuille/" + value.getAlpha2() + ".gif"));
             lblText.setText(value.getCountry());
 
             return this;

@@ -9,6 +9,10 @@ import java.util.*;
 public class AssTranslateTo {
     private final List<Version> versions;
 
+    public AssTranslateTo(){
+        this.versions = new ArrayList<>();
+    }
+
     public AssTranslateTo(List<Version> versions){
         this.versions = versions;
     }
@@ -49,17 +53,17 @@ public class AssTranslateTo {
     }
 
     public static class Tag {
-        private final int number;
-        private final String tagText;
+        private int number;
+        private String tagText;
 
-        private final int dayOfWeek;
-        private final int dayInMonth;
-        private final int month;
-        private final int year;
-        private final int hourOfDay;
-        private final int minutes;
-        private final int seconds;
-        private final int ms;
+        private int dayOfWeek;
+        private int dayInMonth;
+        private int month;
+        private int year;
+        private int hourOfDay;
+        private int minutes;
+        private int seconds;
+        private int ms;
 
         public Tag(int lastTagNumber, String tagText) {
             this.tagText = tagText;
@@ -87,44 +91,84 @@ public class AssTranslateTo {
             this(0, tagText);
         }
 
-        public int getYear() {
-            return year;
+        public int getNumber() {
+            return number;
         }
 
-        public int getMonth() {
-            return month;
+        public void setNumber(int number) {
+            this.number = number;
         }
 
-        public int getDayInMonth() {
-            return dayInMonth;
+        public String getTagText() {
+            return tagText;
+        }
+
+        public void setTagText(String tagText) {
+            this.tagText = tagText;
         }
 
         public int getDayOfWeek() {
             return dayOfWeek;
         }
 
+        public void setDayOfWeek(int dayOfWeek) {
+            this.dayOfWeek = dayOfWeek;
+        }
+
+        public int getDayInMonth() {
+            return dayInMonth;
+        }
+
+        public void setDayInMonth(int dayInMonth) {
+            this.dayInMonth = dayInMonth;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public void setMonth(int month) {
+            this.month = month;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public void setYear(int year) {
+            this.year = year;
+        }
+
         public int getHourOfDay() {
             return hourOfDay;
+        }
+
+        public void setHourOfDay(int hourOfDay) {
+            this.hourOfDay = hourOfDay;
         }
 
         public int getMinutes() {
             return minutes;
         }
 
+        public void setMinutes(int minutes) {
+            this.minutes = minutes;
+        }
+
         public int getSeconds() {
             return seconds;
+        }
+
+        public void setSeconds(int seconds) {
+            this.seconds = seconds;
         }
 
         public int getMs() {
             return ms;
         }
 
-        public int getNumber() {
-            return number;
-        }
-
-        public String getTagText() {
-            return tagText;
+        public void setMs(int ms) {
+            this.ms = ms;
         }
     }
 
@@ -132,12 +176,13 @@ public class AssTranslateTo {
         private final Tag tag;
         private final Map<String, String> roles;
         private ISO_3166 iso;
-        private String text;
+        private List<String> texts;
 
         public Version(Tag tag, ISO_3166 iso){
             this.tag = tag;
             this.iso = iso;
             roles = new HashMap<>();
+            texts = new ArrayList<>();
         }
 
         public static Version createFirstVersion(ISO_3166 src){
@@ -146,7 +191,9 @@ public class AssTranslateTo {
 
         public static Version increment(Version lastVersion, String updates, ISO_3166 lng){
             Tag lastTag = lastVersion.getTag();
-            return new Version(new Tag(lastTag.getNumber(), updates), lng);
+            Version v = new Version(new Tag(lastTag.getNumber(), updates), lng);
+            v.getTexts().addAll(lastVersion.getTexts());
+            return v;
         }
 
         public static Version increment(Version lastVersion, ISO_3166 lng){
@@ -171,12 +218,12 @@ public class AssTranslateTo {
             this.iso = iso;
         }
 
-        public String getText() {
-            return text;
+        public List<String> getTexts() {
+            return texts;
         }
 
-        public void setText(String text) {
-            this.text = text;
+        public void setTexts(List<String> texts) {
+            this.texts = texts;
         }
     }
 }

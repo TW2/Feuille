@@ -13,9 +13,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 
 public class TablePanel extends JPanel {
 
@@ -23,6 +21,8 @@ public class TablePanel extends JPanel {
     private int h;
 
     private final ISO_3166 iso;
+
+    // The need for translations object is handled by flagButtons object
 
     // =================================================================================================================
     // == MAIN CONTROLS
@@ -67,9 +67,6 @@ public class TablePanel extends JPanel {
     // =================================================================================================================
     // == TABLE CONTROLS
     // =================================================================================================================
-    private ISO_3166 originalLanguage = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
-    private ISO_3166 translationLanguage = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
-    private AssTranslateTo translations = AssTranslateTo.createFirst(originalLanguage);
     private final JTable tableTable = new JTable();
     private AssTableModel3 tableTableModel = null;
     private final JScrollPane scrollTable = new JScrollPane();
@@ -201,11 +198,6 @@ public class TablePanel extends JPanel {
         JTextPane paneTranslation = new JTextPane();
         flags.setPaneSrc(paneOrigin);
         flags.setPaneDst(paneTranslation);
-        flags.setSrc(originalLanguage);
-        flags.setDst(translationLanguage);
-        AssTranslateTo.Version v = AssTranslateTo.Version.increment(translations.getVersions().getFirst(), translationLanguage);
-        translations.getVersions().add(v);
-        flags.setTranslations(translations);
 
         panEdit.add(panCommandsOne, BorderLayout.NORTH);
         panEdit.add(splitTextPanes, BorderLayout.CENTER);
@@ -306,29 +298,8 @@ public class TablePanel extends JPanel {
 
     }
 
-    public ISO_3166 getOriginalLanguage() {
-        return originalLanguage;
-    }
-
-    public ISO_3166 getTranslationLanguage() {
-        return translationLanguage;
-    }
-
-    public void setLanguages(ISO_3166 originalLanguage, ISO_3166 translationLanguage) {
-        this.originalLanguage = originalLanguage;
-        this.translationLanguage = translationLanguage;
-        reinitFlags();
-    }
-
-    private void reinitFlags(){
-        flags.setSrc(originalLanguage);
-        flags.setDst(translationLanguage);
-        flags.setTranslations(translations);
-        flags.showLabel();
-    }
-
     private AssEvent createTextPaneEvent(JTextPane src, JTextPane dst){
-        AssEvent event = new AssEvent(originalLanguage);
+        AssEvent event = new AssEvent(flags.getTranslations(), flags.getSrc(), flags.getDst());
         event.setType(cbEditComment.isSelected() ? AssEvent.Type.Comment : AssEvent.Type.Dialogue);
         event.setLayer(spinEditModelLayer.getNumber().intValue()); // layer
         event.setStart(lockStart.getAssTime()); // start
@@ -339,18 +310,18 @@ public class TablePanel extends JPanel {
         event.setMarginR(spinEditModelMR.getNumber().intValue()); // marginR
         event.setMarginV(spinEditModelMV.getNumber().intValue()); // marginV
         event.setEffect(ecbEditEffects.getSelectedItem()); // effect
-        event.getTranslations().getVersion(originalLanguage).setText(src.getText()); // text
+        event.getTranslations().getVersion(flags.getSrc()).getTexts().add(src.getText()); // text
 
         if(event.getTranslations().getVersions().size() == 1){
-            AssTranslateTo.Version v = AssTranslateTo.Version.increment(event.getTranslations().getVersions().getLast(), translationLanguage);
+            AssTranslateTo.Version v = AssTranslateTo.Version.increment(event.getTranslations().getVersions().getLast(), flags.getDst());
             event.getTranslations().getVersions().add(v);
-            event.getTranslations().getLastVersion(translationLanguage).setText(dst.getText()); // text
-        }else if(event.getTranslations().getVersions().getLast().getIso() != translationLanguage){
-            AssTranslateTo.Version v = AssTranslateTo.Version.increment(event.getTranslations().getVersions().getLast(), translationLanguage);
+            event.getTranslations().getLastVersion(flags.getDst()).getTexts().add(dst.getText()); // text
+        }else if(event.getTranslations().getVersions().getLast().getIso() != flags.getDst()){
+            AssTranslateTo.Version v = AssTranslateTo.Version.increment(event.getTranslations().getVersions().getLast(), flags.getDst());
             event.getTranslations().getVersions().add(v);
-            event.getTranslations().getLastVersion(translationLanguage).setText(dst.getText()); // text
+            event.getTranslations().getLastVersion(flags.getDst()).getTexts().add(dst.getText()); // text
         }else if(event.getTranslations().getVersions().size() > 1){
-            event.getTranslations().getLastVersion(translationLanguage).setText(dst.getText()); // text
+            event.getTranslations().getLastVersion(flags.getDst()).getTexts().add(dst.getText()); // text
         }
 
         return event;

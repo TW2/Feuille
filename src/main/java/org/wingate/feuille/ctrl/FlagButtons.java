@@ -8,6 +8,8 @@ import org.wingate.feuille.util.Load;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Locale;
 
 public class FlagButtons extends JPanel {
@@ -100,6 +102,48 @@ public class FlagButtons extends JPanel {
                 if(b){
                     dst = dialog.getDst();
                     lblDst.setIcon(Load.fromResource("/org/wingate/feuille/util/" + dst.getAlpha2() + ".gif"));
+                }
+            }
+        });
+
+        lblSrc.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if(e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2 && lblSrc.isEnabled()){
+                    VersionDetailsDialog dialog = new VersionDetailsDialog(new java.awt.Frame(), true, iso);
+                    dialog.lockDst();
+                    dialog.showDialog(src, dst, translations);
+                    if(dialog.getDialogResult() == DialogResult.OK){
+                        translations = dialog.getTranslations();
+                        src = dialog.getSrc();
+                        lblSrc.setIcon(Load.fromResource("/org/wingate/feuille/util/" + src.getAlpha2() + ".gif"));
+                    }
+                }
+            }
+        });
+
+        lblDst.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if(e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2 && lblDst.isEnabled()){
+                    VersionDetailsDialog dialog = new VersionDetailsDialog(new java.awt.Frame(), true, iso);
+                    dialog.lockSrc();
+                    dialog.showDialog(src, dst, translations);
+                    if(dialog.getDialogResult() == DialogResult.OK){
+                        // Do the next call before all others
+                        // Because dialog.getTranslations() can crash and indicate an error
+                        // If error then do not change anything
+                        translations = dialog.getTranslations();
+                        boolean b = dialog.noError();
+                        if(b){
+                            dst = dialog.getDst();
+                            lblDst.setIcon(Load.fromResource("/org/wingate/feuille/util/" + dst.getAlpha2() + ".gif"));
+                        }
+                    }
                 }
             }
         });

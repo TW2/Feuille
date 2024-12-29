@@ -237,29 +237,29 @@ public class VersionDetailsDialog extends JDialog {
         // Get the date
         String day;
         switch(v.getTag().getDayOfWeek()){
-            case 1 -> { day = Load.language("date_Monday", "Monday", iso); }
-            case 2 -> { day = Load.language("date_Tuesday", "Tuesday", iso); }
-            case 3 -> { day = Load.language("date_Wednesday", "Wednesday", iso); }
-            case 4 -> { day = Load.language("date_Thursday", "Thursday", iso); }
-            case 5 -> { day = Load.language("date_Friday", "Friday", iso); }
-            case 6 -> { day = Load.language("date_Saturday", "Saturday", iso); }
-            case 7 -> { day = Load.language("date_Sunday", "Sunday", iso); }
+            case 2 -> { day = Load.language("date_Monday", "Monday", iso); }
+            case 3 -> { day = Load.language("date_Tuesday", "Tuesday", iso); }
+            case 4 -> { day = Load.language("date_Wednesday", "Wednesday", iso); }
+            case 5 -> { day = Load.language("date_Thursday", "Thursday", iso); }
+            case 6 -> { day = Load.language("date_Friday", "Friday", iso); }
+            case 7 -> { day = Load.language("date_Saturday", "Saturday", iso); }
+            case 1 -> { day = Load.language("date_Sunday", "Sunday", iso); }
             default -> { day = "Unknown day"; }
         }
         String month;
         switch(v.getTag().getMonth()){
-            case 1 -> { month = Load.language("date_January", "January", iso); }
-            case 2 -> { month = Load.language("date_February", "February", iso); }
-            case 3 -> { month = Load.language("date_March", "March", iso); }
-            case 4 -> { month = Load.language("date_April", "April", iso); }
-            case 5 -> { month = Load.language("date_May", "May", iso); }
-            case 6 -> { month = Load.language("date_June", "June", iso); }
-            case 7 -> { month = Load.language("date_July", "July", iso); }
-            case 8 -> { month = Load.language("date_August", "August", iso); }
-            case 9 -> { month = Load.language("date_September", "September", iso); }
-            case 10 -> { month = Load.language("date_October", "October", iso); }
-            case 11 -> { month = Load.language("date_November", "November", iso); }
-            case 12 -> { month = Load.language("date_December", "December", iso); }
+            case 0 -> { month = Load.language("date_January", "January", iso); }
+            case 1 -> { month = Load.language("date_February", "February", iso); }
+            case 2 -> { month = Load.language("date_March", "March", iso); }
+            case 3 -> { month = Load.language("date_April", "April", iso); }
+            case 4 -> { month = Load.language("date_May", "May", iso); }
+            case 5 -> { month = Load.language("date_June", "June", iso); }
+            case 6 -> { month = Load.language("date_July", "July", iso); }
+            case 7 -> { month = Load.language("date_August", "August", iso); }
+            case 8 -> { month = Load.language("date_September", "September", iso); }
+            case 9 -> { month = Load.language("date_October", "October", iso); }
+            case 10 -> { month = Load.language("date_November", "November", iso); }
+            case 11 -> { month = Load.language("date_December", "December", iso); }
             default -> { month = "Unknown month"; }
         }
         // Let's format the date

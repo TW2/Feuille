@@ -2,6 +2,7 @@ package org.wingate.feuille.subs.ass;
 
 
 import org.wingate.feuille.util.ISO_3166;
+import org.wingate.feuille.util.Load;
 
 import java.util.*;
 
@@ -59,7 +60,6 @@ public class AssTranslateTo {
         private final int minutes;
         private final int seconds;
         private final int ms;
-        private final Locale loc;
 
         public Tag(int lastTagNumber, String tagText) {
             this.tagText = tagText;
@@ -81,8 +81,6 @@ public class AssTranslateTo {
             seconds = calendar.get(Calendar.SECOND);
             // Milliseconds
             ms = calendar.get((Calendar.MILLISECOND));
-            // Locale (for ISO-3166-1 search)
-            loc = Locale.getDefault();
         }
 
         public Tag(String tagText){
@@ -143,7 +141,7 @@ public class AssTranslateTo {
         }
 
         public static Version createFirstVersion(ISO_3166 src){
-            return new Version(new Tag("First script"), src);
+            return new Version(new Tag(Load.language("tag_FirstScript", "First script", ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()))), src);
         }
 
         public static Version increment(Version lastVersion, String updates, ISO_3166 lng){
@@ -152,7 +150,9 @@ public class AssTranslateTo {
         }
 
         public static Version increment(Version lastVersion, ISO_3166 lng){
-            return increment(lastVersion, "Update script of \"Version " + lastVersion.tag.number + "\"", lng);
+            String sUp = Load.language("tag_UpdateScript", "Update script of", ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()));
+            String sVer = Load.language("msg_Version", "Version", ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()));
+            return increment(lastVersion, String.format("%s \"%s %d\"", sUp, sVer, lastVersion.tag.number), lng);
         }
 
         public Tag getTag() {

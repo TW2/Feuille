@@ -7,9 +7,9 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
+        <maven.compiler.release>23</maven.compiler.release>
         <exec.mainClass>org.wingate.feuille.Feuille</exec.mainClass>
     </properties>
 	
@@ -43,6 +43,10 @@
                 <version>3.5.0</version>
                 <configuration>
                     <mainClass>org.wingate.feuille.Feuille</mainClass>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>--enable-preview</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

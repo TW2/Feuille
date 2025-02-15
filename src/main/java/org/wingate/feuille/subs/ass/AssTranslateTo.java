@@ -176,13 +176,13 @@ public class AssTranslateTo {
         private final Tag tag;
         private final Map<String, String> roles;
         private ISO_3166 iso;
-        private List<String> texts;
+        private String text;
 
         public Version(Tag tag, ISO_3166 iso){
             this.tag = tag;
             this.iso = iso;
             roles = new HashMap<>();
-            texts = new ArrayList<>();
+            text = "";
         }
 
         public static Version createFirstVersion(ISO_3166 src){
@@ -191,9 +191,7 @@ public class AssTranslateTo {
 
         public static Version increment(Version lastVersion, String updates, ISO_3166 lng){
             Tag lastTag = lastVersion.getTag();
-            Version v = new Version(new Tag(lastTag.getNumber(), updates), lng);
-            v.getTexts().addAll(lastVersion.getTexts());
-            return v;
+            return new Version(new Tag(lastTag.getNumber(), updates), lng);
         }
 
         public static Version increment(Version lastVersion, ISO_3166 lng){
@@ -218,12 +216,12 @@ public class AssTranslateTo {
             this.iso = iso;
         }
 
-        public List<String> getTexts() {
-            return texts;
+        public String getText() {
+            return text;
         }
 
-        public void setTexts(List<String> texts) {
-            this.texts = texts;
+        public void setText(String text) {
+            this.text = text;
         }
     }
 }

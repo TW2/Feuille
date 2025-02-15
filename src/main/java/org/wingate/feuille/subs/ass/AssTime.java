@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  *
  * @author util2
  */
-public class AssTime {
+public class AssTime implements Cloneable {
     private double msTime;
 
     public AssTime(double msTime) {
@@ -133,5 +133,14 @@ public class AssTime {
     @Override
     public String toString() {
         return toAss();
+    }
+
+    @Override
+    public AssTime clone() {
+        try {
+            return (AssTime) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

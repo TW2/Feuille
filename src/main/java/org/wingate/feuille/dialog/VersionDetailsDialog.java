@@ -37,15 +37,15 @@ public class VersionDetailsDialog extends JDialog {
 
         JButton btnOK = new JButton(Load.language("msg_OK", "OK", iso));
         JButton btnCancel = new JButton(Load.language("msg_Cancel", "Cancel", iso));
-        JLabel lblSrc = new JLabel(Load.language("lbl_SrcLanguage", "Source language:", iso));
-        JLabel lblDst = new JLabel(Load.language("lbl_DstLanguage", "To language:", iso));
+        JLabel lblSrc = new JLabel("");
+        JLabel lblDst = new JLabel("");
         cbModelSrc = new DefaultComboBoxModel<>();
         cbModelDst = new DefaultComboBoxModel<>();
         cbSrc = new JComboBox<>(cbModelSrc);
         cbDst = new JComboBox<>(cbModelDst);
         cbSrc.setRenderer(new Renderer());
         cbDst.setRenderer(new Renderer());
-        btnDstChangeUpdate = new JButton(Load.language("btn_dst-change-update", "Change", iso));
+        btnDstChangeUpdate = new JButton("");
 
         // SRC
         lblSrc.setLocation(6, 2);
@@ -62,7 +62,7 @@ public class VersionDetailsDialog extends JDialog {
         btnDstChangeUpdate.setSize(160, 22);
 
         // Update
-        JLabel lblUpdates = new JLabel(Load.language("lbl_version-updates", "Updates:", iso));
+        JLabel lblUpdates = new JLabel("");
         lblUpdates.setLocation(6, 50);
         lblUpdates.setSize(130, 22);
         paneUpdates = new JTextPane();
@@ -203,7 +203,7 @@ public class VersionDetailsDialog extends JDialog {
             noError = false;
             JOptionPane.showMessageDialog(
                     this,
-                    Load.language("msg_Error_target_language", "You cannot change the target language without make a new version!", ISO_3166.getISO_3166(Locale.getDefault().getISO3Country())),
+                    "",
                     Load.language("msg_Error", "Error", ISO_3166.getISO_3166(Locale.getDefault().getISO3Country())),
                     JOptionPane.ERROR_MESSAGE
             );

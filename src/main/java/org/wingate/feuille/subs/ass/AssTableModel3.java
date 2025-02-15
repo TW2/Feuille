@@ -35,7 +35,7 @@ public class AssTableModel3 extends AbstractTableModel {
 
     private final NormalRenderer stringNormalRenderer;
     private final JTable table;
-    private static ASS ass;
+    private ASS ass;
 
     private AssStatistics stats;
 
@@ -253,11 +253,15 @@ public class AssTableModel3 extends AbstractTableModel {
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
 
-            AssEvent event = ass.getEvents().get(row);
+            AssEvent event = null;
+            Object obj = table.getModel().getValueAt(row, 12);
+            if(obj instanceof AssEvent ev){
+                event = ev;
+            }
             
             Color bg;
             
-            if(event.getType() == AssEvent.Type.Comment){
+            if(event != null && event.getType() == AssEvent.Type.Comment){
                 bg = DrawColor.violet.getColor();
             }else{
                 // Get table background (avoid searching from any other way)

@@ -1,7 +1,7 @@
-package org.wingate.feuille.lib;
+package org.wingate.feuille.lib.table;
 
 import org.wingate.feuille.ctrl.ElementsComboBox;
-import org.wingate.feuille.ctrl.FlagButtons;
+import org.wingate.feuille.ctrl.FlagVersion;
 import org.wingate.feuille.ctrl.LockFormatTextField;
 import org.wingate.feuille.subs.ass.*;
 import org.wingate.feuille.util.DrawColor;
@@ -61,7 +61,7 @@ public class TablePanel extends JPanel {
     private final JButton btnReplaceSelvent = new JButton();
     private final JButton btnAddEventBefore = new JButton();
     private final JButton btnAddEventAfter = new JButton();
-    private final FlagButtons flags;
+    private FlagVersion flagVersion;
     // -----------------------------------------------------------------------------------------------------------------
 
     // =================================================================================================================
@@ -129,7 +129,6 @@ public class TablePanel extends JPanel {
         ver02.setBottomComponent(panPeers);
 
         tableTableModel = new AssTableModel3(tableTable);
-        flags = new FlagButtons(iso);
 
         makeVideo();
         makeAudio();
@@ -196,8 +195,7 @@ public class TablePanel extends JPanel {
         JSplitPane splitTextPanes = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         JTextPane paneOrigin = new JTextPane();
         JTextPane paneTranslation = new JTextPane();
-        flags.setPaneSrc(paneOrigin);
-        flags.setPaneDst(paneTranslation);
+        flagVersion = new FlagVersion(iso, paneOrigin, paneTranslation);
 
         panEdit.add(panCommandsOne, BorderLayout.NORTH);
         panEdit.add(splitTextPanes, BorderLayout.CENTER);
@@ -254,30 +252,34 @@ public class TablePanel extends JPanel {
         panCommandsTwo.add(btnReplaceSelvent);
         panCommandsTwo.add(btnAddEventBefore);
         panCommandsTwo.add(btnAddEventAfter);
-        panCommandsTwo.add(flags);
+        panCommandsTwo.add(flagVersion);
 
         btnAddEventQueue.addActionListener(e -> {
-            tableTableModel.addValue(createTextPaneEvent(paneOrigin, paneTranslation));
+            String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
+            tableTableModel.addValue(createTextPaneEvent(text));
         });
 
         btnReplaceSelvent.addActionListener(e -> {
             if(tableTable.getSelectedRow() != -1){
-                tableTableModel.replaceValueAt(createTextPaneEvent(paneOrigin, paneTranslation), tableTable.getSelectedRow());
+                String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
+                tableTableModel.replaceValueAt(createTextPaneEvent(text), tableTable.getSelectedRow());
             }
         });
 
         btnAddEventBefore.addActionListener(e -> {
             if(tableTable.getSelectedRow() != -1){
-                tableTableModel.insertValueAt(createTextPaneEvent(paneOrigin, paneTranslation), tableTable.getSelectedRow());
+                String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
+                tableTableModel.insertValueAt(createTextPaneEvent(text), tableTable.getSelectedRow());
             }
         });
 
         btnAddEventAfter.addActionListener(e -> {
             if(tableTable.getSelectedRow() != -1){
+                String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
                 if(tableTable.getSelectedRow() == tableTable.getRowCount() - 1){
-                    tableTableModel.addValue(createTextPaneEvent(paneOrigin, paneTranslation));
+                    tableTableModel.addValue(createTextPaneEvent(text));
                 }else{
-                    tableTableModel.insertValueAt(createTextPaneEvent(paneOrigin, paneTranslation), tableTable.getSelectedRow() + 1);
+                    tableTableModel.insertValueAt(createTextPaneEvent(text), tableTable.getSelectedRow() + 1);
                 }
             }
         });
@@ -298,8 +300,9 @@ public class TablePanel extends JPanel {
 
     }
 
-    private AssEvent createTextPaneEvent(JTextPane src, JTextPane dst){
-        AssEvent event = new AssEvent(flags.getTranslations(), flags.getSrc(), flags.getDst());
+    private AssEvent createTextPaneEvent(String text){
+        AssEvent event = new AssEvent();
+
         event.setType(cbEditComment.isSelected() ? AssEvent.Type.Comment : AssEvent.Type.Dialogue);
         event.setLayer(spinEditModelLayer.getNumber().intValue()); // layer
         event.setStart(lockStart.getAssTime()); // start
@@ -310,19 +313,7 @@ public class TablePanel extends JPanel {
         event.setMarginR(spinEditModelMR.getNumber().intValue()); // marginR
         event.setMarginV(spinEditModelMV.getNumber().intValue()); // marginV
         event.setEffect(ecbEditEffects.getSelectedItem()); // effect
-        event.getTranslations().getVersion(flags.getSrc()).getTexts().add(src.getText()); // text
-
-        if(event.getTranslations().getVersions().size() == 1){
-            AssTranslateTo.Version v = AssTranslateTo.Version.increment(event.getTranslations().getVersions().getLast(), flags.getDst());
-            event.getTranslations().getVersions().add(v);
-            event.getTranslations().getLastVersion(flags.getDst()).getTexts().add(dst.getText()); // text
-        }else if(event.getTranslations().getVersions().getLast().getIso() != flags.getDst()){
-            AssTranslateTo.Version v = AssTranslateTo.Version.increment(event.getTranslations().getVersions().getLast(), flags.getDst());
-            event.getTranslations().getVersions().add(v);
-            event.getTranslations().getLastVersion(flags.getDst()).getTexts().add(dst.getText()); // text
-        }else if(event.getTranslations().getVersions().size() > 1){
-            event.getTranslations().getLastVersion(flags.getDst()).getTexts().add(dst.getText()); // text
-        }
+        event.setText(text); // text
 
         return event;
     }

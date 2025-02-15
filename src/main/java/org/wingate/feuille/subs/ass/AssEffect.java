@@ -20,7 +20,7 @@ package org.wingate.feuille.subs.ass;
  *
  * @author util2
  */
-public class AssEffect {
+public class AssEffect implements Cloneable {
     private String name;
     private String effect;
 
@@ -80,5 +80,13 @@ public class AssEffect {
     public String toString() {
         return getName();
     }
-    
+
+    @Override
+    public AssEffect clone() {
+        try {
+            return (AssEffect) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

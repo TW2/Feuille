@@ -24,8 +24,7 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -34,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
+
 import org.wingate.feuille.util.DrawColor;
 import org.wingate.feuille.util.ISO_3166;
 import org.wingate.feuille.util.Load;
@@ -42,15 +42,16 @@ import org.wingate.feuille.util.Load;
  *
  * @author util2
  */
-public class AssEvent {
+public class AssEvent implements Cloneable {
 
     public enum Type{
         Comment("Comment"),
-        Dialogue("Dialogue");
+        Dialogue("Dialogue"),
+        Tagged("Tagged");
         
         final String name;
         
-        private Type(String name){
+        Type(String name){
             this.name = name;
         }
 
@@ -60,28 +61,34 @@ public class AssEvent {
         
     }
 
-    private Type type = Type.Dialogue;
-    private int layer = 0;
-    private AssTime start = new AssTime();
-    private AssTime end = new AssTime();
-    private AssStyle style = new AssStyle();
-    private AssActor name = new AssActor();
-    private int marginL = 0;
-    private int marginR = 0;
-    private int marginV = 0;
-    private AssEffect effect = new AssEffect();
-    private AssTranslateTo translations;
-    private ISO_3166 srcLanguage;
-    private ISO_3166 dstLanguage;
+    private Type type;
+    private int layer;
+    private AssTime start;
+    private AssTime end;
+    private AssStyle style;
+    private AssActor name;
+    private int marginL;
+    private int marginR;
+    private int marginV;
+    private AssEffect effect;
+    private String text;
 
-    public AssEvent(AssTranslateTo translations, ISO_3166 srcLanguage, ISO_3166 dstLanguage){
-        this.translations = translations;
-        this.srcLanguage = srcLanguage;
-        this.dstLanguage = dstLanguage == null ? ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()) : dstLanguage;
+    public AssEvent(){
+        type = Type.Dialogue;
+        layer = 0;
+        start = new AssTime();
+        end = new AssTime();
+        style = new AssStyle();
+        name = new AssActor();
+        marginL = 0;
+        marginR = 0;
+        marginV = 0;
+        effect = new AssEffect();
+        text = "";
     }
 
-    public static AssEvent createFromRawLine(AssTranslateTo translations, ISO_3166 srcLanguage, ISO_3166 dstLanguage, String rawline, List<AssStyle> ls, List<AssActor> la, List<AssEffect> lf) {
-        AssEvent event = new AssEvent(translations, srcLanguage, dstLanguage);
+    public static AssEvent createFromRawLine(String rawline, List<AssStyle> ls, List<AssActor> la, List<AssEffect> lf) {
+        AssEvent event = new AssEvent();
 
         String[] t = rawline.split(",", 10);
 
@@ -95,26 +102,25 @@ public class AssEvent {
         event.marginR = Integer.parseInt(t[6]); // marginR
         event.marginV = Integer.parseInt(t[7]); // marginV
         event.effect  = getEffectFromName(lf, t[8]); // effect
-        event.translations.getVersions().getLast().getTexts().add(t[9]); // text (original)
+        event.text    = t[9]; // text
 
         return event;
     }
     
-    public String toRawLine(ISO_3166 src, int index){
-        StringBuilder sb = new StringBuilder(getType().getName() + ": ");
-        sb.append(getLayer()).append(",");
-        sb.append(getStart().toAss()).append(",");
-        sb.append(getEnd().toAss()).append(",");
-        sb.append(getStyle().getName()).append(",");
-        sb.append(getName().getName()).append(",");
-        sb.append(getMarginL()).append(",");
-        sb.append(getMarginR()).append(",");
-        sb.append(getMarginV()).append(",");
-        sb.append(getEffect().getName()).append(",");
-        if(src != null){
-            sb.append(translations.getVersion(src).getTexts().get(index));
-        }
-        return sb.toString();
+    public String toRawLine(){
+        return String.format("%s: %d,%s,%s,%s,%s,%d,%d,%d,%s,%s",
+                getType().getName(),        // "%s": %d, %s, %s, %s, %s, %d, %d, %d, %s, %s
+                getLayer(),                 // %s: "%d", %s, %s, %s, %s, %d, %d, %d, %s, %s
+                getStart().toAss(),         // %s: %d, "%s", %s, %s, %s, %d, %d, %d, %s, %s
+                getEnd().toAss(),           // %s: %d, %s, "%s", %s, %s, %d, %d, %d, %s, %s
+                getStyle().getName(),       // %s: %d, %s, %s, "%s", %s, %d, %d, %d, %s, %s
+                getName().getName(),        // %s: %d, %s, %s, %s, "%s", %d, %d, %d, %s, %s
+                getMarginL(),               // %s: %d, %s, %s, %s, %s, "%d", %d, %d, %s, %s
+                getMarginR(),               // %s: %d, %s, %s, %s, %s, %d, "%d", %d, %s, %s
+                getMarginV(),               // %s: %d, %s, %s, %s, %s, %d, %d, "%d", %s, %s
+                getEffect().getName(),      // %s: %d, %s, %s, %s, %s, %d, %d, %d, "%s", %s
+                getText()                   // %s: %d, %s, %s, %s, %s, %d, %d, %d, %s, "%s"
+        );
     }
     
     private static AssStyle getStyleFromName(List<AssStyle> l, String name){
@@ -236,17 +242,17 @@ public class AssEvent {
         this.effect = effect;
     }
 
-    public AssTranslateTo getTranslations() {
-        return translations;
+    public String getText() {
+        return text;
     }
 
-    public void setTranslations(AssTranslateTo translations) {
-        this.translations = translations;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public float getCPS(int index){
+    public float getCPS(){
         // Character per second
-        String s = translations.getVersion(dstLanguage).getTexts().get(index);
+        String s = getText();
         
         Pattern p = Pattern.compile("\\{[^\\}]*(?<text>[^\\{]*)");
         Matcher m = p.matcher(s);
@@ -270,10 +276,10 @@ public class AssEvent {
         return s.length() / 60f;
     }
     
-    public float getCPL(int index){
+    public float getCPL(){
         // Character per line minus space
         // Taking the greatest piece of line (if two lines separated by \N)
-        String s = translations.getVersion(dstLanguage).getTexts().get(index);
+        String s = getText();
         
         Pattern p = Pattern.compile("\\{[^\\}]*(?<text>[^\\{]*)");
         Matcher m = p.matcher(s);
@@ -299,6 +305,21 @@ public class AssEvent {
         return (float)s.length();
     }
 
+    @Override
+    public AssEvent clone() {
+        try {
+            AssEvent clone = (AssEvent) super.clone();
+            clone.setStart(clone.getStart().clone());
+            clone.setEnd(clone.getEnd().clone());
+            clone.setStyle(clone.getStyle().clone());
+            clone.setName(clone.getName().clone());
+            clone.setEffect(clone.getEffect().clone());
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
     public static class Renderer extends JPanel implements TableCellRenderer {
         
         public enum Stripped {
@@ -309,36 +330,22 @@ public class AssEvent {
         private Stripped strippedTranslation = Stripped.Partially;
         private String partiallyStrippedSymbol = "◆";
 
-        private final JLabel flagOrigin;
-        private final JLabel textOrigin;
-
         private final JLabel flagTranslation;
         private final JLabel textTranslation;
 
         public Renderer() {
-            JPanel withFlagOrigin = new JPanel();
-            flagOrigin = new JLabel("");
-            flagOrigin.setSize(20*4/3, 20);
-            textOrigin = new JLabel("");
-            textOrigin.setOpaque(true);
-
             JPanel withFlagTranslation = new JPanel();
             flagTranslation = new JLabel("");
             flagTranslation.setSize(20*4/3, 20);
             textTranslation = new JLabel("");
             textTranslation.setOpaque(true);
             
-            withFlagOrigin.setLayout(new BorderLayout());
-            withFlagOrigin.add(flagOrigin, BorderLayout.WEST);
-            withFlagOrigin.add(textOrigin, BorderLayout.CENTER);
-            
             withFlagTranslation.setLayout(new BorderLayout());
             withFlagTranslation.add(flagTranslation, BorderLayout.WEST);
             withFlagTranslation.add(textTranslation, BorderLayout.CENTER);
             
-            setLayout(new GridLayout(2, 1, 1, 2));
-            add(withFlagOrigin);
-            add(withFlagTranslation);
+            setLayout(new BorderLayout());
+            add(withFlagTranslation, BorderLayout.CENTER);
         }
         
 
@@ -351,8 +358,7 @@ public class AssEvent {
             if(value instanceof AssEvent event){
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
                 
-                textOrigin.setText(applyStrip(event.translations.getVersion(event.srcLanguage).getTexts().get(row), strippedOrigin));
-                textTranslation.setText(applyStrip(event.translations.getLastVersion(event.dstLanguage).getTexts().get(row), strippedTranslation));
+                textTranslation.setText(applyStrip(event.getText(), strippedTranslation));
                 
                 if(event.getType() == Type.Comment){
                     bg = DrawColor.violet.getColor();
@@ -375,34 +381,19 @@ public class AssEvent {
                 setBackground(bg);
                 setForeground(fg);
                 
-                textOrigin.setBackground(bg);
-                textOrigin.setForeground(fg);
-                
                 textTranslation.setBackground(bg);
                 textTranslation.setForeground(fg);
-
-
-                ImageIcon iOrigin = Load.fromResource("/org/wingate/feuille/" + event.translations.getVersion(event.srcLanguage).getIso().getAlpha2().toLowerCase() + ".gif");
-                BufferedImage imgOrigin = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);
-                Graphics2D gOrigin = imgOrigin.createGraphics();
-                gOrigin.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                gOrigin.setColor(bg);
-                gOrigin.fillRect(0, 0, 20*4/3, 20);
-                gOrigin.setComposite(alpha);
-                gOrigin.drawImage(iOrigin.getImage(), 0, 0, 20*4/3, 20, null);
-                gOrigin.dispose();
-                flagOrigin.setIcon(new ImageIcon(imgOrigin));
                 
-                ImageIcon iTranslation = Load.fromResource("/org/wingate/feuille/" + event.dstLanguage.getAlpha2().toLowerCase() + ".gif");
-                BufferedImage imgTranslation = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);                
-                Graphics2D gTranslation = imgTranslation.createGraphics();
-                gTranslation.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                gTranslation.setColor(bg);
-                gTranslation.fillRect(0, 0, 20*4/3, 20);
-                gTranslation.setComposite(alpha);
-                gTranslation.drawImage(iTranslation.getImage(), 0, 0, 20*4/3, 20, null);
-                gTranslation.dispose();
-                flagTranslation.setIcon(new ImageIcon(imgTranslation));
+//                ImageIcon iTranslation = Load.fromResource("/org/wingate/feuille/" + event.getLanguage().getAlpha2().toLowerCase() + ".gif");
+//                BufferedImage imgTranslation = new BufferedImage(20*4/3, 20, BufferedImage.TYPE_INT_RGB);
+//                Graphics2D gTranslation = imgTranslation.createGraphics();
+//                gTranslation.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//                gTranslation.setColor(bg);
+//                gTranslation.fillRect(0, 0, 20*4/3, 20);
+//                gTranslation.setComposite(alpha);
+//                gTranslation.drawImage(iTranslation.getImage(), 0, 0, 20*4/3, 20, null);
+//                gTranslation.dispose();
+//                flagTranslation.setIcon(new ImageIcon(imgTranslation));
             }
             
             return this;

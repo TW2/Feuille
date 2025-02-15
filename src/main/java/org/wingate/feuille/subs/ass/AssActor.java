@@ -30,7 +30,8 @@ import javax.swing.ImageIcon;
  *
  * @author util2
  */
-public class AssActor {
+public class AssActor implements Cloneable {
+
     public enum Kind {
         Male("Male"),
         Female("Female"),
@@ -183,5 +184,14 @@ public class AssActor {
     @Override
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public AssActor clone() {
+        try {
+            return (AssActor) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

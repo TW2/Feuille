@@ -53,4 +53,23 @@ public class Load {
         }
         return value;
     }
+
+    public static String language(String key, String value){
+        String resource = "/org/wingate/feuille/Languages.properties";
+        try (InputStream in = Load.class.getResourceAsStream(resource)) {
+            if (in != null) {
+                try(BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))){
+                    String line;
+                    while((line = reader.readLine()) != null){
+                        if(line.startsWith(key + "=")){
+                            return line.substring(key.length()+1);
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return value;
+    }
 }

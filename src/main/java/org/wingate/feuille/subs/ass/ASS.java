@@ -178,7 +178,7 @@ public class ASS {
                         }else{
                             cur = tr.getVersions().getLast().getIso();
                         }
-                        ass.getEvents().add(AssEvent.createFromRawLine(tr, cur, null, line, ass.getStyles(), ass.getActors(), ass.getEffects()));
+                        ass.getEvents().add(AssEvent.createFromRawLine(line, ass.getStyles(), ass.getActors(), ass.getEffects()));
                     }catch(Exception exc){
                         // Last line - End of events
                     }
@@ -192,7 +192,7 @@ public class ASS {
                         }else{
                             cur = tr.getVersions().getLast().getIso();
                         }
-                        ass.getEvents().add(AssEvent.createFromRawLine(tr, cur, null, line, ass.getStyles(), ass.getActors(), ass.getEffects()));
+                        ass.getEvents().add(AssEvent.createFromRawLine(line, ass.getStyles(), ass.getActors(), ass.getEffects()));
                     }catch(Exception exc){
                         // Last line - End of events
                     }                    
@@ -278,9 +278,8 @@ public class ASS {
             // Events
             pw.println("[Events]");
             pw.println("Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text");
-            for(int i=0; i<ass.getEvents().size(); i++){
-                AssEvent event = ass.getEvents().get(i);
-                pw.println(event.toRawLine(iso, i));
+            for(AssEvent event : ass.getEvents()){
+                pw.println(event.toRawLine());
             }
         } catch (IOException | AssColorException ex) {
             Logger.getLogger(ASS.class.getName()).log(Level.SEVERE, null, ex);

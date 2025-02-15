@@ -1,12 +1,13 @@
 package org.wingate.feuille;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import org.wingate.feuille.lib.TablePanel;
+import org.wingate.feuille.lib.table.TablePanel;
 import org.wingate.feuille.util.ISO_3166;
 import org.wingate.feuille.util.Load;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
 
 /**
  *
@@ -55,6 +56,10 @@ public class Feuille {
                     }
                 }
             }
+        }
+
+        if(iso == null){
+            iso = ISO_3166.getISO_3166((Locale.getDefault().getISO3Country()));
         }
 
         FlatLightLaf.setup();

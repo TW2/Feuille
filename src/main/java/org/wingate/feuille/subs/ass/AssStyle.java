@@ -118,45 +118,50 @@ public class AssStyle implements Cloneable {
         encoding        = Integer.parseInt(t[22]); // Encoding
     }
     
-    public String toRawLine() throws AssColorException{
-        StringBuilder line = new StringBuilder("Style: ");
-        line = line.append(getName()).append(",");
-        line = line.append(getAssFont().getName()).append(",");
-        line = line.append(Math.round(getAssFont().getSize())).append(",");
-        line = line.append(AssColor.withScheme(getTextColor().getColor(), AssColor.Scheme.ABGR)).append(",");
-        line = line.append(AssColor.withScheme(getKaraokeColor().getColor(), AssColor.Scheme.ABGR)).append(",");
-        line = line.append(AssColor.withScheme(getOutlineColor().getColor(), AssColor.Scheme.ABGR)).append(",");
-        line = line.append(AssColor.withScheme(getShadowColor().getColor(), AssColor.Scheme.ABGR)).append(",");
-        line = line.append((getAssFont().isBold() ? "-1" : "0")).append(",");
-        line = line.append((getAssFont().isItalic()? "-1" : "0")).append(",");
-        line = line.append((getAssFont().isUnderline()? "-1" : "0")).append(",");
-        line = line.append((getAssFont().isStrikeout()? "-1" : "0")).append(",");
-        line = line.append(getScaleX()).append(",");
-        line = line.append(getScaleY()).append(",");
-        line = line.append(getSpacing()).append(",");
-        line = line.append(getAngleZ()).append(",");
-        line = line.append(getBorderStyle()).append(",");
-        line = line.append(getOutline()).append(",");
-        line = line.append(getShadow()).append(",");
-        line = line.append(getAlignment().getNumber()).append(",");
-        line = line.append(getMarginL()).append(",");
-        line = line.append(getMarginR()).append(",");
-        line = line.append(getMarginV()).append(",");
-        line = line.append(getEncoding());
-        
-        return line.toString();
+    public String toRawLine() throws AssColorException {
+        return String.format("Style: %s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%f,%f,%f,%f,%d,%f,%f,%d,%d,%d,%d,%d",
+                getName(), // Style name
+                getAssFont().getName(), // Font name
+                Math.round(getAssFont().getSize()), // Font size
+                AssColor.withScheme(getTextColor().getColor(), AssColor.Scheme.ABGR),
+                AssColor.withScheme(getKaraokeColor().getColor(), AssColor.Scheme.ABGR),
+                AssColor.withScheme(getOutlineColor().getColor(), AssColor.Scheme.ABGR),
+                AssColor.withScheme(getShadowColor().getColor(), AssColor.Scheme.ABGR),
+                getAssFont().isBold() ? "-1" : "0",
+                getAssFont().isItalic() ? "-1" : "0",
+                getAssFont().isUnderline() ? "-1" : "0",
+                getAssFont().isStrikeout() ? "-1" : "0",
+                getScaleX(),
+                getScaleY(),
+                getSpacing(),
+                getAngleZ(),
+                getBorderStyle(),
+                getOutline(),
+                getShadow(),
+                getAlignment().getNumber(),
+                getMarginL(),
+                getMarginR(),
+                getMarginV(),
+                getEncoding()
+        );
     }
 
     @Override
-    public AssStyle clone() throws CloneNotSupportedException {
-        AssStyle style = (AssStyle) super.clone();
-        style.setAssFont(assFont.clone());
-        style.setTextColor(textColor.clone());
-        style.setKaraokeColor(karaokeColor.clone());
-        style.setOutlineColor(outlineColor.clone());
-        style.setShadowColor(shadowColor.clone());
-        style.setAlignment(alignment.clone());
-        return style;
+    public AssStyle clone() {
+        try {
+            AssStyle clone = (AssStyle) super.clone();
+
+            clone.setAssFont(assFont.clone());
+            clone.setTextColor(textColor.clone());
+            clone.setKaraokeColor(karaokeColor.clone());
+            clone.setOutlineColor(outlineColor.clone());
+            clone.setShadowColor(shadowColor.clone());
+            clone.setAlignment(alignment.clone());
+
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
     
     public String getName() {

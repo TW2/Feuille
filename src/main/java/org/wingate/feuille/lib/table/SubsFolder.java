@@ -1,18 +1,41 @@
 package org.wingate.feuille.lib.table;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SubsFolder {
+    private int minIndex;
+    private int maxIndex;
+    private boolean used;
 
-public class SubsFolder<T> {
-    private List<T> list;
-
-    public SubsFolder(List<T> list) {
-        this.list = list;
+    public SubsFolder(int minIndex, int maxIndex) {
+        this.minIndex = minIndex;
+        this.maxIndex = maxIndex;
+        used = false;
     }
 
-    public SubsFolder(T type){
-        List<T> list;
-        list = new ArrayList<>();
-        this.list = list;
+    public SubsFolder() {
+        this(-1, -1);
+    }
+
+    public int getMinIndex() {
+        return minIndex;
+    }
+
+    public void setMinIndex(int minIndex) {
+        this.minIndex = minIndex;
+    }
+
+    public int getMaxIndex() {
+        return maxIndex;
+    }
+
+    public void setMaxIndex(int maxIndex) {
+        this.maxIndex = maxIndex;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 }

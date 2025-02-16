@@ -27,14 +27,7 @@ public class FlagVersion extends JPanel {
     private final ImageIcon linkOK;
     private final ImageIcon linkNOT;
 
-    private int uniqueID;
-    private int versionA;
-    private int versionB;
-
     public FlagVersion(ISO_3166 iso, JTextPane pSrc, JTextPane pDst){
-        uniqueID = -1;
-        versionA = -1;
-        versionB = -1;
 
         linkOK = Load.fromResource("/org/wingate/feuille/thin-linkOK.png");
         linkNOT = Load.fromResource("/org/wingate/feuille/thin-linkNOT.png");
@@ -176,5 +169,13 @@ public class FlagVersion extends JPanel {
 
             return this;
         }
+    }
+
+    public int getCbDisplay1Value() {
+        return cbDisplay1.getSelectedIndex();
+    }
+
+    public int getCbDisplay2Value() {
+        return cbDisplay2.getSelectedIndex();
     }
 }

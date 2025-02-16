@@ -12,8 +12,12 @@ import org.wingate.feuille.util.Waveform;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TablePanel extends JPanel {
 
@@ -42,6 +46,8 @@ public class TablePanel extends JPanel {
     // =================================================================================================================
     // == EDITING CONTROLS
     // =================================================================================================================
+    private final JTextPane paneOrigin = new JTextPane();
+    private final JTextPane paneTranslation = new JTextPane();
     private final JCheckBox cbEditComment = new JCheckBox("#", false);
     private final ElementsComboBox<AssStyle> ecbEditStyles = new ElementsComboBox<>();
     private final ElementsComboBox<AssActor> ecbEditActors = new ElementsComboBox<>();
@@ -68,7 +74,7 @@ public class TablePanel extends JPanel {
     // == TABLE CONTROLS
     // =================================================================================================================
     private final JTable tableTable = new JTable();
-    private AssTableModel3 tableTableModel = null;
+    private VTableModel tableTableModel = null;
     private final JScrollPane scrollTable = new JScrollPane();
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -128,7 +134,7 @@ public class TablePanel extends JPanel {
         ver02.setTopComponent(panTable);
         ver02.setBottomComponent(panPeers);
 
-        tableTableModel = new AssTableModel3(tableTable);
+        tableTableModel = new VTableModel(tableTable);
 
         makeVideo();
         makeAudio();
@@ -193,8 +199,6 @@ public class TablePanel extends JPanel {
         JPanel panCommandsOne = new JPanel(new FlowLayout());
         JPanel panCommandsTwo = new JPanel(new FlowLayout());
         JSplitPane splitTextPanes = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-        JTextPane paneOrigin = new JTextPane();
-        JTextPane paneTranslation = new JTextPane();
         flagVersion = new FlagVersion(iso, paneOrigin, paneTranslation);
 
         panEdit.add(panCommandsOne, BorderLayout.NORTH);
@@ -255,32 +259,66 @@ public class TablePanel extends JPanel {
         panCommandsTwo.add(flagVersion);
 
         btnAddEventQueue.addActionListener(e -> {
-            String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
-            tableTableModel.addValue(createTextPaneEvent(text));
+            try{
+                String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
+                tableTableModel.addValue(
+                        createTextPaneEvent(text),
+                        flagVersion.getCbDisplay2Value()
+                );
+            }catch(Exception ex){
+                Logger.getLogger(TablePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         btnReplaceSelvent.addActionListener(e -> {
-            if(tableTable.getSelectedRow() != -1){
-                String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
-                tableTableModel.replaceValueAt(createTextPaneEvent(text), tableTable.getSelectedRow());
+            try{
+                if(tableTable.getSelectedRow() != -1){
+                    String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
+                    tableTableModel.replaceValueAt(
+                            createTextPaneEvent(text),
+                            flagVersion.getCbDisplay2Value(),
+                            tableTable.getSelectedRow()
+                    );
+                }
+            }catch(Exception ex){
+                Logger.getLogger(TablePanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
         btnAddEventBefore.addActionListener(e -> {
-            if(tableTable.getSelectedRow() != -1){
-                String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
-                tableTableModel.insertValueAt(createTextPaneEvent(text), tableTable.getSelectedRow());
+            try{
+                if(tableTable.getSelectedRow() != -1){
+                    String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
+                    tableTableModel.insertValueAt(
+                            createTextPaneEvent(text),
+                            flagVersion.getCbDisplay2Value(),
+                            tableTable.getSelectedRow()
+                    );
+                }
+            }catch(Exception ex){
+                Logger.getLogger(TablePanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
         btnAddEventAfter.addActionListener(e -> {
-            if(tableTable.getSelectedRow() != -1){
-                String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
-                if(tableTable.getSelectedRow() == tableTable.getRowCount() - 1){
-                    tableTableModel.addValue(createTextPaneEvent(text));
-                }else{
-                    tableTableModel.insertValueAt(createTextPaneEvent(text), tableTable.getSelectedRow() + 1);
+            try{
+                if(tableTable.getSelectedRow() != -1){
+                    String text = paneTranslation.getText().isEmpty() ? paneOrigin.getText() : paneTranslation.getText();
+                    if(tableTable.getSelectedRow() == tableTable.getRowCount() - 1){
+                        tableTableModel.addValue(
+                                createTextPaneEvent(text),
+                                flagVersion.getCbDisplay2Value()
+                        );
+                    }else{
+                        tableTableModel.insertValueAt(
+                                createTextPaneEvent(text),
+                                flagVersion.getCbDisplay2Value(),
+                                tableTable.getSelectedRow() + 1
+                        );
+                    }
                 }
+            }catch(Exception ex){
+                Logger.getLogger(TablePanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
@@ -294,6 +332,27 @@ public class TablePanel extends JPanel {
         scrollTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         panTable.add(scrollTable, BorderLayout.CENTER);
         tableTableModel.updateColumnSize();
+        tableTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if(e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2){
+                    AssEvent event1 = tableTableModel.retrieveValueAt(
+                            tableTable.rowAtPoint(e.getPoint()),
+                            flagVersion.getCbDisplay2Value()
+                    );
+                    if(event1 != null) paneTranslation.setText(event1.getText());
+
+                    int lastVersion = flagVersion.getCbDisplay2Value() > 0 ? flagVersion.getCbDisplay2Value() - 1 : 0;
+                    AssEvent event2 = tableTableModel.retrieveValueAt(
+                            tableTable.rowAtPoint(e.getPoint()),
+                            lastVersion
+                    );
+                    if(event2 != null) paneOrigin.setText(event2.getText());
+                }
+            }
+        });
     }
 
     private void makePeers(){

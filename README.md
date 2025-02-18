@@ -59,7 +59,3 @@ Analysis
 
 - [ ] Compare 2 ASS
 - [ ] Show results
-
-![Feuille table](https://github.com/TW2/Feuille/blob/master/screenshots/Capture%20d'%C3%A9cran%202024-11-20%20225757.png)
-
-![Update 2024-12-11](https://github.com/TW2/Feuille/blob/master/screenshots/Capture%20d'%C3%A9cran%202024-12-11%20030727.png)

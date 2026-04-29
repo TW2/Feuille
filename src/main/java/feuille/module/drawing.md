@@ -1,0 +1,8 @@
+- [x] XY axis
+- [x] Scale (CTRL+Wheel)
+- [ ] Shift (CTRL+Mouse-Btn-1 to de/activate)
+- [x] Line tool
+- [x] Quadratic tool
+- [x] Cubic tool
+- [ ] Spline tool
+- [x] Points editing (Mouse-Btn-2 to de/activate)

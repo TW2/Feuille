@@ -35,8 +35,8 @@ public class Wave extends JPanel {
     public Wave() {
         setDoubleBuffered(true);
 
-        backColor = DrawColor.corn_flower_blue.getColor(.9f);
-        waveColor = DrawColor.corn_flower_blue.getColor(.1f);
+        backColor = Color.white;
+        waveColor = DrawColor.corn_flower_blue.getColor();
         hourColor = Color.red;
         minuteColor = Color.orange;
         secondColor = Color.yellow;
@@ -90,6 +90,14 @@ public class Wave extends JPanel {
             int visibleShift = globalShift - (globalShift / getWidth());
             g2d.drawImage(current, -visibleShift, 0, null);
             if(next != null) g2d.drawImage(next, getWidth() - visibleShift, 0, null);
+
+            g2d.setColor(waveColor);
+            g2d.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
+
+            g2d.setColor(secondColor);
+            for(int i=-visibleShift; i<getWidth(); i+=getWidth()/15){
+                g2d.drawLine(i, 0, i, getHeight());
+            }
         }
 
         //=================================================
@@ -98,6 +106,10 @@ public class Wave extends JPanel {
 
     public FFAudio getFfAudio() {
         return ffAudio;
+    }
+
+    public void execute(long msStart, long msEnd, int width, int height){
+        ffAudio.execute(msStart, msEnd, width, height, waveColor);
     }
 
     public Color getBackColor() {

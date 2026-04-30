@@ -2,6 +2,7 @@ package feuille.module.drawing.ui;
 
 import feuille.module.drawing.AssCanvas;
 import feuille.module.drawing.SelectedTool;
+import feuille.util.Exchange;
 import feuille.util.Loader;
 
 import javax.swing.*;
@@ -9,11 +10,16 @@ import java.awt.*;
 
 public class AssSketchpad extends JPanel {
 
+    private final Exchange exchange;
+
     private final AssCanvas canvas;
     private final JToolBar shapeToolbar;
     private SelectedTool selectedTool = SelectedTool.Line;
 
-    public AssSketchpad() {
+    public AssSketchpad(Exchange exchange, int w, int h) {
+        this.exchange = exchange;
+        setSize(w, h);
+
         setLayout(new BorderLayout());
 
         canvas = new AssCanvas(this);

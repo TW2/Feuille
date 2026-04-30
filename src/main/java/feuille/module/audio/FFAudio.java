@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.ShortBuffer;
-import java.util.EventListener;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -209,12 +208,12 @@ public class FFAudio {
 
     private final EventListenerList listeners = new EventListenerList();
 
-    public void addSignalListener(FFAudioInterface listener){
-        listeners.add(FFAudioListener.class, (FFAudioListener)listener);
+    public void addSignalListener(FFAudioListener listener){
+        listeners.add(FFAudioListener.class, listener);
     }
 
-    public void removeSignalListener(FFAudioInterface listener){
-        listeners.remove(FFAudioListener.class, (FFAudioListener)listener);
+    public void removeSignalListener(FFAudioListener listener){
+        listeners.remove(FFAudioListener.class, listener);
     }
 
     public Object[] getListeners(){
@@ -228,13 +227,5 @@ public class FFAudio {
                 break;
             }
         }
-    }
-
-    public interface FFAudioInterface {
-        void getSignal(FFAudioEvent event);
-    }
-
-    public static abstract class FFAudioListener implements FFAudioInterface, EventListener {
-        // Nothing here
     }
 }

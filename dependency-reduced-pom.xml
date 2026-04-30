@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wingate</groupId>
   <artifactId>feuille</artifactId>
-  <version>0.0.1_2024-10</version>
+  <version>2026-04</version>
   <build>
     <plugins>
       <plugin>
@@ -18,7 +18,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>org.wingate.feuille.Feuille</mainClass>
+                  <mainClass>feuille.Feuille</mainClass>
                 </transformer>
               </transformers>
               <shadedArtifactAttached>true</shadedArtifactAttached>
@@ -32,7 +32,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.0</version>
         <configuration>
-          <mainClass>org.wingate.feuille.Feuille</mainClass>
+          <mainClass>feuille.Feuille</mainClass>
           <executable>java</executable>
           <arguments>
             <argument>--enable-preview</argument>
@@ -45,7 +45,7 @@
     <maven.compiler.release>23</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>23</maven.compiler.target>
-    <exec.mainClass>org.wingate.feuille.Feuille</exec.mainClass>
+    <exec.mainClass>feuille.Feuille</exec.mainClass>
     <maven.compiler.source>23</maven.compiler.source>
   </properties>
 </project>

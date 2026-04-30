@@ -1,11 +1,9 @@
 package feuille.module.editor;
 
+import feuille.module.editor.assa.ASS;
 import feuille.module.editor.assa.AssEvent;
 import feuille.module.editor.assa.AssTime;
-import feuille.util.Clipboard;
-import feuille.util.DrawColor;
-import feuille.util.ISO_3166;
-import feuille.util.Loader;
+import feuille.util.*;
 import feuille.util.assa.AssEventType;
 
 import javax.swing.*;
@@ -27,6 +25,7 @@ public class VoyagersTable extends JPanel {
 
     private Exchange exchange;
 
+    private ASS ass;
     private final List<Voyager> voyagers;
     private final JScrollBar scrollBar;
     private int vBarOffset;
@@ -36,6 +35,7 @@ public class VoyagersTable extends JPanel {
     public VoyagersTable(Exchange exchange) {
         this.exchange = exchange;
         setDoubleBuffered(true);
+        ass = new ASS();
         voyagers = new ArrayList<>();
         scrollBar = new JScrollBar(JScrollBar.VERTICAL);
         scrollBar.setMinimum(0);
@@ -64,6 +64,7 @@ public class VoyagersTable extends JPanel {
                                     voyagers.get(row).setCollapsed(!value);
                                 }else{
                                     for(Voyager v : voyagers) {
+                                        if(v == null) continue;
                                         v.setSelected(false);
                                     }
                                     voyagers.get(row).setSelected(true);

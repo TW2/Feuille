@@ -12,53 +12,11 @@ Feuille alpha release equivalent v0.6 - JDK 23 or superior : [Feuille 0.0.1-2024
 5/ Launch with the command ```java -jar``` targeting the Feuille shaded version.
 
 ### Goals :
-Audio
 
-- [ ] Load audio
-- [ ] Waveform
-- [ ] Spectrogram
-- [ ] Time
 
-Video
 
-- [ ] View (FFmpeg)
-- [ ] Edit
-- [ ] Show subtitles
 
-Table
 
-- [ ] Create subtitles
-- [ ] Open subtitles
-- [ ] Save subtitles
-- [ ] Edit subtitles (status: in progress)
-
-Karaoke
-
-- [ ] Open subtitles
-- [ ] Save subtitles
-- [ ] Make templates
-- [ ] Use JavaScript scripting (use Graal community from Oracle)
-- [ ] Use Lua scripting
-- [ ] Use Python 3 scripting (use Graal community from Oracle)
-- [ ] Use Ruby scripting (use Graal community from Oracle)
-- [ ] Get and use commands
-- [ ] Get and use tags
-- [ ] Scripting edit
-- [ ] Open templates or scripting code
-- [ ] Save templates or scripting code
-- [ ] Add line
-- [ ] Edit line
-- [ ] Undo
-- [ ] Redo
-
-Drawing
-
-- [ ] Use sketchpad to do ASS drawing
-
-Analysis
-
-- [ ] Compare 2 ASS
-- [ ] Show results
 
 You can join me on Discord to speak or idle, in English or French (cause I'm a half white black Frenchy).
 

@@ -232,6 +232,10 @@ public class EditorPanel extends JPanel {
         lockDuration.setAssTime(t);
     }
 
+    public void setToLockDuration(AssTime start, AssTime end){
+        setToLockDuration(AssTime.getMsDuration(start, end));
+    }
+
     public void addToPanel(Voyager voyager){
         cbEditComment.setSelected(voyager.getEvent().getType() == AssEventType.Comment);
         spinEditModelLayer.setValue(voyager.getEvent().getLayer());

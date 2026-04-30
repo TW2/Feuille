@@ -1,13 +1,19 @@
 package feuille.module.audio;
 
+import feuille.module.editor.assa.AssTime;
 import feuille.util.DrawColor;
+import feuille.util.Exchange;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class Wave extends JPanel {
+
+    private final Exchange exchange;
 
     private Color backColor;
     private Color waveColor;
@@ -32,19 +38,23 @@ public class Wave extends JPanel {
     private long msNextStart; // Milliseconds (next image start)
     private long msNextEnd; // Milliseconds (next image end)
 
-    public Wave() {
+    private int startAnchor;
+    private int endAnchor;
+
+    public Wave(Exchange exchange) {
+        this.exchange = exchange;
         setDoubleBuffered(true);
 
         backColor = Color.white;
         waveColor = DrawColor.corn_flower_blue.getColor();
-        hourColor = Color.red;
+        hourColor = Color.black;
         minuteColor = Color.orange;
         secondColor = Color.yellow;
         msColor = DrawColor.beige.getColor();
         miColor = DrawColor.antique_white.getColor();
         selAreaStartColor = Color.green;
-        selAreaEndColor = Color.green;
-        selAreaColor = DrawColor.green.getColor(.5f);
+        selAreaEndColor = Color.red;
+        selAreaColor = DrawColor.green.getColor(.25f);
         cursorColor = Color.white;
 
         ffAudio = new FFAudio();
@@ -58,6 +68,9 @@ public class Wave extends JPanel {
         msNextStart = 0L;
         msNextEnd = 0L;
 
+        startAnchor = 0;
+        endAnchor = 0;
+
         ffAudio.addSignalListener((event -> {
             current = event.getCurrent();
             next = event.getNext();
@@ -67,6 +80,54 @@ public class Wave extends JPanel {
             msNextEnd = event.getNextMsEnd();
             repaint();
         }));
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                double oneSecond = getWidth() / 15d; // pixels
+
+                switch(e.getButton()){
+                    case MouseEvent.BUTTON1 -> {
+                        startAnchor = e.getX();
+                        double ms = startAnchor / oneSecond * 1000d;
+                        exchange.getEditorPanel().setToLockStart(new AssTime(ms));
+                        if(endAnchor - startAnchor > 0){
+                            double end = endAnchor / oneSecond * 1000d;
+                            exchange.getEditorPanel().setToLockDuration(
+                                    new AssTime(ms), new AssTime(end)
+                            );
+                        }
+                    }
+                    case MouseEvent.BUTTON2 -> {
+                        startAnchor = 0;
+                        exchange.getEditorPanel().setToLockStart(new AssTime(0));
+                        endAnchor = 0;
+                        exchange.getEditorPanel().setToLockEnd(new AssTime(0));
+                        exchange.getEditorPanel().setToLockDuration(new AssTime(0));
+                    }
+                    case MouseEvent.BUTTON3 -> {
+                        endAnchor = e.getX();
+                        double ms = endAnchor / oneSecond * 1000d;
+                        exchange.getEditorPanel().setToLockEnd(new AssTime(ms));
+                        if(endAnchor - startAnchor > 0){
+                            double start = startAnchor / oneSecond * 1000d;
+                            exchange.getEditorPanel().setToLockDuration(
+                                    new AssTime(start), new AssTime(ms)
+                            );
+                        }
+                    }
+                }
+
+                repaint();
+            }
+        });
+
+        addMouseWheelListener((e) -> {
+            offset = e.getWheelRotation() > 0 ? offset + 250L : offset - 250L;
+            repaint();
+        });
     }
 
     public boolean setMedia(String path) throws FFmpegFrameGrabber.Exception {
@@ -86,7 +147,7 @@ public class Wave extends JPanel {
 
         if(current != null){
             long dur = msCurrentEnd - msCurrentStart;
-            int globalShift = Math.toIntExact(msCurrent * getWidth() / dur);
+            int globalShift = Math.toIntExact(offset * getWidth() / dur);
             int visibleShift = globalShift - (globalShift / getWidth());
             g2d.drawImage(current, -visibleShift, 0, null);
             if(next != null) g2d.drawImage(next, getWidth() - visibleShift, 0, null);
@@ -98,6 +159,22 @@ public class Wave extends JPanel {
             for(int i=-visibleShift; i<getWidth(); i+=getWidth()/15){
                 g2d.drawLine(i, 0, i, getHeight());
             }
+
+            g2d.setColor(Color.black);
+            for(int i=-visibleShift, j=0; i<getWidth(); i+=getWidth()/15, j++){
+                g2d.drawString(String.format("%d s", j), i-20, 16);
+            }
+
+            if(endAnchor - startAnchor > 0){
+                g2d.setColor(selAreaColor);
+                g2d.fillRect(startAnchor, 0, endAnchor - startAnchor, getHeight());
+            }
+
+            g2d.setColor(selAreaStartColor);
+            g2d.drawLine(startAnchor, 0, startAnchor, getHeight());
+
+            g2d.setColor(selAreaEndColor);
+            g2d.drawLine(endAnchor, 0, endAnchor, getHeight());
         }
 
         //=================================================

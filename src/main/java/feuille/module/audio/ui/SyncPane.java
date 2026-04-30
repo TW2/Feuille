@@ -17,7 +17,7 @@ public class SyncPane extends JPanel {
     public SyncPane(Exchange exchange){
         this.exchange = exchange;
         exchange.setSyncPane(this);
-        waveform = new Wave();
+        waveform = new Wave(exchange);
 
         setLayout(new BorderLayout());
         add(waveform, BorderLayout.CENTER);

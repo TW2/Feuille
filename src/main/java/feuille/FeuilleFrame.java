@@ -259,6 +259,7 @@ public class FeuilleFrame extends JFrame {
                     fileChooser.getSelectedFile().getPath(),
                     15_000L
             );
+            exchange.getMpeg().setMedia(fileChooser.getSelectedFile().getPath());
         }
     }
 

@@ -56,13 +56,13 @@ public class SyncPane extends JPanel {
 
         JButton btnPlay = new JButton("Play");
         btnPlay.addActionListener(e -> {
-
+            exchange.getView().play();
         });
         toolBar.add(btnPlay);
 
         JButton btnStop = new JButton("Stop");
         btnStop.addActionListener(e -> {
-
+            exchange.getView().stop();
         });
         toolBar.add(btnStop);
 

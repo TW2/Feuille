@@ -3,7 +3,6 @@ package feuille.module.audio;
 import feuille.module.editor.assa.AssTime;
 import feuille.util.DrawColor;
 import feuille.util.Exchange;
-import org.bytedeco.javacv.FFmpegFrameGrabber;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +13,8 @@ import java.awt.image.BufferedImage;
 public class Wave extends JPanel {
 
     private final Exchange exchange;
+
+    private static final long MS_PERIOD = 15_000L;
 
     private Color backColor;
     private Color waveColor;
@@ -27,11 +28,11 @@ public class Wave extends JPanel {
     private Color selAreaColor;
     private Color cursorColor;
 
-    private final FFAudio ffAudio;
     private BufferedImage current;
     private BufferedImage next;
 
     private long offset; // Milliseconds
+    private int offsetX; // Integer (pixels)
     private long msCurrent; // Milliseconds
     private long msCurrentStart; // Milliseconds (current image start)
     private long msCurrentEnd; // Milliseconds (current image end)
@@ -57,11 +58,11 @@ public class Wave extends JPanel {
         selAreaColor = DrawColor.green.getColor(.25f);
         cursorColor = Color.white;
 
-        ffAudio = new FFAudio();
         current = null;
         next = null;
 
         offset = 0L;
+        offsetX = 0;
         msCurrent = 0L;
         msCurrentStart = 0L;
         msCurrentEnd = 0L;
@@ -71,16 +72,6 @@ public class Wave extends JPanel {
         startAnchor = 0;
         endAnchor = 0;
 
-        ffAudio.addSignalListener((event -> {
-            current = event.getCurrent();
-            next = event.getNext();
-            msCurrentStart = event.getCurrentMsStart();
-            msCurrentEnd = event.getCurrentMsEnd();
-            msNextStart = event.getNextMsStart();
-            msNextEnd = event.getNextMsEnd();
-            repaint();
-        }));
-
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -88,9 +79,12 @@ public class Wave extends JPanel {
 
                 double oneSecond = getWidth() / 15d; // pixels
 
+                int globalShift = Math.toIntExact(offset * getWidth() / MS_PERIOD);
+                int visibleShift = globalShift - (globalShift / getWidth());
+
                 switch(e.getButton()){
                     case MouseEvent.BUTTON1 -> {
-                        startAnchor = e.getX();
+                        startAnchor = e.getX() + visibleShift;
                         double ms = startAnchor / oneSecond * 1000d;
                         exchange.getEditorPanel().setToLockStart(new AssTime(ms));
                         if(endAnchor - startAnchor > 0){
@@ -108,7 +102,7 @@ public class Wave extends JPanel {
                         exchange.getEditorPanel().setToLockDuration(new AssTime(0));
                     }
                     case MouseEvent.BUTTON3 -> {
-                        endAnchor = e.getX();
+                        endAnchor = e.getX() + visibleShift;
                         double ms = endAnchor / oneSecond * 1000d;
                         exchange.getEditorPanel().setToLockEnd(new AssTime(ms));
                         if(endAnchor - startAnchor > 0){
@@ -126,12 +120,32 @@ public class Wave extends JPanel {
 
         addMouseWheelListener((e) -> {
             offset = e.getWheelRotation() > 0 ? offset + 250L : offset - 250L;
+
+//            if(offset > msCurrentEnd || offset < msCurrentStart){
+//                long start = -1L;
+//
+//                if(offset > msCurrentEnd){
+//                    start = msCurrentEnd;
+//                }
+//
+//                if(offset < msCurrentStart){
+//                    start = msCurrentStart;
+//                }
+//
+//                if(start == -1L){
+//                    return;
+//                }
+//
+//                current = FFAudio2.getImage(start, false);
+//                next = FFAudio2.getImage(start + MS_PERIOD, false);
+//                msCurrentStart = start;
+//                msCurrentEnd = start + MS_PERIOD;
+//                msNextStart = start + MS_PERIOD;
+//                msNextEnd = start + MS_PERIOD * 2;
+//            }
+
             repaint();
         });
-    }
-
-    public boolean setMedia(String path) throws FFmpegFrameGrabber.Exception {
-        return ffAudio.setMedia(path);
     }
 
     @Override
@@ -145,13 +159,25 @@ public class Wave extends JPanel {
         g2d.setColor(backColor);
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
-        if(current != null){
-            long dur = msCurrentEnd - msCurrentStart;
-            int globalShift = Math.toIntExact(offset * getWidth() / dur);
-            int visibleShift = globalShift - (globalShift / getWidth());
-            g2d.drawImage(current, -visibleShift, 0, null);
-            if(next != null) g2d.drawImage(next, getWidth() - visibleShift, 0, null);
+        int globalShift = Math.toIntExact(offset * getWidth() / MS_PERIOD);
+        int visibleShift = globalShift - (globalShift / getWidth());
 
+        // How many times we have 'visibleShift' in 'width':
+        int a = visibleShift / getWidth();
+        // What is the rest:
+        offsetX = visibleShift - (a * getWidth());
+
+        long start = Math.abs(offset / MS_PERIOD) * MS_PERIOD;
+        current = FFAudio2.getImage(start, false);
+        next = FFAudio2.getImage(start + MS_PERIOD, false);
+        if(current != null){
+            g2d.drawImage(current, -offsetX, 0, this);
+        }
+        if(next != null){
+            g2d.drawImage(next, -offsetX + getWidth(), 0, this);
+        }
+
+        if(current != null || next != null){
             g2d.setColor(waveColor);
             g2d.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
 
@@ -167,26 +193,18 @@ public class Wave extends JPanel {
 
             if(endAnchor - startAnchor > 0){
                 g2d.setColor(selAreaColor);
-                g2d.fillRect(startAnchor, 0, endAnchor - startAnchor, getHeight());
+                g2d.fillRect(-visibleShift+startAnchor, 0, endAnchor - startAnchor, getHeight());
             }
 
             g2d.setColor(selAreaStartColor);
-            g2d.drawLine(startAnchor, 0, startAnchor, getHeight());
+            g2d.drawLine(-visibleShift+startAnchor, 0, -visibleShift+startAnchor, getHeight());
 
             g2d.setColor(selAreaEndColor);
-            g2d.drawLine(endAnchor, 0, endAnchor, getHeight());
+            g2d.drawLine(-visibleShift+endAnchor, 0, -visibleShift+endAnchor, getHeight());
         }
 
         //=================================================
         g2d.dispose();
-    }
-
-    public FFAudio getFfAudio() {
-        return ffAudio;
-    }
-
-    public void execute(long msStart, long msEnd, int width, int height){
-        ffAudio.execute(msStart, msEnd, width, height, waveColor);
     }
 
     public Color getBackColor() {
@@ -323,5 +341,13 @@ public class Wave extends JPanel {
 
     public void setMsNextEnd(long msNextEnd) {
         this.msNextEnd = msNextEnd;
+    }
+
+    public void setCurrent(BufferedImage current) {
+        this.current = current;
+    }
+
+    public void setNext(BufferedImage next) {
+        this.next = next;
     }
 }

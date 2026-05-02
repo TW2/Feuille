@@ -255,7 +255,10 @@ public class FeuilleFrame extends JFrame {
         fileChooser.addChoosableFileFilter(new MediaFileFilter());
         int z = fileChooser.showOpenDialog(this);
         if(z == JFileChooser.APPROVE_OPTION){
-            exchange.getSyncPane().openMedia(fileChooser.getSelectedFile().getPath());
+            exchange.getSyncPane().openMedia(
+                    fileChooser.getSelectedFile().getPath(),
+                    15_000L
+            );
         }
     }
 

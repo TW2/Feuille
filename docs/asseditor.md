@@ -1,9 +1,9 @@
 Audio
 
 - [ ] Load audio
-- [ ] Waveform
-- [ ] Spectrogram
-- [ ] Time
+- [x] Waveform
+- [x] Spectrogram
+- [x] Time
 
 Video
 
@@ -14,6 +14,6 @@ Video
 Table
 
 - [ ] Create subtitles
-- [ ] Open subtitles
-- [ ] Save subtitles
+- [x] Open subtitles
+- [x] Save subtitles
 - [ ] Edit subtitles (status: in progress)

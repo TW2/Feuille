@@ -30,6 +30,7 @@ public class Wave extends JPanel {
 
     private BufferedImage current;
     private BufferedImage next;
+    private boolean useSpectrum;
 
     private long offset; // Milliseconds
     private int offsetX; // Integer (pixels)
@@ -60,6 +61,7 @@ public class Wave extends JPanel {
 
         current = null;
         next = null;
+        useSpectrum = false;
 
         offset = 0L;
         offsetX = 0;
@@ -121,29 +123,6 @@ public class Wave extends JPanel {
         addMouseWheelListener((e) -> {
             offset = e.getWheelRotation() > 0 ? offset + 250L : offset - 250L;
 
-//            if(offset > msCurrentEnd || offset < msCurrentStart){
-//                long start = -1L;
-//
-//                if(offset > msCurrentEnd){
-//                    start = msCurrentEnd;
-//                }
-//
-//                if(offset < msCurrentStart){
-//                    start = msCurrentStart;
-//                }
-//
-//                if(start == -1L){
-//                    return;
-//                }
-//
-//                current = FFAudio2.getImage(start, false);
-//                next = FFAudio2.getImage(start + MS_PERIOD, false);
-//                msCurrentStart = start;
-//                msCurrentEnd = start + MS_PERIOD;
-//                msNextStart = start + MS_PERIOD;
-//                msNextEnd = start + MS_PERIOD * 2;
-//            }
-
             repaint();
         });
     }
@@ -168,8 +147,8 @@ public class Wave extends JPanel {
         offsetX = visibleShift - (a * getWidth());
 
         long start = Math.abs(offset / MS_PERIOD) * MS_PERIOD;
-        current = FFAudio2.getImage(start, false);
-        next = FFAudio2.getImage(start + MS_PERIOD, false);
+        current = FFAudio2.getImage(start, useSpectrum);
+        next = FFAudio2.getImage(start + MS_PERIOD, useSpectrum);
         if(current != null){
             g2d.drawImage(current, -offsetX, 0, this);
         }
@@ -349,5 +328,9 @@ public class Wave extends JPanel {
 
     public void setNext(BufferedImage next) {
         this.next = next;
+    }
+
+    public void setUseSpectrum(boolean useSpectrum) {
+        this.useSpectrum = useSpectrum;
     }
 }

@@ -14,8 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class SyncPane extends JPanel {
 
@@ -34,11 +32,41 @@ public class SyncPane extends JPanel {
 
         setLayout(new BorderLayout());
         add(waveform, BorderLayout.CENTER);
+        add(createToolBar(), BorderLayout.SOUTH);
 
         color1 = FFMpegColor.Blue;
         color2 = FFMpegColor.BlueViolet;
         path = null;
         period = -1L;
+    }
+
+    private JToolBar createToolBar(){
+        JToolBar toolBar = new JToolBar();
+        toolBar.setFloatable(false);
+
+        JToggleButton tbSpectrum = new JToggleButton();
+        tbSpectrum.setText("Spectrum");
+        tbSpectrum.setToolTipText("Spectrum");
+        tbSpectrum.setSelected(false);
+        tbSpectrum.addActionListener(e -> {
+            waveform.setUseSpectrum(tbSpectrum.isSelected());
+            waveform.repaint();
+        });
+        toolBar.add(tbSpectrum);
+
+        JButton btnPlay = new JButton("Play");
+        btnPlay.addActionListener(e -> {
+
+        });
+        toolBar.add(btnPlay);
+
+        JButton btnStop = new JButton("Stop");
+        btnStop.addActionListener(e -> {
+
+        });
+        toolBar.add(btnStop);
+
+        return toolBar;
     }
 
     public void openMedia(String path, long period) {

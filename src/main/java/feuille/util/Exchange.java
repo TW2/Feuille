@@ -6,6 +6,7 @@ import feuille.module.editor.VoyagersTable;
 import feuille.module.editor.assa.ASS;
 import feuille.module.editor.assa.AssEvent;
 import feuille.module.editor.assa.ui.EditorPanel;
+import feuille.module.video.View;
 import feuille.util.assa.AssEventType;
 
 import java.util.ArrayList;
@@ -17,15 +18,18 @@ public class Exchange {
     private VoyagersTable voyagersTable;
     private SyncPane syncPane;
     private EditorPanel editorPanel;
+    private View view;
 
     private ASS ass;
     private ISO_3166 flag1;
     private ISO_3166 flag2;
+    private FFMpeg mpeg;
 
     public Exchange() {
         ass = new ASS();
         flag1 = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
         flag2 = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
+        mpeg = new FFMpeg();
     }
 
     public VoyagersTable getVoyagersTable() {
@@ -52,6 +56,14 @@ public class Exchange {
         this.editorPanel = editorPanel;
     }
 
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
     public ASS getAss() {
         return ass;
     }
@@ -74,6 +86,10 @@ public class Exchange {
 
     public void setFlag2(ISO_3166 flag2) {
         this.flag2 = flag2;
+    }
+
+    public FFMpeg getMpeg() {
+        return mpeg;
     }
 
     public void addEvent(AssEvent event, ISO_3166 f1, ISO_3166 f2){

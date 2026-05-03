@@ -29,10 +29,10 @@ public class FlagVersion extends JPanel {
 
     public FlagVersion(ISO_3166 iso, JTextPane pSrc, JTextPane pDst){
 
-        linkOK = Loader.fromResource("/org/wingate/feuille/thin-linkOK.png", 8, 16);
-        linkNOT = Loader.fromResource("/org/wingate/feuille/thin-linkNOT.png", 8, 16);
+        linkOK = Loader.fromResource("/images/thin-linkOK.png", 8, 16);
+        linkNOT = Loader.fromResource("/images/thin-linkNOT.png", 8, 16);
 
-        btnVersionsEdit = new JButton(Loader.fromResource("/org/wingate/feuille/16 engrenage mauve.png", 16, 16));
+        btnVersionsEdit = new JButton(Loader.fromResource("/images/16 engrenage mauve.png", 16, 16));
 
         display1Model = new DefaultComboBoxModel<>();
         display1Model.addElement(ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()));

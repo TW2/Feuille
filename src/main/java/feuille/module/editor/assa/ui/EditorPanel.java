@@ -96,11 +96,11 @@ public class EditorPanel extends JPanel {
         panCommandsOne.add(spinEditMR);
         panCommandsOne.add(spinEditMV);
 
-        btnAddEventQueue.setIcon(Loader.fromResource("/org/wingate/feuille/16OK-custom-green.png", 16, 16));
-        btnReplaceSelEvent.setIcon(Loader.fromResource("/org/wingate/feuille/16OK-custom-orange.png", 16, 16));
-        btnAddEventBefore.setIcon(Loader.fromResource("/org/wingate/feuille/16OK-custom-blue.png", 16, 16));
-        btnAddEventAfter.setIcon(Loader.fromResource("/org/wingate/feuille/16OK-custom-violet.png", 16, 16));
-        btnDeleteEvent.setIcon(Loader.fromResource("/org/wingate/feuille/16KO.png", 16, 16));
+        btnAddEventQueue.setIcon(Loader.fromResource("/images/16OK-custom-green.png", 16, 16));
+        btnReplaceSelEvent.setIcon(Loader.fromResource("/images/16OK-custom-orange.png", 16, 16));
+        btnAddEventBefore.setIcon(Loader.fromResource("/images/16OK-custom-blue.png", 16, 16));
+        btnAddEventAfter.setIcon(Loader.fromResource("/images/16OK-custom-violet.png", 16, 16));
+        btnDeleteEvent.setIcon(Loader.fromResource("/images/16KO.png", 16, 16));
 
         btnAddEventQueue.setToolTipText(Loader.language("btnAddEventQueue", "Add"));
         btnReplaceSelEvent.setToolTipText(Loader.language("btnReplaceEvent", "Replace"));
@@ -280,7 +280,7 @@ public class EditorPanel extends JPanel {
 
         JMenuItem mDelete = new JMenuItem(
                 Loader.language("control.delete", "Delete"),
-                Loader.fromResource("/org/wingate/feuille/16KO.png", 16, 16));
+                Loader.fromResource("/images/16KO.png", 16, 16));
 
         mCut.addActionListener((e)->{
             try{
@@ -356,7 +356,7 @@ public class EditorPanel extends JPanel {
 
         JMenuItem mDelete = new JMenuItem(
                 Loader.language("control.delete", "Delete"),
-                Loader.fromResource("/org/wingate/feuille/16KO.png", 16, 16));
+                Loader.fromResource("/images/16KO.png", 16, 16));
 
         mCut.addActionListener((e)->{
             try{

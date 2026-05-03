@@ -42,11 +42,11 @@ public class LockFormatTextField extends JPanel {
         format = Format.AssTime;
         lock = Lock.NOT;
 
-        formatAssTime = Loader.fromResource("/org/wingate/feuille/thin-present-blue.png", 3, 16);
-        formatMsTime = Loader.fromResource("/org/wingate/feuille/thin-present-yellow.png", 3, 16);
-        formatFrame = Loader.fromResource("/org/wingate/feuille/thin-present-red.png", 3, 16);
-        lockNOT = Loader.fromResource("/org/wingate/feuille/thin-linkNOT.png", 8, 16);
-        lockOK = Loader.fromResource("/org/wingate/feuille/thin-linkOK.png", 8, 16);
+        formatAssTime = Loader.fromResource("/images/thin-present-blue.png", 3, 16);
+        formatMsTime = Loader.fromResource("/images/thin-present-yellow.png", 3, 16);
+        formatFrame = Loader.fromResource("/images/thin-present-red.png", 3, 16);
+        lockNOT = Loader.fromResource("/images/thin-linkNOT.png", 8, 16);
+        lockOK = Loader.fromResource("/images/thin-linkOK.png", 8, 16);
 
         btnFormat.setIcon(formatAssTime);
         btnLock.setIcon(lockNOT);

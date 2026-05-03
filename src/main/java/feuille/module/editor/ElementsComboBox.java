@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ElementsComboBox<T> extends JPanel {
     private final JComboBox<T> comboBox = new JComboBox<>();
     private final DefaultComboBoxModel<T> model = new DefaultComboBoxModel<>();
-    private final JButton button = new JButton(Loader.fromResource("/org/wingate/feuille/16 losange carre.png", 16, 16));
+    private final JButton button = new JButton(Loader.fromResource("/images/16 losange carre.png", 16, 16));
 
     public ElementsComboBox(){
         comboBox.setModel(model);

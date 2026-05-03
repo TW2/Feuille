@@ -77,6 +77,8 @@ public class View extends JPanel {
             int y = (getHeight() - h) / 2;
 
             g.drawImage(image, x, y, w, h, null);
+
+
         }
     }
 

@@ -20,6 +20,9 @@
                 <transformer>
                   <mainClass>feuille.Feuille</mainClass>
                 </transformer>
+                <transformer>
+                  <resource>META-INF/services/java.sql.Driver</resource>
+                </transformer>
               </transformers>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName />
@@ -42,10 +45,10 @@
     </plugins>
   </build>
   <properties>
-    <maven.compiler.release>23</maven.compiler.release>
+    <maven.compiler.release>25</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.target>23</maven.compiler.target>
+    <maven.compiler.target>25</maven.compiler.target>
     <exec.mainClass>feuille.Feuille</exec.mainClass>
-    <maven.compiler.source>23</maven.compiler.source>
+    <maven.compiler.source>25</maven.compiler.source>
   </properties>
 </project>

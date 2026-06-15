@@ -36,16 +36,18 @@ public class AssEditor extends JPanel {
         exchange.setEditorPanel(editorPanel);
         exchange.setView(view);
 
-        setLayout(new BorderLayout());
-        add(syncPane, BorderLayout.NORTH);
-        add(bottomPanel, BorderLayout.CENTER);
-        bottomPanel.add(editorPanel, BorderLayout.NORTH);
-        bottomPanel.add(innerLeftBottomPanel, BorderLayout.CENTER);
-        innerLeftBottomPanel.add(voyagersTable);
-        innerLeftBottomPanel.add(view);
-
-        syncPane.setPreferredSize(new Dimension(w, h / 4));
-        editorPanel.setPreferredSize(new Dimension(w, (h * 3 / 4) * 2 / 9));
+        setLayout(new GridLayout(2, 1, 2, 2));
+        // TOP: View + sync pane + editor
+        // BOTTOM: table
+        JPanel topPanel = new JPanel(new GridLayout(1, 2, 2, 2));
+        // in TOP: left >> view ; right >> sync pane + editor
+        JPanel innerTopRightPanel = new JPanel(new GridLayout(2, 1, 2, 2));
+        topPanel.add(view);
+        topPanel.add(innerTopRightPanel);
+        innerTopRightPanel.add(syncPane);
+        innerTopRightPanel.add(editorPanel);
+        add(topPanel);
+        add(voyagersTable);
     }
 
     public SyncPane getSyncPane() {

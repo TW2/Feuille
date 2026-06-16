@@ -15,9 +15,13 @@ public class View extends JPanel {
     private double fps;
     private int frame;
 
+    private final ViewOverlay overlay;
+
     public View(Exchange exchange) {
         mpeg = exchange.getMpeg();
         setDoubleBuffered(true);
+
+        overlay = new ViewOverlay();
 
         image = null;
         currentMicros = 0L;
@@ -78,7 +82,8 @@ public class View extends JPanel {
 
             g.drawImage(image, x, y, w, h, null);
 
-
+            overlay.setMode(ViewOverlay.Mode.Line);
+            //overlay.drawOverlay((Graphics2D)g, x, y, w, h);
         }
     }
 

@@ -245,7 +245,17 @@ public class FeuilleFrame extends JFrame {
     }
 
     public void mOpenVideoActionPerformed(ActionEvent event){
-
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.addChoosableFileFilter(new MediaFileFilter());
+        int z = fileChooser.showOpenDialog(this);
+        if(z == JFileChooser.APPROVE_OPTION){
+            exchange.getSyncPane().openMedia(
+                    fileChooser.getSelectedFile().getPath(),
+                    15_000L
+            );
+            exchange.getMpeg().setMedia(fileChooser.getSelectedFile().getPath());
+        }
     }
 
     public void mOpenAudioActionPerformed(ActionEvent event){

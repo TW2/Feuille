@@ -44,8 +44,8 @@ public class SyncPane extends JPanel {
         JToolBar toolBar = new JToolBar();
         toolBar.setFloatable(false);
 
-        JToggleButton tbSpectrum = new JToggleButton();
-        tbSpectrum.setText("Spectrum");
+        JToggleButton tbSpectrum = new JToggleButton(Loader.fromResource(
+                "/images/carbon--bring-to-front.png", 16, 16));
         tbSpectrum.setToolTipText("Spectrum");
         tbSpectrum.setSelected(false);
         tbSpectrum.addActionListener(e -> {
@@ -54,13 +54,25 @@ public class SyncPane extends JPanel {
         });
         toolBar.add(tbSpectrum);
 
-        JButton btnPlay = new JButton("Play");
+        JButton btnPlay = new JButton(Loader.fromResource(
+                "/images/carbon--play-filled.png", 16, 16));
+        btnPlay.setToolTipText("Play media");
         btnPlay.addActionListener(e -> {
             exchange.getView().play();
         });
         toolBar.add(btnPlay);
 
-        JButton btnStop = new JButton("Stop");
+        JButton btnPause = new JButton(Loader.fromResource(
+                "/images/carbon--pause-outline-filled.png", 16, 16));
+        btnPause.setToolTipText("Pause");
+        btnPause.addActionListener(e -> {
+            exchange.getView().pause();
+        });
+        toolBar.add(btnPause);
+
+        JButton btnStop = new JButton(Loader.fromResource(
+                "/images/carbon--stop-filled.png", 16, 16));
+        btnStop.setToolTipText("Stop");
         btnStop.addActionListener(e -> {
             exchange.getView().stop();
         });

@@ -6,9 +6,11 @@ import feuille.util.FFMpeg;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class View extends JPanel {
 
+    private final AssaDB assaDB;
     private final FFMpeg mpeg;
     private BufferedImage image;
     private long currentMicros;
@@ -18,6 +20,15 @@ public class View extends JPanel {
     private final ViewOverlay overlay;
 
     public View(Exchange exchange) {
+        // Get the settings folder
+        File app = new File(new File("").getAbsolutePath());
+        File folder = new File(app + "/settings/assa");
+        // Initialize the DB
+        assaDB = new AssaDB(
+                (new File(folder, "assa.db").toPath()),
+                "assa"
+        );
+
         mpeg = exchange.getMpeg();
         setDoubleBuffered(true);
 
@@ -29,12 +40,21 @@ public class View extends JPanel {
         frame = 0;
 
         mpeg.addMediaListener((e) -> {
-            image = e.getImage();
             currentMicros = e.getCurrentMicro();
             fps = e.getFps();
             frame = e.getFrame();
+            image = blend(e.getImage());
             repaint();
         });
+    }
+
+    private BufferedImage blend(BufferedImage cur){
+        BufferedImage sub = assaDB.get(currentMicros / 1000L);
+        if(sub == null) return cur;
+        Graphics2D g2d = cur.createGraphics();
+        g2d.drawImage(sub, 0, 0, cur.getWidth(), cur.getHeight(), null);
+        g2d.dispose();
+        return cur;
     }
 
     public void setMediaPath(String mediaPath) {

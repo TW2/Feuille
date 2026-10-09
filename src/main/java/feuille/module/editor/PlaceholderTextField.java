@@ -46,12 +46,11 @@ public class PlaceholderTextField extends javax.swing.JTextField {
         final Graphics2D g = (Graphics2D) pG;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(g.getFont().deriveFont(Font.ITALIC));
+        int ascent =pG.getFontMetrics(g.getFont()).getAscent();
+        int x = getInsets().left;
+        int y = ((getHeight() - (getInsets().top + getInsets().bottom + ascent)) / 2) + ascent;
         g.setColor(Color.gray);
-        g.drawString(
-                placeholder,
-                getInsets().left,
-                pG.getFontMetrics().getMaxAscent() + getInsets().top
-        );
+        g.drawString(placeholder, x, y);
     }
 
     public void setPlaceholder(final String s) {

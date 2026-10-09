@@ -106,7 +106,7 @@ public class SyncPane extends JPanel {
             // WAVEFORM - WAVEFORM - WAVEFORM - WAVEFORM - WAVEFORM - WAV
             //===========================================================
             File app = new File(new File("").getAbsolutePath());
-            File folder = new File(app + "/settings");
+            File folder = new File(app + "/settings/audio");
             if(!folder.exists()){
                 boolean created = folder.mkdirs();
             }

@@ -1,8 +1,11 @@
 package feuille;
 
+import feuille.dialog.SettingsDialog;
 import feuille.module.drawing.ui.AssSketchpad;
 import feuille.module.editor.assa.ASS;
 import feuille.module.editor.assa.ui.AssEditor;
+import feuille.module.video.AssaDBHandler;
+import feuille.util.DialogResult;
 import feuille.util.Exchange;
 import feuille.util.Loader;
 import feuille.util.Welcome;
@@ -14,6 +17,7 @@ import feuille.util.filefilter.SSAFileFilter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,6 +163,12 @@ public class FeuilleFrame extends JFrame {
 
         mFile.add(new JSeparator());
 
+        JMenuItem mFileSettings = new JMenuItem(Loader.language("menu.settings", "Settings"));
+        mFileSettings.addActionListener(this::mSettingsActionPerformed);
+        mFile.add(mFileSettings);
+
+        mFile.add(new JSeparator());
+
         JMenuItem mFileQuit = new JMenuItem(Loader.language("menu.quit", "Quit"));
         mFileQuit.addActionListener(e -> System.exit(0));
         mFile.add(mFileQuit);
@@ -255,6 +265,19 @@ public class FeuilleFrame extends JFrame {
                     15_000L
             );
             exchange.getMpeg().setMedia(fileChooser.getSelectedFile().getPath());
+
+            // Get the settings folder
+            File app = new File(new File("").getAbsolutePath());
+            File folder = new File(app + "/settings/assa");
+            File assFile = new File(folder, "ass.temp");
+            File imgFile = new File(folder, "sub.png");
+
+            // TODO
+//            AssaDBHandler dbh = new AssaDBHandler(
+//                    assFile.getAbsolutePath(),
+//                    imgFile.getAbsolutePath()
+//            );
+//            dbh.startGrabbing(0d, exchange.getMpeg().);
         }
     }
 
@@ -279,5 +302,13 @@ public class FeuilleFrame extends JFrame {
 
     public void mCloseAudioActionPerformed(ActionEvent event){
 
+    }
+
+    public void mSettingsActionPerformed(ActionEvent event){
+        SettingsDialog settingsDialog = new SettingsDialog();
+        settingsDialog.showDialog();
+        if(settingsDialog.getDialogResult() == DialogResult.OK){
+            // TODO
+        }
     }
 }

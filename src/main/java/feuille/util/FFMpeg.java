@@ -108,10 +108,16 @@ public class FFMpeg implements Runnable {
 
     public void play(){
         if(media == null) return;
-        try{
-            startThread();
-        }catch(Exception _){
-            System.err.println("Something goes wrong when you are tried to play a media!");
+        if(playThread != null){
+            if(playThread.isAlive() || !playThread.isInterrupted()){
+                pause();
+            }
+        }else{
+            try{
+                startThread();
+            }catch(Exception _){
+                System.err.println("Something goes wrong when you are tried to play a media!");
+            }
         }
     }
 
@@ -254,10 +260,12 @@ public class FFMpeg implements Runnable {
                     //==============================================
                     // DESIRED START TRIGGER - AREA END
                     //==============================================
+                    if(!running) continue; //888 -- IMMEDIATELY PAUSE ---
                     final Frame frame = grabber.grab();
                     if (frame == null) {
                         break;
                     }
+                    if(!running) continue; //888 -- IMMEDIATELY PAUSE ---
                     if (lastTimeStamp < 0) {
                         playbackTimer.start();
                     }
@@ -276,6 +284,7 @@ public class FFMpeg implements Runnable {
                     //==============================================
                     // DESIRED END TRIGGER - AREA END
                     //==============================================
+                    if(!running) continue; //888 -- IMMEDIATELY PAUSE ---
                     if (frame.image != null) {
                         final Frame imageFrame = frame.clone();
 

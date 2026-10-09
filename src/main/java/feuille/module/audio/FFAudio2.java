@@ -34,7 +34,7 @@ public class FFAudio2 {
 
     public static BufferedImage getImage(long ms, boolean isSpectrum){
         File app = new File(new File("").getAbsolutePath());
-        File folder = new File(app + "/settings");
+        File folder = new File(app + "/settings/audio");
 
         WaveDB db;
 

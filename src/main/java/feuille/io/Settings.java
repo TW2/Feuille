@@ -14,7 +14,7 @@ public class Settings {
 
     public static void saveSettings(Settings settings) {
         File app = new File(new File("").getAbsolutePath());
-        File rawSettings = new File(app, ".settings.txt");
+        File rawSettings = new File(app, ".settings");
         try(PrintWriter out = new PrintWriter(rawSettings)) {
             out.println("# User path for settings file");
             out.println("USER_SET_PATH="+settings.userSettingsPath);
@@ -26,7 +26,7 @@ public class Settings {
     public static Settings loadSettings() {
         Settings settings = new Settings();
         File app = new File(new File("").getAbsolutePath());
-        File rawSettings = new File(app, ".settings.txt");
+        File rawSettings = new File(app, ".settings");
         try(BufferedReader in = new BufferedReader(new FileReader(rawSettings))){
             String line;
             while((line = in.readLine()) != null) {

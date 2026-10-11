@@ -1,6 +1,7 @@
 package feuille;
 
 import feuille.dialog.SettingsDialog;
+import feuille.io.Settings;
 import feuille.module.drawing.ui.AssSketchpad;
 import feuille.module.editor.assa.ASS;
 import feuille.module.editor.assa.ui.AssEditor;
@@ -17,6 +18,8 @@ import feuille.util.filefilter.SSAFileFilter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,7 @@ public class FeuilleFrame extends JFrame {
     private final AssEditor assEditor;
 
     private String saveAssFile = null;
+    private final Settings settings;
 
     public FeuilleFrame() throws HeadlessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,6 +69,16 @@ public class FeuilleFrame extends JFrame {
         getContentPane().add(embedPanel, BorderLayout.CENTER);
 
         setJMenuBar(createMenu());
+
+        settings = Settings.loadSettings();
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                Settings.saveSettings(settings);
+            }
+        });
     }
 
     private JMenuBar createMenu(){
@@ -119,7 +133,7 @@ public class FeuilleFrame extends JFrame {
         mOpenASS.addActionListener(this::mOpenASSActionPerformed);
         mFileModAssEditor.add(mOpenASS);
 
-        JMenuItem mSaveAsASS = new JMenuItem(Loader.language("menu.editor.ass.sv.ass", "Save the current ASS..."));
+        JMenuItem mSaveAsASS = new JMenuItem(Loader.language("menu.editor.ass.sv.cur.ass", "Save the current ASS..."));
         mSaveAsASS.addActionListener(this::mSaveAsASSActionPerformed);
         mFileModAssEditor.add(mSaveAsASS);
 
@@ -170,7 +184,10 @@ public class FeuilleFrame extends JFrame {
         mFile.add(new JSeparator());
 
         JMenuItem mFileQuit = new JMenuItem(Loader.language("menu.quit", "Quit"));
-        mFileQuit.addActionListener(e -> System.exit(0));
+        mFileQuit.addActionListener((e)-> {
+            Settings.saveSettings(settings);
+            System.exit(0);
+        });
         mFile.add(mFileQuit);
 
         //------------------------------------------------------------------------
@@ -306,9 +323,11 @@ public class FeuilleFrame extends JFrame {
 
     public void mSettingsActionPerformed(ActionEvent event){
         SettingsDialog settingsDialog = new SettingsDialog();
+        settingsDialog.setUserSettingsPath(settings.getUserSettingsPath());
         settingsDialog.showDialog();
         if(settingsDialog.getDialogResult() == DialogResult.OK){
             // TODO
+            settings.setUserSettingsPath(settingsDialog.getUserSettingsPath());
         }
     }
 }

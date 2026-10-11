@@ -1,5 +1,6 @@
 package feuille.dialog;
 
+import com.formdev.flatlaf.ui.FlatBorder;
 import feuille.module.editor.PlaceholderTextField;
 import feuille.util.DialogResult;
 import feuille.util.Loader;
@@ -13,6 +14,9 @@ import java.util.List;
 public class SettingsDialog extends JDialog {
 
     private DialogResult dialogResult;
+
+    // -- Main settings ---------------------------------------
+    private final PlaceholderTextField tfUserSettingsPath;
 
     // -- Database settings -----------------------------------
     private boolean changeDBName = false;
@@ -46,7 +50,6 @@ public class SettingsDialog extends JDialog {
     private final JButton btnAssaDBNameCorrect;
     private final JButton btnAssaDBNameRemove;
 
-    private String databaseLocation;
     private String temporaryWaveformName;
     private String temporarySpectrumName;
     private String temporaryAssScriptName;
@@ -79,13 +82,27 @@ public class SettingsDialog extends JDialog {
 
         dialogResult = DialogResult.None;
 
+        // -- Main settings ---------------------------------------
+        JPanel pMain = new JPanel(new BorderLayout());
+        pMain.setBorder(new FlatBorder());
+        JPanel pMainInner = new JPanel(new BorderLayout());
+        pMainInner.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel pMainUserSetPath = new JPanel(new GridLayout(1, 2));
+        JLabel lblUserSettingsPath = new JLabel(Loader.language("dialog.settings.main.path", "User settings path: "));
+        tfUserSettingsPath = new PlaceholderTextField();
+        tfUserSettingsPath.setPlaceholder("/settings");
+        pMainUserSetPath.add(lblUserSettingsPath);
+        pMainUserSetPath.add(tfUserSettingsPath);
+        pMainInner.add(pMainUserSetPath, BorderLayout.NORTH);
+        pMain.add(pMainInner, BorderLayout.CENTER);
+        tabbedPane.addTab(Loader.language("dialog.settings.tab.name.main", "Main"), pMain);
+
         // -- Database settings -----------------------------------
         useDefault = true;
         useManyAudioDBName = false;
         useManyAssaDBName = false;
         audioDBNames = new ArrayList<>();
         assaDBNames = new ArrayList<>();
-        databaseLocation = "/settings";
         temporaryWaveformName = "temp1.png";
         temporarySpectrumName = "temp2.png";
         temporaryAssScriptName = "ass.temp";
@@ -113,11 +130,11 @@ public class SettingsDialog extends JDialog {
         tfAudioDBName = new PlaceholderTextField();
         tfAudioDBName.setPlaceholder("project-name/database-name");
         btnAudioDBNameAdd = new JButton(Loader.language("dialog.settings.btn.add", "Add"));
-        btnAudioDBNameAdd.addActionListener(this::setBtnAudioDBNameAddActionPerformed);
+        btnAudioDBNameAdd.addActionListener(this::btnAudioDBNameAddActionPerformed);
         btnAudioDBNameCorrect = new JButton(Loader.language("dialog.settings.btn.change", "Change"));
-        btnAudioDBNameCorrect.addActionListener(this::setBtnAudioDBNameCorrectActionPerformed);
+        btnAudioDBNameCorrect.addActionListener(this::btnAudioDBNameCorrectActionPerformed);
         btnAudioDBNameRemove = new JButton(Loader.language("dialog.settings.btn.remove", "Remove"));
-        btnAudioDBNameRemove.addActionListener(this::setBtnAudioDBNameRemoveActionPerformed);
+        btnAudioDBNameRemove.addActionListener(this::btnAudioDBNameRemoveActionPerformed);
         pDB.add(lblAudioDBName);
         pDB.add(cbAudioDBName);
         JPanel correctRemoveAudioButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -141,11 +158,11 @@ public class SettingsDialog extends JDialog {
         tfAssaDBName = new PlaceholderTextField();
         tfAssaDBName.setPlaceholder("project-name/database-name");
         btnAssaDBNameAdd = new JButton(Loader.language("dialog.settings.btn.add", "Add"));
-        btnAssaDBNameAdd.addActionListener(this::setBtnAssaDBNameAddActionPerformed);
+        btnAssaDBNameAdd.addActionListener(this::btnAssaDBNameAddActionPerformed);
         btnAssaDBNameCorrect = new JButton(Loader.language("dialog.settings.btn.change", "Change"));
-        btnAssaDBNameCorrect.addActionListener(this::setBtnAssaDBNameCorrectActionPerformed);
+        btnAssaDBNameCorrect.addActionListener(this::btnAssaDBNameCorrectActionPerformed);
         btnAssaDBNameRemove = new JButton(Loader.language("dialog.settings.btn.remove", "Remove"));
-        btnAssaDBNameRemove.addActionListener(this::setBtnAssaDBNameRemoveActionPerformed);
+        btnAssaDBNameRemove.addActionListener(this::btnAssaDBNameRemoveActionPerformed);
         pDB.add(lblAssaDBName);
         pDB.add(cbAssaDBName);
         JPanel correctRemoveAssaButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -217,11 +234,11 @@ public class SettingsDialog extends JDialog {
         }
     }
 
-    public void setBtnAudioDBNameAddActionPerformed(ActionEvent e) {
+    public void btnAudioDBNameAddActionPerformed(ActionEvent e) {
         cbAudioDBModel.addElement(tfAudioDBName.getText());
     }
 
-    public void setBtnAudioDBNameCorrectActionPerformed(ActionEvent e) {
+    public void btnAudioDBNameCorrectActionPerformed(ActionEvent e) {
         int n = cbAudioDBName.getSelectedIndex();
         changeDBName = true;
         if(n != -1){
@@ -236,18 +253,18 @@ public class SettingsDialog extends JDialog {
         changeDBName = false;
     }
 
-    public void setBtnAudioDBNameRemoveActionPerformed(ActionEvent e) {
+    public void btnAudioDBNameRemoveActionPerformed(ActionEvent e) {
         int n = cbAudioDBName.getSelectedIndex();
         if(n != -1){
             cbAudioDBModel.removeElementAt(n);
         }
     }
 
-    public void setBtnAssaDBNameAddActionPerformed(ActionEvent e) {
+    public void btnAssaDBNameAddActionPerformed(ActionEvent e) {
         cbAssaDBModel.addElement(tfAssaDBName.getText());
     }
 
-    public void setBtnAssaDBNameCorrectActionPerformed(ActionEvent e) {
+    public void btnAssaDBNameCorrectActionPerformed(ActionEvent e) {
         int n = cbAssaDBName.getSelectedIndex();
         changeDBName = true;
         if(n != -1){
@@ -262,13 +279,26 @@ public class SettingsDialog extends JDialog {
         changeDBName = false;
     }
 
-    public void setBtnAssaDBNameRemoveActionPerformed(ActionEvent e) {
+    public void btnAssaDBNameRemoveActionPerformed(ActionEvent e) {
         int n = cbAssaDBName.getSelectedIndex();
         if(n != -1){
             cbAssaDBModel.removeElementAt(n);
         }
     }
 
+    // -- Main settings ---------------------------------------
+    public String getUserSettingsPath() {
+        return tfUserSettingsPath.getText();
+    }
+
+    public void setUserSettingsPath(String userSettingsPath) {
+        tfUserSettingsPath.setText(
+                userSettingsPath.equalsIgnoreCase("null") ?
+                        "/settings" : userSettingsPath
+        );
+    }
+
+    // -- Database settings -----------------------------------
     private void setDatabaseParamVisibility(){
         boolean useDefault = cbxUseDefault.isSelected();
         boolean useManyAudioDBName = cbxUseManyAudioDBName.isSelected();
@@ -321,14 +351,6 @@ public class SettingsDialog extends JDialog {
 
     public void setUseManyAssaDBName(boolean useManyAssaDBName) {
         this.useManyAssaDBName = useManyAssaDBName;
-    }
-
-    public String getDatabaseLocation() {
-        return databaseLocation;
-    }
-
-    public void setDatabaseLocation(String databaseLocation) {
-        this.databaseLocation = databaseLocation;
     }
 
     public String getTemporaryWaveformName() {

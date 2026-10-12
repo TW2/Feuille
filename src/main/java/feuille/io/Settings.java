@@ -7,9 +7,11 @@ import java.io.*;
 public class Settings {
 
     private String userSettingsPath;
+    private String theme;
 
     private Settings() {
         userSettingsPath = null;
+        theme = null;
     }
 
     public static void saveSettings(Settings settings) {
@@ -18,6 +20,8 @@ public class Settings {
         try(PrintWriter out = new PrintWriter(rawSettings)) {
             out.println("# User path for settings file");
             out.println("USER_SET_PATH="+settings.userSettingsPath);
+            out.println(("# Theme name"));
+            out.println("THEME="+settings.theme);
         }catch(FileNotFoundException e){
             Loader.consoleErr(e.getMessage());
         }
@@ -33,6 +37,8 @@ public class Settings {
                 if(line.startsWith("#")) continue;
                 if(line.startsWith("USER_SET_PATH=")) {
                     settings.userSettingsPath = line.split("=")[1];
+                }else if(line.startsWith("THEME=")) {
+                    settings.theme = line.split("=")[1];
                 }
             }
         }catch(IOException e){
@@ -47,5 +53,13 @@ public class Settings {
 
     public void setUserSettingsPath(String userSettingsPath) {
         this.userSettingsPath = userSettingsPath;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 }

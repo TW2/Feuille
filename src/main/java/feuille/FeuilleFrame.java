@@ -324,7 +324,7 @@ public class FeuilleFrame extends JFrame {
     public void mSettingsActionPerformed(ActionEvent event){
         SettingsDialog settingsDialog = new SettingsDialog();
         settingsDialog.setUserSettingsPath(settings.getUserSettingsPath());
-        settingsDialog.showDialog();
+        settingsDialog.showDialog(this);
         if(settingsDialog.getDialogResult() == DialogResult.OK){
             // TODO
             settings.setUserSettingsPath(settingsDialog.getUserSettingsPath());

@@ -1,9 +1,12 @@
 package feuille.dialog;
 
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.ui.FlatBorder;
 import feuille.module.editor.PlaceholderTextField;
 import feuille.util.DialogResult;
 import feuille.util.Loader;
+import feuille.util.theme.Theme;
+import feuille.util.theme.ThemeCollection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,9 +17,11 @@ import java.util.List;
 public class SettingsDialog extends JDialog {
 
     private DialogResult dialogResult;
+    private Frame parent;
 
     // -- Main settings ---------------------------------------
     private final PlaceholderTextField tfUserSettingsPath;
+    private final JComboBox<Theme<? extends FlatLaf>> cbxThemes;
 
     // -- Database settings -----------------------------------
     private boolean changeDBName = false;
@@ -59,6 +64,7 @@ public class SettingsDialog extends JDialog {
 
 
     public SettingsDialog() {
+        parent = null;
         setModal(true);
         setTitle(Loader.language("dialog.settings", "Settings"));
 
@@ -87,12 +93,21 @@ public class SettingsDialog extends JDialog {
         pMain.setBorder(new FlatBorder());
         JPanel pMainInner = new JPanel(new BorderLayout());
         pMainInner.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JPanel pMainUserSetPath = new JPanel(new GridLayout(1, 2));
+        JPanel pMainUserSetPath = new JPanel(new GridLayout(2, 2));
         JLabel lblUserSettingsPath = new JLabel(Loader.language("dialog.settings.main.path", "User settings path: "));
         tfUserSettingsPath = new PlaceholderTextField();
         tfUserSettingsPath.setPlaceholder("/settings");
         pMainUserSetPath.add(lblUserSettingsPath);
         pMainUserSetPath.add(tfUserSettingsPath);
+        JLabel lblThemes = new JLabel(Loader.language("dialog.settings.main.theme", "Chosen theme: "));
+        DefaultComboBoxModel<Theme<? extends FlatLaf>> cbxThemesModel = new DefaultComboBoxModel<>();
+        cbxThemes = new JComboBox<>(cbxThemesModel);
+        cbxThemesModel.addAll(new ThemeCollection());
+        cbxThemes.addActionListener(this::cbxThemesActionPerformed);
+        cbxThemes.setSelectedIndex(0);
+        pMainUserSetPath.add(lblThemes);
+        pMainUserSetPath.add(cbxThemes);
+
         pMainInner.add(pMainUserSetPath, BorderLayout.NORTH);
         pMain.add(pMainInner, BorderLayout.CENTER);
         tabbedPane.addTab(Loader.language("dialog.settings.tab.name.main", "Main"), pMain);
@@ -200,13 +215,28 @@ public class SettingsDialog extends JDialog {
         return dialogResult;
     }
 
-    public void showDialog() {
+    public void showDialog(Frame parent) {
+        this.parent = parent;
         loadSettings();
         setDatabaseParamVisibility();
 
         setSize(650, 320);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void cbxThemesActionPerformed(ActionEvent e) {
+        if(cbxThemes.getSelectedIndex() == -1) return;
+        if(parent == null) return;
+        Theme<? extends FlatLaf> theme = (Theme<? extends FlatLaf>)cbxThemes.getSelectedItem();
+        if(theme == null) return;
+        try{
+            UIManager.setLookAndFeel(theme.getLaf());
+            SwingUtilities.updateComponentTreeUI(parent);
+            SwingUtilities.updateComponentTreeUI(this);
+        }catch(Exception ex){
+            Loader.consoleErr(ex.getMessage());
+        }
     }
 
     // -- Database settings -----------------------------------

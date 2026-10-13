@@ -7,13 +7,13 @@ Audio
 
 Video
 
-- [ ] View (FFmpeg)
+- [x] View (VLCj from caprica)
 - [ ] Edit
 - [ ] Show subtitles
 
 Table
 
-- [ ] Create subtitles
+- [x] Create subtitles
 - [x] Open subtitles
 - [x] Save subtitles
-- [ ] Edit subtitles (status: in progress)
+- [ ] Edit subtitles

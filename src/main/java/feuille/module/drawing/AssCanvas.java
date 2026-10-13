@@ -1,6 +1,6 @@
 package feuille.module.drawing;
 
-import feuille.module.drawing.ui.AssSketchpad;
+import feuille.module.drawing.base.*;
 import feuille.util.DrawColor;
 
 import javax.swing.*;
@@ -90,22 +90,22 @@ public class AssCanvas extends JPanel {
                     change = !change;
                     if(change){
                         for(AShape shape : shapes){
-                            if(AShape.isSame(p, shape.startPoint, 10d)){
+                            if(AShape.isSame(p, shape.getStartPoint(), 10d)){
                                 shape.setChangedStartPoint(p);
                             }
-                            if(AShape.isSame(p, shape.endPoint, 10d)){
+                            if(AShape.isSame(p, shape.getEndPoint(), 10d)){
                                 shape.setChangedEndPoint(p);
                                 if(AShape.isSame(p, lastPoint, 10)){
                                     changeLastPoint = true;
                                 }
                             }
-                            if(AShape.isSame(p, shape.CP0.getPoint(), 10d)){
+                            if(AShape.isSame(p, shape.getCP0().getPoint(), 10d)){
                                 shape.getChangedCP0().setPoint(p);
                             }
-                            if(AShape.isSame(p, shape.CP1.getPoint(), 10d)){
+                            if(AShape.isSame(p, shape.getCP1().getPoint(), 10d)){
                                 shape.getChangedCP1().setPoint(p);
                             }
-                            if(AShape.isSame(p, shape.CP2.getPoint(), 10d)){
+                            if(AShape.isSame(p, shape.getCP2().getPoint(), 10d)){
                                 shape.getChangedCP2().setPoint(p);
                             }
                         }
@@ -113,10 +113,10 @@ public class AssCanvas extends JPanel {
                         // Set up
                         for(AShape shape : shapes){
                             //System.out.println("C: "+cursor+" P: "+p);
-                            if(shape.changedStartPoint != null){
+                            if(shape.getChangedStartPoint() != null){
                                 shape.setStartPoint(p);
                             }
-                            if(shape.changedEndPoint != null){
+                            if(shape.getChangedEndPoint() != null){
                                 shape.setEndPoint(p);
                             }
                             if(shape.getChangedCP0().getPoint() != null){
@@ -137,8 +137,8 @@ public class AssCanvas extends JPanel {
                         }
                         // Reset
                         for(AShape shape : shapes){
-                            shape.changedStartPoint = null;
-                            shape.changedEndPoint = null;
+                            shape.setChangedStartPoint(null);
+                            shape.setChangedEndPoint(null);
                             shape.getChangedCP0().setPoint(null);
                             shape.getChangedCP1().setPoint(null);
                             shape.getChangedCP2().setPoint(null);
@@ -164,10 +164,10 @@ public class AssCanvas extends JPanel {
 
                 if(change){
                     for(AShape shape : shapes){
-                        if(shape.changedStartPoint != null){
+                        if(shape.getChangedStartPoint() != null){
                             shape.setChangedStartPoint(p);
                         }
-                        if(shape.changedEndPoint != null){
+                        if(shape.getChangedEndPoint() != null){
                             shape.setChangedEndPoint(p);
                         }
                         if(shape.getChangedCP0().getPoint() != null){
@@ -211,6 +211,10 @@ public class AssCanvas extends JPanel {
         if(shiftLocation == null) shiftLocation = new Point2D.Double();
         //=============================================
         if(hasScaleChange){
+            canvasSize = new Dimension(getWidth(), getHeight());
+            centerLocation = new Point2D.Double((double) getWidth() /2, (double) getHeight() /2);
+            shiftLocation = new Point2D.Double();
+
             background = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D ctx = background.createGraphics();
             ctx.setColor(Color.white);
@@ -371,6 +375,11 @@ public class AssCanvas extends JPanel {
         );
     }
 
+    public void changeFrameSize(){
+        hasScaleChange = true;
+        repaint();
+    }
+
     /**
      * Create a path from shapes
      * @param c when changes
@@ -385,41 +394,41 @@ public class AssCanvas extends JPanel {
             switch(shape){
                 case LineShape x -> {
                     if(start){
-                        Point2D p = c && x.changedStartPoint != null ?
-                                cs(x.changedStartPoint) : cs(x.startPoint);
+                        Point2D p = c && shape.getChangedStartPoint() != null ?
+                                cs(shape.getChangedStartPoint()) : cs(shape.getStartPoint());
                         path.moveTo(p.getX(), p.getY());
                         start = false;
                     }
-                    Point2D p = c && x.changedEndPoint != null ?
-                            cs(x.changedEndPoint) : cs(x.endPoint);
+                    Point2D p = c && shape.getChangedEndPoint() != null ?
+                            cs(shape.getChangedEndPoint()) : cs(shape.getEndPoint());
                     path.lineTo(p.getX(), p.getY());
                 }
                 case QuadraticShape x -> {
                     if(start){
-                        Point2D p = c && x.changedStartPoint != null ?
-                                cs(x.changedStartPoint) : cs(x.startPoint);
+                        Point2D p = c && shape.getChangedStartPoint() != null ?
+                                cs(shape.getChangedStartPoint()) : cs(shape.getStartPoint());
                         path.moveTo(p.getX(), p.getY());
                         start = false;
                     }
-                    Point2D cp0 = c && x.changedCP0.getPoint() != null ?
-                            cs(x.changedCP0.getPoint()) : cs(x.CP0.getPoint());
-                    Point2D p = c && x.changedEndPoint != null ?
-                            cs(x.changedEndPoint) : cs(x.endPoint);
+                    Point2D cp0 = c && shape.getChangedCP0().getPoint() != null ?
+                            cs(shape.getChangedCP0().getPoint()) : cs(shape.getCP0().getPoint());
+                    Point2D p = c && shape.getChangedEndPoint() != null ?
+                            cs(shape.getChangedEndPoint()) : cs(shape.getEndPoint());
                     path.quadTo(cp0.getX(), cp0.getY(), p.getX(), p.getY());
                 }
                 case CubicShape x -> {
                     if(start){
-                        Point2D p = c && x.changedStartPoint != null ?
-                                cs(x.changedStartPoint) : cs(x.startPoint);
+                        Point2D p = c && shape.getChangedStartPoint() != null ?
+                                cs(shape.getChangedStartPoint()) : cs(shape.getStartPoint());
                         path.moveTo(p.getX(), p.getY());
                         start = false;
                     }
-                    Point2D cp1 = c && x.changedCP1.getPoint() != null ?
-                            cs(x.changedCP1.getPoint()) : cs(x.CP1.getPoint());
-                    Point2D cp2 = c && x.changedCP2.getPoint() != null ?
-                            cs(x.changedCP2.getPoint()) : cs(x.CP2.getPoint());
-                    Point2D p = c && x.changedEndPoint != null ?
-                            cs(x.changedEndPoint) : cs(x.endPoint);
+                    Point2D cp1 = c && shape.getChangedCP1().getPoint() != null ?
+                            cs(shape.getChangedCP1().getPoint()) : cs(shape.getCP1().getPoint());
+                    Point2D cp2 = c && shape.getChangedCP2().getPoint() != null ?
+                            cs(shape.getChangedCP2().getPoint()) : cs(shape.getCP2().getPoint());
+                    Point2D p = c && shape.getChangedEndPoint() != null ?
+                            cs(shape.getChangedEndPoint()) : cs(shape.getEndPoint());
                     path.curveTo(cp1.getX(), cp1.getY(), cp2.getX(), cp2.getY(), p.getX(), p.getY());
                 }
                 default -> { }

@@ -60,111 +60,19 @@
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
-            <version>3.7.1</version>
+            <version>3.7.2</version>
         </dependency>
 
         <dependency>
-            <groupId>org.bytedeco</groupId>
-            <artifactId>javacv-platform</artifactId>
-            <version>1.5.13</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>openblas</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>openblas-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>opencv</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>opencv-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>flycapture</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>flycapture-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>libdc1394</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>libdc1394-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>libfreenect</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>libfreenect-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>libfreenect2</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>libfreenect2-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>librealsense</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>librealsense-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>librealsense2</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>librealsense2-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>videoinput</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>videoinput-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>artoolkitplus</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>artoolkitplus-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>leptonica</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>leptonica-platform</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>tesseract</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>tesseract-platform</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-intellij-themes</artifactId>
+            <version>3.7.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>uk.co.caprica</groupId>
+            <artifactId>vlcj</artifactId>
+            <version>4.12.1</version>
         </dependency>
 
         <dependency>
@@ -187,24 +95,6 @@
             <artifactId>jna-platform</artifactId>
             <version>5.19.1</version>
             <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
-            <version>24.0.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>24.0.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-swing</artifactId>
-            <version>24.0.2</version>
         </dependency>
 
     </dependencies>

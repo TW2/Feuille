@@ -12,4 +12,9 @@ public class Welcome extends JPanel {
 
         setBackground(DrawColor.dark_blue.getColor());
     }
+
+    public void forceResize(int w, int h) {
+        setSize(w, h);
+        updateUI();
+    }
 }

@@ -2,10 +2,9 @@ package feuille;
 
 import feuille.dialog.SettingsDialog;
 import feuille.io.Settings;
-import feuille.module.drawing.ui.AssSketchpad;
+import feuille.module.drawing.AssSketchpad;
 import feuille.module.editor.assa.ASS;
-import feuille.module.editor.assa.ui.AssEditor;
-import feuille.module.video.AssaDBHandler;
+import feuille.module.editor.AssEditor;
 import feuille.util.DialogResult;
 import feuille.util.Exchange;
 import feuille.util.Loader;
@@ -17,10 +16,7 @@ import feuille.util.filefilter.SSAFileFilter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +73,18 @@ public class FeuilleFrame extends JFrame {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 Settings.saveSettings(settings);
+                exchange.getViewVLC().close();
+            }
+        });
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+
+                welcome.forceResize(e.getComponent().getWidth(), e.getComponent().getHeight());
+                sketchpad.forceResize(e.getComponent().getWidth(), e.getComponent().getHeight());
+                assEditor.forceResize(e.getComponent().getWidth(), e.getComponent().getHeight());
             }
         });
     }
@@ -277,24 +285,13 @@ public class FeuilleFrame extends JFrame {
         fileChooser.addChoosableFileFilter(new MediaFileFilter());
         int z = fileChooser.showOpenDialog(this);
         if(z == JFileChooser.APPROVE_OPTION){
+            // Set audio waveform and spectrum
             exchange.getSyncPane().openMedia(
                     fileChooser.getSelectedFile().getPath(),
                     15_000L
             );
-            exchange.getMpeg().setMedia(fileChooser.getSelectedFile().getPath());
-
-            // Get the settings folder
-            File app = new File(new File("").getAbsolutePath());
-            File folder = new File(app + "/settings/assa");
-            File assFile = new File(folder, "ass.temp");
-            File imgFile = new File(folder, "sub.png");
-
-            // TODO
-//            AssaDBHandler dbh = new AssaDBHandler(
-//                    assFile.getAbsolutePath(),
-//                    imgFile.getAbsolutePath()
-//            );
-//            dbh.startGrabbing(0d, exchange.getMpeg().);
+            // Set video
+            exchange.getViewVLC().setMrl(fileChooser.getSelectedFile().getAbsolutePath());
         }
     }
 
@@ -305,11 +302,13 @@ public class FeuilleFrame extends JFrame {
         fileChooser.addChoosableFileFilter(new MediaFileFilter());
         int z = fileChooser.showOpenDialog(this);
         if(z == JFileChooser.APPROVE_OPTION){
+            // Set audio waveform and spectrum
             exchange.getSyncPane().openMedia(
                     fileChooser.getSelectedFile().getPath(),
                     15_000L
             );
-            exchange.getMpeg().setMedia(fileChooser.getSelectedFile().getPath());
+            // Set video
+            exchange.getViewVLC().setMrl(fileChooser.getSelectedFile().getAbsolutePath());
         }
     }
 

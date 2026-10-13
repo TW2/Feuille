@@ -2,10 +2,17 @@
 Feuille (Leaf) is a software for fansubbers first and targeting easy development for fansubbers and professionals.
 This is a tool that contains more than one tool. In the meantime we can not use developed version, so you can just see the preview version or v0.5 in releases.
 
-The current version (v0.6) is not ready for a release, please use v0.5. If you want to see the latest concept, you need at least JDK 24 (Oracle or others) and the last version of Maven to compile the software and open it. The software is fully in English (sorry for the errors) and partially in French.
+The current version (v0.6) is not ready for a release, please use v0.5. If you want to see the latest concept, you need at least JDK 26 (Oracle or others) and the last version of Maven to compile the software and open it. The software is fully in English (sorry for the errors) and partially in French.
+### Dependencies :
+- VLC
+- FFmpeg
+- FFprobe
+
+This three dependencies must be installed in your system (as in Linux with apt) and present in your path (as in Windows).
+The system can crash due to graphical drivers used in VLC, always have latest drivers.
 
 ### How to build it :
-1/ Have git, maven and the last version of Java installed and configurated in your system.<br>
+1/ Have git, maven and the last version of Java installed and configured in your system.<br>
 2/ Clone Feuille repository<br>
 3/ In Feuille folder type ```mvn verify```<br>
 4/ Enter target subfolder<br>

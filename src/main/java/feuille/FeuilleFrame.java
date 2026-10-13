@@ -31,6 +31,11 @@ public class FeuilleFrame extends JFrame {
     private final AssSketchpad sketchpad;
     private final AssEditor assEditor;
 
+    private final JMenuBar myMenuBar;
+    private final JMenu welcomeMenu;
+    private final JMenu sketchpadMenu;
+    private final JMenu assEditorMenu;
+
     private String saveAssFile = null;
     private final Settings settings;
 
@@ -61,10 +66,15 @@ public class FeuilleFrame extends JFrame {
 
         setOnTop(welcome);
 
+        welcomeMenu = getWelcomeMenu();
+        sketchpadMenu = getSketchpadMenu();
+        assEditorMenu = getAssEditorMenu();
+
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(embedPanel, BorderLayout.CENTER);
 
-        setJMenuBar(createMenu());
+        myMenuBar = createMenu();
+        setJMenuBar(myMenuBar);
 
         settings = Settings.loadSettings();
 
@@ -102,36 +112,54 @@ public class FeuilleFrame extends JFrame {
 
         //------------------------------------------------------------------------
 
-        JMenu mFileModWelcome = new JMenu(Loader.language("menu.welcome", "Welcome"));
-        mFileMod.add(mFileModWelcome);
-
         JMenuItem mShowWelcome = new JMenuItem(Loader.language("menu.welcome.mod", "Show Welcome"));
         mShowWelcome.addActionListener(this::mShowWelcomeActionPerformed);
-        mFileModWelcome.add(mShowWelcome);
-
-        mFileMod.add(new JSeparator());
+        mFileMod.add(mShowWelcome);
 
         //------------------------------------------------------------------------
-
-        JMenu mFileModDraw = new JMenu(Loader.language("menu.drawing", "Sketchpad"));
-        mFileMod.add(mFileModDraw);
 
         JMenuItem mShowDraw = new JMenuItem(Loader.language("menu.draw.mod", "Show sketchpad"));
         mShowDraw.addActionListener(this::mShowDrawActionPerformed);
-        mFileModDraw.add(mShowDraw);
-
-        mFileMod.add(new JSeparator());
+        mFileMod.add(mShowDraw);
 
         //------------------------------------------------------------------------
 
-        JMenu mFileModAssEditor = new JMenu(Loader.language("menu.editor.ass", "ASS Editor"));
-        mFileMod.add(mFileModAssEditor);
-
         JMenuItem mShowAssEditor = new JMenuItem(Loader.language("menu.editor.ass.mod", "Show ASS editor"));
         mShowAssEditor.addActionListener(this::mShowAssEditorActionPerformed);
-        mFileModAssEditor.add(mShowAssEditor);
+        mFileMod.add(mShowAssEditor);
 
-        mFileModAssEditor.add(new JSeparator());
+        //------------------------------------------------------------------------
+
+        mFile.add(new JSeparator());
+
+        JMenuItem mFileSettings = new JMenuItem(Loader.language("menu.settings", "Settings"));
+        mFileSettings.addActionListener(this::mSettingsActionPerformed);
+        mFile.add(mFileSettings);
+
+        mFile.add(new JSeparator());
+
+        JMenuItem mFileQuit = new JMenuItem(Loader.language("menu.quit", "Quit"));
+        mFileQuit.addActionListener((e)-> {
+            Settings.saveSettings(settings);
+            System.exit(0);
+        });
+        mFile.add(mFileQuit);
+
+        //------------------------------------------------------------------------
+
+        return mnu;
+    }
+
+    private JMenu getWelcomeMenu() {
+        return(new JMenu(Loader.language("menu.welcome", "Welcome")));
+    }
+
+    private JMenu getSketchpadMenu() {
+        return(new JMenu(Loader.language("menu.drawing", "Sketchpad")));
+    }
+
+    private JMenu getAssEditorMenu(){
+        JMenu mFileModAssEditor = new JMenu(Loader.language("menu.editor.ass", "ASS Editor"));
 
         JMenuItem mNewASS = new JMenuItem(Loader.language("menu.editor.ass.nv.ass", "Start a new ASS"));
         mNewASS.addActionListener(this::mNewASSActionPerformed);
@@ -179,43 +207,25 @@ public class FeuilleFrame extends JFrame {
         mCloseAudio.addActionListener(this::mCloseAudioActionPerformed);
         mFileModAssEditor.add(mCloseAudio);
 
-//        mFileMod.add(new JSeparator());
-
-        //------------------------------------------------------------------------
-
-        mFile.add(new JSeparator());
-
-        JMenuItem mFileSettings = new JMenuItem(Loader.language("menu.settings", "Settings"));
-        mFileSettings.addActionListener(this::mSettingsActionPerformed);
-        mFile.add(mFileSettings);
-
-        mFile.add(new JSeparator());
-
-        JMenuItem mFileQuit = new JMenuItem(Loader.language("menu.quit", "Quit"));
-        mFileQuit.addActionListener((e)-> {
-            Settings.saveSettings(settings);
-            System.exit(0);
-        });
-        mFile.add(mFileQuit);
-
-        //------------------------------------------------------------------------
-
-        return mnu;
+        return mFileModAssEditor;
     }
 
     // Show welcome
     public void mShowWelcomeActionPerformed(ActionEvent event){
         setOnTop(welcome);
+        highlightMenu(welcomeMenu);
     }
 
     // Show sketchpad
     public void mShowDrawActionPerformed(ActionEvent event){
         setOnTop(sketchpad);
+        highlightMenu(sketchpadMenu);
     }
 
     // Show ass editor
     public void mShowAssEditorActionPerformed(ActionEvent event){
         setOnTop(assEditor);
+        highlightMenu(assEditorMenu);
     }
 
     private void setOnTop(Component c){
@@ -230,6 +240,23 @@ public class FeuilleFrame extends JFrame {
                 z++;
             }
         }
+    }
+
+    private void highlightMenu(JMenu menu){
+        for(Component component : myMenuBar.getComponents()){
+            if(component.hashCode() == welcomeMenu.hashCode()){
+                myMenuBar.remove(component);
+            }else if(component.hashCode() == sketchpadMenu.hashCode()){
+                myMenuBar.remove(component);
+            }else if(component.hashCode() == assEditorMenu.hashCode()){
+                myMenuBar.remove(component);
+            }
+        }
+
+        myMenuBar.add(menu);
+        myMenuBar.revalidate();
+        myMenuBar.updateUI();
+        myMenuBar.repaint();
     }
 
     public void mNewASSActionPerformed(ActionEvent event){

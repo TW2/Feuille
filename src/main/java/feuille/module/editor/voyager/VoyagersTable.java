@@ -375,11 +375,11 @@ public class VoyagersTable extends JPanel {
         JMenuItem mDelete = new JMenuItem(Loader.language("control.delete", "Delete"));
         JMenuItem mDuplicate = new JMenuItem(Loader.language("control.duplicate", "Duplicate"));
 
-        mCut.setIcon(Loader.fromResource("20px-Crystal_Clear_action_editcut.png", 20, 20));
-        mCopy.setIcon(Loader.fromResource("20px-Crystal_Clear_action_editcopy.png", 20, 20));
-        mPaste.setIcon(Loader.fromResource("20px-Crystal_Clear_action_editpaste.png", 20, 20));
-        mDelete.setIcon(Loader.fromResource("16KO.png", 16, 16));
-        mDuplicate.setIcon(Loader.fromResource("funsub-dupliquer.png", 20, 20));
+        mCut.setIcon(Loader.fromResource("/images/16-LucideCopyX.png", 16, 16));
+        mCopy.setIcon(Loader.fromResource("/images/16-LucideCopy.png", 16, 16));
+        mPaste.setIcon(Loader.fromResource("/images/16-LucideClipboardPaste.png", 16, 16));
+        mDelete.setIcon(Loader.fromResource("/images/16-LucideDelete.png", 16, 16));
+        mDuplicate.setIcon(Loader.fromResource("/images/16-LucideBookCopy.png", 16, 16));
 
         mCut.addActionListener((e) -> {
             List<Integer> indices = getSelectedVoyagers();

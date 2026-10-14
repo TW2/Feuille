@@ -269,20 +269,20 @@ public class EditorPanel extends JPanel {
         JPopupMenu popupMenu = new JPopupMenu();
 
         JMenuItem mCut = new JMenuItem(
-                Loader.language("control.cut", "Cut"),
-                Loader.fromResource("/org/wingate/feuille/20px-Crystal_Clear_action_editcut.png", 20, 20));
+                Loader.language("io.cut", "Cut"),
+                Loader.fromResource("/images/16-LucideCopyX.png", 16, 16));
 
         JMenuItem mCopy = new JMenuItem(
-                Loader.language("control.copy", "Copy"),
-                Loader.fromResource("/org/wingate/feuille/20px-Crystal_Clear_action_editcopy.png", 20, 20));
+                Loader.language("io.copy", "Copy"),
+                Loader.fromResource("/images/16-LucideCopy.png", 16, 16));
 
         JMenuItem mPaste = new JMenuItem(
-                Loader.language("control.paste", "Paste"),
-                Loader.fromResource("/org/wingate/feuille/20px-Crystal_Clear_action_editpaste.png", 20, 20));
+                Loader.language("io.paste", "Paste"),
+                Loader.fromResource("/images/16-LucideClipboardPaste.png", 16, 16));
 
         JMenuItem mDelete = new JMenuItem(
-                Loader.language("control.delete", "Delete"),
-                Loader.fromResource("/images/16KO.png", 16, 16));
+                Loader.language("io.delete", "Delete"),
+                Loader.fromResource("/images/16-LucideDelete.png", 16, 16));
 
         mCut.addActionListener((e)->{
             try{
@@ -345,20 +345,20 @@ public class EditorPanel extends JPanel {
         JPopupMenu popupMenu = new JPopupMenu();
 
         JMenuItem mCut = new JMenuItem(
-                Loader.language("control.cut", "Cut"),
-                Loader.fromResource("/org/wingate/feuille/20px-Crystal_Clear_action_editcut.png", 20, 20));
+                Loader.language("io.cut", "Cut"),
+                Loader.fromResource("/images/16-LucideCopyX.png", 16, 16));
 
         JMenuItem mCopy = new JMenuItem(
-                Loader.language("control.copy", "Copy"),
-                Loader.fromResource("/org/wingate/feuille/20px-Crystal_Clear_action_editcopy.png", 20, 20));
+                Loader.language("io.copy", "Copy"),
+                Loader.fromResource("/images/16-LucideCopy.png", 16, 16));
 
         JMenuItem mPaste = new JMenuItem(
-                Loader.language("control.paste", "Paste"),
-                Loader.fromResource("/org/wingate/feuille/20px-Crystal_Clear_action_editpaste.png", 20, 20));
+                Loader.language("io.paste", "Paste"),
+                Loader.fromResource("/images/16-LucideClipboardPaste.png", 16, 16));
 
         JMenuItem mDelete = new JMenuItem(
-                Loader.language("control.delete", "Delete"),
-                Loader.fromResource("/images/16KO.png", 16, 16));
+                Loader.language("io.delete", "Delete"),
+                Loader.fromResource("/images/16-LucideDelete.png", 16, 16));
 
         mCut.addActionListener((e)->{
             try{

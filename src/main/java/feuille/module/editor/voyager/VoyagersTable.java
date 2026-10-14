@@ -297,25 +297,28 @@ public class VoyagersTable extends JPanel {
                     g2d.setColor(Color.gray);
                     if(!voyager.isCollapsed()) {
                         // Duration in 0:00:00.00 format
-                        g2d.drawString("Duration :", 248, y + 20 + 16);
+                        g2d.drawString(Loader.language("voyager.lines.duration", "Duration") + " :", 248, y + 20 + 16);
                         // Duration
                         AssTime s = voyager.getEvent().getStart();
                         AssTime e = voyager.getEvent().getEnd();
                         String duration = AssTime.getAssDuration(s, e);
                         g2d.drawString(duration, 327, y + 20 + 16);
                         // Effect
-                        g2d.drawString("Effect :", 407, y + 20 + 16);
+                        g2d.drawString(Loader.language("voyager.lines.effect", "Effect") + " :", 407, y + 20 + 16);
                         g2d.drawString(voyager.getEvent().getEffect().getName(), 487, y + 20 + 16);
                         // CPS
-                        g2d.drawString(String.format("%.02f cps",
-                                voyager.getEvent().getCPS()
+                        g2d.drawString(String.format("%.02f %s",
+                                voyager.getEvent().getCPS(),
+                                Loader.language("voyager.lines.cps", "cps")
                         ), 567, y + 20 + 16);
                         // CPL
-                        g2d.drawString(String.format("%d cpl",
-                                Math.round(voyager.getEvent().getCPL())
+                        g2d.drawString(String.format("%d %s",
+                                Math.round(voyager.getEvent().getCPL()),
+                                Loader.language("voyager.lines.cpl", "cpl")
                         ), 647, y + 20 + 16);
                         // ML, MR, MV
-                        g2d.drawString(String.format("Margins : %d %d %d",
+                        g2d.drawString(String.format("%s : %d %d %d",
+                                Loader.language("voyager.lines.margins", "Margins"),
                                 voyager.getEvent().getMarginL(),
                                 voyager.getEvent().getMarginR(),
                                 voyager.getEvent().getMarginV()
@@ -332,34 +335,34 @@ public class VoyagersTable extends JPanel {
         g2d.setColor(Color.gray);
         g2d.drawRect(0, 0, getWidth()-1, 20-1);
         // Collapse(-) or not(+)
-        g2d.drawString("+/-", 4, 20 - 4);
+        g2d.drawString(Loader.language("voyager.plus.minus", "+/-"), 4, 20 - 4);
         g2d.drawLine(25, 0, 25, 20-1);
         // Line
-        g2d.drawString("Line", 37, 20 - 4);
+        g2d.drawString(Loader.language("voyager.line", "Line"), 37, 20 - 4);
         g2d.drawLine(75, 0, 75, 20-1);
         // Bookmark
-        g2d.drawString("Bookmark", 82, 20 - 4);
+        g2d.drawString(Loader.language("voyager.bookmark", "Bookmark"), 82, 20 - 4);
         g2d.drawLine(153, 0, 153, 20-1);
         // Layer
-        g2d.drawString("Layer", 162, 20 - 4);
+        g2d.drawString(Loader.language("voyager.layer", "Layer"), 162, 20 - 4);
         g2d.drawLine(205, 0, 205, 20-1);
         // Flag
-        g2d.drawString("Flag", 211, 20 - 4);
+        g2d.drawString(Loader.language("voyager.flag", "Flag"), 211, 20 - 4);
         g2d.drawLine(244, 0, 244, 20-1);
         // Start
-        g2d.drawString("Start", 269, 20 - 4);
+        g2d.drawString(Loader.language("voyager.start", "Start"), 269, 20 - 4);
         g2d.drawLine(324, 0, 324, 20-1);
         // End
-        g2d.drawString("End", 352, 20 - 4);
+        g2d.drawString(Loader.language("voyager.end", "End"), 352, 20 - 4);
         g2d.drawLine(404, 0, 404, 20-1);
         // Style
-        g2d.drawString("Style", 427, 20 - 4);
+        g2d.drawString(Loader.language("voyager.style", "Style"), 427, 20 - 4);
         g2d.drawLine(484, 0, 484, 20-1);
         // Actor
-        g2d.drawString("Actor", 507, 20 - 4);
+        g2d.drawString(Loader.language("voyager.actor", "Actor"), 507, 20 - 4);
         g2d.drawLine(564, 0, 564, 20-1);
         // Text
-        g2d.drawString("Text", 760, 20 - 4);
+        g2d.drawString(Loader.language("voyager.text", "Text"), 760, 20 - 4);
 
         //------------------------------------------------------------
         g2d.dispose();
@@ -369,11 +372,11 @@ public class VoyagersTable extends JPanel {
         JPopupMenu popupMenu = new JPopupMenu();
 
         // Cut, Copy, Paste, Delete, Duplicate
-        JMenuItem mCut = new JMenuItem(Loader.language("control.cut", "Cut"));
-        JMenuItem mCopy = new JMenuItem(Loader.language("control.copy", "Copy"));
-        JMenuItem mPaste = new JMenuItem(Loader.language("control.paste", "Paste"));
-        JMenuItem mDelete = new JMenuItem(Loader.language("control.delete", "Delete"));
-        JMenuItem mDuplicate = new JMenuItem(Loader.language("control.duplicate", "Duplicate"));
+        JMenuItem mCut = new JMenuItem(Loader.language("io.cut", "Cut"));
+        JMenuItem mCopy = new JMenuItem(Loader.language("io.copy", "Copy"));
+        JMenuItem mPaste = new JMenuItem(Loader.language("io.paste", "Paste"));
+        JMenuItem mDelete = new JMenuItem(Loader.language("io.delete", "Delete"));
+        JMenuItem mDuplicate = new JMenuItem(Loader.language("io.duplicate", "Clone lines"));
 
         mCut.setIcon(Loader.fromResource("/images/16-LucideCopyX.png", 16, 16));
         mCopy.setIcon(Loader.fromResource("/images/16-LucideCopy.png", 16, 16));

@@ -103,7 +103,7 @@ public class Exchange {
     }
 
     public void setEditorEvent(Voyager voyager){
-        //editorPanel.addToPanel(voyager);
+        editorPanel.addToPanel(voyager);
     }
 
     public void deleteEvent(ISO_3166 f1, ISO_3166 f2){

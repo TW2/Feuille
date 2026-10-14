@@ -651,15 +651,16 @@ public class VoyagersTable extends JPanel {
         try(StringReader sr = new StringReader(Clipboard.pasteString());
             BufferedReader br = new BufferedReader(sr)
         ){
-            deleteEvent(f1, f2);
             voyagers.get(Math.min(voyagers.size()-1, row)).setSelected(true);
             String line;
             while((line = br.readLine()) != null){
                 AssEvent event = AssEvent.createFromRawLine(line, exchange.getAss());
                 if(f1.getAlpha3().equals(f2.getAlpha3())){
-                    beforeEvent(event, f1, f2);
+                    afterEvent(event, f1, f2);
+                    deleteEvent(f1, f2);
                 }else{
                     addEvent(event, f1, f2);
+                    deleteEvent(f1, f2);
                 }
             }
         }catch(Exception ex){

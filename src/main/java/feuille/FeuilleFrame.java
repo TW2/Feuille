@@ -70,11 +70,13 @@ public class FeuilleFrame extends JFrame {
         sketchpadMenu = getSketchpadMenu();
         assEditorMenu = getAssEditorMenu();
 
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(embedPanel, BorderLayout.CENTER);
-
         myMenuBar = createMenu();
         setJMenuBar(myMenuBar);
+
+        highlightMenu(welcomeMenu);
+
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(embedPanel, BorderLayout.CENTER);
 
         settings = Settings.loadSettings();
 

@@ -118,15 +118,6 @@ public class EditorPanel extends JPanel {
         panCommandsTwo.add(flagVersion);
 
         ecbEditStyles.getButton().addActionListener((_)->{
-            Path conf = Path.of(Path.of("").toAbsolutePath() + "\\conf\\conf.txt");
-//            SettingsDialog set = new SettingsDialog(new Frame());
-//            set.getTabbedPane().setSelectedIndex(1);
-//            set.getStyleTabbedPane().setSelectedIndex(0);
-//            set.showDialog(Settings.read(conf.toString()));
-//
-//            if(set.getDialogResult() == DialogResult.OK){
-//                Settings.write(conf.toString(), set.getSettings());
-//            }
             StylesDialog dialog = new StylesDialog(new Frame());
             dialog.showDialog(exchange.getAss().getStyles());
             if(dialog.getDialogResult() == DialogResult.OK){
@@ -134,27 +125,13 @@ public class EditorPanel extends JPanel {
             }
         });
 
-//        ecbEditActors.getButton().addActionListener((_)->{
-//            Path conf = Path.of(Path.of("").toAbsolutePath() + "\\conf\\conf.txt");
-//            SettingsDialog set = new SettingsDialog(new Frame());
-//            set.getTabbedPane().setSelectedIndex(2);
-//            set.showDialog(Settings.read(conf.toString()));
-//
-//            if(set.getDialogResult() == DialogResult.OK){
-//                Settings.write(conf.toString(), set.getSettings());
-//            }
-//        });
+        ecbEditActors.getButton().addActionListener((_)->{
+            // TODO
+        });
 
-//        ecbEditEffects.getButton().addActionListener((_)->{
-//            Path conf = Path.of(Path.of("").toAbsolutePath() + "\\conf\\conf.txt");
-//            SettingsDialog set = new SettingsDialog(new Frame());
-//            set.getTabbedPane().setSelectedIndex(3);
-//            set.showDialog(Settings.read(conf.toString()));
-//
-//            if(set.getDialogResult() == DialogResult.OK){
-//                Settings.write(conf.toString(), set.getSettings());
-//            }
-//        });
+        ecbEditEffects.getButton().addActionListener((_)->{
+            // TODO
+        });
 
         btnAddEventQueue.addActionListener(e -> {
             try{

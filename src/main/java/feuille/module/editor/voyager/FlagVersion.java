@@ -83,6 +83,8 @@ public class FlagVersion extends JPanel {
                     display2Model.removeAllElements();
                     display1Model.addAll(dialog.getList());
                     display2Model.addAll(dialog.getList());
+                    cbDisplay1.setSelectedIndex(0);
+                    cbDisplay2.setSelectedIndex(cbDisplay1.getItemCount()-1);
                 }
             }catch(Exception ex){
                 System.err.println("Exception has occurred at " + e.getSource());

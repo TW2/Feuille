@@ -17,8 +17,10 @@ import feuille.util.filefilter.SSAFileFilter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FeuilleFrame extends JFrame {
 
@@ -153,7 +155,13 @@ public class FeuilleFrame extends JFrame {
     }
 
     private JMenu getWelcomeMenu() {
-        return(new JMenu(Loader.language("menu.welcome", "Welcome")));
+        JMenu mnuWelcome = new JMenu(Loader.language("menu.welcome", "Welcome"));
+
+        JMenuItem mLicense = new JMenuItem(Loader.language("menu.welcome.lic", "Show license"));
+        mLicense.addActionListener(this::mLicenseActionPerformed);
+        mnuWelcome.add(mLicense);
+
+        return(mnuWelcome);
     }
 
     private JMenu getSketchpadMenu() {
@@ -259,6 +267,26 @@ public class FeuilleFrame extends JFrame {
         myMenuBar.revalidate();
         myMenuBar.updateUI();
         myMenuBar.repaint();
+    }
+
+    public void mLicenseActionPerformed(ActionEvent event) {
+        File file = new File(Objects.requireNonNull(
+                FeuilleFrame.class.getResource("/help/GPLv3.html")).getPath());
+        displayWelcomeDocument(file);
+    }
+
+    private void displayWelcomeDocument(File file){
+        if(!file.exists()) return;
+        try(BufferedReader br = new BufferedReader(new FileReader(file))){
+            String line;
+            StringBuilder document = new StringBuilder();
+            while((line = br.readLine()) != null){
+                document.append(line).append("\n");
+            }
+            welcome.setContent(document.toString());
+        } catch (IOException e) {
+            Loader.consoleErr(e.getMessage());
+        }
     }
 
     public void mNewASSActionPerformed(ActionEvent event){

@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 
 public class Wave extends JPanel {
@@ -133,6 +134,7 @@ public class Wave extends JPanel {
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //=================================================
+        double oneSecond = getWidth() / 15d; // pixels
 
         g2d.setColor(UIManager.getColor("Panel.background"));
         g2d.fillRect(0, 0, getWidth(), getHeight());
@@ -160,13 +162,21 @@ public class Wave extends JPanel {
             g2d.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
 
             g2d.setColor(secondColor);
-            for(int i=-visibleShift; i<getWidth(); i+=getWidth()/15){
-                g2d.drawLine(i, 0, i, getHeight());
+//            for(int i=-visibleShift; i<getWidth(); i+=getWidth()/15){
+//                g2d.drawLine(i, 0, i, getHeight());
+//            }
+
+            for(double i=-visibleShift; i<getWidth(); i+=oneSecond){
+                g2d.draw(new Line2D.Double(i, 0, i, getHeight()));
             }
 
             g2d.setColor(Color.black);
-            for(int i=-visibleShift, j=0; i<getWidth(); i+=getWidth()/15, j++){
-                g2d.drawString(String.format("%d s", j), i-20, 16);
+//            for(int i=-visibleShift, j=0; i<getWidth(); i+=getWidth()/15, j++){
+//                g2d.drawString(String.format("%d s", j), i-20, 16);
+//            }
+
+            for(float i=-visibleShift, j=0; i<getWidth(); i+=(float)oneSecond, j++){
+                g2d.drawString(String.format("%d s", (int)j), i-20, 16);
             }
 
             if(endAnchor - startAnchor > 0){

@@ -17,6 +17,17 @@ public class ViewVLC extends JPanel {
 
         setLayout(new BorderLayout());
         add(mediaPlayerComponent, BorderLayout.CENTER);
+        Timer timer = new Timer(50, e -> {
+            if(mrl == null) return;
+            if(mediaPlayerComponent.mediaPlayer().status().isPlaying()){
+                exchange.getSyncPane().getWaveform().setMsCurrent(
+                        mediaPlayerComponent.mediaPlayer().status().time()
+                );
+                exchange.getSyncPane().getWaveform().repaint();
+            }
+        });
+        timer.setRepeats(true);
+        timer.start();
     }
 
     public void setMrl(String mrl){
@@ -25,24 +36,20 @@ public class ViewVLC extends JPanel {
 
     public void play(double secondsStart, double secondsEnd){
         if(mrl == null) return;
-        if(secondsStart < secondsEnd && secondsStart > 0){
-            mediaPlayerComponent.mediaPlayer().media().play(mrl,
-                    String.format(":start-time=%.02f", secondsStart),
-                    String.format(":end-time=%.02f", secondsEnd));
-        }else if(secondsStart > 0){
-            mediaPlayerComponent.mediaPlayer().media().play(mrl,
-                    String.format(":start-time=%.02f", secondsStart));
-        }else{
-            mediaPlayerComponent.mediaPlayer().media().play(mrl);
-        }
+        mediaPlayerComponent.mediaPlayer().media().play(mrl,
+                String.format(":start-time=%.01f", secondsStart),
+                String.format(":run-time=%.01f", secondsEnd - secondsStart));
     }
 
     public void play(double secondsStart){
-        play(secondsStart, 0d);
+        if(mrl == null) return;
+        mediaPlayerComponent.mediaPlayer().media().play(mrl,
+                String.format(":start-time=%.01f", secondsStart));
     }
 
     public void play(){
-        play(0d,0d);
+        if(mrl == null) return;
+        mediaPlayerComponent.mediaPlayer().media().play(mrl);
     }
 
     public void pause(){

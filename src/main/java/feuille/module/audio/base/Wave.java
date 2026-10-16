@@ -27,6 +27,7 @@ public class Wave extends JPanel {
     private Color selAreaEndColor;
     private Color selAreaColor;
     private Color cursorColor;
+    private Color currentTimeColor;
 
     private BufferedImage current;
     private BufferedImage next;
@@ -56,6 +57,7 @@ public class Wave extends JPanel {
         selAreaEndColor = Color.red;
         selAreaColor = DrawColor.green.getColor(.25f);
         cursorColor = Color.white;
+        currentTimeColor = DrawColor.black.getColor(.8f);
 
         current = null;
         next = null;
@@ -89,6 +91,7 @@ public class Wave extends JPanel {
                         startAnchor = e.getX() + visibleShift;
                         double ms = startAnchor / oneSecond * 1000d;
                         exchange.getEditorPanel().setToLockStart(new AssTime(ms));
+                        exchange.setStartTime(new AssTime(ms));
                         if(endAnchor - startAnchor > 0){
                             double end = endAnchor / oneSecond * 1000d;
                             exchange.getEditorPanel().setToLockDuration(
@@ -102,11 +105,14 @@ public class Wave extends JPanel {
                         endAnchor = 0;
                         exchange.getEditorPanel().setToLockEnd(new AssTime(0));
                         exchange.getEditorPanel().setToLockDuration(new AssTime(0));
+                        exchange.setStartTime(new AssTime(0));
+                        exchange.setEndTime(new AssTime(0));
                     }
                     case MouseEvent.BUTTON3 -> {
                         endAnchor = e.getX() + visibleShift;
                         double ms = endAnchor / oneSecond * 1000d;
                         exchange.getEditorPanel().setToLockEnd(new AssTime(ms));
+                        exchange.setEndTime(new AssTime(ms));
                         if(endAnchor - startAnchor > 0){
                             double start = startAnchor / oneSecond * 1000d;
                             exchange.getEditorPanel().setToLockDuration(
@@ -189,6 +195,10 @@ public class Wave extends JPanel {
 
             g2d.setColor(selAreaEndColor);
             g2d.drawLine(-visibleShift+endAnchor, 0, -visibleShift+endAnchor, getHeight());
+
+            g2d.setColor(currentTimeColor);
+            double currentSecond = ((double)getWidth() / MS_PERIOD) * (msCurrent / 1000d);
+            g2d.draw(new Line2D.Double(-visibleShift+currentSecond, 0, -visibleShift+currentSecond, getHeight()));
         }
 
         //=================================================

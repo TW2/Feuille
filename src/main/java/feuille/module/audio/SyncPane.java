@@ -5,6 +5,7 @@ import feuille.module.audio.base.FFAudio2;
 import feuille.module.audio.base.SignalResult;
 import feuille.module.audio.base.Wave;
 import feuille.module.audio.base.WaveDB;
+import feuille.module.editor.assa.AssTime;
 import feuille.util.Exchange;
 import feuille.util.FFMpegColor;
 import feuille.util.Loader;
@@ -57,7 +58,15 @@ public class SyncPane extends JPanel {
                 "/images/carbon--play-filled.png", 16, 16));
         btnPlay.setToolTipText("Play media");
         btnPlay.addActionListener(e -> {
-            exchange.getViewVLC().play();
+            double sStart = exchange.getStartTime().getMsTime() / 1000d;
+            double sEnd = exchange.getEndTime().getMsTime() / 1000d;
+            if(sStart < sEnd){
+                exchange.getViewVLC().play(sStart, sEnd);
+            }else if(sStart > sEnd){
+                exchange.getViewVLC().play(sStart);
+            }else{
+                exchange.getViewVLC().play();
+            }
         });
         toolBar.add(btnPlay);
 

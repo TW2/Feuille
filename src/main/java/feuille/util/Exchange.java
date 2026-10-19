@@ -1,6 +1,8 @@
 package feuille.util;
 
+import feuille.FeuilleFrame;
 import feuille.module.audio.SyncPane;
+import feuille.module.editor.assa.AssStyle;
 import feuille.module.editor.assa.AssTime;
 import feuille.module.editor.voyager.Voyager;
 import feuille.module.editor.voyager.VoyagersTable;
@@ -16,6 +18,7 @@ import java.util.Locale;
 
 public class Exchange {
 
+    private FeuilleFrame mainFrame;
     private VoyagersTable voyagersTable;
     private SyncPane syncPane;
     private EditorPanel editorPanel;
@@ -26,6 +29,7 @@ public class Exchange {
     private ISO_3166 flag2;
     private AssTime startTime;
     private AssTime endTime;
+    private AssStyle currentStyle;
 
     public Exchange() {
         ass = new ASS();
@@ -33,6 +37,15 @@ public class Exchange {
         flag2 = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
         startTime = new AssTime(0);
         endTime = new AssTime(0);
+        currentStyle = new AssStyle();
+    }
+
+    public FeuilleFrame getMainFrame() {
+        return mainFrame;
+    }
+
+    public void setMainFrame(FeuilleFrame mainFrame) {
+        this.mainFrame = mainFrame;
     }
 
     public VoyagersTable getVoyagersTable() {
@@ -109,6 +122,15 @@ public class Exchange {
 
     public void setEditorEvent(Voyager voyager){
         editorPanel.addToPanel(voyager);
+        currentStyle = voyager.getEvent().getStyle();
+    }
+
+    public AssStyle getCurrentStyle() {
+        return currentStyle;
+    }
+
+    public void setCurrentStyle(AssStyle currentStyle) {
+        this.currentStyle = currentStyle;
     }
 
     public AssTime getStartTime() {

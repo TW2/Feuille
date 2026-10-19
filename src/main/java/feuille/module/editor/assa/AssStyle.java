@@ -12,8 +12,8 @@ public class AssStyle {
     private AssColor karaokeColor;
     private AssColor outlineColor;
     private AssColor shadowColor;
-    private float scaleX;
-    private float scaleY;
+    private int scaleX;
+    private int scaleY;
     private float spacing;
     private float angleZ;
     private int borderStyle;
@@ -28,7 +28,7 @@ public class AssStyle {
     public AssStyle(String name, AssFont assFont,
                     AssColor textColor, AssColor karaokeColor,
                     AssColor outlineColor, AssColor shadowColor,
-                    float scaleX, float scaleY,
+                    int scaleX, int scaleY,
                     float spacing, float angleZ,
                     int borderStyle, float outline, float shadow,
                     AssAlignment alignment,
@@ -61,8 +61,8 @@ public class AssStyle {
                 new AssColor(Color.red), // Karaoke color
                 new AssColor(Color.black), // Outline color
                 new AssColor(Color.black), // Shadow color
-                1f, // Scale X
-                1f, // Scale Y
+                100, // Scale X
+                100, // Scale Y
                 0f, // Spacing
                 0f, // Angle Z
                 1, // BorderStyle (1 normal, 3 rectangle)
@@ -94,8 +94,8 @@ public class AssStyle {
         karaokeColor    = AssColor.fromScheme(t[4], AssColorScheme.ABGR); // Karaoke color
         outlineColor    = AssColor.fromScheme(t[5], AssColorScheme.ABGR); // Outline color
         shadowColor     = AssColor.fromScheme(t[6], AssColorScheme.ABGR); // Shadow color
-        scaleX          = Float.parseFloat(t[11]); // Scale X
-        scaleY          = Float.parseFloat(t[12]); // Scale Y
+        scaleX          = Integer.parseInt(t[11]); // Scale X
+        scaleY          = Integer.parseInt(t[12]); // Scale Y
         spacing         = Float.parseFloat(t[13]); // Spacing
         angleZ          = Float.parseFloat(t[14]); // Angle Z
         borderStyle     = t[15].equalsIgnoreCase("1") ? 1 : 3; // BorderStyle (1 normal, 3 rectangle)
@@ -184,19 +184,19 @@ public class AssStyle {
         this.shadowColor = shadowColor;
     }
 
-    public float getScaleX() {
+    public int getScaleX() {
         return scaleX;
     }
 
-    public void setScaleX(float scaleX) {
+    public void setScaleX(int scaleX) {
         this.scaleX = scaleX;
     }
 
-    public float getScaleY() {
+    public int getScaleY() {
         return scaleY;
     }
 
-    public void setScaleY(float scaleY) {
+    public void setScaleY(int scaleY) {
         this.scaleY = scaleY;
     }
 
@@ -278,6 +278,38 @@ public class AssStyle {
 
     public void setEncoding(int encoding) {
         this.encoding = encoding;
+    }
+
+    public void setRawLine(String rawLine) {
+        String[] t = rawLine.split(",");
+
+        AssFont font = new AssFont(
+                t[1], // Name
+                Float.parseFloat(t[2]), // Size
+                t[7].equalsIgnoreCase("-1"), // Bold
+                t[8].equalsIgnoreCase("-1"), // Italic
+                t[9].equalsIgnoreCase("-1"), // Underline
+                t[10].equalsIgnoreCase("-1") // Strikeout
+        );
+
+        name            = t[0].substring(t[0].indexOf(" ") + 1); // Name
+        assFont         = font; // Font
+        textColor       = AssColor.fromScheme(t[3], AssColorScheme.ABGR); // Text color
+        karaokeColor    = AssColor.fromScheme(t[4], AssColorScheme.ABGR); // Karaoke color
+        outlineColor    = AssColor.fromScheme(t[5], AssColorScheme.ABGR); // Outline color
+        shadowColor     = AssColor.fromScheme(t[6], AssColorScheme.ABGR); // Shadow color
+        scaleX          = Integer.parseInt(t[11]); // Scale X
+        scaleY          = Integer.parseInt(t[12]); // Scale Y
+        spacing         = Float.parseFloat(t[13]); // Spacing
+        angleZ          = Float.parseFloat(t[14]); // Angle Z
+        borderStyle     = t[15].equalsIgnoreCase("1") ? 1 : 3; // BorderStyle (1 normal, 3 rectangle)
+        outline         = Float.parseFloat(t[16]); // Outline
+        shadow          = Float.parseFloat(t[17]); // Shadow
+        alignment       = new AssAlignment(Integer.parseInt(t[18])); // ASS Alignment
+        marginL         = Integer.parseInt(t[19]); // Margin Left
+        marginR         = Integer.parseInt(t[20]); // Margin Right
+        marginV         = Integer.parseInt(t[21]); // Margin Vertical
+        encoding        = Integer.parseInt(t[22]); // Encoding
     }
 
     @Override

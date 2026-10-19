@@ -39,7 +39,7 @@ public class FeuilleFrame extends JFrame {
     private final JMenu assEditorMenu;
 
     private String saveAssFile = null;
-    private final Settings settings;
+    private Settings settings;
 
     public FeuilleFrame() throws HeadlessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,6 +47,8 @@ public class FeuilleFrame extends JFrame {
         setTitle("Feuille v0.6");
 
         exchange = new Exchange();
+
+        exchange.setMainFrame(this);
 
         embedPanel = new JLayeredPane();
         components = new ArrayList<>();
@@ -385,5 +387,13 @@ public class FeuilleFrame extends JFrame {
             // TODO
             settings.setUserSettingsPath(settingsDialog.getUserSettingsPath());
         }
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 }

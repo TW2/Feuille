@@ -1,5 +1,6 @@
 package feuille.module.editor;
 
+import feuille.dialog.AssEditorDialog;
 import feuille.module.editor.assa.*;
 import feuille.module.editor.voyager.*;
 import feuille.util.*;
@@ -127,6 +128,13 @@ public class EditorPanel extends JPanel {
 
         ecbEditActors.getButton().addActionListener((_)->{
             // TODO
+            AssEditorDialog ae = new AssEditorDialog(exchange);
+            ae.setCurrentStyle(exchange.getCurrentStyle());
+            ae.setStyles(exchange.getAss().getStyles());
+            ae.showDialog(exchange.getMainFrame().getSettings());
+            if(ae.getDialogResult() == DialogResult.OK){
+                Loader.dialogErr("It works!");
+            }
         });
 
         ecbEditEffects.getButton().addActionListener((_)->{
@@ -392,6 +400,14 @@ public class EditorPanel extends JPanel {
         popupMenu.add(mDelete);
 
         return  popupMenu;
+    }
+
+    private AssStyle styleFromEditor(){
+        AssStyle style = new AssStyle();
+
+
+
+        return style;
     }
 
     public ISO_3166 getFlag1(){

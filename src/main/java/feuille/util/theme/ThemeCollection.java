@@ -56,7 +56,7 @@ public class ThemeCollection extends ArrayList<Theme<? extends FlatLaf>> {
         add(new Theme<>(new FlatGradiantoDeepOceanIJTheme(), ThemeType.Dark));
         add(new Theme<>(new FlatGradiantoMidnightBlueIJTheme(), ThemeType.Dark));
         add(new Theme<>(new FlatGradiantoNatureGreenIJTheme(), ThemeType.Dark));
-        add(new Theme<>(new FlatGrayIJTheme(), ThemeType.Dark));
+        add(new Theme<>(new FlatGrayIJTheme(), ThemeType.Light));
         add(new Theme<>(new FlatGruvboxDarkHardIJTheme(), ThemeType.Dark));
         add(new Theme<>(new FlatHiberbeeDarkIJTheme(), ThemeType.Dark));
         add(new Theme<>(new FlatHighContrastIJTheme(), ThemeType.Dark));

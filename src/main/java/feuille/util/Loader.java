@@ -1,5 +1,9 @@
 package feuille.util;
 
+import feuille.Feuille;
+import feuille.FeuilleFrame;
+import feuille.io.Settings;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -38,7 +42,17 @@ public class Loader {
     }
 
     public static String language(String key, String value){
-        return language(key, value, ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()));
+        Settings settings = FeuilleFrame.settings;
+        if(settings == null || settings.getLanguage() == null){
+            return language(key, value, ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()));
+        }else{
+            ISO_3166 iso = ISO_3166.getISO_3166(settings.getLanguage());
+            if(iso == null){
+                return language(key, value, ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()));
+            }else{
+                return language(key, value, iso);
+            }
+        }
     }
 
     public static ImageIcon fromResource(String resource, int w, int h){

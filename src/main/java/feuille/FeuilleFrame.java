@@ -24,6 +24,8 @@ import java.util.Objects;
 
 public class FeuilleFrame extends JFrame {
 
+    public static Settings settings;
+
     private final Exchange exchange;
 
     private final JLayeredPane embedPanel;
@@ -39,12 +41,13 @@ public class FeuilleFrame extends JFrame {
     private final JMenu assEditorMenu;
 
     private String saveAssFile = null;
-    private Settings settings;
 
     public FeuilleFrame() throws HeadlessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1000);
         setTitle("Feuille v0.6");
+
+        settings = Settings.loadSettings(this);
 
         exchange = new Exchange();
 
@@ -81,8 +84,6 @@ public class FeuilleFrame extends JFrame {
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(embedPanel, BorderLayout.CENTER);
-
-        settings = Settings.loadSettings();
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -382,10 +383,14 @@ public class FeuilleFrame extends JFrame {
     public void mSettingsActionPerformed(ActionEvent event){
         SettingsDialog settingsDialog = new SettingsDialog();
         settingsDialog.setUserSettingsPath(settings.getUserSettingsPath());
+        settingsDialog.setTheme(settings.getTheme());
+        settingsDialog.setLanguage(settings.getLanguage());
         settingsDialog.showDialog(this);
         if(settingsDialog.getDialogResult() == DialogResult.OK){
             // TODO
             settings.setUserSettingsPath(settingsDialog.getUserSettingsPath());
+            settings.setTheme(settingsDialog.getTheme());
+            settings.setLanguage(settingsDialog.getLanguage());
         }
     }
 
@@ -394,6 +399,6 @@ public class FeuilleFrame extends JFrame {
     }
 
     public void setSettings(Settings settings) {
-        this.settings = settings;
+        FeuilleFrame.settings = settings;
     }
 }

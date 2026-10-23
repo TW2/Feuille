@@ -6,6 +6,7 @@ import feuille.util.Exchange;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class ViewFMP extends JPanel {
 
@@ -35,10 +36,16 @@ public class ViewFMP extends JPanel {
                 free();
                 controller = null;
             }
+            File app = new File(new File("").getAbsolutePath());
+            File folder = new File(app.getPath() +
+                    File.separator + "settings" +
+                    File.separator + "preview"
+            );
+            File script = new File(folder, "editflag2.ass");
             controller = new FreeMediaPlayer.PlaybackController(
                     freeMediaPlayer.getFmp(),
                     mediaPath,
-                    null,
+                    script.getPath(),
                     videoPanel
             );
         } catch (Exception exception) {

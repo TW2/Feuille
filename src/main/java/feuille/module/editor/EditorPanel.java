@@ -53,6 +53,7 @@ public class EditorPanel extends JPanel {
         JPanel panCommandsTwo = new JPanel(new FlowLayout());
         JSplitPane splitTextPanes = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         flagVersion = new FlagVersion(
+                exchange,
                 ISO_3166.getISO_3166(Locale.getDefault().getISO3Country()),
                 paneOrigin,
                 paneTranslation

@@ -85,6 +85,9 @@ public class FeuilleFrame extends JFrame {
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(embedPanel, BorderLayout.CENTER);
 
+        // Create a blank file to avoid crashing of ass renderer
+        exchange.setTemporarySubtitlesFile();
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

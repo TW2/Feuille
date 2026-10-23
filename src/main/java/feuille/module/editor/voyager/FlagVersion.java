@@ -1,6 +1,7 @@
 package feuille.module.editor.voyager;
 
 import feuille.util.DialogResult;
+import feuille.util.Exchange;
 import feuille.util.ISO_3166;
 import feuille.util.Loader;
 
@@ -27,8 +28,7 @@ public class FlagVersion extends JPanel {
     private final ImageIcon linkOK;
     private final ImageIcon linkNOT;
 
-    public FlagVersion(ISO_3166 iso, JTextPane pSrc, JTextPane pDst){
-
+    public FlagVersion(Exchange exchange, ISO_3166 iso, JTextPane pSrc, JTextPane pDst){
         linkOK = Loader.fromResource("/images/thin-linkOK.png", 8, 16);
         linkNOT = Loader.fromResource("/images/thin-linkNOT.png", 8, 16);
 
@@ -118,7 +118,7 @@ public class FlagVersion extends JPanel {
 
         cbDisplay1.addActionListener(e -> {
             try{
-
+                exchange.setTemporarySubtitlesFile();
             }catch(Exception ex){
                 System.err.println("Exception has occurred at " + e.getSource());
                 Logger.getLogger(FlagVersion.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,7 +127,7 @@ public class FlagVersion extends JPanel {
 
         cbDisplay2.addActionListener(e -> {
             try{
-
+                exchange.setTemporarySubtitlesFile();
             }catch(Exception ex){
                 System.err.println("Exception has occurred at " + e.getSource());
                 Logger.getLogger(FlagVersion.class.getName()).log(Level.SEVERE, null, ex);

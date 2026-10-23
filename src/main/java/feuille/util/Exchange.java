@@ -12,6 +12,7 @@ import feuille.module.editor.EditorPanel;
 import feuille.module.video.ViewFMP;
 import feuille.util.assa.AssEventType;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -106,18 +107,22 @@ public class Exchange {
 
     public void addEvent(AssEvent event, ISO_3166 f1, ISO_3166 f2){
         voyagersTable.addEvent(event, f1, f2);
+        setTemporarySubtitlesFile();
     }
 
     public void replaceEvent(AssEvent event, ISO_3166 f1, ISO_3166 f2){
         voyagersTable.replaceEvent(event, f1, f2);
+        setTemporarySubtitlesFile();
     }
 
     public void beforeEvent(AssEvent event, ISO_3166 f1, ISO_3166 f2){
         voyagersTable.beforeEvent(event, f1, f2);
+        setTemporarySubtitlesFile();
     }
 
     public void afterEvent(AssEvent event, ISO_3166 f1, ISO_3166 f2){
         voyagersTable.afterEvent(event, f1, f2);
+        setTemporarySubtitlesFile();
     }
 
     public void setEditorEvent(Voyager voyager){
@@ -217,5 +222,35 @@ public class Exchange {
 
     public void clearEvents(){
         voyagersTable.getVoyagers().clear();
+    }
+
+    public void setTemporarySubtitlesFile(){
+        if(editorPanel.getFlag1() == null) return;
+        if(editorPanel.getFlag2() == null) return;
+        File app = new File(new File("").getAbsolutePath());
+        File folder = new File(app.getPath() +
+                File.separator + "settings" +
+                File.separator + "preview"
+        );
+        File script = new File(folder, "editflag2.ass");
+        ASS newASS = new ASS();
+        if(editorPanel.getFlag1().equals(editorPanel.getFlag2())){
+            for(Voyager voyager : voyagersTable.getVoyagers()){
+                if (voyager == null) continue;
+                newASS.getEvents().add(voyager.getEvent());
+            }
+        }else{
+            for(Voyager voyager : voyagersTable.getVoyagers()){
+                if (voyager == null) continue;
+                for(Voyager v : voyager.getVoyagers()){
+                    if(editorPanel.getFlag2().equals(v.getLanguage())){
+                        newASS.getEvents().add(v.getEvent());
+                    }
+                }
+            }
+        }
+        newASS.setInfos(ass.getInfos());
+        newASS.setStyles(ass.getStyles());
+        ASS.write(newASS, script.getPath());
     }
 }

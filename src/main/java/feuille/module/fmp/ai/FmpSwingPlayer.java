@@ -75,7 +75,7 @@ public final class FmpSwingPlayer {
         private Loader() {
             // The path where the shared library is
             String libPath = Objects.requireNonNull(
-                    getClass().getResource("/ext_lib/fmp/Linux-x86-64")
+                    getClass().getResource("/ext_lib/fmp/linux")
             ).getPath();
 
             // The linkage

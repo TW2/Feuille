@@ -1,9 +1,6 @@
 package feuille.module.fmp.ai;
 
-import com.sun.jna.Library;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.Structure;
+import com.sun.jna.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
@@ -169,9 +166,18 @@ public class FreeMediaPlayer {
         private final FmpNative fmp;
 
         private Loader() {
+            // OS choices
+            String osName = System.getProperty("os.name");
+            int platform = Platform.getOSType();
+            switch(platform) {
+                case Platform.LINUX -> osName = "linux";
+                case Platform.WINDOWS -> osName = "windows";
+                case Platform.MAC -> osName = "mac";
+            }
+
             // The path where the shared library is
             String libPath = Objects.requireNonNull(
-                    getClass().getResource("/ext_lib/fmp/Linux-x86-64")
+                    getClass().getResource("/ext_lib/fmp/" + osName)
             ).getPath();
 
             // The linkage

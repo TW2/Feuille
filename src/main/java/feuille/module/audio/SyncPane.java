@@ -58,14 +58,12 @@ public class SyncPane extends JPanel {
                 "/images/carbon--play-filled.png", 16, 16));
         btnPlay.setToolTipText("Play media");
         btnPlay.addActionListener(e -> {
-            double sStart = exchange.getStartTime().getMsTime() / 1000d;
-            double sEnd = exchange.getEndTime().getMsTime() / 1000d;
-            if(sStart < sEnd){
-                exchange.getViewVLC().play(sStart, sEnd);
-            }else if(sStart > sEnd){
-                exchange.getViewVLC().play(sStart);
+            long startUs = Math.round(exchange.getStartTime().getMsTime() * 1000d);
+            long endUs = Math.round(exchange.getEndTime().getMsTime() * 1000d);
+            if(startUs < endUs){
+                exchange.getViewFMP().play(startUs, endUs);
             }else{
-                exchange.getViewVLC().play();
+                exchange.getViewFMP().play(0L, 0L);
             }
         });
         toolBar.add(btnPlay);
@@ -74,7 +72,7 @@ public class SyncPane extends JPanel {
                 "/images/carbon--pause-outline-filled.png", 16, 16));
         btnPause.setToolTipText("Pause");
         btnPause.addActionListener(e -> {
-            exchange.getViewVLC().pause();
+            exchange.getViewFMP().pause();
         });
         toolBar.add(btnPause);
 
@@ -82,7 +80,7 @@ public class SyncPane extends JPanel {
                 "/images/carbon--stop-filled.png", 16, 16));
         btnStop.setToolTipText("Stop");
         btnStop.addActionListener(e -> {
-            exchange.getViewVLC().stop();
+            exchange.getViewFMP().stop();
         });
         toolBar.add(btnStop);
 

@@ -230,7 +230,7 @@ public class FreeMediaPlayer {
         private static final long serialVersionUID = 1L;
         private transient BufferedImage frame;
 
-        VideoPanel() {
+        public VideoPanel() {
             setPreferredSize(new Dimension(960, 540));
             setBackground(Color.BLACK);
         }
@@ -302,7 +302,7 @@ public class FreeMediaPlayer {
         private long nextPresentationNanos;
         private final String sourceVideoProfile;
 
-        PlaybackController(String mediaPath, String subtitlePath, VideoPanel panel)
+        public PlaybackController(FmpNative fmp, String mediaPath, String subtitlePath, VideoPanel panel)
                 throws Exception {
             videoPanel = panel;
             PointerByReference outPlayer = new PointerByReference();
@@ -368,11 +368,11 @@ public class FreeMediaPlayer {
             worker.start();
         }
 
-        void play() {
+        public void play() {
             request(PlaybackController.State.PLAYING);
         }
 
-        void play(long startTimeUs, long endTimeUs) {
+        public void play(long startTimeUs, long endTimeUs) {
             if (startTimeUs < 0 || endTimeUs <= startTimeUs) {
                 throw new IllegalArgumentException(
                         "Playback range must be non-negative and end after start");
@@ -412,11 +412,11 @@ public class FreeMediaPlayer {
 //            videoPanel.setFrame(null);
 //        }
 
-        void pause() {
+        public void pause() {
             request(PlaybackController.State.PAUSED);
         }
 
-        void stop() {
+        public void stop() {
             generation++;
             synchronized (stateLock) {
                 rangePending = false;
@@ -431,7 +431,7 @@ public class FreeMediaPlayer {
             videoPanel.setFrame(null);
         }
 
-        void setLooping(boolean enabled) {
+        public void setLooping(boolean enabled) {
             looping = enabled;
         }
 

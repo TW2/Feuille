@@ -90,7 +90,7 @@ public class FeuilleFrame extends JFrame {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 Settings.saveSettings(settings);
-                exchange.getViewVLC().close();
+                exchange.getViewFMP().free();
             }
         });
 
@@ -351,7 +351,7 @@ public class FeuilleFrame extends JFrame {
                     15_000L
             );
             // Set video
-            exchange.getViewVLC().setMrl(fileChooser.getSelectedFile().getAbsolutePath());
+            exchange.getViewFMP().openMedia(fileChooser.getSelectedFile().getAbsolutePath());
         }
     }
 
@@ -368,7 +368,7 @@ public class FeuilleFrame extends JFrame {
                     15_000L
             );
             // Set video
-            exchange.getViewVLC().setMrl(fileChooser.getSelectedFile().getAbsolutePath());
+            exchange.getViewFMP().openMedia(fileChooser.getSelectedFile().getAbsolutePath());
         }
     }
 

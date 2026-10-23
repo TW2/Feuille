@@ -2,8 +2,6 @@ package feuille.util;
 
 import feuille.module.editor.assa.*;
 import feuille.module.fmp.ai.FreeMediaPlayer;
-import feuille.util.assa.AssColor;
-import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
 import javax.swing.*;
 import java.awt.*;

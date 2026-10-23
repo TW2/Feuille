@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.Serial;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.Objects;
@@ -105,6 +106,7 @@ public final class FmpSwingPlayer {
     }
 
     private static final class VideoPanel extends JPanel {
+        @Serial
         private static final long serialVersionUID = 1L;
         private transient BufferedImage frame;
 

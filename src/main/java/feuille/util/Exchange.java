@@ -9,7 +9,7 @@ import feuille.module.editor.voyager.VoyagersTable;
 import feuille.module.editor.assa.ASS;
 import feuille.module.editor.assa.AssEvent;
 import feuille.module.editor.EditorPanel;
-import feuille.module.video.ViewVLC;
+import feuille.module.video.ViewFMP;
 import feuille.util.assa.AssEventType;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Exchange {
     private VoyagersTable voyagersTable;
     private SyncPane syncPane;
     private EditorPanel editorPanel;
-    private ViewVLC viewVLC;
+    private ViewFMP viewFMP;
 
     private ASS ass;
     private ISO_3166 flag1;
@@ -96,12 +96,12 @@ public class Exchange {
         this.flag2 = flag2;
     }
 
-    public ViewVLC getViewVLC() {
-        return viewVLC;
+    public ViewFMP getViewFMP() {
+        return viewFMP;
     }
 
-    public void setViewVLC(ViewVLC viewVLC) {
-        this.viewVLC = viewVLC;
+    public void setViewFMP(ViewFMP viewFMP) {
+        this.viewFMP = viewFMP;
     }
 
     public void addEvent(AssEvent event, ISO_3166 f1, ISO_3166 f2){

@@ -2,7 +2,7 @@ package feuille.module.editor;
 
 import feuille.module.audio.SyncPane;
 import feuille.module.editor.voyager.VoyagersTable;
-import feuille.module.video.ViewVLC;
+import feuille.module.video.ViewFMP;
 import feuille.util.Exchange;
 
 import javax.swing.*;
@@ -15,7 +15,7 @@ public class AssEditor extends JPanel {
     private final SyncPane syncPane;
     private final VoyagersTable voyagersTable;
     private final EditorPanel editorPanel;
-    private final ViewVLC viewVLC;
+    private final ViewFMP viewFMP;
 
     public AssEditor(Exchange exchange, int w, int h){
         this.exchange = exchange;
@@ -29,12 +29,12 @@ public class AssEditor extends JPanel {
         syncPane = new SyncPane(exchange);
         voyagersTable = new VoyagersTable(exchange);
         editorPanel = new EditorPanel(exchange);
-        viewVLC = new ViewVLC(exchange);
+        viewFMP = new ViewFMP(exchange);
 
         exchange.setSyncPane(syncPane);
         exchange.setVoyagersTable(voyagersTable);
         exchange.setEditorPanel(editorPanel);
-        exchange.setViewVLC(viewVLC);
+        exchange.setViewFMP(viewFMP);
 
         setLayout(new GridLayout(2, 1, 2, 2));
         // TOP: View + sync pane + editor
@@ -42,7 +42,7 @@ public class AssEditor extends JPanel {
         JPanel topPanel = new JPanel(new GridLayout(1, 2, 2, 2));
         // in TOP: left >> view ; right >> sync pane + editor
         JPanel innerTopRightPanel = new JPanel(new GridLayout(2, 1, 2, 2));
-        topPanel.add(viewVLC);
+        topPanel.add(viewFMP);
         topPanel.add(innerTopRightPanel);
         innerTopRightPanel.add(syncPane);
         innerTopRightPanel.add(editorPanel);
@@ -67,7 +67,7 @@ public class AssEditor extends JPanel {
         return editorPanel;
     }
 
-    public ViewVLC getViewVLC() {
-        return viewVLC;
+    public ViewFMP getViewFMP() {
+        return viewFMP;
     }
 }

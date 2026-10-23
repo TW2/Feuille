@@ -2,12 +2,9 @@ package feuille.util;
 
 import feuille.FeuilleFrame;
 import feuille.module.audio.SyncPane;
-import feuille.module.editor.assa.AssStyle;
-import feuille.module.editor.assa.AssTime;
+import feuille.module.editor.assa.*;
 import feuille.module.editor.voyager.Voyager;
 import feuille.module.editor.voyager.VoyagersTable;
-import feuille.module.editor.assa.ASS;
-import feuille.module.editor.assa.AssEvent;
 import feuille.module.editor.EditorPanel;
 import feuille.module.video.ViewFMP;
 import feuille.util.assa.AssEventType;
@@ -31,6 +28,8 @@ public class Exchange {
     private AssTime startTime;
     private AssTime endTime;
     private AssStyle currentStyle;
+    private final List<AssStylesCollection> stylesCollections;
+    private AssStylesCollection currentStylesCollection;
 
     public Exchange() {
         ass = new ASS();
@@ -39,6 +38,9 @@ public class Exchange {
         startTime = new AssTime(0);
         endTime = new AssTime(0);
         currentStyle = new AssStyle();
+        stylesCollections = new ArrayList<>();
+        currentStylesCollection = null;
+        initStyles();
     }
 
     public FeuilleFrame getMainFrame() {
@@ -136,6 +138,10 @@ public class Exchange {
 
     public void setCurrentStyle(AssStyle currentStyle) {
         this.currentStyle = currentStyle;
+    }
+
+    public List<AssStylesCollection> getStylesCollections() {
+        return stylesCollections;
     }
 
     public AssTime getStartTime() {
@@ -252,5 +258,21 @@ public class Exchange {
         newASS.setInfos(ass.getInfos());
         newASS.setStyles(ass.getStyles());
         ASS.write(newASS, script.getPath());
+    }
+
+    private void initStyles(){
+        AssStylesCollection newAssStylesCollection = new AssStylesCollection("Default collection");
+        newAssStylesCollection.getStyles().add(currentStyle);
+        stylesCollections.add(newAssStylesCollection);
+        currentStylesCollection = newAssStylesCollection;
+        ass.getStyles().add(currentStyle);
+    }
+
+    public AssStylesCollection getCurrentStylesCollection() {
+        return currentStylesCollection;
+    }
+
+    public void setCurrentStylesCollection(AssStylesCollection currentStylesCollection) {
+        this.currentStylesCollection = currentStylesCollection;
     }
 }

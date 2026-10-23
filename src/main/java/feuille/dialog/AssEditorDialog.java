@@ -26,7 +26,6 @@ public class AssEditorDialog extends JDialog {
     private final Exchange exchange;
 
     private Settings settings;
-    private final List<AssStyle> styles = new ArrayList<>();
     private AssStyle currentStyle;
     private DialogResult dialogResult;
 
@@ -474,13 +473,60 @@ public class AssEditorDialog extends JDialog {
         setVisible(true);
     }
 
-    public void setStyles(List<AssStyle> styles) {
-        this.styles.clear();
-        this.styles.addAll(styles);
+    /** SETTER */
+    public void initAssStylesCollections(){
+        modelColStyles.removeAllElements();
+        modelColStyles.addAll(exchange.getStylesCollections());
+        if(modelColStyles.getSize() > 0){
+            boolean found = false;
+            for(int i=0; i<modelColStyles.getSize(); i++){
+                AssStylesCollection col = modelColStyles.getElementAt(i);
+                if(col.hashCode() == exchange.getCurrentStylesCollection().hashCode()){
+                    cbColStyle.setSelectedIndex(i);
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                cbColStyle.setSelectedIndex(0);
+            }
+            storageList.setSelectedIndex(0);
+        }
+        if(storageList.getSelectedIndex() != -1) {
+            for(int i=0; i<storageList.getSelectedIndices().length; i++) {
+                scriptStorageModel.addElement(storageModel.get(i));
+            }
+            boolean found = false;
+            for(int i=0; i<scriptStorageModel.size(); i++) {
+                AssStyle style = scriptStorageModel.get(i);
+                if(style.hashCode() == exchange.getCurrentStyle().hashCode()) {
+                    scriptStorageList.setSelectedIndex(i);
+                    found = true;
+                    break;
+                }
+            }
+            if(!found && !scriptStorageModel.isEmpty()) {
+                scriptStorageList.setSelectedIndex(0);
+            }
+        }
+        currentStyle = scriptStorageList.getSelectedIndex() == -1 ?
+                exchange.getCurrentStyle() :
+                scriptStorageModel.get(storageList.getSelectedIndex());
+        updateFont();
+        previewASS.setCurrentStyle(currentStyle);
+        previewASS.changeStyleAndSentence();
     }
 
-    public void setCurrentStyle(AssStyle currentStyle) {
-        this.currentStyle = currentStyle;
+    /** GETTER */
+    public void replaceAssStylesCollections(){
+        exchange.getStylesCollections().clear();
+        for(int i=0; i<modelColStyles.getSize(); i++){
+            exchange.getStylesCollections().add(modelColStyles.getElementAt(i));
+        }
+        if(cbColStyle.getSelectedItem() instanceof AssStylesCollection v){
+            exchange.setCurrentStylesCollection(v);
+        }
+        exchange.setCurrentStyle(currentStyle);
     }
 
     public DialogResult getDialogResult() {
@@ -488,11 +534,7 @@ public class AssEditorDialog extends JDialog {
     }
 
     public List<AssStyle> getStyles() {
-        return styles;
-    }
-
-    public AssStyle getCurrentStyle() {
-        return currentStyle;
+        return scriptStorageList.getSelectedValuesList();
     }
 
     public Settings getSettings() {

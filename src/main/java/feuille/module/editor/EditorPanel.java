@@ -120,22 +120,24 @@ public class EditorPanel extends JPanel {
         panCommandsTwo.add(flagVersion);
 
         ecbEditStyles.getButton().addActionListener((_)->{
-            StylesDialog dialog = new StylesDialog(new Frame());
-            dialog.showDialog(exchange.getAss().getStyles());
-            if(dialog.getDialogResult() == DialogResult.OK){
-                exchange.getAss().setStyles(dialog.getStyles());
+//            StylesDialog dialog = new StylesDialog(new Frame());
+//            dialog.showDialog(exchange.getAss().getStyles());
+//            if(dialog.getDialogResult() == DialogResult.OK){
+//                exchange.getAss().setStyles(dialog.getStyles());
+//            }
+            AssEditorDialog ae = new AssEditorDialog(exchange);
+            ae.initAssStylesCollections();
+            ae.showDialog(exchange.getMainFrame().getSettings());
+            if(ae.getDialogResult() == DialogResult.OK){
+                ae.replaceAssStylesCollections();
+                ecbEditStyles.getObjects().clear();
+                ecbEditStyles.getObjects().addAll(ae.getStyles());
             }
         });
 
         ecbEditActors.getButton().addActionListener((_)->{
             // TODO
-            AssEditorDialog ae = new AssEditorDialog(exchange);
-            ae.setCurrentStyle(exchange.getCurrentStyle());
-            ae.setStyles(exchange.getAss().getStyles());
-            ae.showDialog(exchange.getMainFrame().getSettings());
-            if(ae.getDialogResult() == DialogResult.OK){
-                Loader.dialogErr("It works!");
-            }
+
         });
 
         ecbEditEffects.getButton().addActionListener((_)->{

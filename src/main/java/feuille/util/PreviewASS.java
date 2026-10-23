@@ -58,7 +58,7 @@ public class PreviewASS extends JPanel {
         //changeStyleAndSentence();
     }
 
-    private void changeStyleAndSentence() {
+    public void changeStyleAndSentence() {
         File app = new File(new File("").getAbsolutePath());
         File folder = new File(app.getPath() +
                 File.separator + "settings" +

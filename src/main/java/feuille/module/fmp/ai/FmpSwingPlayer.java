@@ -59,6 +59,7 @@ public final class FmpSwingPlayer {
         int fmp_load_subtitles(Pointer player, String subtitlePath);
         int fmp_next(Pointer player, FmpEvent event);
         int fmp_play(Pointer player);
+        int fmp_play_range(Pointer player, long startTimeUs, long endTimeUs);
         int fmp_pause(Pointer player);
         int fmp_stop(Pointer player);
         int fmp_get_error(Pointer player, byte[] buffer, int bufferSize);
@@ -160,6 +161,13 @@ public final class FmpSwingPlayer {
 
         private volatile State requestedState = State.STOPPED;
         private volatile long generation;
+        private volatile boolean looping;
+        private volatile boolean rangePending;
+        private long pendingRangeStartUs;
+        private long pendingRangeEndUs;
+        private long activeRangeStartUs;
+        private long activeRangeEndUs;
+        private boolean activeRange;
         private State appliedState;
         private volatile boolean audioClockReady;
         private long audioClockBasePtsUs;
@@ -240,18 +248,46 @@ public final class FmpSwingPlayer {
             request(State.PLAYING);
         }
 
+        void play(long startTimeUs, long endTimeUs) {
+            if (startTimeUs < 0 || endTimeUs <= startTimeUs) {
+                throw new IllegalArgumentException(
+                        "Playback range must be non-negative and end after start");
+            }
+            generation++;
+            synchronized (stateLock) {
+                pendingRangeStartUs = startTimeUs;
+                pendingRangeEndUs = endTimeUs;
+                rangePending = true;
+                requestedState = State.PLAYING;
+                stateLock.notifyAll();
+            }
+            synchronized (frameLock) {
+                frames.clear();
+                frameLock.notifyAll();
+            }
+            videoPanel.setFrame(null);
+        }
+
         void pause() {
             request(State.PAUSED);
         }
 
         void stop() {
             generation++;
-            request(State.STOPPED);
+            synchronized (stateLock) {
+                rangePending = false;
+                requestedState = State.STOPPED;
+                stateLock.notifyAll();
+            }
             synchronized (frameLock) {
                 frames.clear();
                 frameLock.notifyAll();
             }
             videoPanel.setFrame(null);
+        }
+
+        void setLooping(boolean enabled) {
+            looping = enabled;
         }
 
         private void request(State state) {
@@ -281,10 +317,17 @@ public final class FmpSwingPlayer {
                     if (status == NEXT_PAUSED) continue;
                     if (status == NEXT_EOF) {
                         waitForAudioToFinish();
+                        if (looping && requestedState == State.PLAYING) {
+                            restartForLoop();
+                            continue;
+                        }
                         if (requestedState != State.STOPPED) presentLastQueuedVideo();
-                        NATIVE.fmp_stop(player);
+                        if (NATIVE.fmp_stop(player) != 0) {
+                            throw new IllegalStateException(nativeError(player));
+                        }
                         appliedState = State.STOPPED;
                         requestedState = State.STOPPED;
+                        activeRange = false;
                         audioLine.stop();
                         audioLine.flush();
                         resetAudioClock();
@@ -325,7 +368,63 @@ public final class FmpSwingPlayer {
             }
         }
 
+        private void restartForLoop() {
+            audioLine.stop();
+            audioLine.flush();
+            if (activeRange) {
+                if (NATIVE.fmp_play_range(
+                        player, activeRangeStartUs, activeRangeEndUs) != 0) {
+                    throw new IllegalStateException(nativeError(player));
+                }
+            } else {
+                if (NATIVE.fmp_stop(player) != 0) {
+                    throw new IllegalStateException(nativeError(player));
+                }
+                if (NATIVE.fmp_play(player) != 0) {
+                    throw new IllegalStateException(nativeError(player));
+                }
+            }
+            generation++;
+            synchronized (frameLock) {
+                frames.clear();
+                frameLock.notifyAll();
+            }
+            videoPanel.setFrame(null);
+            resetAudioClock();
+
+            if (requestedState != State.PLAYING) {
+                appliedState = State.STOPPED;
+                return;
+            }
+            fallbackClockBaseNanos = System.nanoTime();
+            appliedState = State.PLAYING;
+            audioLine.start();
+        }
+
         private void applyRequestedState() {
+            if (rangePending) {
+                long startUs;
+                long endUs;
+                synchronized (stateLock) {
+                    startUs = pendingRangeStartUs;
+                    endUs = pendingRangeEndUs;
+                    rangePending = false;
+                }
+                audioLine.stop();
+                audioLine.flush();
+                if (NATIVE.fmp_play_range(player, startUs, endUs) != 0) {
+                    throw new IllegalStateException(nativeError(player));
+                }
+                activeRangeStartUs = startUs;
+                activeRangeEndUs = endUs;
+                activeRange = true;
+                resetAudioClock();
+                fallbackClockBasePtsUs = startUs;
+                fallbackClockBaseNanos = System.nanoTime();
+                appliedState = State.PLAYING;
+                audioLine.start();
+                return;
+            }
             State requested = requestedState;
             if (requested == appliedState) return;
 
@@ -348,6 +447,7 @@ public final class FmpSwingPlayer {
                 if (NATIVE.fmp_stop(player) != 0) {
                     throw new IllegalStateException(nativeError(player));
                 }
+                activeRange = false;
                 resetAudioClock();
             }
             appliedState = requested;
@@ -556,14 +656,17 @@ public final class FmpSwingPlayer {
         JButton play = new JButton("Play");
         JButton pause = new JButton("Pause");
         JButton stop = new JButton("Stop");
+        JCheckBox loop = new JCheckBox("Loop");
         play.addActionListener(event -> controller.play());
         pause.addActionListener(event -> controller.pause());
         stop.addActionListener(event -> controller.stop());
+        loop.addActionListener(event -> controller.setLooping(loop.isSelected()));
 
         JPanel controls = new JPanel();
         controls.add(play);
         controls.add(pause);
         controls.add(stop);
+        controls.add(loop);
 
         JFrame window = new JFrame(
                 "FMP Swing Player — " + controller.sourceVideoProfile);

@@ -1,8 +1,7 @@
 package feuille.util;
 
-import feuille.module.editor.assa.ASS;
-import feuille.module.editor.assa.AssEvent;
-import feuille.module.editor.assa.AssStyle;
+import feuille.module.editor.assa.*;
+import feuille.module.fmp.ai.FreeMediaPlayer;
 import feuille.util.assa.AssColor;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
@@ -14,50 +13,49 @@ import java.io.File;
 
 public class PreviewASS extends JPanel {
 
-    private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
     private final JLabel lblView;
+    private final SpinnerNumberModel spinnerWidthModel;
+    private final SpinnerNumberModel spinnerHeightModel;
     private final JTextField tfSentence;
 
-    private String mrl;
     private AssStyle currentStyle;
-    private Color back;
-    private Color grid;
+    int w, h, sq;
+    Color c1, c2;
 
+    public PreviewASS(int width, int height, int squareSize, Color c1, Color c2) {
+        w = width;
+        h = height - 26;
+        sq = squareSize;
+        this.c1 = c1;
+        this.c2 = c2;
 
-    public PreviewASS() {
-        mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
         lblView = new JLabel();
-        lblView.setOpaque(true);
-        lblView.setBackground(getBackground());
+        spinnerWidthModel = new SpinnerNumberModel(1920, 100, 60000, 1);
+        spinnerHeightModel = new SpinnerNumberModel(1080, 100, 60000, 1);
+        JSpinner spinnerWidth = new JSpinner(spinnerWidthModel);
+        JSpinner spinnerHeight = new JSpinner(spinnerHeightModel);
         tfSentence = new JTextField("It's a beautiful day! 1234567\\Nかわいい女の子あなたは");
         JButton btnSentence = new JButton("Change");
 
-        JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setOpaque(true);
-        layeredPane.setBackground(getBackground());
-        layeredPane.add(lblView);
-        layeredPane.add(mediaPlayerComponent);
-        layeredPane.setPosition(lblView, 1);
-        layeredPane.setPosition(mediaPlayerComponent, 2);
-        layeredPane.setPreferredSize(new Dimension(426, 240));
+        lblView.setPreferredSize(new Dimension(w, h));
 
-        JPanel panSouth = new JPanel(new BorderLayout());
-        panSouth.add(tfSentence, BorderLayout.CENTER);
-        panSouth.add(btnSentence, BorderLayout.EAST);
+        JPanel panSouth = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        spinnerWidth.setPreferredSize(new Dimension(120, 26));
+        spinnerHeight.setPreferredSize(new Dimension(120, 26));
+        tfSentence.setPreferredSize(new Dimension(500, 26));
+        btnSentence.setPreferredSize(new Dimension(120, 26));
+        panSouth.add(spinnerWidth);
+        panSouth.add(spinnerHeight);
+        panSouth.add(tfSentence);
+        panSouth.add(btnSentence);
 
-        mrl = null;
         currentStyle = new AssStyle();
-        back = null;
-        grid = null;
 
         btnSentence.addActionListener(this::btnSentenceActionPerformed);
 
         setLayout(new BorderLayout());
-        add(layeredPane, BorderLayout.CENTER);
+        add(lblView, BorderLayout.CENTER);
         add(panSouth, BorderLayout.SOUTH);
-
-        mediaPlayerComponent.setSize(426, 240);
-        lblView.setPreferredSize(new Dimension(426, 240));
 
         //changeStyleAndSentence();
     }
@@ -69,38 +67,35 @@ public class PreviewASS extends JPanel {
                 File.separator + "preview"
         );
         File script = new File(folder, "editstyle.ass");
-        mrl = new File(folder, "output.m4v").getAbsolutePath();
         ASS ass = ASS.read(script.getPath());
-        for(AssStyle style : ass.getStyles()) {
-            if(style.getName().equals("Default")){
-                style.setAssFont(currentStyle.getAssFont());
-            }
-        }
-        for(AssStyle style : ass.getStyles()) {
-            if(style.getName().equals("Back") && back != null) {
-                style.setTextColor(new AssColor(back));
-            }
-        }
-        for(AssStyle style : ass.getStyles()) {
-            if(style.getName().equals("Relief") && grid != null) {
-                style.setTextColor(new AssColor(grid));
-            }
-        }
-        for(AssEvent event : ass.getEvents()) {
-            if(event.getName().getName().equals("Line")) {
-                event.setText(tfSentence.getText());
-            }
-        }
+        ass.getInfos().setPlayResX(spinnerWidthModel.getNumber().intValue());
+        ass.getInfos().setPlayResY(spinnerHeightModel.getNumber().intValue());
+        ass.getStyles().clear();
+        currentStyle.setAlignment(new AssAlignment(5));
+        ass.getStyles().add(currentStyle);
+        AssEvent newEvent = new AssEvent();
+        newEvent.setStyle(currentStyle);
+        newEvent.setText(tfSentence.getText());
+        newEvent.setName(new AssActor("Line"));
+        newEvent.setStart(new AssTime(0));
+        newEvent.setEnd(new AssTime(5_000));
+        ass.getEvents().clear();
+        ass.getEvents().add(newEvent);
         ASS.write(ass, script.getPath());
-        mediaPlayerComponent.mediaPlayer().media().play(mrl,
-                ":no-sub-autodetect-file",
-                ":sub-file=" + script.getPath()
+        FreeMediaPlayer freeMediaPlayer = new FreeMediaPlayer();
+        BufferedImage img = freeMediaPlayer.screenshot(
+                null,
+                1_000_000,
+                script.getPath(),
+                FreeMediaPlayer.BackgroundType.CHECKERBOARD,
+                spinnerWidthModel.getNumber().intValue(),
+                spinnerHeightModel.getNumber().intValue(),
+                sq, c1, c2
         );
-        mediaPlayerComponent.mediaPlayer().controls().setPosition(0.8f);
-        BufferedImage img = mediaPlayerComponent.mediaPlayer().snapshots().get();
-        if(img != null) {
-            lblView.setIcon(new ImageIcon(img));
-        }
+        int ws = spinnerWidthModel.getNumber().intValue() / 3;
+        int hs = spinnerHeightModel.getNumber().intValue() / 3;
+        lblView.setIcon(new ImageIcon(img.getSubimage(ws, hs, ws, hs)));
+        lblView.setHorizontalAlignment(JLabel.CENTER);
     }
 
     public void btnSentenceActionPerformed(ActionEvent e) {
@@ -109,17 +104,5 @@ public class PreviewASS extends JPanel {
 
     public void setCurrentStyle(AssStyle currentStyle) {
         this.currentStyle = currentStyle;
-    }
-
-    public void setAssBackground(Color c) {
-        back = c;
-    }
-
-    public void setAssGridColor(Color c) {
-        grid = c;
-    }
-
-    public void updatePreview() {
-        changeStyleAndSentence();
     }
 }

@@ -396,7 +396,8 @@ public class AssEditorDialog extends JDialog {
         JPanel stylePreviewPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         stylePreviewPanel.setBorder(BorderFactory.createTitledBorder(bdTab, "Preview"));
         // TODO make a better style preview
-        previewASS = new PreviewASS();
+        previewASS = new PreviewASS(426, 240, 8,
+                DrawColor.black.getColor(), DrawColor.chocolate.getColor());
         stylePreviewPanel.add(previewASS);
         stylesPanel.add(stylePreviewPanel);
 

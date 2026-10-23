@@ -94,8 +94,8 @@ public class AssStyle {
         karaokeColor    = AssColor.fromScheme(t[4], AssColorScheme.ABGR); // Karaoke color
         outlineColor    = AssColor.fromScheme(t[5], AssColorScheme.ABGR); // Outline color
         shadowColor     = AssColor.fromScheme(t[6], AssColorScheme.ABGR); // Shadow color
-        scaleX          = Integer.parseInt(t[11]); // Scale X
-        scaleY          = Integer.parseInt(t[12]); // Scale Y
+        scaleX          = Math.round(Float.parseFloat(t[11])); // Scale X
+        scaleY          = Math.round(Float.parseFloat(t[12])); // Scale Y
         spacing         = Float.parseFloat(t[13]); // Spacing
         angleZ          = Float.parseFloat(t[14]); // Angle Z
         borderStyle     = t[15].equalsIgnoreCase("1") ? 1 : 3; // BorderStyle (1 normal, 3 rectangle)

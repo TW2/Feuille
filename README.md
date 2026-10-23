@@ -14,7 +14,7 @@ The seek function of FMP (Free Media Player), a player made by AI which embeds F
 ### How to build FMP:
 
 0/ You need cmake build tools and shared library of FFmpeg and libass, put them at final folder of FMP or install them in your system.<br>
-1/ After the cloning of Feuille, go to ```/docs/fmp``` and unzip ```fmp.zip```.<br>
+1/ After the cloning of Feuille, go to ```/docs``` and unzip ```fmp.zip```.<br>
 2/ In the fresh fmp folder, type: ```cmake -S . -B build -DCMAKE_BUILD_TYPE=Release```.<br>
 3/ Then ```cmake --build build```.<br>
 4/ Then ```cmake --install build --prefix install```.<br>
@@ -28,11 +28,6 @@ The seek function of FMP (Free Media Player), a player made by AI which embeds F
 5/ Launch with the command ```java -jar``` targeting the Feuille shaded version.
 
 ### Goals:
-
-- [Analysis](https://github.com/TW2/Feuille/blob/86fe9ba019a7e7b773774f3b5221f7b629150042/docs/analysis.md)
-- [Editor](https://github.com/TW2/Feuille/blob/86fe9ba019a7e7b773774f3b5221f7b629150042/docs/asseditor.md)
-- [Drawing](https://github.com/TW2/Feuille/blob/86fe9ba019a7e7b773774f3b5221f7b629150042/docs/drawing.md)
-- [Karaoke](https://github.com/TW2/Feuille/blob/86fe9ba019a7e7b773774f3b5221f7b629150042/docs/karaoke.md)
 
 ### Discord EN/FR:
 

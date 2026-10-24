@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.nio.file.Path;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EditorPanel extends JPanel {
 
@@ -259,72 +261,78 @@ public class EditorPanel extends JPanel {
         JMenuItem mCut = new JMenuItem(
                 Loader.language("io.cut", "Cut"),
                 Loader.fromResource("/images/16-LucideCopyX.png", 16, 16));
+        mCut.addActionListener((e) -> cut(paneOrigin));
+        popupMenu.add(mCut);
 
         JMenuItem mCopy = new JMenuItem(
                 Loader.language("io.copy", "Copy"),
                 Loader.fromResource("/images/16-LucideCopy.png", 16, 16));
+        mCopy.addActionListener((e)-> copy(paneOrigin));
+        popupMenu.add(mCopy);
 
         JMenuItem mPaste = new JMenuItem(
                 Loader.language("io.paste", "Paste"),
                 Loader.fromResource("/images/16-LucideClipboardPaste.png", 16, 16));
+        mPaste.addActionListener((e)-> paste(paneOrigin));
+        popupMenu.add(mPaste);
 
         JMenuItem mDelete = new JMenuItem(
                 Loader.language("io.delete", "Delete"),
                 Loader.fromResource("/images/16-LucideDelete.png", 16, 16));
-
-        mCut.addActionListener((e)->{
-            try{
-                int start = paneOrigin.getSelectionStart();
-                int end = paneOrigin.getSelectionEnd();
-                String text = paneOrigin.getText();
-                Clipboard.copyString(paneOrigin.getSelectedText());
-                paneOrigin.setText(
-                        (start > 0 ? text.substring(0, start) : "") +
-                        (end < text.length() ? text.substring(end) : ""));
-            }catch(Exception ex){
-                Loader.dialogErr(ex.getLocalizedMessage());
-            }
-        });
-
-        mCopy.addActionListener((e)->{
-            try{
-                Clipboard.copyString(paneOrigin.getSelectedText());
-            }catch(Exception ex){
-                Loader.dialogErr(ex.getLocalizedMessage());
-            }
-        });
-
-        mPaste.addActionListener((e)->{
-            try{
-                int start = paneOrigin.getSelectionStart();
-                int end = paneOrigin.getSelectionEnd();
-                String text = paneOrigin.getText();
-                paneOrigin.setText(
-                        (start > 0 ? text.substring(0, start) : "") +
-                        Clipboard.pasteString() +
-                        (end < text.length() ? text.substring(end) : ""));
-            }catch(Exception ex){
-                Loader.dialogErr(ex.getLocalizedMessage());
-            }
-        });
-
-        mDelete.addActionListener((e)->{
-            try{
-                int start = paneOrigin.getSelectionStart();
-                int end = paneOrigin.getSelectionEnd();
-                String text = paneOrigin.getText();
-                paneOrigin.setText(
-                        (start > 0 ? text.substring(0, start) : "") +
-                        (end < text.length() ? text.substring(end) : ""));
-            }catch(Exception ex){
-                Loader.dialogErr(ex.getLocalizedMessage());
-            }
-        });
-
-        popupMenu.add(mCut);
-        popupMenu.add(mCopy);
-        popupMenu.add(mPaste);
+        mDelete.addActionListener((e)-> delete(paneOrigin));
         popupMenu.add(mDelete);
+
+        popupMenu.add(new JPopupMenu.Separator());
+
+        JMenuItem mBold = new JMenuItem(
+                Loader.language("io.bold.add", "Add Bold"),
+                Loader.fromResource("/images/16-bold-blue.png", 16, 16));
+        mBold.addActionListener((e)-> bold(paneOrigin, true));
+        popupMenu.add(mBold);
+
+        JMenuItem mItalic = new JMenuItem(
+                Loader.language("io.italic.add", "Add Italic"),
+                Loader.fromResource("/images/16-italic-blue.png", 16, 16));
+        mItalic.addActionListener((e)-> italic(paneOrigin, true));
+        popupMenu.add(mItalic);
+
+        JMenuItem mUnderline = new JMenuItem(
+                Loader.language("io.underline.add", "Add Underline"),
+                Loader.fromResource("/images/16-underline-blue.png", 16, 16));
+        mUnderline.addActionListener((e)-> underline(paneOrigin, true));
+        popupMenu.add(mUnderline);
+
+        JMenuItem mStrikeOut = new JMenuItem(
+                Loader.language("io.strikeOut.add", "Add StrikeOut"),
+                Loader.fromResource("/images/16-strikeOut-blue.png", 16, 16));
+        mStrikeOut.addActionListener((e)-> strikeOut(paneOrigin, true));
+        popupMenu.add(mStrikeOut);
+
+        popupMenu.add(new JPopupMenu.Separator());
+
+        JMenuItem mBold_r = new JMenuItem(
+                Loader.language("io.bold.rem", "Remove Bold"),
+                Loader.fromResource("/images/16-bold-red.png", 16, 16));
+        mBold_r.addActionListener((e)-> bold(paneOrigin, false));
+        popupMenu.add(mBold_r);
+
+        JMenuItem mItalic_r = new JMenuItem(
+                Loader.language("io.italic.rem", "Remove Italic"),
+                Loader.fromResource("/images/16-italic-red.png", 16, 16));
+        mItalic_r.addActionListener((e)-> italic(paneOrigin, false));
+        popupMenu.add(mItalic_r);
+
+        JMenuItem mUnderline_r = new JMenuItem(
+                Loader.language("io.underline.rem", "Remove Underline"),
+                Loader.fromResource("/images/16-underline-red.png", 16, 16));
+        mUnderline_r.addActionListener((e)-> underline(paneOrigin, false));
+        popupMenu.add(mUnderline_r);
+
+        JMenuItem mStrikeOut_r = new JMenuItem(
+                Loader.language("io.strikeOut.rem", "Remove StrikeOut"),
+                Loader.fromResource("/images/16-strikeOut-red.png", 16, 16));
+        mStrikeOut_r.addActionListener((e)-> strikeOut(paneOrigin, false));
+        popupMenu.add(mStrikeOut_r);
 
         return  popupMenu;
     }
@@ -335,72 +343,78 @@ public class EditorPanel extends JPanel {
         JMenuItem mCut = new JMenuItem(
                 Loader.language("io.cut", "Cut"),
                 Loader.fromResource("/images/16-LucideCopyX.png", 16, 16));
+        mCut.addActionListener((e) -> cut(paneTranslation));
+        popupMenu.add(mCut);
 
         JMenuItem mCopy = new JMenuItem(
                 Loader.language("io.copy", "Copy"),
                 Loader.fromResource("/images/16-LucideCopy.png", 16, 16));
+        mCopy.addActionListener((e)-> copy(paneTranslation));
+        popupMenu.add(mCopy);
 
         JMenuItem mPaste = new JMenuItem(
                 Loader.language("io.paste", "Paste"),
                 Loader.fromResource("/images/16-LucideClipboardPaste.png", 16, 16));
+        mPaste.addActionListener((e)-> paste(paneTranslation));
+        popupMenu.add(mPaste);
 
         JMenuItem mDelete = new JMenuItem(
                 Loader.language("io.delete", "Delete"),
                 Loader.fromResource("/images/16-LucideDelete.png", 16, 16));
-
-        mCut.addActionListener((e)->{
-            try{
-                int start = paneTranslation.getSelectionStart();
-                int end = paneTranslation.getSelectionEnd();
-                String text = paneTranslation.getText();
-                Clipboard.copyString(paneTranslation.getSelectedText());
-                paneTranslation.setText(
-                        (start > 0 ? text.substring(0, start) : "") +
-                        (end < text.length() ? text.substring(end) : ""));
-            }catch(Exception ex){
-                Loader.dialogErr(ex.getLocalizedMessage());
-            }
-        });
-
-        mCopy.addActionListener((e)->{
-            try{
-                Clipboard.copyString(paneTranslation.getSelectedText());
-            }catch(Exception ex){
-                Loader.dialogErr(ex.getLocalizedMessage());
-            }
-        });
-
-        mPaste.addActionListener((e)->{
-            try{
-                int start = paneTranslation.getSelectionStart();
-                int end = paneTranslation.getSelectionEnd();
-                String text = paneTranslation.getText();
-                paneTranslation.setText(
-                        (start > 0 ? text.substring(0, start) : "") +
-                        Clipboard.pasteString() +
-                        (end < text.length() ? text.substring(end) : ""));
-            }catch(Exception ex){
-                Loader.dialogErr(ex.getLocalizedMessage());
-            }
-        });
-
-        mDelete.addActionListener((e)->{
-            try{
-                int start = paneTranslation.getSelectionStart();
-                int end = paneTranslation.getSelectionEnd();
-                String text = paneTranslation.getText();
-                paneTranslation.setText(
-                        (start > 0 ? text.substring(0, start) : "") +
-                        (end < text.length() ? text.substring(end) : ""));
-            }catch(Exception ex){
-                Loader.dialogErr(ex.getLocalizedMessage());
-            }
-        });
-
-        popupMenu.add(mCut);
-        popupMenu.add(mCopy);
-        popupMenu.add(mPaste);
+        mDelete.addActionListener((e)-> delete(paneTranslation));
         popupMenu.add(mDelete);
+
+        popupMenu.add(new JPopupMenu.Separator());
+
+        JMenuItem mBold = new JMenuItem(
+                Loader.language("io.bold.add", "Add Bold"),
+                Loader.fromResource("/images/16-bold-blue.png", 16, 16));
+        mBold.addActionListener((e)-> bold(paneTranslation, true));
+        popupMenu.add(mBold);
+
+        JMenuItem mItalic = new JMenuItem(
+                Loader.language("io.italic.add", "Add Italic"),
+                Loader.fromResource("/images/16-italic-blue.png", 16, 16));
+        mItalic.addActionListener((e)-> italic(paneTranslation, true));
+        popupMenu.add(mItalic);
+
+        JMenuItem mUnderline = new JMenuItem(
+                Loader.language("io.underline.add", "Add Underline"),
+                Loader.fromResource("/images/16-underline-blue.png", 16, 16));
+        mUnderline.addActionListener((e)-> underline(paneTranslation, true));
+        popupMenu.add(mUnderline);
+
+        JMenuItem mStrikeOut = new JMenuItem(
+                Loader.language("io.strikeOut.add", "Add StrikeOut"),
+                Loader.fromResource("/images/16-strikeOut-blue.png", 16, 16));
+        mStrikeOut.addActionListener((e)-> strikeOut(paneTranslation, true));
+        popupMenu.add(mStrikeOut);
+
+        popupMenu.add(new JPopupMenu.Separator());
+
+        JMenuItem mBold_r = new JMenuItem(
+                Loader.language("io.bold.rem", "Remove Bold"),
+                Loader.fromResource("/images/16-bold-red.png", 16, 16));
+        mBold_r.addActionListener((e)-> bold(paneTranslation, false));
+        popupMenu.add(mBold_r);
+
+        JMenuItem mItalic_r = new JMenuItem(
+                Loader.language("io.italic.rem", "Remove Italic"),
+                Loader.fromResource("/images/16-italic-red.png", 16, 16));
+        mItalic_r.addActionListener((e)-> italic(paneTranslation, false));
+        popupMenu.add(mItalic_r);
+
+        JMenuItem mUnderline_r = new JMenuItem(
+                Loader.language("io.underline.rem", "Remove Underline"),
+                Loader.fromResource("/images/16-underline-red.png", 16, 16));
+        mUnderline_r.addActionListener((e)-> underline(paneTranslation, false));
+        popupMenu.add(mUnderline_r);
+
+        JMenuItem mStrikeOut_r = new JMenuItem(
+                Loader.language("io.strikeOut.rem", "Remove StrikeOut"),
+                Loader.fromResource("/images/16-strikeOut-red.png", 16, 16));
+        mStrikeOut_r.addActionListener((e)-> strikeOut(paneTranslation, false));
+        popupMenu.add(mStrikeOut_r);
 
         return  popupMenu;
     }
@@ -424,4 +438,158 @@ public class EditorPanel extends JPanel {
     public boolean flag2HasMany(){
         return flagVersion.flag2HasMany();
     }
+
+    private void cut(JTextPane textPane){
+        try{
+            int start = textPane.getSelectionStart();
+            int end = textPane.getSelectionEnd();
+            String text = textPane.getText();
+            Clipboard.copyString(textPane.getSelectedText());
+            textPane.setText(
+                    (start > 0 ? text.substring(0, start) : "") +
+                            (end < text.length() ? text.substring(end) : ""));
+        }catch(Exception ex){
+            Loader.dialogErr(ex.getLocalizedMessage());
+        }
+    }
+
+    private void copy(JTextPane textPane){
+        try{
+            Clipboard.copyString(textPane.getSelectedText());
+        }catch(Exception ex){
+            Loader.dialogErr(ex.getLocalizedMessage());
+        }
+    }
+
+    private void paste(JTextPane textPane){
+        try{
+            int start = textPane.getSelectionStart();
+            int end = textPane.getSelectionEnd();
+            String text = textPane.getText();
+            textPane.setText(
+                    (start > 0 ? text.substring(0, start) : "") +
+                            Clipboard.pasteString() +
+                            (end < text.length() ? text.substring(end) : ""));
+        }catch(Exception ex){
+            Loader.dialogErr(ex.getLocalizedMessage());
+        }
+    }
+
+    private void delete(JTextPane textPane){
+        try{
+            int start = textPane.getSelectionStart();
+            int end = textPane.getSelectionEnd();
+            String text = textPane.getText();
+            textPane.setText(
+                    (start > 0 ? text.substring(0, start) : "") +
+                            (end < text.length() ? text.substring(end) : ""));
+        }catch(Exception ex){
+            Loader.dialogErr(ex.getLocalizedMessage());
+        }
+    }
+
+    private void insertOverrides(JTextPane textPane, String o1, String o2){
+        try{
+            int start = textPane.getSelectionStart();
+            int end = textPane.getSelectionEnd();
+            String text = textPane.getText();
+            textPane.setText(
+                    (start > 0 ? text.substring(0, start) : "") + "{"+o1+"}" +
+                            textPane.getSelectedText() + "{"+o2+"}" +
+                            (end < text.length() ? text.substring(end) : ""));
+            String s = textPane.getText();
+            s = s.replace("}{", "");
+            s = s.replace("{}", "");
+            textPane.setText(s);
+        }catch(Exception ex){
+            Loader.dialogErr(ex.getLocalizedMessage());
+        }
+    }
+
+    private void removeOverrides(JTextPane textPane, String o1, String o2){
+        try{
+            String s = textPane.getText();
+            int startSelection = textPane.getSelectionStart();
+            StringBuilder sb = new StringBuilder();
+            int start = s.lastIndexOf("{", startSelection);
+            String before = start == 0 || start == -1 ? "" : s.substring(0, start);
+            String after = start == 0 || start == -1 ? s : s.substring(start);
+            Pattern p = Pattern.compile("(?<e1>[^{]*)(?<a1>\\{)(?<r1>[\\\\bius0-1]+)(?<a2>})(?<e2>[^{]*)(?<a3>\\{)(?<r2>[\\\\bius0-1]+)(?<a4>})(?<e3>.*)");
+            Matcher m = p.matcher(after);
+            if(m.find()){
+                //System.out.println("e1: " + m.group("e1"));
+                sb.append(m.group("e1"));
+                sb.append("{");
+                //System.out.println("r1: " + m.group("r1"));
+                sb.append(m.group("r1").replace(o1, ""));
+                sb.append("}");
+                //System.out.println("e2: " + m.group("e2"));
+                sb.append(m.group("e2"));
+                sb.append("{");
+                //System.out.println("r2: " + m.group("r2"));
+                sb.append(m.group("r2").replace(o2, ""));
+                sb.append("}");
+                //System.out.println("e3: " + m.group("e3"));
+                sb.append(m.group("e3"));
+            }
+            s = before + (sb.isEmpty() ? after : sb.toString());
+            s = removeLoop(s);
+            textPane.setText(s);
+        }catch(Exception ex){
+            Loader.dialogErr(ex.getLocalizedMessage());
+        }
+    }
+
+    private String removeLoop(String text){
+        String[] values = new String[]{"}{", "{}"};
+        while(hasValues(text, values)){
+            for(String v : values){
+                text = text.replace(v, "");
+            }
+        }
+        return text;
+    }
+
+    private boolean hasValues(String text, String[] values){
+        for(String v : values){
+            if(text.contains(v)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void bold(JTextPane textPane, boolean add){
+        if(add){
+            insertOverrides(textPane, "\\b1", "\\b0");
+        }else{
+            removeOverrides(textPane, "\\b1", "\\b0");
+        }
+    }
+
+    private void italic(JTextPane textPane, boolean add){
+        if(add){
+            insertOverrides(textPane, "\\i1", "\\i0");
+        }else{
+            removeOverrides(textPane, "\\i1", "\\i0");
+        }
+    }
+
+    private void underline(JTextPane textPane, boolean add){
+        if(add){
+            insertOverrides(textPane, "\\u1", "\\u0");
+        }else{
+            removeOverrides(textPane, "\\u1", "\\u0");
+        }
+    }
+
+    private void strikeOut(JTextPane textPane, boolean add){
+        if(add){
+            insertOverrides(textPane, "\\s1", "\\s0");
+        }else{
+            removeOverrides(textPane, "\\s1", "\\s0");
+        }
+    }
+
+
 }

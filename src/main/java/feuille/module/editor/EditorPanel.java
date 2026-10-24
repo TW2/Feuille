@@ -3,6 +3,7 @@ package feuille.module.editor;
 import feuille.dialog.AssEditorDialog;
 import feuille.module.editor.assa.*;
 import feuille.module.editor.voyager.*;
+import feuille.module.fmp.ai.FreeMediaPlayer;
 import feuille.util.*;
 import feuille.util.assa.AssEventType;
 
@@ -284,55 +285,86 @@ public class EditorPanel extends JPanel {
 
         popupMenu.add(new JPopupMenu.Separator());
 
+        JMenu menuAdd = new JMenu(Loader.language("io.menu.add", "Add"));
+        popupMenu.add(menuAdd);
+
         JMenuItem mBold = new JMenuItem(
                 Loader.language("io.bold.add", "Add Bold"),
                 Loader.fromResource("/images/16-bold-blue.png", 16, 16));
         mBold.addActionListener((e)-> bold(paneOrigin, true));
-        popupMenu.add(mBold);
+        menuAdd.add(mBold);
 
         JMenuItem mItalic = new JMenuItem(
                 Loader.language("io.italic.add", "Add Italic"),
                 Loader.fromResource("/images/16-italic-blue.png", 16, 16));
         mItalic.addActionListener((e)-> italic(paneOrigin, true));
-        popupMenu.add(mItalic);
+        menuAdd.add(mItalic);
 
         JMenuItem mUnderline = new JMenuItem(
                 Loader.language("io.underline.add", "Add Underline"),
                 Loader.fromResource("/images/16-underline-blue.png", 16, 16));
         mUnderline.addActionListener((e)-> underline(paneOrigin, true));
-        popupMenu.add(mUnderline);
+        menuAdd.add(mUnderline);
 
         JMenuItem mStrikeOut = new JMenuItem(
                 Loader.language("io.strikeOut.add", "Add StrikeOut"),
                 Loader.fromResource("/images/16-strikeOut-blue.png", 16, 16));
         mStrikeOut.addActionListener((e)-> strikeOut(paneOrigin, true));
-        popupMenu.add(mStrikeOut);
+        menuAdd.add(mStrikeOut);
 
-        popupMenu.add(new JPopupMenu.Separator());
+        JMenu menuRemove = new JMenu(Loader.language("io.menu.rem", "Remove"));
+        popupMenu.add(menuRemove);
 
         JMenuItem mBold_r = new JMenuItem(
                 Loader.language("io.bold.rem", "Remove Bold"),
                 Loader.fromResource("/images/16-bold-red.png", 16, 16));
         mBold_r.addActionListener((e)-> bold(paneOrigin, false));
-        popupMenu.add(mBold_r);
+        menuRemove.add(mBold_r);
 
         JMenuItem mItalic_r = new JMenuItem(
                 Loader.language("io.italic.rem", "Remove Italic"),
                 Loader.fromResource("/images/16-italic-red.png", 16, 16));
         mItalic_r.addActionListener((e)-> italic(paneOrigin, false));
-        popupMenu.add(mItalic_r);
+        menuRemove.add(mItalic_r);
 
         JMenuItem mUnderline_r = new JMenuItem(
                 Loader.language("io.underline.rem", "Remove Underline"),
                 Loader.fromResource("/images/16-underline-red.png", 16, 16));
         mUnderline_r.addActionListener((e)-> underline(paneOrigin, false));
-        popupMenu.add(mUnderline_r);
+        menuRemove.add(mUnderline_r);
 
         JMenuItem mStrikeOut_r = new JMenuItem(
                 Loader.language("io.strikeOut.rem", "Remove StrikeOut"),
                 Loader.fromResource("/images/16-strikeOut-red.png", 16, 16));
         mStrikeOut_r.addActionListener((e)-> strikeOut(paneOrigin, false));
-        popupMenu.add(mStrikeOut_r);
+        menuRemove.add(mStrikeOut_r);
+
+        JMenu menuDefine = new JMenu(Loader.language("io.menu.def", "Define"));
+        popupMenu.add(menuDefine);
+
+        JMenuItem mTextColor = new JMenuItem(
+                Loader.language("io.text.color", "Color the text"),
+                Loader.fromResource("/images/16-colors-text.png", 16, 16));
+        mTextColor.addActionListener((e)-> textColor(paneOrigin));
+        menuDefine.add(mTextColor);
+
+        JMenuItem mKaraokeColor = new JMenuItem(
+                Loader.language("io.karaoke.color", "Color the karaoke"),
+                Loader.fromResource("/images/16-colors-karaoke.png", 16, 16));
+        mKaraokeColor.addActionListener((e)-> karaokeColor(paneOrigin));
+        menuDefine.add(mKaraokeColor);
+
+        JMenuItem mOutlineColor = new JMenuItem(
+                Loader.language("io.outline.color", "Color the outline"),
+                Loader.fromResource("/images/16-colors-outline.png", 16, 16));
+        mOutlineColor.addActionListener((e)-> outlineColor(paneOrigin));
+        menuDefine.add(mOutlineColor);
+
+        JMenuItem mShadowColor = new JMenuItem(
+                Loader.language("io.shadow.color", "Color the shadow"),
+                Loader.fromResource("/images/16-colors-shadow.png", 16, 16));
+        mShadowColor.addActionListener((e)-> shadowColor(paneOrigin));
+        menuDefine.add(mShadowColor);
 
         return  popupMenu;
     }
@@ -366,55 +398,86 @@ public class EditorPanel extends JPanel {
 
         popupMenu.add(new JPopupMenu.Separator());
 
+        JMenu menuAdd = new JMenu(Loader.language("io.menu.add", "Add"));
+        popupMenu.add(menuAdd);
+
         JMenuItem mBold = new JMenuItem(
                 Loader.language("io.bold.add", "Add Bold"),
                 Loader.fromResource("/images/16-bold-blue.png", 16, 16));
         mBold.addActionListener((e)-> bold(paneTranslation, true));
-        popupMenu.add(mBold);
+        menuAdd.add(mBold);
 
         JMenuItem mItalic = new JMenuItem(
                 Loader.language("io.italic.add", "Add Italic"),
                 Loader.fromResource("/images/16-italic-blue.png", 16, 16));
         mItalic.addActionListener((e)-> italic(paneTranslation, true));
-        popupMenu.add(mItalic);
+        menuAdd.add(mItalic);
 
         JMenuItem mUnderline = new JMenuItem(
                 Loader.language("io.underline.add", "Add Underline"),
                 Loader.fromResource("/images/16-underline-blue.png", 16, 16));
         mUnderline.addActionListener((e)-> underline(paneTranslation, true));
-        popupMenu.add(mUnderline);
+        menuAdd.add(mUnderline);
 
         JMenuItem mStrikeOut = new JMenuItem(
                 Loader.language("io.strikeOut.add", "Add StrikeOut"),
                 Loader.fromResource("/images/16-strikeOut-blue.png", 16, 16));
         mStrikeOut.addActionListener((e)-> strikeOut(paneTranslation, true));
-        popupMenu.add(mStrikeOut);
+        menuAdd.add(mStrikeOut);
 
-        popupMenu.add(new JPopupMenu.Separator());
+        JMenu menuRemove = new JMenu(Loader.language("io.menu.rem", "Remove"));
+        popupMenu.add(menuRemove);
 
         JMenuItem mBold_r = new JMenuItem(
                 Loader.language("io.bold.rem", "Remove Bold"),
                 Loader.fromResource("/images/16-bold-red.png", 16, 16));
         mBold_r.addActionListener((e)-> bold(paneTranslation, false));
-        popupMenu.add(mBold_r);
+        menuRemove.add(mBold_r);
 
         JMenuItem mItalic_r = new JMenuItem(
                 Loader.language("io.italic.rem", "Remove Italic"),
                 Loader.fromResource("/images/16-italic-red.png", 16, 16));
         mItalic_r.addActionListener((e)-> italic(paneTranslation, false));
-        popupMenu.add(mItalic_r);
+        menuRemove.add(mItalic_r);
 
         JMenuItem mUnderline_r = new JMenuItem(
                 Loader.language("io.underline.rem", "Remove Underline"),
                 Loader.fromResource("/images/16-underline-red.png", 16, 16));
         mUnderline_r.addActionListener((e)-> underline(paneTranslation, false));
-        popupMenu.add(mUnderline_r);
+        menuRemove.add(mUnderline_r);
 
         JMenuItem mStrikeOut_r = new JMenuItem(
                 Loader.language("io.strikeOut.rem", "Remove StrikeOut"),
                 Loader.fromResource("/images/16-strikeOut-red.png", 16, 16));
         mStrikeOut_r.addActionListener((e)-> strikeOut(paneTranslation, false));
-        popupMenu.add(mStrikeOut_r);
+        menuRemove.add(mStrikeOut_r);
+
+        JMenu menuDefine = new JMenu(Loader.language("io.menu.def", "Define"));
+        popupMenu.add(menuDefine);
+
+        JMenuItem mTextColor = new JMenuItem(
+                Loader.language("io.text.color", "Color the text"),
+                Loader.fromResource("/images/16-colors-text.png", 16, 16));
+        mTextColor.addActionListener((e)-> textColor(paneTranslation));
+        menuDefine.add(mTextColor);
+
+        JMenuItem mKaraokeColor = new JMenuItem(
+                Loader.language("io.karaoke.color", "Color the karaoke"),
+                Loader.fromResource("/images/16-colors-karaoke.png", 16, 16));
+        mKaraokeColor.addActionListener((e)-> karaokeColor(paneTranslation));
+        menuDefine.add(mKaraokeColor);
+
+        JMenuItem mOutlineColor = new JMenuItem(
+                Loader.language("io.outline.color", "Color the outline"),
+                Loader.fromResource("/images/16-colors-outline.png", 16, 16));
+        mOutlineColor.addActionListener((e)-> outlineColor(paneTranslation));
+        menuDefine.add(mOutlineColor);
+
+        JMenuItem mShadowColor = new JMenuItem(
+                Loader.language("io.shadow.color", "Color the shadow"),
+                Loader.fromResource("/images/16-colors-shadow.png", 16, 16));
+        mShadowColor.addActionListener((e)-> shadowColor(paneTranslation));
+        menuDefine.add(mShadowColor);
 
         return  popupMenu;
     }
@@ -589,6 +652,44 @@ public class EditorPanel extends JPanel {
         }else{
             removeOverrides(textPane, "\\s1", "\\s0");
         }
+    }
+
+    private void color(JTextPane textPane, int type){
+        try{
+            int start = textPane.getSelectionStart();
+            int end = textPane.getSelectionEnd();
+            String text = textPane.getText();
+            Color color = JColorChooser.showDialog(this, "Choose a color", null);
+            if(color != null){
+                String bgr = String.format("%02X%02X%02X", color.getBlue(), color.getGreen(), color.getRed());
+                textPane.setText(
+                        (start > 0 ? text.substring(0, start) : "") + "{\\"+type+"c&H" + bgr + "&}" +
+                                textPane.getSelectedText() +
+                                (end < text.length() ? text.substring(end) : ""));
+                String s = textPane.getText();
+                s = s.replace("}{", "");
+                s = s.replace("{}", "");
+                textPane.setText(s);
+            }
+        }catch(Exception ex){
+            Loader.dialogErr(ex.getLocalizedMessage());
+        }
+    }
+
+    private void textColor(JTextPane textPane){
+        color(textPane, 1);
+    }
+
+    private void karaokeColor(JTextPane textPane){
+        color(textPane, 2);
+    }
+
+    private void outlineColor(JTextPane textPane){
+        color(textPane, 3);
+    }
+
+    private void shadowColor(JTextPane textPane){
+        color(textPane, 4);
     }
 
 

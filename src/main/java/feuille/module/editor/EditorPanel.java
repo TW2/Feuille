@@ -130,11 +130,12 @@ public class EditorPanel extends JPanel {
 //            }
             AssEditorDialog ae = new AssEditorDialog(exchange);
             ae.initAssStylesCollections();
+            ae.setStyles(ecbEditStyles.getObjects());
             ae.showDialog(exchange.getMainFrame().getSettings());
             if(ae.getDialogResult() == DialogResult.OK){
                 ae.replaceAssStylesCollections();
-                ecbEditStyles.getObjects().clear();
-                ecbEditStyles.getObjects().addAll(ae.getStyles());
+                ecbEditStyles.setObjects(ae.getStyles());
+                exchange.getAss().setStyles(ae.getStyles());
             }
         });
 

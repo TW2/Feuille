@@ -5,6 +5,7 @@ import feuille.util.Loader;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ElementsComboBox<T> extends JPanel {
     private final JComboBox<T> comboBox = new JComboBox<>();
@@ -27,21 +28,19 @@ public class ElementsComboBox<T> extends JPanel {
         return button;
     }
 
-    public java.util.List<T> getObjects(){
-        java.util.List<T> list = new ArrayList<>();
-
-        for(int i=0; i<model.getSize(); i++){
-            list.add(model.getElementAt(i));
+    public List<T> getObjects(){
+        List<T> list = new ArrayList<>();
+        for(int i=0; i<comboBox.getItemCount(); i++){
+            list.add(comboBox.getItemAt(i));
         }
-
         return list;
     }
 
-    public void setObjects(java.util.List<T> objects, boolean add){
-        if(!add){
-            model.removeAllElements();
+    public void setObjects(List<T> list){
+        model.removeAllElements();
+        for(T obj : list){
+            model.addElement(obj);
         }
-        model.addAll(objects);
     }
 
     public void addObject(T obj){

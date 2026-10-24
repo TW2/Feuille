@@ -69,6 +69,7 @@ public class PreviewASS extends JPanel {
         ass.getInfos().setPlayResX(spinnerWidthModel.getNumber().intValue());
         ass.getInfos().setPlayResY(spinnerHeightModel.getNumber().intValue());
         ass.getStyles().clear();
+        int alignment = currentStyle.getAlignment().getNumber();
         currentStyle.setAlignment(new AssAlignment(5));
         ass.getStyles().add(currentStyle);
         AssEvent newEvent = new AssEvent();
@@ -94,6 +95,7 @@ public class PreviewASS extends JPanel {
         int hs = spinnerHeightModel.getNumber().intValue() / 3;
         lblView.setIcon(new ImageIcon(img.getSubimage(ws, hs, ws, hs)));
         lblView.setHorizontalAlignment(JLabel.CENTER);
+        currentStyle.setAlignment(new AssAlignment(alignment));
     }
 
     public void btnSentenceActionPerformed(ActionEvent e) {

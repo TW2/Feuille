@@ -262,7 +262,7 @@ public class AssEditorDialog extends JDialog {
 
         JPanel styleSpacingPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         styleSpacingPanel.setBorder(BorderFactory.createTitledBorder(bdTab, "Spacing px"));
-        spinnerSpacingModel = new SpinnerNumberModel(0.0, null, null, 1);
+        spinnerSpacingModel = new SpinnerNumberModel(0.0, 0.0, null, 1);
         spinnerSpacing = new JSpinner(spinnerSpacingModel);
         spinnerSpacing.addChangeListener(this::spinnerSpacingChanged);
         spinnerSpacing.setPreferredSize(new Dimension(70, 26));
@@ -533,8 +533,19 @@ public class AssEditorDialog extends JDialog {
         return dialogResult;
     }
 
+    // To use with ElementsComboBox combobox
     public List<AssStyle> getStyles() {
-        return scriptStorageList.getSelectedValuesList();
+        List<AssStyle> list = new ArrayList<>();
+        for(int i=0; i<scriptStorageModel.getSize(); i++){
+            list.add(scriptStorageModel.getElementAt(i));
+        }
+        return list;
+    }
+
+    // To use with ElementsComboBox combobox
+    public void setStyles(List<AssStyle> list){
+        scriptStorageModel.clear();
+        scriptStorageModel.addAll(list);
     }
 
     public Settings getSettings() {

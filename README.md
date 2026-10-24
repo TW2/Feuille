@@ -27,7 +27,15 @@ The seek function of FMP (Free Media Player), a player made by AI which embeds F
 4/ Enter target subfolder<br>
 5/ Launch with the command ```java -jar``` targeting the Feuille shaded version.
 
-### Goals:
+### Current development of v0.6:
+
+| Subject | Few functionalities |
+|---|---|
+| Welcome | Show License, Designed to display Help in HTML (JavaFX) |
+| Karaoke | Later (Java Swing) |
+| Editor | Time, Preview (with issues), Open Save ASS (Java Swing / JNA / C++) |
+| Drawing | Line, Bézier work, but not Spline, delayed (Java Swing) |
+| Analysis | Later (Java Swing) |
 
 ### Discord EN/FR:
 

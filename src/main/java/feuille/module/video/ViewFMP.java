@@ -45,7 +45,7 @@ public class ViewFMP extends JPanel {
             controller = new FreeMediaPlayer.PlaybackController(
                     freeMediaPlayer.getFmp(),
                     mediaPath,
-                    script.getAbsolutePath(),
+                    script.getPath(),
                     videoPanel
             );
         } catch (Exception exception) {

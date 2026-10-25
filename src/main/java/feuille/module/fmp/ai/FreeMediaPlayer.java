@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
 import java.io.Serial;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
@@ -175,10 +176,15 @@ public class FreeMediaPlayer {
                 case Platform.MAC -> osName = "mac";
             }
 
+            // External path
+            File app = new File(new File("").getAbsolutePath());
+            File folder = new File(app.getPath() +
+                    File.separator + "settings" +
+                    File.separator + "dependencies"
+            );
+
             // The path where the shared library is
-            String libPath = Objects.requireNonNull(
-                    getClass().getResource("/ext_lib/fmp/" + osName)
-            ).getPath();
+            String libPath = new File(folder, osName).getPath();
 
             // The linkage
             System.setProperty("jna.library.path", libPath);

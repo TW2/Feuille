@@ -49,7 +49,8 @@ public class ViewFMP extends JPanel {
                     videoPanel
             );
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(),
+            String error = exception.getMessage() + " at " + exception.getStackTrace()[1];
+            JOptionPane.showMessageDialog(null, error,
                     "Unable to start FMP", JOptionPane.ERROR_MESSAGE);
         }
     }

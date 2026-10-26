@@ -1,5 +1,6 @@
 package feuille.module.editor;
 
+import feuille.dialog.AssActorsDialog;
 import feuille.dialog.AssEditorDialog;
 import feuille.module.editor.assa.*;
 import feuille.module.editor.voyager.*;
@@ -86,6 +87,10 @@ public class EditorPanel extends JPanel {
         spinEditMV.setModel(spinEditModelMV);
         spinEditMV.setPreferredSize(new Dimension(60, 22));
 
+        ecbEditStyles.setImage(Loader.fromResource("/images/16-diamond.png", 16, 16));
+        ecbEditActors.setImage(Loader.fromResource("/images/16-user-blue.png", 16, 16));
+        ecbEditEffects.setImage(Loader.fromResource("/images/16-goldenstar.png", 16, 16));
+
         // TODO Do that carefully:
         ecbEditStyles.addObject(new AssStyle());
         ecbEditActors.addObject(new AssActor());
@@ -140,8 +145,15 @@ public class EditorPanel extends JPanel {
         });
 
         ecbEditActors.getButton().addActionListener((_)->{
-            // TODO
-
+            AssActorsDialog ac = new AssActorsDialog(exchange);
+            ac.setActorsList(ecbEditActors.getObjects());
+            ac.selectActor(ecbEditActors.getSelectedItem());
+            ac.setCurrentStyle(exchange.getCurrentStyle());
+            ac.showDialog(exchange.getMainFrame().getSettings());
+            if(ac.getDialogResult() == DialogResult.OK){
+                ecbEditActors.setObjects(ac.getActorsList());
+                exchange.setCurrentStyle(ac.getCurrentStyle());
+            }
         });
 
         ecbEditEffects.getButton().addActionListener((_)->{

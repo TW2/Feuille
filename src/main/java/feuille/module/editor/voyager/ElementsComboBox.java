@@ -10,7 +10,7 @@ import java.util.List;
 public class ElementsComboBox<T> extends JPanel {
     private final JComboBox<T> comboBox = new JComboBox<>();
     private final DefaultComboBoxModel<T> model = new DefaultComboBoxModel<>();
-    private final JButton button = new JButton(Loader.fromResource("/images/16 losange carre.png", 16, 16));
+    private final JButton button = new JButton();
 
     public ElementsComboBox(){
         comboBox.setModel(model);
@@ -61,5 +61,9 @@ public class ElementsComboBox<T> extends JPanel {
 
     public void setSelected(T obj){
         model.setSelectedItem(obj);
+    }
+
+    public void setImage(ImageIcon image){
+        button.setIcon(image);
     }
 }

@@ -197,7 +197,7 @@ public class Wave extends JPanel {
             g2d.drawLine(-visibleShift+endAnchor, 0, -visibleShift+endAnchor, getHeight());
 
             g2d.setColor(currentTimeColor);
-            double currentSecond = ((double)getWidth() / MS_PERIOD) * (msCurrent / 1000d);
+            double currentSecond = oneSecond * (msCurrent / 1000d);
             g2d.draw(new Line2D.Double(-visibleShift+currentSecond, 0, -visibleShift+currentSecond, getHeight()));
         }
 

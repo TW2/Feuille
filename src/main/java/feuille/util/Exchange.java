@@ -275,4 +275,114 @@ public class Exchange {
     public void setCurrentStylesCollection(AssStylesCollection currentStylesCollection) {
         this.currentStylesCollection = currentStylesCollection;
     }
+
+    public static class SpyPlaying implements Runnable {
+        public enum State {
+            PLAYING,
+            PAUSED,
+            RESUMED,
+            STOPPED
+        }
+
+        private State currentState = State.STOPPED;
+
+        private final Exchange exchange;
+        private volatile boolean running;
+        private Thread thread;
+        private long currentTime;
+        private long startUs;
+        private long endUs;
+        private double fps;
+
+        @Override
+        public void run() {
+            long time = 0;
+            long startTime = System.nanoTime();
+            long to = 0;
+            boolean controlSet = false;
+            while(running){
+                if(currentState == State.RESUMED){
+                    startTime = System.nanoTime() - currentTime;
+                }
+                if(currentState == State.PLAYING || currentState == State.RESUMED){
+                    time = System.nanoTime() - startTime;
+                    currentTime = time;
+                    if(startUs != 0 && endUs != 0){
+                        if(!controlSet){
+                            to = System.nanoTime() + ((endUs * 1000) - (startUs * 1000));
+                            controlSet = true;
+                        }
+                        currentTime = time + (startUs * 1000L);
+                        if(System.nanoTime() >= to){
+                            stopTriggered();
+                        }
+                    }
+
+                }
+                exchange.getSyncPane().getWaveform().setMsCurrent(currentTime / 1_000_000);
+                exchange.getSyncPane().getWaveform().repaint();
+            }
+        }
+
+        public SpyPlaying(Exchange exchange) {
+            this.exchange = exchange;
+            thread = null;
+            running = false;
+            currentTime = 0L;
+            startUs = 0L;
+            endUs = 0L;
+            fps = 24000d / 1001d;
+        }
+
+        public void setFps(double fps){
+            this.fps = fps;
+        }
+
+        public double getFps(){
+            return fps;
+        }
+
+        public void usDiscovered(long startUs, long endUs) {
+            this.startUs = startUs;
+            this.endUs = endUs;
+        }
+
+        public void usReset(){
+            this.startUs = 0;
+            this.endUs = 0;
+        }
+
+        public void playTriggered(){
+            if(currentState == State.PAUSED){
+                resumeTriggered();
+            }else{
+                currentState = State.PLAYING;
+                running = true;
+                thread = new Thread(this);
+                thread.start();
+            }
+        }
+
+        public void pauseTriggered(){
+            currentState = State.PAUSED;
+            running = false;
+        }
+
+        public void resumeTriggered(){
+            currentState = State.RESUMED;
+            running = true;
+        }
+
+        public void stopTriggered(){
+            currentState = State.STOPPED;
+            running = false;
+            if(thread != null){
+                if(thread.isAlive() || !thread.isInterrupted()){
+                    thread.interrupt();
+                    thread = null;
+                }
+            }
+            usReset();
+        }
+    }
 }

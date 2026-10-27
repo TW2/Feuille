@@ -43,6 +43,7 @@ public class ViewFMP extends JPanel {
             );
             File script = new File(folder, "editflag2.ass");
             controller = new FreeMediaPlayer.PlaybackController(
+                    exchange,
                     freeMediaPlayer.getFmp(),
                     mediaPath,
                     script.getPath(),

@@ -4,6 +4,7 @@ import feuille.module.editor.assa.ASS;
 import feuille.module.editor.assa.AssEvent;
 import feuille.module.editor.assa.AssTime;
 import feuille.util.*;
+import feuille.util.assa.AssActorType;
 import feuille.util.assa.AssEventType;
 
 import javax.swing.*;
@@ -32,6 +33,14 @@ public class VoyagersTable extends JPanel {
     private int pressedAt = -1;
     private int releasedAt = -1;
 
+    private final ImageIcon iBoy;
+    private final ImageIcon iGirl;
+    private final ImageIcon iMan;
+    private final ImageIcon iWoman;
+    private final ImageIcon iNarrator;
+    private final ImageIcon iRobot;
+    private final ImageIcon iUnknown;
+
     public VoyagersTable(Exchange exchange) {
         this.exchange = exchange;
         setDoubleBuffered(true);
@@ -46,6 +55,14 @@ public class VoyagersTable extends JPanel {
 
         setLayout( new BorderLayout());
         add(scrollBar, BorderLayout.EAST);
+
+        iBoy = Loader.fromResource("/images/16-k-boy.png", 16, 16);
+        iGirl = Loader.fromResource("/images/16-k-girl.png", 16, 16);
+        iMan = Loader.fromResource("/images/16-k-man.png", 16, 16);
+        iWoman = Loader.fromResource("/images/16-k-woman.png", 16, 16);
+        iNarrator = Loader.fromResource("/images/16-k-narrator.png", 16, 16);
+        iRobot = Loader.fromResource("/images/16-k-robot.png", 16, 16);
+        iUnknown = Loader.fromResource("/images/16-k-unknown.png", 16, 16);
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -220,10 +237,67 @@ public class VoyagersTable extends JPanel {
 
         y = 20 + offset;
 
+        FontMetrics fontMetrics = g2d.getFontMetrics(g2d.getFont());
+
+        // Header
+        String plus_minus = Loader.language("voyager.plus.minus", "+/-");
+        String line = Loader.language("voyager.line", "Line");
+        String bookmark = Loader.language("voyager.bookmark", "Bookmark");
+        String layer = Loader.language("voyager.layer", "Layer");
+        String flag = Loader.language("voyager.flag", "Flag");
+        String start = Loader.language("voyager.start", "Start");
+        String end = Loader.language("voyager.end", "End");
+        String style = Loader.language("voyager.style", "Style");
+        String actor = Loader.language("voyager.actor", "Actor");
+        String effect = Loader.language("voyager.effect", "Effect");
+        String text = Loader.language("voyager.text", "Text");
+
+        int sLine = fontMetrics.stringWidth(line);
+        int sBookmark = fontMetrics.stringWidth(bookmark);
+        int sLayer = fontMetrics.stringWidth(layer);
+        int sFlag = fontMetrics.stringWidth(flag);
+        int sStart = fontMetrics.stringWidth(start);
+        int sEnd = fontMetrics.stringWidth(end);
+        int sStyle = fontMetrics.stringWidth(style);
+        int sActor = fontMetrics.stringWidth(actor);
+        int sEffect = fontMetrics.stringWidth(effect);
+
+        int lineCounter = 0;
+        for(Voyager voyager : voyagers){
+            if(voyager != null) {
+                sLine = Math.max(sLine, fontMetrics.stringWidth(Integer.toString(lineCounter)));
+                sBookmark = Math.max(sBookmark, voyager.getBookmarks().size() * 6);
+                sLayer = Math.max(sLayer, fontMetrics.stringWidth(Integer.toString(voyager.getEvent().getLayer())));
+                sFlag = Math.max(sFlag, Loader.locations(voyager.getLanguage()).getIconWidth());
+                sStart = Math.max(sStart, fontMetrics.stringWidth(voyager.getEvent().getStart().toAss()));
+                sEnd = Math.max(sEnd, fontMetrics.stringWidth(voyager.getEvent().getEnd().toAss()));
+                sStyle = Math.max(sStyle, fontMetrics.stringWidth(voyager.getEvent().getStyle().getName()));
+                sActor = Math.max(sActor, fontMetrics.stringWidth(voyager.getEvent().getName().getName()));
+                sEffect = Math.max(sEffect, fontMetrics.stringWidth(voyager.getEvent().getEffect().getName()));
+
+                sActor = Math.max(sActor, sEffect);
+                sEffect = sActor;
+
+                lineCounter++;
+            }
+        }
+
+        sLine += 10;
+        sBookmark += 10;
+        sLayer += 10;
+        sFlag += 10;
+        sStart += 10;
+        sEnd += 10;
+        sStyle += 10;
+        sActor += 10 + 40; // 20(16) kind + 20(16) color
+
+        int amplify;
+
         // The data
         for (Voyager voyager : voyagers) {
             if(voyager != null) {
                 counter++;
+                amplify = 0;
                 int h = voyager.isCollapsed() ? 20 : 40 + voyager.getVoyagers().size() * 20;
                 if(h >= vBarOffset && vBarOffset < h + getHeight()) {
                     g2d.setColor(getForeground());
@@ -241,10 +315,15 @@ public class VoyagersTable extends JPanel {
                         g2d.draw(plusMinus);
                         g2d.drawLine(6, y + 10, 14, y + 10);
                     }
+                    amplify += 27;
                     // Line number
-                    g2d.drawString(String.valueOf(counter), 27, y + 16);
+                    g2d.drawString(String.valueOf(counter), amplify + 4, y + 16);
+                    amplify += sLine;
+                    // TODO: Bookmarks
+                    amplify += sBookmark;
                     // Layer
-                    g2d.drawString(String.format("%d", voyager.getEvent().getLayer()), 155, y + 16);
+                    g2d.drawString(String.format("%d", voyager.getEvent().getLayer()), amplify + 4, y + 16);
+                    amplify += sLayer;
                     // Flag
                     try{
                         int wi, xi;
@@ -253,116 +332,154 @@ public class VoyagersTable extends JPanel {
                             ImageIcon i1 = Loader.locations(voyager.getLanguage());
                             wi = 18 * i1.getIconWidth() / i1.getIconHeight();
                             xi = (39 - wi) / 2;
-                            g2d.drawImage(i1.getImage(), 205 + xi, y+1, wi, 18,null);
+                            g2d.drawImage(i1.getImage(), amplify + xi, y+1, wi, 18,null);
                         }else{
                             // Minus
                             ImageIcon i1 = Loader.locations(voyager.getLanguage());
                             wi = 18 * i1.getIconWidth() / i1.getIconHeight();
                             xi = (39 - wi) / 2;
-                            g2d.drawImage(i1.getImage(), 205 + xi, y+1, wi, 18,null);
+                            g2d.drawImage(i1.getImage(), amplify + xi, y+1, wi, 18,null);
                             int ya = y + 40;
                             for(Voyager v : voyager.getVoyagers()) {
                                 i1 = Loader.locations(v.getLanguage());
                                 wi = 18 * i1.getIconWidth() / i1.getIconHeight();
                                 xi = (39 - wi) / 2;
-                                g2d.drawImage(i1.getImage(), 205 + xi, ya+1, wi, 18,null);
+                                g2d.drawImage(i1.getImage(), amplify + xi, ya+1, wi, 18,null);
                                 ya += 20;
                             }
                         }
                     }catch(Exception _){
                         // Wrong locale
                     }
+                    amplify += sFlag;
                     // Start time in 0:00:00.00 format
-                    g2d.drawString(voyager.getEvent().getStart().toAss(), 247, y + 16);
+                    g2d.drawString(voyager.getEvent().getStart().toAss(), amplify + 4, y + 16);
+                    amplify += sStart;
                     // End time in 0:00:00.00 format
-                    g2d.drawString(voyager.getEvent().getEnd().toAss(), 327, y + 16);
+                    g2d.drawString(voyager.getEvent().getEnd().toAss(), amplify + 4, y + 16);
+                    amplify += sEnd;
                     // Style
-                    g2d.drawString(voyager.getEvent().getStyle().getName(), 407, y + 16);
+                    g2d.drawString(voyager.getEvent().getStyle().getName(), amplify + 4, y + 16);
+                    amplify += sStyle;
                     // Actor
-                    g2d.drawString(voyager.getEvent().getName().getName(), 487, y + 16);
+                    // Replaced value is 487
+                    switch(voyager.getEvent().getName().getAssActorType()){
+                        case AssActorType.Boy -> g2d.drawImage(iBoy.getImage(), amplify + 2, y + 2, null);
+                        case AssActorType.Girl -> g2d.drawImage(iGirl.getImage(), amplify + 2, y + 2, null);
+                        case AssActorType.Man -> g2d.drawImage(iMan.getImage(), amplify + 2, y + 2, null);
+                        case AssActorType.Woman -> g2d.drawImage(iWoman.getImage(), amplify + 2, y + 2, null);
+                        case AssActorType.Narrator -> g2d.drawImage(iNarrator.getImage(), amplify + 2, y + 2, null);
+                        case AssActorType.Robot -> g2d.drawImage(iRobot.getImage(), amplify + 2, y + 2, null);
+                        default -> g2d.drawImage(iUnknown.getImage(), amplify + 2, y + 2, null);
+                    }
+                    g2d.setColor(voyager.getEvent().getName().getColor().getColor());
+                    g2d.fillRect(amplify + 22, y + 2, 16, 16);
+                    g2d.setColor(getForeground());
+                    g2d.drawRect(amplify + 22, y + 2, 16, 16);
+                    g2d.drawString(voyager.getEvent().getName().getName(), amplify + 44, y + 16);
+                    amplify += sActor;
                     // Text
+                    // Replaced value is 567
                     if(voyager.isCollapsed()) {
                         // Plus
-                        g2d.drawString(applyStrip(voyager.getEvent().getText()), 567, y + 16);
+                        g2d.drawString(applyStrip(voyager.getEvent().getText()), amplify + 4, y + 16);
                     }else{
                         // Minus
-                        g2d.drawString(applyStrip(voyager.getEvent().getText()), 567, y + 16);
+                        g2d.drawString(applyStrip(voyager.getEvent().getText()), amplify + 4, y + 16);
                         int ya = y + 40;
                         for(Voyager v : voyager.getVoyagers()) {
-                            g2d.drawString(applyStrip(v.getEvent().getText()), 567, ya + 16);
+                            g2d.drawString(applyStrip(v.getEvent().getText()), amplify + 4, ya + 16);
                             ya += 20;
                         }
                     }
 
+                    amplify = 27 + sLine + sBookmark + sLayer + sFlag;
                     g2d.setColor(Color.gray);
                     if(!voyager.isCollapsed()) {
                         // Duration in 0:00:00.00 format
-                        g2d.drawString(Loader.language("voyager.lines.duration", "Duration") + " :", 248, y + 20 + 16);
+                        g2d.drawString(Loader.language("voyager.lines.duration", "Duration: "), amplify + 4, y + 20 + 16);
+                        amplify += sStart;
                         // Duration
                         AssTime s = voyager.getEvent().getStart();
                         AssTime e = voyager.getEvent().getEnd();
                         String duration = AssTime.getAssDuration(s, e);
-                        g2d.drawString(duration, 327, y + 20 + 16);
+                        g2d.drawString(duration, amplify + 4, y + 20 + 16);
+                        amplify += sEnd;
                         // Effect
-                        g2d.drawString(Loader.language("voyager.lines.effect", "Effect") + " :", 407, y + 20 + 16);
-                        g2d.drawString(voyager.getEvent().getEffect().getName(), 487, y + 20 + 16);
+                        // Replaced value is 487
+                        g2d.drawString(Loader.language("voyager.lines.effect", "Effect: "), amplify + 4, y + 20 + 16);
+                        amplify += sStyle;
+                        g2d.drawString(voyager.getEvent().getEffect().getName(), amplify + 4, y + 20 + 16);
+                        amplify += sActor;
                         // CPS
                         g2d.drawString(String.format("%.02f %s",
                                 voyager.getEvent().getCPS(),
                                 Loader.language("voyager.lines.cps", "cps")
-                        ), 567, y + 20 + 16);
+                        ), amplify + 4, y + 20 + 16); // 567
+                        amplify += 80;
                         // CPL
                         g2d.drawString(String.format("%d %s",
                                 Math.round(voyager.getEvent().getCPL()),
                                 Loader.language("voyager.lines.cpl", "cpl")
-                        ), 647, y + 20 + 16);
+                        ), amplify + 4, y + 20 + 16); // 647 = 567 + 80
+                        amplify += 80;
                         // ML, MR, MV
                         g2d.drawString(String.format("%s : %d %d %d",
                                 Loader.language("voyager.lines.margins", "Margins"),
                                 voyager.getEvent().getMarginL(),
                                 voyager.getEvent().getMarginR(),
                                 voyager.getEvent().getMarginV()
-                        ), 727, y + 20 + 16);
+                        ), amplify + 4, y + 20 + 16); // 727 = 567 + 160
                     }
                 }
                 y += h;
             }
         }
 
+        amplify = 27;
+
         // The header
-        g2d.setColor(getBackground());
+        g2d.setColor(DrawColor.dark_blue.getColor());
         g2d.fillRect(0, 0, getWidth(), 20);
-        g2d.setColor(Color.gray);
+        g2d.setColor(Color.white);
         g2d.drawRect(0, 0, getWidth()-1, 20-1);
         // Collapse(-) or not(+)
-        g2d.drawString(Loader.language("voyager.plus.minus", "+/-"), 4, 20 - 4);
+        g2d.drawString(plus_minus, 4, 20 - 4);
         g2d.drawLine(25, 0, 25, 20-1);
         // Line
-        g2d.drawString(Loader.language("voyager.line", "Line"), 37, 20 - 4);
-        g2d.drawLine(75, 0, 75, 20-1);
+        g2d.drawString(line, amplify + 4, 20 - 4);
+        g2d.drawLine(sLine + amplify, 0, sLine + amplify, 20-1);
+        amplify += sLine;
         // Bookmark
-        g2d.drawString(Loader.language("voyager.bookmark", "Bookmark"), 82, 20 - 4);
-        g2d.drawLine(153, 0, 153, 20-1);
+        g2d.drawString(bookmark, amplify + 4, 20 - 4);
+        g2d.drawLine(sBookmark + amplify, 0, sBookmark + amplify, 20-1);
+        amplify += sBookmark;
         // Layer
-        g2d.drawString(Loader.language("voyager.layer", "Layer"), 162, 20 - 4);
-        g2d.drawLine(205, 0, 205, 20-1);
+        g2d.drawString(layer, amplify + 4, 20 - 4);
+        g2d.drawLine(sLayer + amplify, 0, sLayer + amplify, 20-1);
+        amplify += sLayer;
         // Flag
-        g2d.drawString(Loader.language("voyager.flag", "Flag"), 211, 20 - 4);
-        g2d.drawLine(244, 0, 244, 20-1);
+        g2d.drawString(flag, amplify + 4, 20 - 4);
+        g2d.drawLine(sFlag + amplify, 0,  sFlag + amplify, 20-1);
+        amplify += sFlag;
         // Start
-        g2d.drawString(Loader.language("voyager.start", "Start"), 269, 20 - 4);
-        g2d.drawLine(324, 0, 324, 20-1);
+        g2d.drawString(start, amplify + 4, 20 - 4);
+        g2d.drawLine(sStart + amplify, 0, sStart + amplify, 20-1);
+        amplify += sStart;
         // End
-        g2d.drawString(Loader.language("voyager.end", "End"), 352, 20 - 4);
-        g2d.drawLine(404, 0, 404, 20-1);
+        g2d.drawString(end, amplify + 4, 20 - 4);
+        g2d.drawLine(sEnd + amplify, 0, sEnd + amplify, 20-1);
+        amplify += sEnd;
         // Style
-        g2d.drawString(Loader.language("voyager.style", "Style"), 427, 20 - 4);
-        g2d.drawLine(484, 0, 484, 20-1);
+        g2d.drawString(style, amplify + 4, 20 - 4);
+        g2d.drawLine(sStyle + amplify, 0, sStyle + amplify, 20-1);
+        amplify += sStyle;
         // Actor
-        g2d.drawString(Loader.language("voyager.actor", "Actor"), 507, 20 - 4);
-        g2d.drawLine(564, 0, 564, 20-1);
+        g2d.drawString(actor, amplify + 4, 20 - 4);
+        g2d.drawLine(sActor + amplify, 0, sActor + amplify, 20-1);
+        amplify += sActor;
         // Text
-        g2d.drawString(Loader.language("voyager.text", "Text"), 760, 20 - 4);
+        g2d.drawString(text, amplify + 4, 20 - 4);
 
         //------------------------------------------------------------
         g2d.dispose();

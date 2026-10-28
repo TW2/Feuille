@@ -93,7 +93,6 @@ public class FeuilleFrame extends JFrame {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 Settings.saveSettings(settings);
-                exchange.getViewFMP().free();
             }
         });
 
@@ -163,9 +162,17 @@ public class FeuilleFrame extends JFrame {
     private JMenu getWelcomeMenu() {
         JMenu mnuWelcome = new JMenu(Loader.language("menu.welcome", "Welcome"));
 
-        JMenuItem mLicense = new JMenuItem(Loader.language("menu.welcome.lic", "Show license"));
+        JMenuItem mLicense = new JMenuItem(Loader.language("menu.welcome.lic", "Show Feuille license"));
         mLicense.addActionListener(this::mLicenseActionPerformed);
         mnuWelcome.add(mLicense);
+
+        JMenuItem mLicenseFF = new JMenuItem(Loader.language("menu.welcome.licf", "Show FFmpeg license"));
+        mLicenseFF.addActionListener(this::mLicenseFFActionPerformed);
+        mnuWelcome.add(mLicenseFF);
+
+        JMenuItem mLicenseASS = new JMenuItem(Loader.language("menu.welcome.lica", "Show libass license"));
+        mLicenseASS.addActionListener(this::mLicenseASSActionPerformed);
+        mnuWelcome.add(mLicenseASS);
 
         return(mnuWelcome);
     }
@@ -281,6 +288,14 @@ public class FeuilleFrame extends JFrame {
         displayWelcomeDocument(file);
     }
 
+    public void mLicenseFFActionPerformed(ActionEvent event) {
+        welcome.setURL("https://ffmpeg.org/legal.html");
+    }
+
+    public void mLicenseASSActionPerformed(ActionEvent event) {
+        welcome.setURL("https://github.com/libass/libass?tab=ISC-1-ov-file");
+    }
+
     private void displayWelcomeDocument(File file){
         if(!file.exists()) return;
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
@@ -354,7 +369,7 @@ public class FeuilleFrame extends JFrame {
                     15_000L
             );
             // Set video
-            exchange.getViewFMP().openMedia(fileChooser.getSelectedFile().getAbsolutePath());
+            exchange.getViewGst().openMedia(fileChooser.getSelectedFile().getAbsolutePath());
         }
     }
 
@@ -371,7 +386,7 @@ public class FeuilleFrame extends JFrame {
                     15_000L
             );
             // Set video
-            exchange.getViewFMP().openMedia(fileChooser.getSelectedFile().getAbsolutePath());
+            exchange.getViewGst().openMedia(fileChooser.getSelectedFile().getAbsolutePath());
         }
     }
 

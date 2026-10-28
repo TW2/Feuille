@@ -107,5 +107,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Source: https://mvnrepository.com/artifact/org.freedesktop.gstreamer/gst1-java-core -->
+        <dependency>
+            <groupId>org.freedesktop.gstreamer</groupId>
+            <artifactId>gst1-java-core</artifactId>
+            <version>1.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 </project>

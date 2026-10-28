@@ -5,7 +5,6 @@ import feuille.module.audio.base.FFAudio2;
 import feuille.module.audio.base.SignalResult;
 import feuille.module.audio.base.Wave;
 import feuille.module.audio.base.WaveDB;
-import feuille.module.editor.assa.AssTime;
 import feuille.util.Exchange;
 import feuille.util.FFMpegColor;
 import feuille.util.Loader;
@@ -61,9 +60,9 @@ public class SyncPane extends JPanel {
             long startUs = Math.round(exchange.getStartTime().getMsTime() * 1000d);
             long endUs = Math.round(exchange.getEndTime().getMsTime() * 1000d);
             if(startUs < endUs){
-                exchange.getViewFMP().play(startUs, endUs);
+                exchange.getViewGst().play(startUs, endUs);
             }else{
-                exchange.getViewFMP().play(0L, 0L);
+                exchange.getViewGst().play(0L, 0L);
             }
         });
         toolBar.add(btnPlay);
@@ -71,18 +70,130 @@ public class SyncPane extends JPanel {
         JButton btnPause = new JButton(Loader.fromResource(
                 "/images/carbon--pause-outline-filled.png", 16, 16));
         btnPause.setToolTipText("Pause");
-        btnPause.addActionListener(e -> {
-            exchange.getViewFMP().pause();
-        });
+        btnPause.addActionListener(e -> exchange.getViewGst().pause());
         toolBar.add(btnPause);
 
         JButton btnStop = new JButton(Loader.fromResource(
                 "/images/carbon--stop-filled.png", 16, 16));
         btnStop.setToolTipText("Stop");
-        btnStop.addActionListener(e -> {
-            exchange.getViewFMP().stop();
-        });
+        btnStop.addActionListener(e -> exchange.getViewGst().stop());
         toolBar.add(btnStop);
+
+        JButton btnPlayBefore = new JButton(Loader.fromResource(
+                "/images/16-play-start-to.png", 16, 16));
+        btnPlayBefore.setToolTipText(Loader.language("tooltip.play.before", "Play before"));
+        btnPlayBefore.addActionListener(e -> {
+            long endUs = Math.round(exchange.getStartTime().getMsTime() * 1000d);
+            long startUs = endUs - 500_000L;
+            exchange.getViewGst().play(startUs, endUs);
+        });
+        toolBar.add(btnPlayBefore);
+
+        JButton btnPlayBegin = new JButton(Loader.fromResource(
+                "/images/16-play-to-start.png", 16, 16));
+        btnPlayBegin.setToolTipText(Loader.language("tooltip.play.begin", "Play beginning"));
+        btnPlayBegin.addActionListener(e -> {
+            long startUs = Math.round(exchange.getStartTime().getMsTime() * 1000d);
+            long endUs = startUs + 500_000L;
+            exchange.getViewGst().play(startUs, endUs);
+        });
+        toolBar.add(btnPlayBegin);
+
+        JButton btnPlayEnd = new JButton(Loader.fromResource(
+                "/images/16-play-to-end.png", 16, 16));
+        btnPlayEnd.setToolTipText(Loader.language("tooltip.play.ending", "Play ending"));
+        btnPlayEnd.addActionListener(e -> {
+            long endUs = Math.round(exchange.getEndTime().getMsTime() * 1000d);
+            long startUs = endUs - 500_000L;
+            exchange.getViewGst().play(startUs, endUs);
+        });
+        toolBar.add(btnPlayEnd);
+
+        JButton btnPlayAfter = new JButton(Loader.fromResource(
+                "/images/16-play-end-to.png", 16, 16));
+        btnPlayAfter.setToolTipText(Loader.language("tooltip.play.after", "Play after"));
+        btnPlayAfter.addActionListener(e -> {
+            long startUs = Math.round(exchange.getEndTime().getMsTime() * 1000d);
+            long endUs = startUs + 500_000L;
+            exchange.getViewGst().play(startUs, endUs);
+        });
+        toolBar.add(btnPlayAfter);
+
+        JButton btnKaraokeRules = new JButton(Loader.fromResource(
+                "/images/16-characters.png", 16, 16));
+        btnKaraokeRules.setToolTipText(Loader.language("tooltip.karaoke.rules", "Karaoke rules"));
+        btnKaraokeRules.addActionListener(e -> {
+
+        });
+        toolBar.add(btnKaraokeRules);
+
+        JButton btnKaraokeOn = new JButton(Loader.fromResource(
+                "/images/16-characters-green.png", 16, 16));
+        btnKaraokeOn.setToolTipText(Loader.language("tooltip.karaoke.on", "Create Karaoke"));
+        btnKaraokeOn.addActionListener(e -> {
+            waveform.setUseSpectrum(true);
+            tbSpectrum.setSelected(true);
+            waveform.repaint();
+        });
+        toolBar.add(btnKaraokeOn);
+
+        JButton btnKaraokeOff = new JButton(Loader.fromResource(
+                "/images/16-characters-red.png", 16, 16));
+        btnKaraokeOff.setToolTipText(Loader.language("tooltip.karaoke.off", "Validate Karaoke"));
+        btnKaraokeOff.addActionListener(e -> {
+            waveform.setUseSpectrum(false);
+            tbSpectrum.setSelected(false);
+            waveform.repaint();
+        });
+        toolBar.add(btnKaraokeOff);
+
+        JButton btnKaraokeSU = new JButton(Loader.fromResource(
+                "/images/16-circle-up.png", 16, 16));
+        btnKaraokeSU.setToolTipText(Loader.language("tooltip.karaoke.su", "Take the current sentence"));
+        btnKaraokeSU.addActionListener(e -> {
+
+        });
+        toolBar.add(btnKaraokeSU);
+
+        JButton btnKaraokeSLeft = new JButton(Loader.fromResource(
+                "/images/16-circle-left.png", 16, 16));
+        btnKaraokeSLeft.setToolTipText(Loader.language("tooltip.karaoke.sl", "Previous syllable"));
+        btnKaraokeSLeft.addActionListener(e -> {
+
+        });
+        toolBar.add(btnKaraokeSLeft);
+
+        JButton btnKaraokeSR = new JButton(Loader.fromResource(
+                "/images/16-circle-right.png", 16, 16));
+        btnKaraokeSR.setToolTipText(Loader.language("tooltip.karaoke.sr", "Next syllable"));
+        btnKaraokeSR.addActionListener(e -> {
+
+        });
+        toolBar.add(btnKaraokeSR);
+
+        JButton btnKaraokeSD = new JButton(Loader.fromResource(
+                "/images/16-circle-down.png", 16, 16));
+        btnKaraokeSD.setToolTipText(Loader.language("tooltip.karaoke.sd", "Get the karaoke"));
+        btnKaraokeSD.addActionListener(e -> {
+
+        });
+        toolBar.add(btnKaraokeSD);
+
+        JButton btnKaraokeSA = new JButton(Loader.fromResource(
+                "/images/16-tasks.png", 16, 16));
+        btnKaraokeSA.setToolTipText(Loader.language("tooltip.karaoke.sa", "Make it!"));
+        btnKaraokeSA.addActionListener(e -> {
+
+        });
+        toolBar.add(btnKaraokeSA);
+
+        JButton btnKaraokeDone = new JButton(Loader.fromResource(
+                "/images/16-done.png", 16, 16));
+        btnKaraokeDone.setToolTipText(Loader.language("tooltip.karaoke.done", "Go to next line"));
+        btnKaraokeDone.addActionListener(e -> {
+
+        });
+        toolBar.add(btnKaraokeDone);
 
         return toolBar;
     }

@@ -281,8 +281,6 @@ public class FreeMediaPlayer {
     }
 
     public static final class PlaybackController implements AutoCloseable {
-        private final Exchange.SpyPlaying spyPlaying;
-        //========================================================
         private enum State { PLAYING, PAUSED, STOPPED }
 
         private final Object stateLock = new Object();
@@ -317,10 +315,8 @@ public class FreeMediaPlayer {
         private long nextPresentationNanos;
         private final String sourceVideoProfile;
 
-        public PlaybackController(Exchange exchange, FmpNative fmp, String mediaPath, String subtitlePath, VideoPanel panel)
+        public PlaybackController(FmpNative fmp, String mediaPath, String subtitlePath, VideoPanel panel)
                 throws Exception {
-            this.spyPlaying = new Exchange.SpyPlaying(exchange);
-            //======================================================
             videoPanel = panel;
             PointerByReference outPlayer = new PointerByReference();
             if (fmp.fmp_open(mediaPath, outPlayer) != 0) {
@@ -340,7 +336,6 @@ public class FreeMediaPlayer {
                     fpsNumerator.getValue() > 0 && fpsDenominator.getValue() > 0) {
                 sourceFps = (double) fpsNumerator.getValue() /
                         fpsDenominator.getValue();
-                spyPlaying.setFps(sourceFps);
             }
             if (!Double.isFinite(sourceFps) || sourceFps <= 0.0) {
                 sourceFps = FALLBACK_FPS;
@@ -388,7 +383,6 @@ public class FreeMediaPlayer {
 
         public void play() {
             request(PlaybackController.State.PLAYING);
-            spyPlaying.playTriggered();
         }
 
         public void play(long startTimeUs, long endTimeUs) {
@@ -405,8 +399,6 @@ public class FreeMediaPlayer {
                 requestedState = State.PLAYING;
                 stateLock.notifyAll();
             }
-            spyPlaying.usDiscovered(startTimeUs, endTimeUs);
-            spyPlaying.playTriggered();
             synchronized (frameLock) {
                 frames.clear();
                 frameLock.notifyAll();
@@ -435,7 +427,6 @@ public class FreeMediaPlayer {
 
         public void pause() {
             request(PlaybackController.State.PAUSED);
-            spyPlaying.pauseTriggered();
         }
 
         public void stop() {
@@ -446,7 +437,6 @@ public class FreeMediaPlayer {
                 requestedState = State.STOPPED;
                 stateLock.notifyAll();
             }
-            spyPlaying.stopTriggered();
             synchronized (frameLock) {
                 frames.clear();
                 frameLock.notifyAll();
@@ -502,7 +492,6 @@ public class FreeMediaPlayer {
                         audioLine.stop();
                         audioLine.flush();
                         resetAudioClock();
-                        spyPlaying.stopTriggered(); // EOF
                         continue;
                     }
                     if (status == Next.ERROR.getValue()) {

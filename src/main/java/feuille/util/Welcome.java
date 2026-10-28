@@ -54,4 +54,6 @@ public class Welcome extends JPanel {
     public void setContent(String content) {
         Platform.runLater(() -> engine.loadContent(content));
     }
+
+    public void setURL(String url) { Platform.runLater(() -> engine.load(url)); }
 }

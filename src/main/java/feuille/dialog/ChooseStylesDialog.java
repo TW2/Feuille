@@ -1,6 +1,6 @@
 package feuille.dialog;
 
-import feuille.module.editor.assa.AssStyle;
+import feuille.io.assa.AssStyle;
 import feuille.util.DialogResult;
 import feuille.util.Loader;
 

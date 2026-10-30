@@ -1,10 +1,9 @@
 package feuille.util.renderer;
 
-import feuille.module.editor.assa.AssActor;
+import feuille.io.assa.AssActor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class AssActorRenderer extends DefaultListCellRenderer {
 

@@ -2,10 +2,9 @@ package feuille.module.editor;
 
 import feuille.dialog.AssActorsDialog;
 import feuille.dialog.AssEditorDialog;
-import feuille.module.editor.assa.*;
+import feuille.io.assa.*;
 import feuille.module.editor.voyager.*;
 import feuille.util.*;
-import feuille.util.assa.AssEventType;
 
 import javax.swing.*;
 import java.awt.*;

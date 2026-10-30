@@ -1,9 +1,9 @@
 package feuille.io;
 
-import feuille.module.editor.assa.ASS;
-import feuille.module.editor.assa.AssActor;
-import feuille.module.editor.assa.AssEffect;
-import feuille.module.editor.assa.AssStyle;
+import feuille.io.assa.ASS;
+import feuille.io.assa.AssActor;
+import feuille.io.assa.AssEffect;
+import feuille.io.assa.AssStyle;
 import feuille.module.editor.voyager.Bookmark;
 import feuille.module.editor.voyager.Voyager;
 import org.xml.sax.*;

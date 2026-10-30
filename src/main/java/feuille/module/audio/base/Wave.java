@@ -1,6 +1,6 @@
 package feuille.module.audio.base;
 
-import feuille.module.editor.assa.AssTime;
+import feuille.io.assa.AssTime;
 import feuille.util.DrawColor;
 import feuille.util.Exchange;
 

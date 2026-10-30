@@ -1,11 +1,9 @@
 package feuille.dialog;
 
 import feuille.io.Settings;
-import feuille.module.editor.assa.*;
+import feuille.io.assa.*;
 import feuille.module.editor.voyager.PlaceholderTextField;
 import feuille.util.*;
-import feuille.util.assa.AssColor;
-import feuille.util.assa.AssEncoding;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,7 +14,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.font.TextAttribute;
 import java.io.File;
 import java.util.*;
 import java.util.List;

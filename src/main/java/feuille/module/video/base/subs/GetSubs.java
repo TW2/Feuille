@@ -1,6 +1,6 @@
 package feuille.module.video.base.subs;
 
-import feuille.module.editor.assa.ASS;
+import feuille.io.assa.ASS;
 
 import javax.swing.event.EventListenerList;
 import java.awt.image.BufferedImage;

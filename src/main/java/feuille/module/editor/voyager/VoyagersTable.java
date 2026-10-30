@@ -1,11 +1,11 @@
 package feuille.module.editor.voyager;
 
-import feuille.module.editor.assa.ASS;
-import feuille.module.editor.assa.AssEvent;
-import feuille.module.editor.assa.AssTime;
+import feuille.io.assa.ASS;
+import feuille.io.assa.AssEvent;
+import feuille.io.assa.AssTime;
 import feuille.util.*;
-import feuille.util.assa.AssActorType;
-import feuille.util.assa.AssEventType;
+import feuille.io.assa.AssActorType;
+import feuille.io.assa.AssEventType;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,14 +1,14 @@
 package feuille.dialog;
 
 import feuille.io.Settings;
-import feuille.module.editor.assa.AssActor;
-import feuille.module.editor.assa.AssStyle;
+import feuille.io.assa.AssActor;
+import feuille.io.assa.AssStyle;
 import feuille.module.editor.voyager.PlaceholderTextField;
 import feuille.util.DialogResult;
 import feuille.util.Exchange;
 import feuille.util.Loader;
-import feuille.util.assa.AssActorType;
-import feuille.util.assa.AssColor;
+import feuille.io.assa.AssActorType;
+import feuille.io.assa.AssColor;
 import feuille.util.renderer.AssActorRenderer;
 
 import javax.imageio.ImageIO;

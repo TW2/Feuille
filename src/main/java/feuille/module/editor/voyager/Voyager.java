@@ -1,6 +1,6 @@
 package feuille.module.editor.voyager;
 
-import feuille.module.editor.assa.AssEvent;
+import feuille.io.assa.AssEvent;
 import feuille.util.ISO_3166;
 
 import java.util.ArrayList;

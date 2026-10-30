@@ -3,7 +3,7 @@ package feuille;
 import feuille.dialog.SettingsDialog;
 import feuille.io.Settings;
 import feuille.module.drawing.AssSketchpad;
-import feuille.module.editor.assa.ASS;
+import feuille.io.assa.ASS;
 import feuille.module.editor.AssEditor;
 import feuille.util.DialogResult;
 import feuille.util.Exchange;

@@ -1,12 +1,12 @@
 package feuille.module.editor.voyager;
 
-import feuille.module.editor.assa.AssStyle;
-import feuille.module.editor.assa.AssStylePreview;
-import feuille.module.editor.assa.render.FontRenderer;
+import feuille.io.assa.AssStyle;
+import feuille.io.assa.AssStylePreview;
+import feuille.io.assa.render.FontRenderer;
 import feuille.util.DialogResult;
 import feuille.util.Loader;
-import feuille.util.assa.AssColor;
-import feuille.util.assa.AssColorScheme;
+import feuille.io.assa.AssColor;
+import feuille.io.assa.AssColorScheme;
 
 import javax.swing.*;
 import java.awt.*;

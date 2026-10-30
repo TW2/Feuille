@@ -1,6 +1,6 @@
 package feuille.module.editor.voyager;
 
-import feuille.module.editor.assa.AssTime;
+import feuille.io.assa.AssTime;
 import feuille.util.Loader;
 
 import javax.swing.*;

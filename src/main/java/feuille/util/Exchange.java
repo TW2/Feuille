@@ -1,15 +1,13 @@
 package feuille.util;
 
 import feuille.FeuilleFrame;
+import feuille.io.assa.*;
 import feuille.module.audio.SyncPane;
-import feuille.module.editor.assa.*;
 import feuille.module.editor.voyager.Voyager;
 import feuille.module.editor.voyager.VoyagersTable;
 import feuille.module.editor.EditorPanel;
 import feuille.module.video.ViewGst;
-import feuille.util.assa.AssEventType;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

@@ -1,6 +1,6 @@
 package feuille.util;
 
-import feuille.module.editor.assa.*;
+import feuille.io.assa.*;
 import feuille.module.video.base.subs.GetSubs;
 
 import javax.swing.*;

@@ -33,7 +33,7 @@ Place the resulting ```libass_jna``` (so/dll/dylib) in the ```/settings/dependen
 |---|---|
 | Welcome | Show License, Designed to display Help in HTML (JavaFX) |
 | Karaoke | Later (Java Swing) |
-| Editor | Time, Preview, Open Save ASS (Java Swing / JNA / C++) |
+| Editor | Time, Preview, Open Save ASS (Java Swing / JNA / C) |
 | Drawing | Line, Bézier work, but not Spline, delayed (Java Swing) |
 | Analysis | Later (Java Swing) |
 

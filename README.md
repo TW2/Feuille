@@ -4,7 +4,7 @@ It is the continuation of AssFxMaker, its big features are a karaoke editor (v0.
 The current version (v0.6) is not ready for a release, please use v0.5. If you want to see the latest concept, you need at least JDK 26 (Oracle or others) and the last version of Maven to compile the software and open it. The software is fully in English (sorry for the errors) and partially in French.
 
 ### Availability:
-- Windows -> Instructions and release later. It maybe works on WSL2 targeting Ubuntu and following installation like in Ubuntu. 
+- Windows -> Release later. It maybe works on WSL2 targeting Ubuntu and following installation like in Ubuntu. 
 - Linux -> Software works and you can use libass_jna.so and you must install ffmpeg and libass in your system. I develop it using Ubuntu 26.04 so you can test it with ease. Release later.
 - Mac -> Someone have a mac, I don't have a mac. MacOs breaks on VM with me and new versions. Release later if possible.
 
@@ -13,6 +13,12 @@ The current version (v0.6) is not ready for a release, please use v0.5. If you w
 - FFprobe
 - libass (libass_jna.c)
 - GStreamer 1.x
+
+### CMake:
+To build ```libass_jna``` (so/dll/dylib) you must have cmake, ffmpeg and libass installed in your compile system (cmake).<br>
+Go to ```docs``` to get ```ass-native.zip``` and after extract, rename the folder that contains ```libass_jna.c``` to ```native```.
+You are now ready for compile. Type this ```cmake -S native -B native/build && cmake --build native/build``` in a terminal while viewing the ```native``` folder in your folders list.
+Place the resulting ```libass_jna``` (so/dll/dylib) in the ```/settings/dependencies/<os-name>```. ```<os-name>``` is your system name in lowercase (```linux```, ```mac```, ```windows```).
 
 ### How to build Feuille:
 1/ Have git, maven and the last version of Java installed and configured in your system.<br>

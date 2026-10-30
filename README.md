@@ -15,7 +15,7 @@ The current version (v0.6) is not ready for a release, please use v0.5. If you w
 - GStreamer 1.x
 
 ### CMake:
-To build ```libass_jna``` (so/dll/dylib) you must have cmake. libass must be installed in your compile system (cmake) or in your system like in linux.<br>
+To build ```libass_jna``` (so/dll/dylib) you must have cmake. libass must be installed in your compile system (cmake) or in your system like in linux.
 Go to ```docs``` to get ```ass-native.zip``` and after extract, rename the folder that contains ```libass_jna.c``` to ```native```.
 You are now ready for compile. Type this ```cmake -S native -B native/build && cmake --build native/build``` in a terminal while viewing the ```native``` folder in your folders list.
 Place the resulting ```libass_jna``` (so/dll/dylib) in the ```/settings/dependencies/<os-name>```. ```<os-name>``` is your system name in lowercase (```linux```, ```mac```, ```windows```).

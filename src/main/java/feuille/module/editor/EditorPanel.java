@@ -4,13 +4,11 @@ import feuille.dialog.AssActorsDialog;
 import feuille.dialog.AssEditorDialog;
 import feuille.module.editor.assa.*;
 import feuille.module.editor.voyager.*;
-import feuille.module.fmp.ai.FreeMediaPlayer;
 import feuille.util.*;
 import feuille.util.assa.AssEventType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.Path;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -153,6 +151,7 @@ public class EditorPanel extends JPanel {
             if(ac.getDialogResult() == DialogResult.OK){
                 ecbEditActors.setObjects(ac.getActorsList());
                 exchange.setCurrentStyle(ac.getCurrentStyle());
+                exchange.getActors().addAll(ac.getActorsList());
             }
         });
 

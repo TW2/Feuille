@@ -2,8 +2,11 @@ package feuille.module.video;
 
 import com.sun.jna.Platform;
 import com.sun.jna.platform.win32.Kernel32;
-import feuille.module.video.base.GstVideoComponent;
-import feuille.module.video.base.Playground;
+import feuille.module.video.base.image.AssSubtitleController;
+import feuille.module.video.base.image.GstVideoComponent;
+import feuille.module.video.base.image.VideoSurface;
+import feuille.module.video.base.subs.LibassSubtitleRenderer;
+import feuille.module.video.base.wave.Playground;
 import feuille.util.Exchange;
 import org.freedesktop.gstreamer.*;
 import org.freedesktop.gstreamer.elements.PlayBin;
@@ -21,8 +24,9 @@ import java.util.stream.Stream;
 public class ViewGst extends JPanel {
 
     private final Exchange exchange;
+    private final LibassSubtitleRenderer renderer;
+    private final AssSubtitleController subtitles;
     private final Playground playground;
-    private final JLabel lblOverlay;
     private final PlayBin playbin;
     private final Element level;
 
@@ -43,16 +47,34 @@ public class ViewGst extends JPanel {
         playbin.set("audio-filter", level);
 
         //------------------------------ UI
+        int videoWidth = 1920;
+        int videoHeight = 1080;
+
+        renderer = new LibassSubtitleRenderer(videoWidth, videoHeight);
+        VideoSurface surface = new VideoSurface(vc);
+
+        subtitles = new AssSubtitleController(
+                renderer,
+                surface.getSubtitleOverlay(),
+                this::getMsPosition
+        );
+
         setLayout(new BorderLayout());
-        add(vc, BorderLayout.CENTER);
+        add(surface, BorderLayout.CENTER);
+    }
 
-        lblOverlay = new JLabel();
-        lblOverlay.setOpaque(false);
-        lblOverlay.setHorizontalAlignment(SwingConstants.CENTER);
-        lblOverlay.setVerticalAlignment(SwingConstants.CENTER);
+    public long getMsPosition() {
+        long nanos = playbin.queryPosition(Format.TIME);
+        return nanos < 0 ? -1L : nanos / 1_000_000L;
+    }
 
-        vc.setLayout(new BorderLayout());
-        vc.add(lblOverlay, BorderLayout.CENTER);
+    public void free(){
+        subtitles.close();
+        renderer.close();
+    }
+
+    public AssSubtitleController getSubtitles() {
+        return subtitles;
     }
 
     public void openMedia(String mediaPath) {
@@ -93,22 +115,6 @@ public class ViewGst extends JPanel {
     public void stop(){
         playbin.stop(); // Playback
         playground.stop(); // Thread for drawing
-    }
-
-    public int getOverlayWidth() {
-        return lblOverlay.getWidth();
-    }
-
-    public int getOverlayHeight() {
-        return lblOverlay.getHeight();
-    }
-
-    public void setOverlay(BufferedImage overlay) {
-        if(overlay == null) {
-            lblOverlay.setIcon(null);
-        }else{
-            lblOverlay.setIcon(new ImageIcon(overlay));
-        }
     }
 
     /**

@@ -93,6 +93,7 @@ public class FeuilleFrame extends JFrame {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 Settings.saveSettings(settings);
+                exchange.getViewGst().free();
             }
         });
 

@@ -2,7 +2,7 @@ package feuille;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import feuille.dialog.SplashScreen;
+import feuille.frame.SplashScreen;
 
 import java.awt.*;
 import java.io.File;

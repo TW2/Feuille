@@ -1,7 +1,7 @@
 package feuille.util;
 
 import feuille.module.editor.assa.*;
-import feuille.module.fmp.ai.FreeMediaPlayer;
+import feuille.module.video.base.subs.GetSubs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,20 +81,17 @@ public class PreviewASS extends JPanel {
         ass.getEvents().clear();
         ass.getEvents().add(newEvent);
         ASS.write(ass, script.getPath());
-        FreeMediaPlayer freeMediaPlayer = new FreeMediaPlayer();
-        BufferedImage img = freeMediaPlayer.screenshot(
-                null,
-                1_000_000,
-                script.getPath(),
-                FreeMediaPlayer.BackgroundType.CHECKERBOARD,
+        BufferedImage img = GetSubs.getScreenshot(
+                ass,
                 spinnerWidthModel.getNumber().intValue(),
                 spinnerHeightModel.getNumber().intValue(),
-                sq, c1, c2
+                1_000L
         );
         int ws = spinnerWidthModel.getNumber().intValue() / 3;
         int hs = spinnerHeightModel.getNumber().intValue() / 3;
         lblView.setIcon(new ImageIcon(img.getSubimage(ws, hs, ws, hs)));
         lblView.setHorizontalAlignment(JLabel.CENTER);
+        lblView.setVerticalAlignment(JLabel.CENTER);
         currentStyle.setAlignment(new AssAlignment(alignment));
     }
 

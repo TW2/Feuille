@@ -1,4 +1,4 @@
-package feuille.dialog;
+package feuille.frame;
 
 import javax.swing.*;
 import java.awt.*;

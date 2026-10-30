@@ -1,6 +1,6 @@
 package feuille.module.audio;
 
-import feuille.dialog.WaitFrame;
+import feuille.frame.WaitFrame;
 import feuille.module.audio.base.FFAudio2;
 import feuille.module.audio.base.SignalResult;
 import feuille.module.audio.base.Wave;

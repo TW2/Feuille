@@ -30,6 +30,8 @@ public class Exchange {
     private AssStyle currentStyle;
     private final List<AssStylesCollection> stylesCollections;
     private AssStylesCollection currentStylesCollection;
+    private List<AssActor> actors;
+    private List<AssEffect> effects;
 
     public Exchange() {
         ass = new ASS();
@@ -40,6 +42,8 @@ public class Exchange {
         currentStyle = new AssStyle();
         stylesCollections = new ArrayList<>();
         currentStylesCollection = null;
+        actors = new ArrayList<>();
+        effects = new ArrayList<>();
         initStyles();
     }
 
@@ -97,6 +101,22 @@ public class Exchange {
 
     public void setFlag2(ISO_3166 flag2) {
         this.flag2 = flag2;
+    }
+
+    public List<AssActor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<AssActor> actors) {
+        this.actors = actors;
+    }
+
+    public List<AssEffect> getEffects() {
+        return effects;
+    }
+
+    public void setEffects(List<AssEffect> effects) {
+        this.effects = effects;
     }
 
     public ViewGst getViewGst() {
@@ -182,24 +202,20 @@ public class Exchange {
 
             if(lastVoyager == null) {
                 lastVoyager = v;
-                System.out.println(1);
             }else if(v.getEvent().getStart().toAss().equals(lastVoyager.getEvent().getStart().toAss())
                     && v.getEvent().getEnd().toAss().equals(lastVoyager.getEvent().getEnd().toAss())
                     && !v.getLanguage().getAlpha3().equals(lastVoyager.getLanguage().getAlpha3())){
                 lastVoyager.getVoyagers().add(v);
-                System.out.println(2);
             }else{
                 list.add(lastVoyager);
                 list.add(v);
                 lastVoyager = null;
-                System.out.println(3);
             }
         }
         list.add(lastVoyager);
         voyagersTable.getVoyagers().clear();
         voyagersTable.getVoyagers().addAll(list);
         voyagersTable.repaint();
-        //tablePanel.getTable().loadASS(ass);
     }
 
     public void saveAsASS(String filepath){
@@ -222,6 +238,8 @@ public class Exchange {
                 }
             }
         }
+        ass.setStyles(getAss().getStyles());
+        ass.setActors(getActors());
 
         ASS.write(ass, filepath);
     }
@@ -233,12 +251,6 @@ public class Exchange {
     public void setTemporarySubtitlesFile(){
         if(editorPanel.getFlag1() == null) return;
         if(editorPanel.getFlag2() == null) return;
-        File app = new File(new File("").getAbsolutePath());
-        File folder = new File(app.getPath() +
-                File.separator + "settings" +
-                File.separator + "preview"
-        );
-        File script = new File(folder, "editflag2.ass");
         ASS newASS = new ASS();
         if(editorPanel.getFlag1().equals(editorPanel.getFlag2())){
             for(Voyager voyager : voyagersTable.getVoyagers()){
@@ -257,7 +269,7 @@ public class Exchange {
         }
         newASS.setInfos(ass.getInfos());
         newASS.setStyles(ass.getStyles());
-        ASS.write(newASS, script.getPath());
+        getViewGst().getSubtitles().loadTrack(ASS.stringify(newASS));
     }
 
     private void initStyles(){

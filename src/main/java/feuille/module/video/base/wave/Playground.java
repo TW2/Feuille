@@ -1,6 +1,5 @@
-package feuille.module.video.base;
+package feuille.module.video.base.wave;
 
-import feuille.module.video.ViewGst;
 import feuille.util.Exchange;
 
 /**

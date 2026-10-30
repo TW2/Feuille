@@ -1,4 +1,4 @@
-package feuille.dialog;
+package feuille.frame;
 
 import feuille.util.Loader;
 

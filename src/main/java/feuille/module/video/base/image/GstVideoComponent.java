@@ -16,7 +16,7 @@
  */
 
 // https://github.com/gstreamer-java/gst1-java-swing/blob/master/src/main/java/org/freedesktop/gstreamer/swing/GstVideoComponent.java
-package feuille.module.video.base;
+package feuille.module.video.base.image;
 
 import org.freedesktop.gstreamer.Element;
 import org.freedesktop.gstreamer.Structure;

@@ -1,4 +1,4 @@
-package feuille.util.theme;
+package feuille.theme;
 
 import com.formdev.flatlaf.FlatLaf;
 

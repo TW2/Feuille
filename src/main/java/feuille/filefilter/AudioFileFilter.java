@@ -1,4 +1,4 @@
-package feuille.util.filefilter;
+package feuille.filefilter;
 
 import feuille.util.Loader;
 

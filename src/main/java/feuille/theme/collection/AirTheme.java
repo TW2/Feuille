@@ -1,18 +1,17 @@
-package feuille.util.theme.collection;
+package feuille.theme.collection;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-public class Lemon
-	extends FlatLightLaf
-{
-	public static final String NAME = "Lemon";
+public class AirTheme extends FlatLightLaf {
+
+	public static final String NAME = "Air";
 
 	public static boolean setup() {
-		return setup( new Lemon() );
+		return setup( new AirTheme() );
 	}
 
 	public static void installLafInfo() {
-		installLafInfo( NAME, Lemon.class );
+		installLafInfo( NAME, AirTheme.class );
 	}
 
 	@Override

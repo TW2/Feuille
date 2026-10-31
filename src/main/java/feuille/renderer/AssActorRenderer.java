@@ -1,4 +1,4 @@
-package feuille.util.renderer;
+package feuille.renderer;
 
 import feuille.io.assa.AssActor;
 

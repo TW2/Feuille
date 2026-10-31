@@ -3,13 +3,11 @@ package feuille.io;
 import com.formdev.flatlaf.FlatLaf;
 import feuille.FeuilleFrame;
 import feuille.util.Loader;
-import feuille.util.theme.Theme;
-import feuille.util.theme.ThemeCollection;
+import feuille.theme.Theme;
+import feuille.theme.ThemeCollection;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Settings {
 

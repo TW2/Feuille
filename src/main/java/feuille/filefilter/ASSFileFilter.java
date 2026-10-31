@@ -1,18 +1,15 @@
-package feuille.util.filefilter;
+package feuille.filefilter;
 
 import feuille.util.Loader;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
-public class MediaFileFilter extends FileFilter {
+public class ASSFileFilter extends FileFilter {
 
-    final List<String> ext = Arrays.asList(
-            ".mp4", ".avi", ".m2ts", ".ts", ".mpeg",
-            ".vob", "m4v", "mkv", ".ogm", ".divx",
-            ".mov", ".flv", ".wmv");
+    final List<String> ext = List.of(
+            ".ass");
 
     @Override
     public boolean accept(File f) {
@@ -25,6 +22,6 @@ public class MediaFileFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return Loader.language("file.filter.video", "VideoFiles");
+        return Loader.language("file.filter.ass", "Advanced SubStation Alpha files");
     }
 }

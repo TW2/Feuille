@@ -9,10 +9,10 @@ import feuille.util.DialogResult;
 import feuille.io.Exchange;
 import feuille.util.Loader;
 import feuille.module.welcome.Welcome;
-import feuille.util.filefilter.ASSFileFilter;
-import feuille.util.filefilter.AudioFileFilter;
-import feuille.util.filefilter.MediaFileFilter;
-import feuille.util.filefilter.SSAFileFilter;
+import feuille.filefilter.ASSFileFilter;
+import feuille.filefilter.AudioFileFilter;
+import feuille.filefilter.MediaFileFilter;
+import feuille.filefilter.SSAFileFilter;
 
 import javax.swing.*;
 import java.awt.*;

@@ -9,7 +9,7 @@ import feuille.io.Exchange;
 import feuille.util.Loader;
 import feuille.io.assa.AssActorType;
 import feuille.io.assa.AssColor;
-import feuille.util.renderer.AssActorRenderer;
+import feuille.renderer.AssActorRenderer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

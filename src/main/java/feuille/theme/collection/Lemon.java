@@ -1,18 +1,18 @@
-package feuille.util.theme.collection;
+package feuille.theme.collection;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-public class Nihon
+public class Lemon
 	extends FlatLightLaf
 {
-	public static final String NAME = "Nihon";
+	public static final String NAME = "Lemon";
 
 	public static boolean setup() {
-		return setup( new Nihon() );
+		return setup( new Lemon() );
 	}
 
 	public static void installLafInfo() {
-		installLafInfo( NAME, Nihon.class );
+		installLafInfo( NAME, Lemon.class );
 	}
 
 	@Override

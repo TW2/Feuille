@@ -1,11 +1,11 @@
-package feuille.util.theme;
+package feuille.theme;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.*;
-import feuille.util.theme.collection.*;
+import feuille.theme.collection.*;
 
 import java.io.File;
 import java.util.ArrayList;

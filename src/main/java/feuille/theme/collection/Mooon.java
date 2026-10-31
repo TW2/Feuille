@@ -1,18 +1,18 @@
-package feuille.util.theme.collection;
+package feuille.theme.collection;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
-public class Nuclear
+public class Mooon
 	extends FlatDarkLaf
 {
-	public static final String NAME = "Nuclear";
+	public static final String NAME = "Mooon";
 
 	public static boolean setup() {
-		return setup( new Nuclear() );
+		return setup( new Mooon() );
 	}
 
 	public static void installLafInfo() {
-		installLafInfo( NAME, Nuclear.class );
+		installLafInfo( NAME, Mooon.class );
 	}
 
 	@Override

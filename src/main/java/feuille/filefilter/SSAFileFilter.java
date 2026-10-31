@@ -1,4 +1,4 @@
-package feuille.util.filefilter;
+package feuille.filefilter;
 
 import feuille.util.Loader;
 
@@ -6,10 +6,10 @@ import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.util.List;
 
-public class ASSFileFilter extends FileFilter {
+public class SSAFileFilter extends FileFilter {
 
     final List<String> ext = List.of(
-            ".ass");
+            ".ssa");
 
     @Override
     public boolean accept(File f) {
@@ -22,6 +22,6 @@ public class ASSFileFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return Loader.language("file.filter.ass", "Advanced SubStation Alpha files");
+        return Loader.language("file.filter.ssa", "SubStation Alpha files");
     }
 }

@@ -1,18 +1,18 @@
-package feuille.util.theme.collection;
+package feuille.theme.collection;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
-public class Ranch
+public class BloodyGolden
 	extends FlatDarkLaf
 {
-	public static final String NAME = "Ranch";
+	public static final String NAME = "BloodyGolden";
 
 	public static boolean setup() {
-		return setup( new Ranch() );
+		return setup( new BloodyGolden() );
 	}
 
 	public static void installLafInfo() {
-		installLafInfo( NAME, Ranch.class );
+		installLafInfo( NAME, BloodyGolden.class );
 	}
 
 	@Override

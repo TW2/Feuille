@@ -6,8 +6,8 @@ import feuille.component.PlaceholderTextField;
 import feuille.util.DialogResult;
 import feuille.util.ISO_3166;
 import feuille.util.Loader;
-import feuille.util.theme.Theme;
-import feuille.util.theme.ThemeCollection;
+import feuille.theme.Theme;
+import feuille.theme.ThemeCollection;
 
 import javax.swing.*;
 import java.awt.*;

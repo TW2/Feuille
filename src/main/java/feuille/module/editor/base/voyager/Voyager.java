@@ -1,6 +1,7 @@
 package feuille.module.editor.base.voyager;
 
 import feuille.io.assa.AssEvent;
+import feuille.module.editor.base.bookmark.Bookmark;
 import feuille.util.ISO_3166;
 
 import java.util.ArrayList;

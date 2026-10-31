@@ -2,7 +2,7 @@ package feuille.module.audio.base;
 
 import feuille.io.assa.AssTime;
 import feuille.util.DrawColor;
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 
 import javax.swing.*;
 import java.awt.*;

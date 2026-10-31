@@ -1,5 +1,6 @@
-package feuille.module.editor.base.voyager;
+package feuille.dialog;
 
+import feuille.component.ColorButton;
 import feuille.io.assa.AssStyle;
 import feuille.io.assa.AssStylePreview;
 import feuille.io.assa.render.FontRenderer;

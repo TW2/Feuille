@@ -1,5 +1,7 @@
-package feuille.util;
+package feuille.module.welcome;
 
+import feuille.io.Exchange;
+import feuille.util.DrawColor;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;

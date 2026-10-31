@@ -1,5 +1,7 @@
 package feuille.module.editor.base.voyager;
 
+import feuille.io.Clipboard;
+import feuille.io.Exchange;
 import feuille.io.assa.ASS;
 import feuille.io.assa.AssEvent;
 import feuille.io.assa.AssTime;

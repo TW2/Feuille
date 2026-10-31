@@ -1,11 +1,13 @@
 package feuille.dialog;
 
 import feuille.io.Settings;
+import feuille.io.js.Function;
 import feuille.util.DialogResult;
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 import feuille.util.Loader;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -39,7 +41,23 @@ public class KaraokeRulesDialog extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(btnOK);
 
+        JTabbedPane tabbedPane = new JTabbedPane();
 
+        JPanel resultPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        resultPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        resultPanel.add(btnOK);
+        resultPanel.add(btnCancel);
+
+        contentPane.add(tabbedPane, BorderLayout.CENTER);
+        contentPane.add(resultPanel, BorderLayout.SOUTH);
+
+        Border bdTab = BorderFactory.createLineBorder(
+                UIManager.getColor("TabbedPane.underlineColor"));
+
+        //===================================================
+        JPanel rulesMainPanel = new JPanel(new BorderLayout());
+        JTable funkTable = new JTable();
+        resultPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
     public void showDialog(Settings settings){

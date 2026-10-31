@@ -2,7 +2,7 @@ package feuille.dialog;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.ui.FlatBorder;
-import feuille.module.editor.base.voyager.PlaceholderTextField;
+import feuille.component.PlaceholderTextField;
 import feuille.util.DialogResult;
 import feuille.util.ISO_3166;
 import feuille.util.Loader;

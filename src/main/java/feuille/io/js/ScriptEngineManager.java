@@ -1,6 +1,5 @@
 package feuille.io.js;
 
-import feuille.util.Exchange;
 import feuille.util.Loader;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Value;

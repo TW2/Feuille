@@ -8,9 +8,9 @@ import feuille.module.audio.base.SignalResult;
 import feuille.module.audio.base.Wave;
 import feuille.module.audio.base.WaveDB;
 import feuille.module.editor.base.MakeItAutomation;
-import feuille.module.editor.base.voyager.ElementsComboBox;
+import feuille.component.ElementsComboBox;
 import feuille.util.DialogResult;
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 import feuille.util.FFMpegColor;
 import feuille.util.Loader;
 
@@ -134,7 +134,7 @@ public class SyncPane extends JPanel {
         btnKaraokeRules.setToolTipText(Loader.language("tooltip.karaoke.rules", "Karaoke rules"));
         btnKaraokeRules.addActionListener(e -> {
             KaraokeRulesDialog dialog = new KaraokeRulesDialog(exchange);
-            dialog.setVisible(true);
+            dialog.showDialog(exchange.getMainFrame().getSettings());
             if(dialog.getDialogResult() == DialogResult.OK) {
                 // TODO
             }

@@ -1,7 +1,7 @@
 package feuille.dialog;
 
 import feuille.util.DialogResult;
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 import feuille.util.Loader;
 import feuille.io.assa.AssActorType;
 

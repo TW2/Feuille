@@ -1,8 +1,11 @@
 package feuille.dialog;
 
+import feuille.component.ColorView;
+import feuille.component.PreviewASS;
+import feuille.io.Exchange;
 import feuille.io.Settings;
 import feuille.io.assa.*;
-import feuille.module.editor.base.voyager.PlaceholderTextField;
+import feuille.component.PlaceholderTextField;
 import feuille.util.*;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package feuille.util;
+package feuille.io;
 
 import java.nio.file.Path;
 import java.sql.Connection;

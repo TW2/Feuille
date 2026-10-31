@@ -1,4 +1,4 @@
-package feuille.util;
+package feuille.io;
 
 import feuille.FeuilleFrame;
 import feuille.io.assa.*;
@@ -7,6 +7,7 @@ import feuille.module.editor.base.voyager.Voyager;
 import feuille.module.editor.base.voyager.VoyagersTable;
 import feuille.module.editor.EditorPanel;
 import feuille.module.video.ViewGst;
+import feuille.util.ISO_3166;
 
 import java.util.ArrayList;
 import java.util.List;

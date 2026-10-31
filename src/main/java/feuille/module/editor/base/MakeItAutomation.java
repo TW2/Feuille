@@ -3,7 +3,7 @@ package feuille.module.editor.base;
 import feuille.io.Settings;
 import feuille.io.js.Function;
 import feuille.io.js.MyScriptHandler;
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 
 import java.io.File;
 import java.util.ArrayList;

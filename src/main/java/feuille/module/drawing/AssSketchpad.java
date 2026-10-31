@@ -1,7 +1,7 @@
 package feuille.module.drawing;
 
 import feuille.module.drawing.base.SelectedTool;
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 import feuille.util.Loader;
 
 import javax.swing.*;

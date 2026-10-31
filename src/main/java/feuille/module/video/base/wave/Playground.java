@@ -1,6 +1,6 @@
 package feuille.module.video.base.wave;
 
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 
 /**
  * Playground is a class for the display of current time in WaveForm/Spectrum

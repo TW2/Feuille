@@ -1,4 +1,4 @@
-package feuille.util;
+package feuille.component;
 
 import feuille.io.assa.*;
 import feuille.module.video.base.subs.GetSubs;

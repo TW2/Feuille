@@ -7,7 +7,7 @@ import feuille.module.video.base.image.GstVideoComponent;
 import feuille.module.video.base.image.VideoSurface;
 import feuille.module.video.base.subs.LibassSubtitleRenderer;
 import feuille.module.video.base.wave.Playground;
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 import org.freedesktop.gstreamer.*;
 import org.freedesktop.gstreamer.elements.PlayBin;
 import org.freedesktop.gstreamer.event.SeekEvent;
@@ -16,7 +16,6 @@ import org.freedesktop.gstreamer.event.SeekType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.EnumSet;
 import java.util.stream.Stream;

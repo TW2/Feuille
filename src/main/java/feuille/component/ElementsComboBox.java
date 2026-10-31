@@ -1,4 +1,4 @@
-package feuille.module.editor.base.voyager;
+package feuille.component;
 
 import javax.swing.*;
 import java.awt.*;

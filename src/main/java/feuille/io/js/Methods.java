@@ -1,11 +1,7 @@
 package feuille.io.js;
 
-import feuille.module.editor.base.voyager.Voyager;
-import feuille.util.Exchange;
-import feuille.util.ISO_3166;
+import feuille.io.Exchange;
 import org.graalvm.polyglot.HostAccess;
-
-import java.util.List;
 
 public class Methods {
 

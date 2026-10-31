@@ -1,7 +1,12 @@
 package feuille.module.editor;
 
+import feuille.component.ElementsComboBox;
+import feuille.component.FlagVersion;
+import feuille.component.LockFormatTextField;
 import feuille.dialog.AssActorsDialog;
 import feuille.dialog.AssEditorDialog;
+import feuille.io.Clipboard;
+import feuille.io.Exchange;
 import feuille.io.assa.*;
 import feuille.module.editor.base.voyager.*;
 import feuille.util.*;

@@ -1,7 +1,8 @@
-package feuille.module.editor.base.voyager;
+package feuille.component;
 
+import feuille.dialog.VersionsDialog;
 import feuille.util.DialogResult;
-import feuille.util.Exchange;
+import feuille.io.Exchange;
 import feuille.util.ISO_3166;
 import feuille.util.Loader;
 

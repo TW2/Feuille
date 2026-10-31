@@ -1,7 +1,7 @@
 package feuille.module.editor;
 
 import feuille.module.audio.SyncPane;
-import feuille.module.editor.voyager.VoyagersTable;
+import feuille.module.editor.base.voyager.VoyagersTable;
 import feuille.module.video.ViewGst;
 import feuille.util.Exchange;
 

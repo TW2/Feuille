@@ -2,7 +2,7 @@
  * Copyright to guys of StackOverflow
  * https://stackoverflow.com/questions/16213836/java-swing-jtextfield-set-placeholder
  */
-package feuille.module.editor.voyager;
+package feuille.module.editor.base.voyager;
 
 import javax.swing.text.Document;
 import java.awt.*;

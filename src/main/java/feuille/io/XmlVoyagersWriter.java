@@ -4,8 +4,8 @@ import feuille.io.assa.ASS;
 import feuille.io.assa.AssActor;
 import feuille.io.assa.AssEffect;
 import feuille.io.assa.AssStyle;
-import feuille.module.editor.voyager.Bookmark;
-import feuille.module.editor.voyager.Voyager;
+import feuille.module.editor.base.voyager.Bookmark;
+import feuille.module.editor.base.voyager.Voyager;
 import org.xml.sax.*;
 import org.xml.sax.helpers.AttributesImpl;
 

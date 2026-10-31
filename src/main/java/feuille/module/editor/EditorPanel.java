@@ -3,7 +3,7 @@ package feuille.module.editor;
 import feuille.dialog.AssActorsDialog;
 import feuille.dialog.AssEditorDialog;
 import feuille.io.assa.*;
-import feuille.module.editor.voyager.*;
+import feuille.module.editor.base.voyager.*;
 import feuille.util.*;
 
 import javax.swing.*;
@@ -493,12 +493,20 @@ public class EditorPanel extends JPanel {
         return  popupMenu;
     }
 
-    private AssStyle styleFromEditor(){
-        AssStyle style = new AssStyle();
+    public String getCurrentText(){
+        if(paneTranslation.getText().isEmpty()){
+            return paneOrigin.getText();
+        }else{
+            return paneTranslation.getText();
+        }
+    }
 
-
-
-        return style;
+    public void setCurrentText(String text){
+        if(paneOrigin.getText().isEmpty()){
+            paneOrigin.setText(text);
+        }else{
+            paneTranslation.setText(text);
+        }
     }
 
     public ISO_3166 getFlag1(){

@@ -2,7 +2,7 @@ package feuille.dialog;
 
 import feuille.io.Settings;
 import feuille.io.assa.*;
-import feuille.module.editor.voyager.PlaceholderTextField;
+import feuille.module.editor.base.voyager.PlaceholderTextField;
 import feuille.util.*;
 
 import javax.swing.*;

@@ -3,7 +3,7 @@ package feuille.dialog;
 import feuille.io.Settings;
 import feuille.io.assa.AssActor;
 import feuille.io.assa.AssStyle;
-import feuille.module.editor.voyager.PlaceholderTextField;
+import feuille.module.editor.base.voyager.PlaceholderTextField;
 import feuille.util.DialogResult;
 import feuille.util.Exchange;
 import feuille.util.Loader;

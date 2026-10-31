@@ -1,4 +1,4 @@
-package feuille.module.editor.voyager;
+package feuille.module.editor.base.voyager;
 
 import feuille.util.DrawColor;
 

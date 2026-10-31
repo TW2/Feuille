@@ -1,6 +1,4 @@
-package feuille.module.editor.voyager;
-
-import feuille.util.Loader;
+package feuille.module.editor.base.voyager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +25,10 @@ public class ElementsComboBox<T> extends JPanel {
     public JButton getButton() {
         return button;
     }
+
+    public JComboBox<T> getComboBox() { return comboBox; }
+
+    public DefaultComboBoxModel<T> getModel() { return model; }
 
     public List<T> getObjects(){
         List<T> list = new ArrayList<>();

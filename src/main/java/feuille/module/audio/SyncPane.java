@@ -1,10 +1,15 @@
 package feuille.module.audio;
 
+import feuille.dialog.KaraokeRulesDialog;
 import feuille.frame.WaitFrame;
+import feuille.io.js.Function;
 import feuille.module.audio.base.FFAudio2;
 import feuille.module.audio.base.SignalResult;
 import feuille.module.audio.base.Wave;
 import feuille.module.audio.base.WaveDB;
+import feuille.module.editor.base.MakeItAutomation;
+import feuille.module.editor.base.voyager.ElementsComboBox;
+import feuille.util.DialogResult;
 import feuille.util.Exchange;
 import feuille.util.FFMpegColor;
 import feuille.util.Loader;
@@ -12,6 +17,7 @@ import feuille.util.Loader;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.*;
 
 public class SyncPane extends JPanel {
@@ -24,10 +30,14 @@ public class SyncPane extends JPanel {
     private String path;
     private long period;
 
+    private final ElementsComboBox<Function> ecbMakeIt = new ElementsComboBox<>();
+    private final MakeItAutomation makeItAutomation;
+
     public SyncPane(Exchange exchange){
         this.exchange = exchange;
         exchange.setSyncPane(this);
         waveform = new Wave(exchange);
+        makeItAutomation = new MakeItAutomation(exchange);
 
         setLayout(new BorderLayout());
         add(waveform, BorderLayout.CENTER);
@@ -123,7 +133,11 @@ public class SyncPane extends JPanel {
                 "/images/16-characters.png", 16, 16));
         btnKaraokeRules.setToolTipText(Loader.language("tooltip.karaoke.rules", "Karaoke rules"));
         btnKaraokeRules.addActionListener(e -> {
-
+            KaraokeRulesDialog dialog = new KaraokeRulesDialog(exchange);
+            dialog.setVisible(true);
+            if(dialog.getDialogResult() == DialogResult.OK) {
+                // TODO
+            }
         });
         toolBar.add(btnKaraokeRules);
 
@@ -179,13 +193,13 @@ public class SyncPane extends JPanel {
         });
         toolBar.add(btnKaraokeSD);
 
-        JButton btnKaraokeSA = new JButton(Loader.fromResource(
-                "/images/16-tasks.png", 16, 16));
-        btnKaraokeSA.setToolTipText(Loader.language("tooltip.karaoke.sa", "Make it!"));
-        btnKaraokeSA.addActionListener(e -> {
 
-        });
-        toolBar.add(btnKaraokeSA);
+        ecbMakeIt.getButton().setIcon(Loader.fromResource(
+                "/images/16-tasks.png", 16, 16));
+        ecbMakeIt.setToolTipText(Loader.language("tooltip.karaoke.sa", "Make it!"));
+        ecbMakeIt.setObjects(makeItAutomation.getFunctions());
+        ecbMakeIt.getButton().addActionListener(this::ecbMakeItActionPerformed);
+        toolBar.add(ecbMakeIt);
 
         JButton btnKaraokeDone = new JButton(Loader.fromResource(
                 "/images/16-done.png", 16, 16));
@@ -390,6 +404,12 @@ public class SyncPane extends JPanel {
 
     public void setColor2(FFMpegColor color2) {
         this.color2 = color2;
+    }
+
+    public void ecbMakeItActionPerformed(ActionEvent e) {
+        if(ecbMakeIt.getComboBox().getSelectedIndex() == -1) return;
+        Function function = ecbMakeIt.getSelectedItem();
+        makeItAutomation.execute(function.getName());
     }
 
 }

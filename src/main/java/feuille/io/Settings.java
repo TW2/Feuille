@@ -16,11 +16,13 @@ public class Settings {
     private String userSettingsPath;
     private String theme;
     private String language;
+    private String automationMakeItPath;
 
     private Settings() {
         userSettingsPath = null;
         theme = null;
         language = null;
+        automationMakeItPath = null;
     }
 
     public static void saveSettings(Settings settings) {
@@ -33,6 +35,8 @@ public class Settings {
             out.println("THEME="+settings.theme);
             out.println("# Language");
             out.println("LANGUAGE="+settings.language);
+            out.println("# MakeIt path");
+            out.println("MAKE_IT="+settings.automationMakeItPath);
         }catch(FileNotFoundException e){
             Loader.consoleErr(e.getMessage());
         }
@@ -71,6 +75,11 @@ public class Settings {
                     if(choice != null && !choice.equalsIgnoreCase("null")) {
                         settings.language = choice;
                     }
+                }else if(line.startsWith("MAKE_IT=")) {
+                    String choice = line.split("=")[1];
+                    if(choice != null && !choice.equalsIgnoreCase("null")) {
+                        settings.automationMakeItPath = choice;
+                    }
                 }
             }
         }catch(IOException e){
@@ -101,5 +110,13 @@ public class Settings {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getAutomationMakeItPath() {
+        return automationMakeItPath;
+    }
+
+    public void setAutomationMakeItPath(String automationMakeItPath) {
+        this.automationMakeItPath = automationMakeItPath;
     }
 }

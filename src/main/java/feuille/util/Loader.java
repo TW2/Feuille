@@ -90,6 +90,24 @@ public class Loader {
         );
     }
 
+    public static void consoleInfo(String source){
+        String startTranslation = filter(language("infoMsg", "Info"));
+        System.out.printf("%s:\n%s\n", startTranslation, source);
+    }
+
+    public static void dialogInfo(String source){
+        consoleInfo(source);
+        String startTranslation = filter(language("infoMsg", "Info"));
+        String title = language("infoMsgTitle", "Info");
+
+        JOptionPane.showMessageDialog(
+                new javax.swing.JFrame(),
+                String.format("%s:\n%s\n", startTranslation, source),
+                title,
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
     public static ImageIcon locations(String imageName){
         return new ImageIcon(Objects.requireNonNull(
                 Loader.class.getResource("/locations/" + imageName.toLowerCase())

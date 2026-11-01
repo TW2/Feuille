@@ -19,6 +19,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SyncPane extends JPanel {
 
@@ -37,7 +39,7 @@ public class SyncPane extends JPanel {
         this.exchange = exchange;
         exchange.setSyncPane(this);
         waveform = new Wave(exchange);
-        makeItAutomation = new MakeItAutomation(exchange);
+        makeItAutomation = exchange.getMakeItAutomation();
 
         setLayout(new BorderLayout());
         add(waveform, BorderLayout.CENTER);
@@ -136,7 +138,15 @@ public class SyncPane extends JPanel {
             KaraokeRulesDialog dialog = new KaraokeRulesDialog(exchange);
             dialog.showDialog(exchange.getMainFrame().getSettings());
             if(dialog.getDialogResult() == DialogResult.OK) {
-                // TODO
+                exchange.getMakeItAutomation().getFunctions().clear();
+                exchange.getMakeItAutomation().getFunctions().addAll(dialog.getFunctions());
+                List<Function> functions = new ArrayList<>();
+                for(Function function : exchange.getMakeItAutomation().getFunctions()) {
+                    if(function.isActive()){
+                        functions.add(function);
+                    }
+                }
+                ecbMakeIt.setObjects(functions);
             }
         });
         toolBar.add(btnKaraokeRules);

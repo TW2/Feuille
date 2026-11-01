@@ -18,17 +18,13 @@ public class MakeItAutomation {
 
     public MakeItAutomation(Exchange exchange) {
         myScriptHandler = new MyScriptHandler(exchange);
-        Settings settings = exchange.getMainFrame().getSettings();
+    }
+
+    public void setPaths(Settings settings){
         File app = new File(new File("").getAbsolutePath());
         File folder = new File(app + "/settings/scripting/makeit");
-        myScriptHandler.discover(
-                folder.getAbsolutePath(),
-                settings.getAutomationMakeItPath()
-        );
         folders.add(folder.getAbsolutePath());
         folders.add(settings.getAutomationMakeItPath());
-
-        functions = getList();
     }
 
     private List<Function> getList(){
@@ -40,9 +36,7 @@ public class MakeItAutomation {
     }
 
     public void reload(){
-        myScriptHandler.getScripts().getRegistry().clear();
         myScriptHandler.discover(folders.toArray(new String[0]));
-
         functions = getList();
     }
 
@@ -52,5 +46,9 @@ public class MakeItAutomation {
 
     public void execute(String functionName, Object... args) {
         myScriptHandler.execute(functionName, args);
+    }
+
+    public List<String> getFolders() {
+        return folders;
     }
 }

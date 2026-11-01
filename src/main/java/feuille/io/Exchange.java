@@ -3,6 +3,7 @@ package feuille.io;
 import feuille.FeuilleFrame;
 import feuille.io.assa.*;
 import feuille.module.audio.SyncPane;
+import feuille.module.editor.base.MakeItAutomation;
 import feuille.module.editor.base.voyager.Voyager;
 import feuille.module.editor.base.voyager.VoyagersTable;
 import feuille.module.editor.EditorPanel;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class Exchange {
+
+    private Settings settings;
 
     private FeuilleFrame mainFrame;
     private VoyagersTable voyagersTable;
@@ -31,8 +34,10 @@ public class Exchange {
     private AssStylesCollection currentStylesCollection;
     private List<AssActor> actors;
     private List<AssEffect> effects;
+    private MakeItAutomation makeItAutomation;
 
-    public Exchange() {
+    public Exchange(Settings settings) {
+        this.settings = settings;
         ass = new ASS();
         flag1 = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
         flag2 = ISO_3166.getISO_3166(Locale.getDefault().getISO3Country());
@@ -43,6 +48,9 @@ public class Exchange {
         currentStylesCollection = null;
         actors = new ArrayList<>();
         effects = new ArrayList<>();
+        makeItAutomation = new MakeItAutomation(this);
+        makeItAutomation.setPaths(settings);
+        makeItAutomation.reload();
         initStyles();
     }
 
@@ -52,6 +60,14 @@ public class Exchange {
 
     public void setMainFrame(FeuilleFrame mainFrame) {
         this.mainFrame = mainFrame;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 
     public VoyagersTable getVoyagersTable() {
@@ -285,5 +301,13 @@ public class Exchange {
 
     public void setCurrentStylesCollection(AssStylesCollection currentStylesCollection) {
         this.currentStylesCollection = currentStylesCollection;
+    }
+
+    public MakeItAutomation getMakeItAutomation() {
+        return makeItAutomation;
+    }
+
+    public void setMakeItAutomation(MakeItAutomation makeItAutomation) {
+        this.makeItAutomation = makeItAutomation;
     }
 }

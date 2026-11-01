@@ -49,7 +49,7 @@ public class FeuilleFrame extends JFrame {
 
         settings = Settings.loadSettings(this);
 
-        exchange = new Exchange();
+        exchange = new Exchange(settings);
 
         exchange.setMainFrame(this);
 

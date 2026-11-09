@@ -201,10 +201,6 @@ public class FeuilleFrame extends JFrame {
         mSaveASS.addActionListener(this::mSaveASSActionPerformed);
         mFileModAssEditor.add(mSaveASS);
 
-        JMenuItem mCloseASS = new JMenuItem(Loader.language("menu.editor.ass.cl.ass", "Close ASS"));
-        mCloseASS.addActionListener(this::mCloseASSActionPerformed);
-        mFileModAssEditor.add(mCloseASS);
-
         mFileModAssEditor.add(new JSeparator());
 
         JCheckBoxMenuItem mAutoSaveASS = new JCheckBoxMenuItem(Loader.language("menu.editor.ass.asv.ass", "Autosave ASS"), false);
@@ -348,10 +344,6 @@ public class FeuilleFrame extends JFrame {
         }else{
             mSaveAsASSActionPerformed(event);
         }
-    }
-
-    public void mCloseASSActionPerformed(ActionEvent event){
-        exchange.clearEvents();
     }
 
     public void mAutoSaveASSActionPerformed(ActionEvent event){

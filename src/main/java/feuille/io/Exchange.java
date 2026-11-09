@@ -281,6 +281,7 @@ public class Exchange {
 
     public void clearEvents(){
         voyagersTable.getVoyagers().clear();
+        voyagersTable.repaint();
     }
 
     public void setTemporarySubtitlesFile(){

@@ -498,6 +498,11 @@ public class EditorPanel extends JPanel {
         return  popupMenu;
     }
 
+    public void forceResize(int w, int h) {
+        setSize(w, h);
+        updateUI();
+    }
+
     public String getCurrentText(){
         if(paneTranslation.getText().isEmpty()){
             return paneOrigin.getText();

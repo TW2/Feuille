@@ -75,8 +75,8 @@ register("separate_romaji", () => {
     // Texte
     const origin_size = t.length;
 
-    console.log("Phrase d'origine : " + t);
-    console.log("Taille d'origine : " + origin_size);
+    //console.log("Phrase d'origine : " + t);
+    //console.log("Taille d'origine : " + origin_size);
 
     // On boucle tant que le texte n'a pas été entièrement parcouru.
     while(count < origin_size && count_limits < 300){

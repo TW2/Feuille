@@ -158,6 +158,9 @@ public class SyncPane extends JPanel {
             waveform.setUseSpectrum(true);
             tbSpectrum.setSelected(true);
             waveform.repaint();
+            exchange.getKaraokeDisplay().setCurrentText(exchange.getEditorPanel().getCurrentText());
+            exchange.getAssEditor().setOnTop(exchange.getKaraokeDisplay());
+            exchange.getSyncPane().getWaveform().setKaraoke(true);
         });
         toolBar.add(btnKaraokeOn);
 
@@ -168,6 +171,9 @@ public class SyncPane extends JPanel {
             waveform.setUseSpectrum(false);
             tbSpectrum.setSelected(false);
             waveform.repaint();
+            exchange.getAssEditor().setOnTop(exchange.getEditorPanel());
+            exchange.getEditorPanel().setCurrentText(exchange.getKaraokeDisplay().getCurrentText());
+            exchange.getSyncPane().getWaveform().setKaraoke(false);
         });
         toolBar.add(btnKaraokeOff);
 

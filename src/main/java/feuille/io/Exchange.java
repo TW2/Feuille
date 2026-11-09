@@ -3,6 +3,8 @@ package feuille.io;
 import feuille.FeuilleFrame;
 import feuille.io.assa.*;
 import feuille.module.audio.SyncPane;
+import feuille.module.editor.AssEditor;
+import feuille.module.editor.KaraokeDisplay;
 import feuille.module.editor.base.MakeItAutomation;
 import feuille.module.editor.base.voyager.Voyager;
 import feuille.module.editor.base.voyager.VoyagersTable;
@@ -23,6 +25,8 @@ public class Exchange {
     private SyncPane syncPane;
     private EditorPanel editorPanel;
     private ViewGst viewGStreamer;
+    private AssEditor assEditor;
+    private KaraokeDisplay karaokeDisplay;
 
     private ASS ass;
     private ISO_3166 flag1;
@@ -92,6 +96,22 @@ public class Exchange {
 
     public void setEditorPanel(EditorPanel editorPanel) {
         this.editorPanel = editorPanel;
+    }
+
+    public AssEditor getAssEditor() {
+        return assEditor;
+    }
+
+    public void setAssEditor(AssEditor assEditor) {
+        this.assEditor = assEditor;
+    }
+
+    public KaraokeDisplay getKaraokeDisplay() {
+        return karaokeDisplay;
+    }
+
+    public void setKaraokeDisplay(KaraokeDisplay karaokeDisplay) {
+        this.karaokeDisplay = karaokeDisplay;
     }
 
     public ASS getAss() {

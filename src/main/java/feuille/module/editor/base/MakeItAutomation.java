@@ -1,8 +1,8 @@
 package feuille.module.editor.base;
 
 import feuille.io.Settings;
-import feuille.io.js.Function;
-import feuille.io.js.MyScriptHandler;
+import feuille.io.edit.js.Function;
+import feuille.io.edit.js.MyScriptHandler;
 import feuille.io.Exchange;
 
 import java.io.File;

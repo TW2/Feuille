@@ -5,6 +5,7 @@ import feuille.component.FlagVersion;
 import feuille.component.LockFormatTextField;
 import feuille.dialog.AssActorsDialog;
 import feuille.dialog.AssEditorDialog;
+import feuille.dialog.AssEffectsDialog;
 import feuille.io.Clipboard;
 import feuille.io.Exchange;
 import feuille.io.assa.*;
@@ -160,7 +161,11 @@ public class EditorPanel extends JPanel {
         });
 
         ecbEditEffects.getButton().addActionListener((_)->{
-            // TODO
+            AssEffectsDialog ae = new AssEffectsDialog(exchange);
+            ae.showDialog();
+            if(ae.getDialogResult() == DialogResult.OK){
+                // TODO
+            }
         });
 
         btnAddEventQueue.addActionListener(e -> {
@@ -270,6 +275,24 @@ public class EditorPanel extends JPanel {
             }
             paneTranslation.setText(add.getEvent().getText());
         }
+    }
+
+    public AssEvent getCurrentEvent(){
+        AssEvent event = new AssEvent();
+
+        event.setType(cbEditComment.isSelected() ? AssEventType.Comment : AssEventType.Dialogue);
+        event.setLayer(spinEditModelLayer.getNumber().intValue()); // layer
+        event.setStart(lockStart.getAssTime()); // start
+        event.setEnd(lockEnd.getAssTime()); // end
+        event.setStyle(ecbEditStyles.getSelectedItem()); // style
+        event.setName(ecbEditActors.getSelectedItem()); // name
+        event.setMarginL(spinEditModelML.getNumber().intValue()); // marginL
+        event.setMarginR(spinEditModelMR.getNumber().intValue()); // marginR
+        event.setMarginV(spinEditModelMV.getNumber().intValue()); // marginV
+        event.setEffect(ecbEditEffects.getSelectedItem()); // effect
+        event.setText(getCurrentText()); // text
+
+        return event;
     }
 
     private JPopupMenu createOriginPopupMenu(){

@@ -34,6 +34,7 @@ public class VoyagersTable extends JPanel {
     private int vBarOffset;
     private int pressedAt = -1;
     private int releasedAt = -1;
+    private int activeLine = -1;
 
     private final ImageIcon iBoy;
     private final ImageIcon iGirl;
@@ -75,6 +76,7 @@ public class VoyagersTable extends JPanel {
                     pressedAt = -1;
                     releasedAt = -1;
                     int row = getRowAt(e.getY());
+                    activeLine = row;
                     if(e.getY() > 20 && row < voyagers.size()) {
                         switch(e.getClickCount()){
                             case 1 -> {
@@ -788,5 +790,9 @@ public class VoyagersTable extends JPanel {
         }catch(Exception ex){
             Loader.dialogErr(ex.getLocalizedMessage());
         }
+    }
+
+    public int getActiveLine() {
+        return activeLine;
     }
 }

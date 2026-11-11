@@ -110,6 +110,22 @@ public class AssTime {
         msTime = value == 0d ? msTime : msTime / value;
     }
 
+    public static AssTime add(AssTime a, AssTime b){
+        return new AssTime(a.getMsTime() + b.getMsTime());
+    }
+
+    public static AssTime subtract(AssTime a, AssTime b){
+        return new AssTime(b.getMsTime() - a.getMsTime());
+    }
+
+    public static AssTime multiply(AssTime a, AssTime b){
+        return new AssTime(a.getMsTime() * b.getMsTime());
+    }
+
+    public static AssTime divide(AssTime a, AssTime b){
+        return new AssTime(a.getMsTime() / (b.getMsTime() == 0d ? 1d : b.getMsTime()));
+    }
+
     @Override
     public String toString() {
         return toAss();

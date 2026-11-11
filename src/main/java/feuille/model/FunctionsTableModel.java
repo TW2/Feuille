@@ -1,6 +1,6 @@
 package feuille.model;
 
-import feuille.io.js.Function;
+import feuille.io.edit.js.Function;
 import feuille.util.Loader;
 
 import javax.swing.table.DefaultTableModel;

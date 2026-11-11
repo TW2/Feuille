@@ -10,6 +10,7 @@ import feuille.module.editor.base.voyager.Voyager;
 import feuille.module.editor.base.voyager.VoyagersTable;
 import feuille.module.editor.EditorPanel;
 import feuille.module.video.ViewGst;
+import feuille.scripting.FxObject;
 import feuille.util.ISO_3166;
 
 import java.util.ArrayList;
@@ -40,6 +41,9 @@ public class Exchange {
     private List<AssEffect> effects;
     private MakeItAutomation makeItAutomation;
 
+    // Karaoke effects (legacy XFX - Fxo)
+    private List<FxObject> fxObjects;
+
     public Exchange(Settings settings) {
         this.settings = settings;
         ass = new ASS();
@@ -56,6 +60,7 @@ public class Exchange {
         makeItAutomation.setPaths(settings);
         makeItAutomation.reload();
         initStyles();
+        fxObjects = new ArrayList<>();
     }
 
     public FeuilleFrame getMainFrame() {
@@ -330,5 +335,17 @@ public class Exchange {
 
     public void setMakeItAutomation(MakeItAutomation makeItAutomation) {
         this.makeItAutomation = makeItAutomation;
+    }
+
+    public AssEvent getCurrentEvent() {
+        return editorPanel.getCurrentEvent();
+    }
+
+    public List<FxObject> getFxObjects() {
+        return fxObjects;
+    }
+
+    public void setFxObjects(List<FxObject> fxObjects) {
+        this.fxObjects = fxObjects;
     }
 }

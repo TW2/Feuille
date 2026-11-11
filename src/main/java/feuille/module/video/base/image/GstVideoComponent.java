@@ -32,6 +32,7 @@ import java.awt.image.DataBufferInt;
 import java.awt.image.VolatileImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serial;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
@@ -210,6 +211,7 @@ public class GstVideoComponent extends javax.swing.JComponent {
 
     private class RenderComponent extends javax.swing.JComponent {
 
+        @Serial
         private static final long serialVersionUID = -4736605073704494268L;
 
         @Override

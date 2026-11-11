@@ -120,7 +120,7 @@ public class ViewGst extends JPanel {
      * Configures paths to the GStreamer libraries. On Windows queries various
      * GStreamer environment variables, and then sets up the PATH environment
      * variable. On macOS, adds the location to jna.library.path (macOS binaries
-     * link to each other). On both, the gstreamer.path system property can be
+     * link to each other). On both, the gstreamer path system property can be
      * used to override. On Linux, assumes GStreamer is in the path already.
      */
     private void configurePaths() {

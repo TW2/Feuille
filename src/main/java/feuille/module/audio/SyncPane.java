@@ -2,7 +2,7 @@ package feuille.module.audio;
 
 import feuille.dialog.KaraokeRulesDialog;
 import feuille.frame.WaitFrame;
-import feuille.io.js.Function;
+import feuille.io.edit.js.Function;
 import feuille.module.audio.base.FFAudio2;
 import feuille.module.audio.base.SignalResult;
 import feuille.module.audio.base.Wave;

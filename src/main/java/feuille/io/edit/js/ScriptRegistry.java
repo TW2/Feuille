@@ -1,4 +1,4 @@
-package feuille.io.js;
+package feuille.io.edit.js;
 
 import feuille.util.Loader;
 import org.graalvm.polyglot.Value;

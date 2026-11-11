@@ -1,4 +1,4 @@
-package feuille.io.js;
+package feuille.scripting.js;
 
 import feuille.util.Loader;
 import org.graalvm.polyglot.Context;
@@ -39,8 +39,6 @@ public final class ScriptEngineManager implements AutoCloseable {
                                 Expected:
                                 
                                 register(name, function)
-                                or
-                                register(name, category, function)
                                 """
                         );
             }
@@ -49,13 +47,7 @@ public final class ScriptEngineManager implements AutoCloseable {
                 String name = args[0].asString();
                 Value function = args[1];
 
-                registry.register(name, "None", function);
-            }else if(args.length == 3){
-                String name = args[0].asString();
-                String category = args[1].asString();
-                Value function = args[2];
-
-                registry.register(name, category, function);
+                registry.register(name, function);
             }
 
             return null;

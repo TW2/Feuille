@@ -2,7 +2,7 @@ package feuille.dialog;
 
 import feuille.filefilter.JavascriptFileFilter;
 import feuille.io.Settings;
-import feuille.io.js.Function;
+import feuille.io.edit.js.Function;
 import feuille.model.FunctionsTableModel;
 import feuille.util.DialogResult;
 import feuille.io.Exchange;

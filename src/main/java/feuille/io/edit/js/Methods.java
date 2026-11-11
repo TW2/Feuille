@@ -1,4 +1,4 @@
-package feuille.io.js;
+package feuille.io.edit.js;
 
 import feuille.io.Exchange;
 import org.graalvm.polyglot.HostAccess;

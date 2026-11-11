@@ -1,10 +1,14 @@
 package feuille.dialog;
 
+import feuille.component.CodeLanguage;
 import feuille.component.PlaceholderTextField;
 import feuille.io.Exchange;
 import feuille.io.assa.*;
 import feuille.util.DialogResult;
 import feuille.util.Loader;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -23,7 +27,7 @@ public class AssEffectsDialog extends JDialog {
     private DialogResult dialogResult;
     private final JTabbedPane tabbedPane;
 
-    //=================================================== Styles collector
+    //=================================================== Effects collector
     private final DefaultListModel<AssEffect> storageModel;
     private final JList<AssEffect> storageList;
     private final PlaceholderTextField tfCol;
@@ -31,6 +35,9 @@ public class AssEffectsDialog extends JDialog {
     private final JComboBox<AssEffectsCollection> cbColEffect;
     private final DefaultListModel<AssEffect> effectStorageModel;
     private final JList<AssEffect> effectStorageList;
+
+    //=================================================== Effects editor
+    private final RSyntaxTextArea textArea;
 
     public AssEffectsDialog(Exchange exchange){
         super(exchange.getMainFrame());
@@ -133,6 +140,14 @@ public class AssEffectsDialog extends JDialog {
         JPanel effectsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         effectsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        JLabel lblName = new JLabel("Name: ");
+        effectsPanel.add(lblName);
+
+        PlaceholderTextField tfName = new PlaceholderTextField();
+        tfName.setPlaceholder("A name for this setting");
+        tfName.setPreferredSize(new Dimension(250, 22));
+        effectsPanel.add(tfName);
+
         JLabel lblMethod = new JLabel("Method: ");
         effectsPanel.add(lblMethod);
 
@@ -140,6 +155,42 @@ public class AssEffectsDialog extends JDialog {
         JComboBox<String> cbMethods = new JComboBox<>(methodsModel);
         cbMethods.setPreferredSize(new Dimension(500, 22));
         effectsPanel.add(cbMethods);
+
+        JTextArea taEffects = new JTextArea();
+        taEffects.setPreferredSize(new Dimension(870, 150));
+        taEffects.setBorder(bdTab);
+        effectsPanel.add(taEffects);
+
+        JPanel controlsPanel = new JPanel(new GridLayout(1, 3));
+        JButton btnAdd = new JButton("Add");
+        btnAdd.addActionListener((e) -> {});
+        controlsPanel.add(btnAdd);
+        JButton btnModify = new JButton("Modify");
+        btnModify.addActionListener((e) -> {});
+        controlsPanel.add(btnModify);
+        JButton btnRemove = new JButton("Remove");
+        btnRemove.addActionListener((e) -> {});
+        controlsPanel.add(btnRemove);
+        effectsPanel.add(controlsPanel);
+
+        JList<String> listEffects = new JList<>();
+        listEffects.setPreferredSize(new Dimension(870, 100));
+        listEffects.setBorder(bdTab);
+        effectsPanel.add(listEffects);
+
+        JToolBar codeToolBar = createCodeToolBar();
+        codeToolBar.setPreferredSize(new Dimension(870, 40));
+        effectsPanel.add(codeToolBar);
+
+        textArea = new RSyntaxTextArea(20, 60);
+        textArea.setFont(textArea.getFont().deriveFont(18f));
+        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+        textArea.setCodeFoldingEnabled(true);
+        RTextScrollPane codeEditorScrollPane = new RTextScrollPane(textArea);
+        codeEditorScrollPane.setPreferredSize(new Dimension(870, 200));
+        codeEditorScrollPane.setBorder(bdTab);
+        effectsPanel.add(codeEditorScrollPane);
+
 
         tabbedPane.add(Loader.language("dialog.title.fx.edit", "Effects Editor"), effectsPanel);
     }
@@ -228,6 +279,15 @@ public class AssEffectsDialog extends JDialog {
         popupMenu.add(mScSToStorage);
 
         return popupMenu;
+    }
+
+    private JToolBar createCodeToolBar() {
+        JToolBar tb = new JToolBar(JToolBar.HORIZONTAL);
+
+        CodeLanguage codeLanguage = new CodeLanguage();
+        tb.add(codeLanguage);
+
+        return tb;
     }
 
     public void cbColEffectActionPerformed(ActionEvent e) {

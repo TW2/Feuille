@@ -263,15 +263,15 @@ public class XmlVoyagersWriter {
             // Entering 'effects' tag
             startElement("effects");
             for(AssEffect e : ass.getEffects()){
-                // <effect name= language= >
-                startElement("effect",
-                        new AttributesSetter("name", e.getName()),
-                        new AttributesSetter("language", "lua")
-                );
-                // effect code
-                putText(e.getEffect());
-                // </effect>
-                endElement("effect");
+//                // <effect name= language= >
+//                startElement("effect",
+//                        new AttributesSetter("name", e.getName()),
+//                        new AttributesSetter("language", "lua")
+//                );
+//                // effect code
+//                putText(e.getEffect());
+//                // </effect>
+//                endElement("effect");
             }
             // Closing 'effects' tag
             endElement("effects");

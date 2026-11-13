@@ -15,26 +15,30 @@ public class Settings {
     private String theme;
     private String language;
     private String automationMakeItPath;
+    private String codeMethodsPath;
 
     private Settings() {
         userSettingsPath = null;
         theme = null;
         language = null;
         automationMakeItPath = null;
+        codeMethodsPath = null;
     }
 
     public static void saveSettings(Settings settings) {
         File app = new File(new File("").getAbsolutePath());
         File rawSettings = new File(app, ".settings");
         try(PrintWriter out = new PrintWriter(rawSettings)) {
-            out.println("# User path for settings file");
-            out.println("USER_SET_PATH="+settings.userSettingsPath);
-            out.println(("# Theme name"));
-            out.println("THEME="+settings.theme);
-            out.println("# Language");
-            out.println("LANGUAGE="+settings.language);
-            out.println("# MakeIt path");
-            out.println("MAKE_IT="+settings.automationMakeItPath);
+            saveParam(out, "User path for settings file",
+                    "USER_SET_PATH", settings.userSettingsPath);
+            saveParam(out, "Theme name",
+                    "THEME", settings.theme);
+            saveParam(out, "Language",
+                    "LANGUAGE", settings.language);
+            saveParam(out, "MakeIt path",
+                    "MAKE_IT", settings.automationMakeItPath);
+            saveParam(out, "CodeMethods path",
+                    "CODE_METHODS", settings.codeMethodsPath);
         }catch(FileNotFoundException e){
             Loader.consoleErr(e.getMessage());
         }
@@ -48,35 +52,26 @@ public class Settings {
             String line;
             while((line = in.readLine()) != null) {
                 if(line.startsWith("#")) continue;
-                if(line.startsWith("USER_SET_PATH=")) {
-                    settings.userSettingsPath = line.split("=")[1];
-                }else if(line.startsWith("THEME=")) {
-                    String choice = line.split("=")[1];
-                    if(choice != null && !choice.equalsIgnoreCase("null")) {
-                        settings.theme = choice;
-                        Theme<? extends FlatLaf> theme = null;
-                        for(Theme<? extends FlatLaf> th : new ThemeCollection()) {
-                            if(th.getName().equalsIgnoreCase(choice)) {
-                                theme = th;
-                            }
-                        }
-                        if(theme == null) continue;
-                        try{
-                            UIManager.setLookAndFeel(theme.getLaf());
-                            SwingUtilities.updateComponentTreeUI(parent);
-                        }catch(Exception ex){
-                            Loader.consoleErr(ex.getMessage());
+                settings.userSettingsPath = loadParam(line, "USER_SET_PATH");
+                settings.theme = loadParam(line, "THEME");
+                settings.language = loadParam(line, "LANGUAGE");
+                settings.automationMakeItPath = loadParam(line, "MAKE_IT");
+                settings.codeMethodsPath = loadParam(line, "CODE_METHODS");
+
+                // Do it later
+                if(settings.theme != null) {
+                    Theme<? extends FlatLaf> theme = null;
+                    for(Theme<? extends FlatLaf> th : new ThemeCollection()) {
+                        if(th.getName().equalsIgnoreCase(settings.theme)) {
+                            theme = th;
                         }
                     }
-                }else if(line.startsWith("LANGUAGE=")) {
-                    String choice = line.split("=")[1];
-                    if(choice != null && !choice.equalsIgnoreCase("null")) {
-                        settings.language = choice;
-                    }
-                }else if(line.startsWith("MAKE_IT=")) {
-                    String choice = line.split("=")[1];
-                    if(choice != null && !choice.equalsIgnoreCase("null")) {
-                        settings.automationMakeItPath = choice;
+                    if(theme == null) continue;
+                    try{
+                        UIManager.setLookAndFeel(theme.getLaf());
+                        SwingUtilities.updateComponentTreeUI(parent);
+                    }catch(Exception ex){
+                        Loader.consoleErr(ex.getMessage());
                     }
                 }
             }
@@ -84,6 +79,19 @@ public class Settings {
             Loader.consoleErr(e.getMessage());
         }
         return settings;
+    }
+
+    private static void saveParam(PrintWriter out, String comment, String startLine, String param){
+        if(param == null) return;
+        out.println("# " + comment);
+        out.println(startLine.replace(" ", "_").toUpperCase() + "=" + param);
+    }
+
+    private static String loadParam(String line, String startLine){
+        if(line.startsWith(startLine + "=")){
+            return line.split("=")[1];
+        }
+        return null;
     }
 
     public String getUserSettingsPath() {
@@ -116,5 +124,13 @@ public class Settings {
 
     public void setAutomationMakeItPath(String automationMakeItPath) {
         this.automationMakeItPath = automationMakeItPath;
+    }
+
+    public String getCodeMethodsPath() {
+        return codeMethodsPath;
+    }
+
+    public void setCodeMethodsPath(String codeMethodsPath) {
+        this.codeMethodsPath = codeMethodsPath;
     }
 }

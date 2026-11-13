@@ -1,40 +1,110 @@
 package feuille.io.assa;
 
-public class AssEffect {
-    private String name;
-    private String effect;
+import feuille.scripting.EffectsDB;
 
-    public AssEffect(String name, String effect) {
-        this.name = name;
-        this.effect = effect;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AssEffect {
+
+    public enum MethodType {
+        None("None"),
+        XFX("XFX"),
+        Groovy("Groovy"),
+        JavaScript("JavaScript"),
+        Kotlin("Kotlin"),
+        Lua("Lua"),
+        Python("Python"),
+        Ruby("Ruby");
+
+        final String name;
+
+        MethodType(String name){
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return getName();
+        }
+
+        public static MethodType of(String name){
+            MethodType methodType = MethodType.None;
+            for(MethodType type : values()){
+                if(type.getName().equalsIgnoreCase(name)){
+                    methodType = type;
+                    break;
+                }
+            }
+            return methodType;
+        }
     }
 
-    public AssEffect(String effect) {
-        this("Default", effect);
+    private MethodType methodType;
+    private String collectionName;
+    private String name;
+    private List<String> effects;
+
+    public AssEffect(MethodType methodType, String collectionName, String name, List<String> effects) {
+        this.methodType = methodType;
+        this.collectionName = collectionName;
+        this.name = name;
+        this.effects = effects;
+    }
+
+    public AssEffect(String name, String collectionName, List<String> effects) {
+        this(MethodType.None, collectionName, name, effects);
+    }
+
+    public AssEffect(String name, List<String> effects){
+        this(MethodType.None, "Default collection", name, effects);
+    }
+
+    public AssEffect(List<String> effects) {
+        this("Default", effects);
     }
 
     public AssEffect() {
-        this("Default", "");
+        this("Default", new ArrayList<>());
     }
 
     public static AssEffect fromLine(String line){
         // [FXs]
-        // Format: Name, Effect
-        // FX: Banner,{\\move(100,200,300,120)}
+        // Format: Method, Name, Effect
+        // FX: None,Banner,{\\move(100,200,300,120)}
         AssEffect fx = new AssEffect();
-        String[] t = line.split(",");
+        String[] t = line.substring(3).split(",");
 
-        fx.name = t[0].substring(t[0].indexOf(" ") + 1);
-        fx.effect = t[1];
+        fx.methodType = MethodType.of(t[0]);
+        fx.collectionName = t[1];
+        fx.name = t[2];
+        fx.effects = EffectsDB.stringToData(t[3]);
 
         return fx;
     }
 
     public String toLine(){
         // [FXs]
-        // Format: Name, Effect
-        // FX: Banner,{\\move(100,200,300,120)}
-        return "FX: " + name + "," + effect;
+        // Format: Method, Name, Effects
+        // FX: None,Banner,{\\move(100,200,300,120)}
+        return String.format("FX: %s,%s,%s,%s",
+                methodType.getName(),
+                collectionName,
+                name,
+                EffectsDB.stringifyData(effects)
+        );
+    }
+
+    public MethodType getMethodType() {
+        return methodType;
+    }
+
+    public void setMethodType(MethodType methodType) {
+        this.methodType = methodType;
     }
 
     public String getName() {
@@ -45,12 +115,20 @@ public class AssEffect {
         this.name = name;
     }
 
-    public String getEffect() {
-        return effect;
+    public List<String> getEffects() {
+        return effects;
     }
 
-    public void setEffect(String effect) {
-        this.effect = effect;
+    public void setEffects(List<String> effects) {
+        this.effects = effects;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
     }
 
     @Override

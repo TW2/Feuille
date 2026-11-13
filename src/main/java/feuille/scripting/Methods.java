@@ -630,11 +630,11 @@ public class Methods {
     @HostAccess.Export
     public String getFxoMoment(String preset){
 //        for (FxObject fxo : (FxObject[])fxModel.toArray()){
-        for (FxObject fxo : exchange.getFxObjects()){
-            if(fxo.getName().equals(preset)){
-                return fxo.getMoment();
-            }
-        }
+//        for (FxObject fxo : exchange.getFxObjects()){
+//            if(fxo.getName().equals(preset)){
+//                return fxo.getMoment();
+//            }
+//        }
         return "undefined?";
     }
 
@@ -642,11 +642,11 @@ public class Methods {
      * Retourne le temps de ce XFX ou revoit la chaine d'erreur 'undefined?'.</p> */
     @HostAccess.Export
     public String getFxoTime(String preset){
-        for (FxObject fxo : exchange.getFxObjects()){
-            if(fxo.getName().equals(preset)){
-                return fxo.getTime();
-            }
-        }
+//        for (FxObject fxo : exchange.getFxObjects()){
+//            if(fxo.getName().equals(preset)){
+//                return fxo.getTime();
+//            }
+//        }
         return "undefined?";
     }
 
@@ -654,11 +654,11 @@ public class Methods {
      * Retourne la première couche de ce XFX ou revoit la chaine d'erreur 'undefined?'.</p> */
     @HostAccess.Export
     public String getFxoFirstLayer(String preset){
-        for (FxObject fxo : exchange.getFxObjects()){
-            if(fxo.getName().equals(preset)){
-                return fxo.getFirstLayer();
-            }
-        }
+//        for (FxObject fxo : exchange.getFxObjects()){
+//            if(fxo.getName().equals(preset)){
+//                return fxo.getFirstLayer();
+//            }
+//        }
         return "undefined?";
     }
 
@@ -666,11 +666,11 @@ public class Methods {
      * Retourne le nombre de couches de ce XFX ou revoit la chaine d'erreur 'undefined?'.</p> */
     @HostAccess.Export
     public String getFxoNbLayers(String preset){
-        for (FxObject fxo : exchange.getFxObjects()){
-            if(fxo.getName().equals(preset)){
-                return fxo.getNbLayers();
-            }
-        }
+//        for (FxObject fxo : exchange.getFxObjects()){
+//            if(fxo.getName().equals(preset)){
+//                return fxo.getNbLayers();
+//            }
+//        }
         return "undefined?";
     }
 
@@ -678,11 +678,11 @@ public class Methods {
      * Retourne le style de ce XFX ou revoit la chaine d'erreur 'undefined?'.</p> */
     @HostAccess.Export
     public String getFxoStyle(String preset){
-        for (FxObject fxo : exchange.getFxObjects()){
-            if(fxo.getName().equals(preset)){
-                return fxo.getStyle();
-            }
-        }
+//        for (FxObject fxo : exchange.getFxObjects()){
+//            if(fxo.getName().equals(preset)){
+//                return fxo.getStyle();
+//            }
+//        }
         return "undefined?";
     }
 

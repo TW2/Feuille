@@ -162,8 +162,10 @@ public class EditorPanel extends JPanel {
 
         ecbEditEffects.getButton().addActionListener((_)->{
             AssEffectsDialog ae = new AssEffectsDialog(exchange);
+            ae.loadEffects();
             ae.showDialog();
             if(ae.getDialogResult() == DialogResult.OK){
+                ae.saveEffects();
                 // TODO
             }
         });

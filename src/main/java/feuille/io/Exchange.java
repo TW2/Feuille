@@ -10,7 +10,6 @@ import feuille.module.editor.base.voyager.Voyager;
 import feuille.module.editor.base.voyager.VoyagersTable;
 import feuille.module.editor.EditorPanel;
 import feuille.module.video.ViewGst;
-import feuille.scripting.FxObject;
 import feuille.util.ISO_3166;
 
 import java.util.ArrayList;
@@ -37,12 +36,11 @@ public class Exchange {
     private AssStyle currentStyle;
     private final List<AssStylesCollection> stylesCollections;
     private AssStylesCollection currentStylesCollection;
+    private AssEffect currentEffect;
+    private final List<AssEffectsCollection> effectsCollections;
+    private AssEffectsCollection currentEffectsCollection;
     private List<AssActor> actors;
-    private List<AssEffect> effects;
     private MakeItAutomation makeItAutomation;
-
-    // Karaoke effects (legacy XFX - Fxo)
-    private List<FxObject> fxObjects;
 
     public Exchange(Settings settings) {
         this.settings = settings;
@@ -54,117 +52,14 @@ public class Exchange {
         currentStyle = new AssStyle();
         stylesCollections = new ArrayList<>();
         currentStylesCollection = null;
+        currentEffect = null;
+        effectsCollections = new ArrayList<>();
+        currentEffectsCollection = null;
         actors = new ArrayList<>();
-        effects = new ArrayList<>();
         makeItAutomation = new MakeItAutomation(this);
         makeItAutomation.setPaths(settings);
         makeItAutomation.reload();
         initStyles();
-        fxObjects = new ArrayList<>();
-    }
-
-    public FeuilleFrame getMainFrame() {
-        return mainFrame;
-    }
-
-    public void setMainFrame(FeuilleFrame mainFrame) {
-        this.mainFrame = mainFrame;
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public void setSettings(Settings settings) {
-        this.settings = settings;
-    }
-
-    public VoyagersTable getVoyagersTable() {
-        return voyagersTable;
-    }
-
-    public void setVoyagersTable(VoyagersTable voyagersTable) {
-        this.voyagersTable = voyagersTable;
-    }
-
-    public SyncPane getSyncPane() {
-        return syncPane;
-    }
-
-    public void setSyncPane(SyncPane syncPane) {
-        this.syncPane = syncPane;
-    }
-
-    public EditorPanel getEditorPanel() {
-        return editorPanel;
-    }
-
-    public void setEditorPanel(EditorPanel editorPanel) {
-        this.editorPanel = editorPanel;
-    }
-
-    public AssEditor getAssEditor() {
-        return assEditor;
-    }
-
-    public void setAssEditor(AssEditor assEditor) {
-        this.assEditor = assEditor;
-    }
-
-    public KaraokeDisplay getKaraokeDisplay() {
-        return karaokeDisplay;
-    }
-
-    public void setKaraokeDisplay(KaraokeDisplay karaokeDisplay) {
-        this.karaokeDisplay = karaokeDisplay;
-    }
-
-    public ASS getAss() {
-        return ass;
-    }
-
-    public void setAss(ASS ass) {
-        this.ass = ass;
-    }
-
-    public ISO_3166 getFlag1() {
-        return flag1;
-    }
-
-    public void setFlag1(ISO_3166 flag1) {
-        this.flag1 = flag1;
-    }
-
-    public ISO_3166 getFlag2() {
-        return flag2;
-    }
-
-    public void setFlag2(ISO_3166 flag2) {
-        this.flag2 = flag2;
-    }
-
-    public List<AssActor> getActors() {
-        return actors;
-    }
-
-    public void setActors(List<AssActor> actors) {
-        this.actors = actors;
-    }
-
-    public List<AssEffect> getEffects() {
-        return effects;
-    }
-
-    public void setEffects(List<AssEffect> effects) {
-        this.effects = effects;
-    }
-
-    public ViewGst getViewGst() {
-        return viewGStreamer;
-    }
-
-    public void setViewGst(ViewGst viewGStreamer) {
-        this.viewGStreamer = viewGStreamer;
     }
 
     public void addEvent(AssEvent event, ISO_3166 f1, ISO_3166 f2){
@@ -192,34 +87,6 @@ public class Exchange {
         currentStyle = voyager.getEvent().getStyle();
     }
 
-    public AssStyle getCurrentStyle() {
-        return currentStyle;
-    }
-
-    public void setCurrentStyle(AssStyle currentStyle) {
-        this.currentStyle = currentStyle;
-    }
-
-    public List<AssStylesCollection> getStylesCollections() {
-        return stylesCollections;
-    }
-
-    public AssTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(AssTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public AssTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(AssTime endTime) {
-        this.endTime = endTime;
-    }
-
     public void deleteEvent(ISO_3166 f1, ISO_3166 f2){
         voyagersTable.deleteEvent(f1, f2);
     }
@@ -227,7 +94,6 @@ public class Exchange {
     public void openASS(ASS ass){
         List<Voyager> list = new ArrayList<>();
         Voyager lastVoyager = null;
-        int counter = 0;
         for(AssEvent event : ass.getEvents()) {
             ISO_3166 iso = event.getText().startsWith("{ISO-3166=") ?
                     ISO_3166.getISO_3166(event.getText().substring("{ISO-3166=".length(), event.getText().indexOf("}")))
@@ -237,8 +103,6 @@ public class Exchange {
                 event.setText(event.getText().substring("{ISO-3166=".length() + 4));
             }
             Voyager v = new Voyager(iso, visible, event);
-
-            counter++;
 
             if(lastVoyager == null) {
                 lastVoyager = v;
@@ -321,12 +185,156 @@ public class Exchange {
         ass.getStyles().add(currentStyle);
     }
 
+    public FeuilleFrame getMainFrame() {
+        return mainFrame;
+    }
+
+    public void setMainFrame(FeuilleFrame mainFrame) {
+        this.mainFrame = mainFrame;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+
+    public VoyagersTable getVoyagersTable() {
+        return voyagersTable;
+    }
+
+    public void setVoyagersTable(VoyagersTable voyagersTable) {
+        this.voyagersTable = voyagersTable;
+    }
+
+    public SyncPane getSyncPane() {
+        return syncPane;
+    }
+
+    public void setSyncPane(SyncPane syncPane) {
+        this.syncPane = syncPane;
+    }
+
+    public EditorPanel getEditorPanel() {
+        return editorPanel;
+    }
+
+    public void setEditorPanel(EditorPanel editorPanel) {
+        this.editorPanel = editorPanel;
+    }
+
+    public AssEditor getAssEditor() {
+        return assEditor;
+    }
+
+    public void setAssEditor(AssEditor assEditor) {
+        this.assEditor = assEditor;
+    }
+
+    public KaraokeDisplay getKaraokeDisplay() {
+        return karaokeDisplay;
+    }
+
+    public void setKaraokeDisplay(KaraokeDisplay karaokeDisplay) {
+        this.karaokeDisplay = karaokeDisplay;
+    }
+
+    public AssStyle getCurrentStyle() {
+        return currentStyle;
+    }
+
+    public void setCurrentStyle(AssStyle currentStyle) {
+        this.currentStyle = currentStyle;
+    }
+
+    public List<AssStylesCollection> getStylesCollections() {
+        return stylesCollections;
+    }
+
+    public AssTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(AssTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public AssTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(AssTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public ASS getAss() {
+        return ass;
+    }
+
+    public void setAss(ASS ass) {
+        this.ass = ass;
+    }
+
+    public ISO_3166 getFlag1() {
+        return flag1;
+    }
+
+    public void setFlag1(ISO_3166 flag1) {
+        this.flag1 = flag1;
+    }
+
+    public ISO_3166 getFlag2() {
+        return flag2;
+    }
+
+    public void setFlag2(ISO_3166 flag2) {
+        this.flag2 = flag2;
+    }
+
+    public List<AssActor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<AssActor> actors) {
+        this.actors = actors;
+    }
+
+    public ViewGst getViewGst() {
+        return viewGStreamer;
+    }
+
+    public void setViewGst(ViewGst viewGStreamer) {
+        this.viewGStreamer = viewGStreamer;
+    }
+
     public AssStylesCollection getCurrentStylesCollection() {
         return currentStylesCollection;
     }
 
     public void setCurrentStylesCollection(AssStylesCollection currentStylesCollection) {
         this.currentStylesCollection = currentStylesCollection;
+    }
+
+    public AssEffect getCurrentEffect() {
+        return currentEffect;
+    }
+
+    public void setCurrentEffect(AssEffect currentEffect) {
+        this.currentEffect = currentEffect;
+    }
+
+    public List<AssEffectsCollection> getEffectsCollections() {
+        return effectsCollections;
+    }
+
+    public AssEffectsCollection getCurrentEffectsCollection() {
+        return currentEffectsCollection;
+    }
+
+    public void setCurrentEffectsCollection(AssEffectsCollection currentEffectsCollection) {
+        this.currentEffectsCollection = currentEffectsCollection;
     }
 
     public MakeItAutomation getMakeItAutomation() {
@@ -339,13 +347,5 @@ public class Exchange {
 
     public AssEvent getCurrentEvent() {
         return editorPanel.getCurrentEvent();
-    }
-
-    public List<FxObject> getFxObjects() {
-        return fxObjects;
-    }
-
-    public void setFxObjects(List<FxObject> fxObjects) {
-        this.fxObjects = fxObjects;
     }
 }

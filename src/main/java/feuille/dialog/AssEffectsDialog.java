@@ -4,6 +4,7 @@ import feuille.component.CodeLanguage;
 import feuille.component.PlaceholderTextField;
 import feuille.io.Exchange;
 import feuille.io.assa.*;
+import feuille.scripting.EffectsDB;
 import feuille.util.DialogResult;
 import feuille.util.Loader;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
@@ -17,6 +18,8 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class AssEffectsDialog extends JDialog {
@@ -151,8 +154,11 @@ public class AssEffectsDialog extends JDialog {
         JLabel lblMethod = new JLabel("Method: ");
         effectsPanel.add(lblMethod);
 
-        DefaultComboBoxModel<String> methodsModel = new DefaultComboBoxModel<>();
-        JComboBox<String> cbMethods = new JComboBox<>(methodsModel);
+        DefaultComboBoxModel<AssEffect.MethodType> methodsModel = new DefaultComboBoxModel<>();
+        JComboBox<AssEffect.MethodType> cbMethods = new JComboBox<>(methodsModel);
+        for(AssEffect.MethodType t : AssEffect.MethodType.values()){
+            methodsModel.addElement(t);
+        }
         cbMethods.setPreferredSize(new Dimension(500, 22));
         effectsPanel.add(cbMethods);
 
@@ -205,6 +211,7 @@ public class AssEffectsDialog extends JDialog {
     }
 
     public void btnOKActionPerformed(ActionEvent e) {
+
         dialogResult = DialogResult.OK;
         setVisible(false);
         dispose();
@@ -222,6 +229,48 @@ public class AssEffectsDialog extends JDialog {
             help.showDialog("EffectsCollection");
         }else if(tabbedPane.getSelectedIndex() == 1){
             help.showDialog("EffectsEditor");
+        }
+    }
+
+    public void saveEffects(){
+        try{
+            EffectsDB db = new EffectsDB(exchange);
+            db.clear();
+            db.create();
+            for(int i=0; i<cbColEffect.getItemCount(); i++){
+                String colName = cbColEffect.getItemAt(i).getName();
+                for(AssEffect ef : cbColEffect.getItemAt(i).getEffects()){
+                    db.add(ef, colName);
+                }
+            }
+        }catch(Exception _){
+        }
+    }
+
+    public void loadEffects(){
+        try{
+            EffectsDB db = new EffectsDB(exchange);
+            List<AssEffectsCollection> cols = new ArrayList<>();
+            for(AssEffect ef : db.getAssEffects()){
+                AssEffectsCollection c = null;
+                for(AssEffectsCollection col : cols){
+                    if(col.getName().equals(ef.getCollectionName())){
+                        c = col;
+                    }
+                }
+                if(c != null){
+                    c.getEffects().add(ef);
+                }else{
+                    AssEffectsCollection col = new AssEffectsCollection(ef.getCollectionName());
+                    col.getEffects().add(ef);
+                    cols.add(col);
+                }
+            }
+            modelColEffects.addAll(cols);
+            if(modelColEffects.getSize() > 0){
+                cbColEffect.setSelectedIndex(0);
+            }
+        }catch(Exception _){
         }
     }
 
@@ -387,7 +436,7 @@ public class AssEffectsDialog extends JDialog {
             AssEffect selected = effectStorageModel.getElementAt(effectStorageList.getSelectedIndex());
             AssEffect newEffect = new AssEffect();
             newEffect.setName(selected.getName() + " copy");
-            newEffect.setEffect(selected.getEffect());
+            newEffect.setEffects(selected.getEffects());
             effectStorageModel.addElement(newEffect);
         }
     }
